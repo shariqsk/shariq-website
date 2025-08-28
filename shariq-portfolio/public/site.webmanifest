@@ -1,0 +1,25 @@
+{
+  "name": "Shariq Safdar Khan - Portfolio",
+  "short_name": "Shariq Portfolio",
+  "description": "Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["technology", "portfolio", "developer"],
+  "lang": "en",
+  "dir": "ltr"
+}

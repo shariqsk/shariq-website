@@ -3,6 +3,7 @@ import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
+import Analytics from "./analytics";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
@@ -15,8 +16,30 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  keywords: siteConfig.keywords,
+  authors: [{ name: siteConfig.author }],
+  creator: siteConfig.creator,
+  publisher: siteConfig.publisher,
+  formatDetection: siteConfig.formatDetection,
+  metadataBase: siteConfig.metadataBase,
+  alternates: siteConfig.alternates,
+  openGraph: siteConfig.openGraph,
+  twitter: siteConfig.twitter,
+  robots: siteConfig.robots,
   icons: {
     icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
+  verification: {
+    google: "your-google-verification-code",
+  },
+  category: "technology",
+  classification: "Portfolio",
+  other: {
+    "msapplication-TileColor": "#000000",
+    "theme-color": "#000000",
   },
 };
 
@@ -25,6 +48,9 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -46,6 +72,7 @@ export default function RootLayout({
           <Navbar />
           {children}
         </Providers>
+        <Analytics />
       </body>
     </html>
   );

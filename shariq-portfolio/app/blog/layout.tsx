@@ -1,13 +1,36 @@
+import { Metadata } from "next";
+import { siteConfig } from "@/config/site";
+
+export const metadata: Metadata = {
+  title: "Blog - Shariq Safdar Khan",
+  description: "Read Shariq Safdar Khan's blog posts about cybersecurity, technology, and development. Insights from a Computer Security Student at York University & Full-Stack Developer.",
+  keywords: [
+    "Blog",
+    "Shariq Safdar Khan",
+    "Cybersecurity",
+    "Technology",
+    "Development",
+    "Computer Security",
+    "York University",
+    "Full-Stack Development"
+  ],
+  openGraph: {
+    title: "Blog - Shariq Safdar Khan",
+    description: "Read Shariq Safdar Khan's blog posts about cybersecurity, technology, and development. Insights from a Computer Security Student at York University & Full-Stack Developer.",
+    url: `${siteConfig.url}/blog`,
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "Blog - Shariq Safdar Khan",
+    description: "Read Shariq Safdar Khan's blog posts about cybersecurity, technology, and development.",
+  },
+};
+
 export default function BlogLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-      <div className="inline-block max-w-lg text-center justify-center">
-        {children}
-      </div>
-    </section>
-  );
+  return children;
 }

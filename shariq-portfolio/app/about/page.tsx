@@ -8,8 +8,8 @@ import React from 'react';
 
 export default function About() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-12 pt-20 sm:pt-24 pb-8">
-      <div className="w-full relative z-10">
+    <div className="relative min-h-screen flex items-center justify-center px-4 pt-20 sm:pt-24 pb-8 overflow-hidden">
+      <div className="w-full max-w-5xl mx-auto relative z-10">
         {/* Terminal Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -30,7 +30,7 @@ export default function About() {
                $ whoami
              </h1>
              <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-mono">
-               Computer Security Student & Developer
+               Computer Security Student at York University & Full-Stack Developer
              </p>
           </div>
         </motion.div>
