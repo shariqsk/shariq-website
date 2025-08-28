@@ -1,149 +1,156 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
-import { Card, CardBody } from '@heroui/card';
-import { Chip } from '@heroui/chip';
+import { motion } from 'framer-motion';
 import { Button } from '@heroui/button';
 import { Link } from '@heroui/link';
-import { Terminal, ExternalLink, FileText, Globe, Monitor, Github, Linkedin, Mail, Twitter } from 'lucide-react';
-import React, { useRef, type ReactNode } from 'react';
-import CinematicBackground from '@/components/CinematicBackground';
-
-const GlitchText = ({ text }: { text: string }) => (
-  <div className="glitch-container">
-    <h1 className="glitch-text text-5xl md:text-7xl lg:text-8xl font-bold" data-text={text}>
-      {text}
-    </h1>
-    <div className="neon-divider" />
-  </div>
-);
-
-function Section({ children, className = '' }: { children: ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { amount: 0.6, margin: '0px 0px -10% 0px' });
-
-  return (
-    <section ref={ref} className={`h-screen snap-section flex items-center justify-center ${className}`}>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.99 }}
-        animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : 0.99 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        className="w-full"
-      >
-        {children}
-      </motion.div>
-    </section>
-  );
-}
-
-const projects = [
-  {
-    title: 'Neural Network Visualizer',
-    description: 'Interactive 3D visualization of neural network architectures with real-time training simulation',
-    tech: ['React', 'Three.js', 'TensorFlow.js', 'WebGL'],
-    link: '#',
-    github: '#',
-  },
-  {
-    title: 'Quantum Encryption Protocol',
-    description: 'Implementation of quantum-resistant encryption algorithms for secure communication',
-    tech: ['Python', 'Qiskit', 'Cryptography', 'REST API'],
-    link: '#',
-    github: '#',
-  },
-  {
-    title: 'Cybersecurity Dashboard',
-    description: 'Real-time threat monitoring and analysis dashboard with AI-powered anomaly detection',
-    tech: ['Vue.js', 'Node.js', 'MongoDB', 'Socket.io'],
-    link: '#',
-    github: '#',
-  },
-];
+import { Github, Linkedin, Mail, Calendar, ExternalLink, BookOpen, Terminal, Eye, Zap, User } from 'lucide-react';
+import React from 'react';
 
 export default function Home() {
   return (
-    <div className="relative overflow-hidden">
-      {/* Background now mounted globally in layout; keep page clean */}
-      <main className="relative z-10 h-screen overflow-y-scroll snap-container">
-        {/* Slide 1: Hero */}
-        <Section className="px-4">
-          <div className="section-narrow mx-auto text-center pt-32">
-            <GlitchText text="SHARIQ" />
-            <p className="mt-5 text-base md:text-xl text-gray-300">Cybersecurity Specialist & AI Researcher</p>
+    <div className="relative min-h-screen flex items-center justify-center px-4 pt-24 overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Subtle gradient orbs with smooth animations */}
+        <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-gradient-radial from-blue-500/8 via-blue-400/4 to-transparent rounded-full animate-float"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-gradient-radial from-emerald-500/6 via-emerald-400/3 to-transparent rounded-full animate-float-delayed"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-gradient-radial from-purple-500/4 via-purple-400/2 to-transparent rounded-full animate-float-slow"></div>
+        
+        {/* Subtle mesh gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-500/2 to-purple-500/2"></div>
+        
+        {/* Floating particles */}
+        <div className="absolute top-1/3 left-1/3 w-1 h-1 bg-white/20 rounded-full animate-float-particle"></div>
+        <div className="absolute top-2/3 right-1/4 w-0.5 h-0.5 bg-white/30 rounded-full animate-float-particle-delayed"></div>
+        <div className="absolute bottom-1/3 left-1/2 w-1 h-1 bg-white/15 rounded-full animate-float-particle-slow"></div>
+      </div>
 
-            <div className="mt-5 flex flex-wrap justify-center gap-3">
-              <Chip className="bg-red-500/20 border border-red-500/50 text-red-400 font-mono neon-border" variant="bordered" startContent={<Terminal className="w-4 h-4" />}>Ethical Hacker</Chip>
-              <Chip className="bg-green-500/20 border border-green-500/50 text-green-400 font-mono neon-border" variant="bordered" startContent={<Monitor className="w-4 h-4" />}>AI Researcher</Chip>
-              <Chip className="bg-blue-500/20 border border-blue-500/50 text-blue-400 font-mono neon-border" variant="bordered" startContent={<Globe className="w-4 h-4" />}>Full Stack Dev</Chip>
+      <div className="max-w-3xl mx-auto relative z-10">
+        {/* Main Terminal Window */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="bg-black/60 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-8 relative overflow-hidden"
+        >
+          {/* Terminal Header */}
+          <div className="flex items-center gap-2 mb-6">
+            <div className="flex gap-1">
+              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-emerald-400 text-xs font-mono">welcome.sh</span>
+          </div>
+
+          {/* Terminal Content */}
+          <div className="space-y-6 font-mono">
+            <div className="flex items-start gap-2">
+              <span className="text-emerald-400 text-lg">$</span>
+              <span className="text-white text-lg">whoami</span>
+            </div>
+            
+            <div className="ml-4 text-emerald-300 text-lg">
+              Shariq Khan
             </div>
 
-            <div className="mt-7 flex flex-wrap justify-center gap-4">
-              <Button as={Link} href="/projects" className="red-btn soft-glow neon-border" size="md">
-                <FileText className="w-5 h-5 mr-2" />
-                View Projects
-              </Button>
-              <Button as={Link} href="/about" className="btn-ghost neon-border" variant="bordered" size="md">
-                About
-              </Button>
+            <div className="flex items-start gap-2">
+              <span className="text-emerald-400 text-lg">$</span>
+              <span className="text-white text-lg">cat role.txt</span>
+            </div>
+            
+            <div className="ml-4 text-gray-300 text-base leading-relaxed">
+              Computer Security Student & Developer at York University
             </div>
 
-            <div className="mt-7 flex justify-center gap-3">
-              {[
-                { icon: Github, href: '#', label: 'GitHub' },
-                { icon: Linkedin, href: '#', label: 'LinkedIn' },
-                { icon: Twitter, href: '#', label: 'Twitter' },
-                { icon: Mail, href: '#', label: 'Email' },
-              ].map((s, i) => (
-                <motion.a key={s.label} href={s.href} className="social-link soft-glow" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.35, delay: 0.15 + i * 0.08 }} title={s.label} aria-label={s.label}>
-                  <s.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
+            <div className="flex items-start gap-2">
+              <span className="text-emerald-400 text-lg">$</span>
+              <span className="text-white text-lg">cat intro.txt</span>
+            </div>
+            
+            <div className="ml-4 text-gray-300 text-sm leading-relaxed">
+              <p>
+                I'm passionate about cybersecurity and building secure, scalable applications. Currently working as an Import Analyst at Farrow while pursuing Computer Security at York University. 
+                Always open to chat; reach me via{' '}
+                <Link href="mailto:00khanshariq@gmail.com" className="text-blue-400 hover:text-blue-300 underline font-medium transition-colors duration-300">
+                  email
+                </Link>{' '}
+                or{' '}
+                <Link href="tel:+16473036451" className="text-blue-400 hover:text-blue-300 underline font-medium transition-colors duration-300">
+                  phone
+                </Link>
+              </p>
+            </div>
+
+            <div className="flex items-start gap-2">
+              <span className="text-emerald-400 text-lg">$</span>
+              <span className="text-white text-lg">./show_actions.sh</span>
+            </div>
+            
+            <div className="ml-4">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Button 
+                  as={Link} 
+                  href="/projects" 
+                  className="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white px-5 py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 flex items-center justify-center gap-2 text-sm font-mono border border-emerald-500/30"
+                >
+                  <Terminal className="w-4 h-4" />
+                  <span>./view_projects.sh</span>
+                </Button>
+                <Button 
+                  as={Link} 
+                  href="/about" 
+                  className="bg-black/30 hover:bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-5 py-2.5 rounded-md transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-sm font-mono"
+                >
+                  <Eye className="w-4 h-4" />
+                  <span>./about.sh</span>
+                </Button>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-2">
+              <span className="text-emerald-400 text-lg">$</span>
+              <span className="text-white text-lg">ls social/</span>
+            </div>
+            
+            <div className="ml-4">
+              <div className="flex justify-center gap-4">
+                {[
+                  { icon: Github, href: 'https://github.com/shariqsk', label: 'GitHub' },
+                  { icon: Linkedin, href: 'https://linkedin.com/in/shariq-khan', label: 'LinkedIn' },
+                  { icon: Mail, href: 'mailto:00khanshariq@gmail.com', label: 'Email' },
+                  { icon: Calendar, href: 'tel:+16473036451', label: 'Phone' },
+                ].map((social, i) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    className="w-10 h-10 rounded-md bg-black/30 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 flex items-center justify-center text-emerald-400 transition-all duration-300 shadow-md hover:shadow-lg backdrop-blur-sm"
+                    title={social.label}
+                    aria-label={social.label}
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 + i * 0.1, duration: 0.4 }}
+                  >
+                    <social.icon className="w-4 h-4" />
+                  </motion.a>
+                ))}
+              </div>
             </div>
           </div>
-        </Section>
 
-        {/* Slide 2: Featured Projects */}
-        <Section className="px-4">
-          <div className="section-medium mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-6 gradient-text">Featured Projects</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              {projects.map((project, index) => (
-                <motion.div key={project.title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: index * 0.06 }} viewport={{ once: true }}>
-                  <Card className="relative card-surface card-3d h-full overflow-hidden">
-                    <CardBody className="p-5">
-                      <h3 className="text-lg font-semibold mb-2 gradient-text">{project.title}</h3>
-                      <p className="text-gray-300 mb-3 text-sm leading-relaxed">{project.description}</p>
-                      <div className="flex flex-wrap gap-2 mb-12">
-                        {project.tech.map((tech) => (
-                          <Chip key={tech} size="sm" variant="bordered" className="chip-strong font-mono">
-                            {tech}
-                          </Chip>
-                        ))}
-                      </div>
-                      <div className="card-footer-blur">
-                        <span className="text-xs text-white/80">Explore more</span>
-                        <div className="flex gap-2">
-                          <Button size="sm" as={Link} href={project.link} className="red-btn neon-border" aria-label={`View ${project.title} live`}>
-                            <ExternalLink className="w-4 h-4" />
-                          </Button>
-                          <Button size="sm" variant="bordered" as={Link} href={project.github} className="btn-ghost neon-border" aria-label={`View ${project.title} source code`}>
-                            <FileText className="w-4 h-4" />
-                          </Button>
-                        </div>
-                      </div>
-                    </CardBody>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-            <div className="mt-6 text-center">
-              <Button as={Link} href="/projects" className="btn-ghost neon-border" variant="bordered" size="sm">
-                View all projects
-              </Button>
+          {/* Security Badge */}
+          <div className="absolute top-4 right-4">
+            <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-2 py-1">
+              <div className="flex items-center gap-1">
+                <User className="w-3 h-3 text-emerald-400" />
+                <span className="text-emerald-400 text-xs font-mono">ONLINE</span>
+              </div>
             </div>
           </div>
-        </Section>
-      </main>
+        </motion.div>
+      </div>
     </div>
   );
 }
