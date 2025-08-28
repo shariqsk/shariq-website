@@ -181,7 +181,7 @@ export default function Home() {
                 className="ml-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2.0 }}
+                transition={{ delay: 2.0, duration: 0.6 }}
               >
                 <div className="flex justify-center gap-3 sm:gap-4">
                   {[
@@ -200,7 +200,11 @@ export default function Home() {
                       whileTap={{ scale: 0.95 }}
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 2.2 + i * 0.1, duration: 0.4 }}
+                      transition={{ 
+                        delay: 2.2 + i * 0.15, 
+                        duration: 0.5,
+                        ease: "easeOut"
+                      }}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-md"></div>
                       <social.icon className="w-3 h-3 sm:w-4 sm:h-4 relative z-10" />

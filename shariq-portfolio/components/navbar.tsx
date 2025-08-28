@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { Home, User, FolderOpen, Mail, FileText } from 'lucide-react';
 import React from 'react';
 
 export default function Navbar() {
@@ -12,47 +13,27 @@ export default function Navbar() {
     { 
       label: "Home", 
       href: "/", 
-      icon: (
-        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-      )
+      icon: Home
     },
     { 
       label: "About", 
       href: "/about", 
-      icon: (
-        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-      )
+      icon: User
     },
     { 
       label: "Projects", 
       href: "/projects", 
-      icon: (
-        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-        </svg>
-      )
+      icon: FolderOpen
     },
     { 
       label: "Contact", 
       href: "/contact", 
-      icon: (
-        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      )
+      icon: Mail
     },
     { 
       label: "Resume", 
       href: "https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing", 
-      icon: (
-        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      )
+      icon: FileText
     },
   ];
 
@@ -60,32 +41,67 @@ export default function Navbar() {
     <motion.nav
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50"
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="fixed top-4 sm:top-6 left-1/2 transform -translate-x-1/2 z-50"
     >
-      <div className="flex items-center gap-2 px-3 sm:px-4 py-2 bg-black/40 backdrop-blur-xl border border-emerald-500/30 rounded-full shadow-lg">
-        {navigation.map((item, index) => (
-          <motion.div
-            key={item.label}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.1, duration: 0.3 }}
-          >
-            <Link
-              href={item.href}
-              className={`flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full transition-all duration-300 hover:scale-110 backdrop-blur-sm ${
-                pathname === item.href
-                  ? 'bg-emerald-500/30 border border-emerald-500/50 text-emerald-400 shadow-lg'
-                  : 'bg-black/30 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 text-emerald-400'
-              }`}
-              title={item.label}
-              target={item.href.startsWith('http') ? '_blank' : undefined}
-              rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+      <div className="relative">
+        {/* Glow effect behind navbar */}
+        <div className="absolute -inset-2 bg-gradient-to-r from-emerald-500/20 via-cyan-500/20 to-blue-500/20 rounded-full blur-xl opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+        
+        {/* Main navbar container */}
+        <div className="relative flex items-center gap-3 sm:gap-4 px-5 sm:px-6 py-3 sm:py-3 bg-black/60 backdrop-blur-xl border border-emerald-500/30 rounded-full shadow-2xl shadow-emerald-500/10">
+          {navigation.map((item, index) => (
+            <motion.div
+              key={item.label}
+              initial={{ opacity: 0, scale: 0.8, y: -10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ 
+                delay: index * 0.1, 
+                duration: 0.4,
+                ease: "easeOut"
+              }}
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {item.icon}
-            </Link>
-          </motion.div>
-        ))}
+              <Link
+                href={item.href}
+                className={`relative group flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full transition-all duration-300 ${
+                  pathname === item.href
+                    ? 'bg-gradient-to-r from-emerald-500/30 to-cyan-500/30 border border-emerald-500/50 text-emerald-400 shadow-lg shadow-emerald-500/20'
+                    : 'bg-black/40 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 text-emerald-400 hover:text-emerald-300'
+                }`}
+                title={item.label}
+                target={item.href.startsWith('http') ? '_blank' : undefined}
+                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              >
+                {/* Hover text label */}
+                <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                  <div className="bg-black/80 backdrop-blur-sm border border-emerald-500/30 rounded-lg px-2 py-1 text-xs text-emerald-400 font-mono whitespace-nowrap">
+                    {item.label}
+                  </div>
+                  {/* Arrow pointing up */}
+                  <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-2 border-r-2 border-b-2 border-transparent border-b-emerald-500/30"></div>
+                </div>
+                                 {/* Hover glow effect */}
+                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Icon with better positioning */}
+                <div className="relative z-10 flex items-center justify-center">
+                                     <item.icon className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:scale-110" />
+                </div>
+                
+                {/* Active indicator */}
+                {pathname === item.href && (
+                  <motion.div
+                    layoutId="activeTab"
+                    className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-emerald-400 rounded-full"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </motion.nav>
   );

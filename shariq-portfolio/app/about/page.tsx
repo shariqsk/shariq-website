@@ -3,35 +3,35 @@
 import { motion } from 'framer-motion';
 import { Button } from '@heroui/button';
 import { Link } from '@heroui/link';
-import { Terminal, Eye, Mail, Phone, Github, Linkedin, Calendar, ExternalLink, Shield, Code, Database, Cloud, Lock, Zap, User, Target, BookOpen } from 'lucide-react';
+import { Terminal, Eye, Mail, Phone, Github, Linkedin, Calendar, ExternalLink, Shield, Code, Database, Cloud, Lock, Zap, User, Target, BookOpen, Mountain, Gamepad2, BookOpenCheck, Film } from 'lucide-react';
 import React from 'react';
 
 export default function About() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 pb-8">
+    <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-12 pt-20 sm:pt-24 pb-8">
       <div className="w-full relative z-10">
         {/* Terminal Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-4 sm:mb-6 md:mb-8"
+          className="text-center mb-6 sm:mb-8 md:mb-10"
         >
-          <div className="inline-block bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="flex gap-1">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+          <div className="inline-block bg-black/60 backdrop-blur-sm border border-emerald-500/40 rounded-xl p-4 sm:p-6 md:p-8 mb-4 sm:mb-6">
+            <div className="flex items-center gap-3 mb-3 sm:mb-4">
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full"></div>
               </div>
-              <span className="text-emerald-400 text-xs font-mono">about_shariq.exe</span>
+              <span className="text-emerald-400 text-sm sm:text-base font-mono">about_shariq.exe</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-emerald-400 mb-2 tracking-tight leading-none font-mono">
-              $ whoami
-            </h1>
-            <p className="text-emerald-300 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-light tracking-wide font-mono">
-              Computer Security Student & Developer
-            </p>
+                         <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-mono">
+               $ whoami
+             </h1>
+             <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-mono">
+               Computer Security Student & Developer
+             </p>
           </div>
         </motion.div>
 
@@ -83,7 +83,7 @@ export default function About() {
         </motion.div>
 
         {/* Education and Experience Grid */}
-        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 mb-4 sm:mb-5 md:mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 mb-4 sm:mb-5 md:mb-6">
           {/* Education Terminal */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -185,13 +185,15 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* Skills Terminal */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="bg-black/40 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-3 sm:p-4 md:p-5 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden"
-        >
+        {/* Skills and Interests Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 mb-4 sm:mb-5 md:mb-6">
+          {/* Skills Terminal */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+            className="bg-black/40 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden"
+          >
           {/* Terminal Header */}
           <div className="flex items-center gap-2 mb-3 sm:mb-4">
             <div className="flex gap-1">
@@ -248,11 +250,86 @@ export default function About() {
           </div>
         </motion.div>
 
+          {/* Interests & Hobbies Terminal */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7, ease: "easeOut" }}
+            className="bg-black/40 backdrop-blur-sm border border-orange-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden"
+          >
+          {/* Terminal Header */}
+          <div className="flex items-center gap-2 mb-3 sm:mb-4">
+            <div className="flex gap-1">
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+            </div>
+            <span className="text-orange-400 text-xs font-mono">interests.sh</span>
+          </div>
+
+          <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
+            <div className="flex items-start gap-2">
+              <span className="text-orange-400">$</span>
+              <span className="text-white">cat personal_interests.txt</span>
+            </div>
+
+            <div className="ml-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4">
+              <div>
+                <div className="text-orange-300 font-semibold mb-2 flex items-center gap-2">
+                  <Mountain className="w-3 h-3 sm:w-4 sm:h-4" />
+                  Climbing & Sports
+                </div>
+                <div className="text-gray-300 text-xs space-y-1">
+                  <div>• Rock climbing (indoor & outdoor)</div>
+                  <div>• Basketball, soccer, tennis</div>
+                  <div>• Fitness & strength training</div>
+                  <div>• Hiking and outdoor adventures</div>
+                </div>
+              </div>
+              <div>
+                <div className="text-orange-300 font-semibold mb-2 flex items-center gap-2">
+                  <BookOpenCheck className="w-3 h-3 sm:w-4 sm:h-4" />
+                  Reading & Entertainment
+                </div>
+                <div className="text-gray-300 text-xs space-y-1">
+                  <div>• Tech books & cybersecurity literature</div>
+                  <div>• Sci-fi novels & thrillers</div>
+                  <div>• TV shows: Breaking Bad, The Wire</div>
+                  <div>• Movies: Inception, The Matrix, Interstellar</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="ml-4 mt-3 sm:mt-4">
+              <div className="text-orange-300 font-semibold mb-2 flex items-center gap-2">
+                <Gamepad2 className="w-3 h-3 sm:w-4 sm:h-4" />
+                Beyond the Terminal
+              </div>
+              <div className="text-gray-300 text-xs leading-relaxed">
+                When I'm not diving into code or studying security protocols, you'll find me scaling walls at the climbing gym, 
+                shooting hoops, or getting lost in a good book. I believe in maintaining a balance between technical skills 
+                and personal well-being - after all, the best security professionals are those who can think clearly and stay 
+                focused under pressure!
+              </div>
+            </div>
+          </div>
+
+          <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
+            <div className="bg-orange-500/20 border border-orange-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
+              <div className="flex items-center gap-1">
+                <User className="w-2 h-2 sm:w-3 sm:h-3 text-orange-400" />
+                <span className="text-orange-400 text-xs font-mono">HUMAN</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        </div>
+
         {/* Call to Action Terminal */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, delay: 0.9, ease: "easeOut" }}
         >
           <div className="bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden">
             {/* Terminal Header */}

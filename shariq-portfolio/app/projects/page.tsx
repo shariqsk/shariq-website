@@ -8,30 +8,30 @@ import React from 'react';
 
 export default function Projects() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 pt-16 pb-8 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center px-4 pt-20 sm:pt-24 pb-8 overflow-hidden">
       <div className="w-full max-w-5xl mx-auto relative z-10">
         {/* Terminal Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-4 sm:mb-6 md:mb-8"
+          className="text-center mb-6 sm:mb-8 md:mb-10"
         >
-          <div className="inline-block bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="flex gap-1">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
+          <div className="inline-block bg-black/60 backdrop-blur-sm border border-emerald-500/40 rounded-xl p-4 sm:p-6 md:p-8 mb-4 sm:mb-6">
+            <div className="flex items-center gap-3 mb-3 sm:mb-4">
+              <div className="flex gap-1.5">
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full"></div>
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-yellow-500 rounded-full"></div>
+                <div className="w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full"></div>
               </div>
-              <span className="text-emerald-400 text-xs font-mono">projects_repository.exe</span>
+              <span className="text-emerald-400 text-sm sm:text-base font-mono">projects_repository.exe</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-emerald-400 mb-2 tracking-tight leading-none font-mono">
-              $ ls projects/
-            </h1>
-            <p className="text-emerald-300 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-light tracking-wide font-mono">
-              Featured Projects & Applications
-            </p>
+                         <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-mono">
+               $ ls projects/
+             </h1>
+             <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-mono">
+               Featured Projects & Applications
+             </p>
           </div>
         </motion.div>
 
