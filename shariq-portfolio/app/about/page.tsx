@@ -8,28 +8,28 @@ import React from 'react';
 
 export default function About() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 pt-24">
-      <div className="max-w-7xl mx-auto relative z-10">
+    <div className="relative min-h-screen flex items-center justify-center px-4 pt-16 pb-8">
+      <div className="w-full max-w-6xl mx-auto relative z-10">
         {/* Terminal Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-8"
+          className="text-center mb-4 sm:mb-6 md:mb-8"
         >
-          <div className="inline-block bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-4 mb-4">
+          <div className="inline-block bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-3 sm:p-4 mb-3 sm:mb-4">
             <div className="flex items-center gap-2 mb-2">
               <div className="flex gap-1">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
               </div>
               <span className="text-emerald-400 text-xs font-mono">about_shariq.exe</span>
             </div>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-emerald-400 mb-2 tracking-tight leading-none font-mono">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-emerald-400 mb-2 tracking-tight leading-none font-mono">
               $ whoami
             </h1>
-            <p className="text-emerald-300 text-sm md:text-lg lg:text-xl font-light tracking-wide font-mono">
+            <p className="text-emerald-300 text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-light tracking-wide font-mono">
               Computer Security Student & Developer
             </p>
           </div>
@@ -40,26 +40,26 @@ export default function About() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="bg-black/60 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-6 mb-6 relative overflow-hidden"
+          className="bg-black/60 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden"
         >
           {/* Terminal Header */}
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-3 sm:mb-4">
             <div className="flex gap-1">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
             </div>
             <span className="text-emerald-400 text-xs font-mono">user_profile.sh</span>
           </div>
 
           {/* Terminal Content */}
-          <div className="space-y-4 font-mono">
+          <div className="space-y-3 sm:space-y-4 font-mono">
             <div className="flex items-start gap-2">
-              <span className="text-emerald-400 text-sm">$</span>
-              <span className="text-white text-sm">cat profile.txt</span>
+              <span className="text-emerald-400 text-xs sm:text-sm">$</span>
+              <span className="text-white text-xs sm:text-sm">cat profile.txt</span>
             </div>
             
-            <div className="ml-4 space-y-3 text-sm">
+            <div className="ml-4 space-y-2 sm:space-y-3 text-xs sm:text-sm">
               <p className="text-gray-300 leading-relaxed">
                 I'm a Computer Security student at York University with a passion for cybersecurity and secure software development. 
                 Currently working as an Import Analyst at Farrow, I bring a unique perspective combining security knowledge with real-world business processes.
@@ -72,10 +72,10 @@ export default function About() {
           </div>
 
           {/* Security Badge */}
-          <div className="absolute top-4 right-4">
-            <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-2 py-1">
+          <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
+            <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
               <div className="flex items-center gap-1">
-                <Shield className="w-3 h-3 text-emerald-400" />
+                <Shield className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
                 <span className="text-emerald-400 text-xs font-mono">SECURE</span>
               </div>
             </div>
@@ -83,25 +83,25 @@ export default function About() {
         </motion.div>
 
         {/* Education and Experience Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 mb-4 sm:mb-5 md:mb-6">
           {/* Education Terminal */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="bg-black/40 backdrop-blur-sm border border-blue-500/30 rounded-lg p-5 relative overflow-hidden"
+            className="bg-black/40 backdrop-blur-sm border border-blue-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden"
           >
             {/* Terminal Header */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <div className="flex gap-1">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
               </div>
               <span className="text-blue-400 text-xs font-mono">education.sh</span>
             </div>
 
-            <div className="space-y-3 font-mono text-sm">
+            <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
               <div className="flex items-start gap-2">
                 <span className="text-blue-400">$</span>
                 <span className="text-white">cat education.txt</span>
@@ -119,10 +119,10 @@ export default function About() {
               </div>
             </div>
 
-            <div className="absolute top-4 right-4">
-              <div className="bg-blue-500/20 border border-blue-500/40 rounded-md px-2 py-1">
+            <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
+              <div className="bg-blue-500/20 border border-blue-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
                 <div className="flex items-center gap-1">
-                  <BookOpen className="w-3 h-3 text-blue-400" />
+                  <BookOpen className="w-2 h-2 sm:w-3 sm:h-3 text-blue-400" />
                   <span className="text-blue-400 text-xs font-mono">EDU</span>
                 </div>
               </div>
@@ -134,25 +134,25 @@ export default function About() {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg p-5 relative overflow-hidden"
+            className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden"
           >
             {/* Terminal Header */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <div className="flex gap-1">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
               </div>
               <span className="text-purple-400 text-xs font-mono">experience.sh</span>
             </div>
 
-            <div className="space-y-3 font-mono text-sm">
+            <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
               <div className="flex items-start gap-2">
                 <span className="text-purple-400">$</span>
                 <span className="text-white">cat experience.txt</span>
               </div>
               
-              <div className="ml-4 space-y-3">
+              <div className="ml-4 space-y-2 sm:space-y-3">
                 <div>
                   <div className="text-purple-300 font-semibold">Import Analyst I - Farrow</div>
                   <div className="text-gray-400 text-xs">Jun 2024 - Present (Hybrid)</div>
@@ -174,10 +174,10 @@ export default function About() {
               </div>
             </div>
 
-            <div className="absolute top-4 right-4">
-              <div className="bg-purple-500/20 border border-purple-500/40 rounded-md px-2 py-1">
+            <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
+              <div className="bg-purple-500/20 border border-purple-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
                 <div className="flex items-center gap-1">
-                  <Target className="w-3 h-3 text-purple-400" />
+                  <Target className="w-2 h-2 sm:w-3 sm:h-3 text-purple-400" />
                   <span className="text-purple-400 text-xs font-mono">EXP</span>
                 </div>
               </div>
@@ -190,25 +190,25 @@ export default function About() {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="bg-black/40 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-5 mb-6 relative overflow-hidden"
+          className="bg-black/40 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-3 sm:p-4 md:p-5 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden"
         >
           {/* Terminal Header */}
-          <div className="flex items-center gap-2 mb-4">
+          <div className="flex items-center gap-2 mb-3 sm:mb-4">
             <div className="flex gap-1">
-              <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
             </div>
             <span className="text-cyan-400 text-xs font-mono">skills_analysis.sh</span>
           </div>
 
-          <div className="space-y-3 font-mono text-sm">
+          <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
             <div className="flex items-start gap-2">
               <span className="text-cyan-400">$</span>
               <span className="text-white">./analyze_skills.sh</span>
             </div>
 
-            <div className="ml-4 grid md:grid-cols-3 gap-4">
+            <div className="ml-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               <div>
                 <div className="text-cyan-300 font-semibold mb-2">Security & Systems</div>
                 <div className="text-gray-300 text-xs space-y-1">
@@ -238,10 +238,10 @@ export default function About() {
             </div>
           </div>
 
-          <div className="absolute top-4 right-4">
-            <div className="bg-cyan-500/20 border border-cyan-500/40 rounded-md px-2 py-1">
+          <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
+            <div className="bg-cyan-500/20 border border-cyan-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
               <div className="flex items-center gap-1">
-                <Code className="w-3 h-3 text-cyan-400" />
+                <Code className="w-2 h-2 sm:w-3 sm:h-3 text-cyan-400" />
                 <span className="text-cyan-400 text-xs font-mono">SKILLS</span>
               </div>
             </div>
@@ -254,38 +254,38 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
         >
-          <div className="bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-5 relative overflow-hidden">
+          <div className="bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden">
             {/* Terminal Header */}
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex items-center gap-2 mb-3 sm:mb-4">
               <div className="flex gap-1">
-                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
+                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
               </div>
               <span className="text-emerald-400 text-xs font-mono">actions.sh</span>
             </div>
 
-            <div className="space-y-3 font-mono">
+            <div className="space-y-2 sm:space-y-3 font-mono">
               <div className="flex items-start gap-2">
-                <span className="text-emerald-400 text-sm">$</span>
-                <span className="text-white text-sm">./available_actions.sh</span>
+                <span className="text-emerald-400 text-xs sm:text-sm">$</span>
+                <span className="text-white text-xs sm:text-sm">./available_actions.sh</span>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
                 <Button
                   as={Link}
                   href="/projects"
-                  className="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white px-5 py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 transform hover:scale-105 flex items-center justify-center gap-2 text-sm font-mono border border-emerald-500/30"
+                  className="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 transform hover:scale-105 flex items-center justify-center gap-2 text-xs sm:text-sm font-mono border border-emerald-500/30"
                 >
-                  <Terminal className="w-4 h-4" />
+                  <Terminal className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span>./view_projects.sh</span>
                 </Button>
                 <Button
                   as={Link}
                   href="/contact"
-                  className="bg-black/30 hover:bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-5 py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg backdrop-blur-sm transform hover:scale-105 flex items-center justify-center gap-2 text-sm font-mono"
+                  className="bg-black/30 hover:bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg backdrop-blur-sm transform hover:scale-105 flex items-center justify-center gap-2 text-xs sm:text-sm font-mono"
                 >
-                  <Mail className="w-4 h-4" />
+                  <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span>./contact.sh</span>
                 </Button>
                 <Button
@@ -293,9 +293,9 @@ export default function About() {
                   href="https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-black/30 hover:bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-5 py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg backdrop-blur-sm transform hover:scale-105 flex items-center justify-center gap-2 text-sm font-mono"
+                  className="bg-black/30 hover:bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg backdrop-blur-sm transform hover:scale-105 flex items-center justify-center gap-2 text-xs sm:text-sm font-mono"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                   <span>./resume.sh</span>
@@ -303,10 +303,10 @@ export default function About() {
               </div>
             </div>
 
-            <div className="absolute top-4 right-4">
-              <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-2 py-1">
+            <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
+              <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
                 <div className="flex items-center gap-1">
-                  <Zap className="w-3 h-3 text-emerald-400" />
+                  <Zap className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
                   <span className="text-emerald-400 text-xs font-mono">READY</span>
                 </div>
               </div>
