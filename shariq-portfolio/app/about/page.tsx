@@ -8,7 +8,7 @@ import React from 'react';
 
 export default function About() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 pt-24 overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center px-4 pt-24">
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Terminal Header */}
         <motion.div
