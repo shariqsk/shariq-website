@@ -9,15 +9,7 @@ import React from 'react';
 export default function About() {
   return (
     <div className="relative min-h-screen flex items-center justify-center px-4 pt-24 overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[200px] h-[200px] md:w-[300px] md:h-[300px] bg-gradient-radial from-blue-500/8 via-blue-400/4 to-transparent rounded-full animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-gradient-radial from-emerald-500/6 via-emerald-400/3 to-transparent rounded-full animate-float-delayed"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-gradient-radial from-purple-500/4 via-purple-400/2 to-transparent rounded-full animate-float-slow"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-500/2 to-purple-500/2"></div>
-      </div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Terminal Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -295,6 +287,18 @@ export default function About() {
                 >
                   <Mail className="w-4 h-4" />
                   <span>./contact.sh</span>
+                </Button>
+                <Button
+                  as={Link}
+                  href="https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-black/30 hover:bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-5 py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg backdrop-blur-sm transform hover:scale-105 flex items-center justify-center gap-2 text-sm font-mono"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <span>./resume.sh</span>
                 </Button>
               </div>
             </div>
