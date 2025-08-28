@@ -8,8 +8,8 @@ import React from 'react';
 
 export default function About() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 pt-16 pb-8">
-      <div className="w-full max-w-6xl mx-auto relative z-10">
+    <div className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 xl:px-12 pt-16 pb-8">
+      <div className="w-full relative z-10">
         {/* Terminal Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -55,11 +55,11 @@ export default function About() {
           {/* Terminal Content */}
           <div className="space-y-3 sm:space-y-4 font-mono">
             <div className="flex items-start gap-2">
-              <span className="text-emerald-400 text-xs sm:text-sm">$</span>
-              <span className="text-white text-xs sm:text-sm">cat profile.txt</span>
+              <span className="text-emerald-400 text-sm sm:text-base">$</span>
+              <span className="text-white text-sm sm:text-base">cat profile.txt</span>
             </div>
             
-            <div className="ml-4 space-y-2 sm:space-y-3 text-xs sm:text-sm">
+            <div className="ml-4 space-y-3 sm:space-y-4 text-sm sm:text-base lg:text-lg">
               <p className="text-gray-300 leading-relaxed">
                 I'm a Computer Security student at York University with a passion for cybersecurity and secure software development. 
                 Currently working as an Import Analyst at Farrow, I bring a unique perspective combining security knowledge with real-world business processes.
@@ -68,8 +68,8 @@ export default function About() {
                 My focus areas include web security, cloud platforms, and building secure applications. I love learning new technologies 
                 and applying security best practices to solve real problems.
               </p>
-            </div>
-          </div>
+                  </div>
+                </div>
 
           {/* Security Badge */}
           <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
@@ -78,12 +78,12 @@ export default function About() {
                 <Shield className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
                 <span className="text-emerald-400 text-xs font-mono">SECURE</span>
               </div>
-            </div>
-          </div>
+                </div>
+              </div>
         </motion.div>
 
         {/* Education and Experience Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 md:gap-6 mb-4 sm:mb-5 md:mb-6">
+        <div className="grid grid-cols-1 gap-4 sm:gap-5 md:gap-6 mb-4 sm:mb-5 md:mb-6">
           {/* Education Terminal */}
           <motion.div
             initial={{ opacity: 0, y: 25 }}
@@ -126,7 +126,7 @@ export default function About() {
                   <span className="text-blue-400 text-xs font-mono">EDU</span>
                 </div>
               </div>
-            </div>
+                  </div>
           </motion.div>
 
           {/* Experience Terminal */}
@@ -181,7 +181,7 @@ export default function About() {
                   <span className="text-purple-400 text-xs font-mono">EXP</span>
                 </div>
               </div>
-            </div>
+                  </div>
           </motion.div>
         </div>
 
@@ -309,9 +309,9 @@ export default function About() {
                   <Zap className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
                   <span className="text-emerald-400 text-xs font-mono">READY</span>
                 </div>
+                    </div>
+                  </div>
               </div>
-            </div>
-          </div>
         </motion.div>
       </div>
     </div>

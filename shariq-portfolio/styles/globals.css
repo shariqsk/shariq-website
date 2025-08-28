@@ -3,8 +3,8 @@
 :root {
   --background: #000000;
   --foreground: #f4f4f5;
-  --red-600: #dc2626;
-  --red-500: #ef4444;
+  --emerald-600: #059669;
+  --emerald-500: #10b981;
   --terminal-green: #00ff41;
   --terminal-cyan: #00ffff;
 }
@@ -519,13 +519,13 @@ body {
   border-radius: 50%;
 }
 .aurora::before {
-  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.35), transparent 60%);
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.35), transparent 60%);
   top: -10%;
   left: -10%;
   animation: aurora-drift-1 25s ease-in-out infinite alternate;
 }
 .aurora::after {
-  background: radial-gradient(circle at center, rgba(34, 197, 94, 0.25), transparent 60%);
+  background: radial-gradient(circle at center, rgba(0, 255, 255, 0.25), transparent 60%);
   bottom: -10%;
   right: -10%;
   animation: aurora-drift-2 28s ease-in-out infinite alternate;

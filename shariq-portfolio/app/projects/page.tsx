@@ -207,7 +207,7 @@ export default function Projects() {
               <div className="flex items-start gap-2">
                 <span className="text-emerald-400 text-xs sm:text-sm">$</span>
                 <span className="text-white text-xs sm:text-sm">./available_actions.sh</span>
-              </div>
+                  </div>
 
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
                 <Button
@@ -225,7 +225,7 @@ export default function Projects() {
                 >
                   <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span>./contact.sh</span>
-                </Button>
+                        </Button>
                 <Button
                   as={Link}
                   href="https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing"
@@ -237,9 +237,9 @@ export default function Projects() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                   <span>./resume.sh</span>
-                </Button>
-              </div>
-            </div>
+                      </Button>
+                    </div>
+                  </div>
 
             <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
               <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
@@ -247,7 +247,7 @@ export default function Projects() {
                   <Zap className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
                   <span className="text-emerald-400 text-xs font-mono">READY</span>
                 </div>
-              </div>
+        </div>
             </div>
           </div>
         </motion.div>

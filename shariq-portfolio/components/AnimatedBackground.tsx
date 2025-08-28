@@ -53,7 +53,7 @@ export default function AnimatedBackground(): JSX.Element {
       ctx.clearRect(0, 0, w, h);
 
       const grd = ctx.createRadialGradient(w * 0.2, h * 0.2, 0, w * 0.2, h * 0.2, Math.max(w, h));
-      grd.addColorStop(0, "rgba(239,68,68,0.08)");
+      grd.addColorStop(0, "rgba(16,185,129,0.08)");
       grd.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = grd;
       ctx.fillRect(0, 0, w, h);
@@ -77,7 +77,7 @@ export default function AnimatedBackground(): JSX.Element {
           const dist = Math.hypot(dx, dy);
           if (dist < 140) {
             const alpha = 1 - dist / 140;
-            ctx.strokeStyle = `rgba(239,68,68,${0.18 * alpha})`;
+            ctx.strokeStyle = `rgba(16,185,129,${0.18 * alpha})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
@@ -90,7 +90,7 @@ export default function AnimatedBackground(): JSX.Element {
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        ctx.fillStyle = "rgba(239,68,68,0.5)";
+        ctx.fillStyle = "rgba(16,185,129,0.5)";
         ctx.beginPath();
         ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
         ctx.fill();

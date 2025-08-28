@@ -50,12 +50,12 @@ export default function CinematicBackground(): JSX.Element {
       ctx.fillRect(0, 0, w, h);
 
       const glow = ctx.createRadialGradient(cx, horizonY, 0, cx, horizonY, h * 0.9);
-      glow.addColorStop(0, "rgba(239,68,68,0.07)");
+      glow.addColorStop(0, "rgba(16,185,129,0.07)");
       glow.addColorStop(1, "rgba(0,0,0,0)");
       ctx.fillStyle = glow;
       ctx.fillRect(0, 0, w, h);
 
-      ctx.strokeStyle = "rgba(239,68,68,0.18)";
+      ctx.strokeStyle = "rgba(16,185,129,0.18)";
       ctx.lineWidth = 1;
       const vCount = isMobile() ? 7 : 10;
       const spacing = isMobile() ? 58 : 54;
