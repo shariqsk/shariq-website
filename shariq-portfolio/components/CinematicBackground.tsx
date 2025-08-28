@@ -76,7 +76,7 @@ export default function CinematicBackground(): JSX.Element {
         const char = glyphs[(c + Math.floor(t / 420)) % glyphs.length]; // slower character change
         ctx.fillStyle = "rgba(0,255,180,0.12)";
         ctx.fillText(char, x, y);
-        const step = isMobile() ? 2 : 3; // much slower fall per frame
+        const step = isMobile() ? 0.3 : 0.5; // very slow, soothing fall
         const ny = y > h ? -Math.random() * h * 0.1 : y + step;
         rainColsRef.current[c] = ny;
       }
