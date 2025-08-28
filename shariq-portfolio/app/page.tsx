@@ -24,8 +24,8 @@ export default function Home() {
       "https://www.linkedin.com/in/shariq-khan-430754217/",
       "https://shariqsk.github.io/"
     ],
-    "email": "00khanshariq@gmail.com",
-    "telephone": "+16473036451",
+    "email": "contact@shariqsk.com",
+    "telephone": "",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "CA"
@@ -151,7 +151,10 @@ export default function Home() {
                     I also write about tech and security on my{' '}
                     <Link href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
                       blog
-                    </Link>. Always open to chat and collaborations!
+                    </Link>. Always open to chat and{' '}
+                    <Link href="https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
+                      collaborations
+                    </Link>!
                   </p>
                 </motion.div>
 
@@ -199,19 +202,6 @@ export default function Home() {
                       <Mail className="w-3 h-3 sm:w-4 sm:h-4 relative z-10" />
                       <span className="relative z-10">./contact.sh</span>
                     </Button>
-                    <Button 
-                      as={Link} 
-                      href="https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="relative overflow-hidden bg-black/40 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-xs sm:text-sm font-mono hover:scale-105 group"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <svg className="w-3 h-3 sm:w-4 sm:h-4 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                      </svg>
-                      <span className="relative z-10">./resume.sh</span>
-                    </Button>
                   </div>
                 </motion.div>
 
@@ -235,8 +225,7 @@ export default function Home() {
                     {[
                       { icon: Github, href: 'https://github.com/shariqsk', label: 'GitHub' },
                       { icon: Linkedin, href: 'https://www.linkedin.com/in/shariq-khan-430754217/', label: 'LinkedIn' },
-                      { icon: Mail, href: 'mailto:00khanshariq@gmail.com', label: 'Email' },
-                      { icon: Calendar, href: 'tel:+16473036451', label: 'Phone' },
+                      { icon: Mail, href: 'mailto:contact@shariqsk.com', label: 'Email' },
                     ].map((social, i) => (
                       <motion.a
                         key={social.label}
