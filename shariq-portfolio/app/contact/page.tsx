@@ -285,12 +285,12 @@ export default function Contact() {
             </div>
 
             <div className="flex justify-center gap-3 sm:gap-4">
-              {[
-                { icon: Github, href: 'https://github.com/shariqsk', label: 'GitHub' },
-                { icon: Linkedin, href: 'https://linkedin.com/in/shariq-khan', label: 'LinkedIn' },
-                { icon: Mail, href: 'mailto:00khanshariq@gmail.com', label: 'Email' },
-                { icon: Calendar, href: 'tel:+16473036451', label: 'Phone' },
-              ].map((social, i) => (
+                             {[
+                 { icon: Github, href: 'https://github.com/shariqsk', label: 'GitHub' },
+                 { icon: Linkedin, href: 'https://www.linkedin.com/in/shariq-khan-430754217/', label: 'LinkedIn' },
+                 { icon: Mail, href: 'mailto:00khanshariq@gmail.com', label: 'Email' },
+                 { icon: Calendar, href: 'tel:+16473036451', label: 'Phone' },
+               ].map((social, i) => (
                 <motion.a
                   key={social.label}
                   href={social.href}

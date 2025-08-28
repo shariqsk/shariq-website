@@ -56,7 +56,7 @@ export default function Home() {
                 transition={{ delay: 0.2 }}
               >
                 <span className="text-emerald-400 text-sm sm:text-base md:text-lg">$</span>
-                <span className="text-white text-sm sm:text-base md:text-lg">echo "Hello, I'm Shariq Khan"</span>
+                <span className="text-white text-sm sm:text-base md:text-lg">echo "Hello, I'm Shariq Safdar Khan"</span>
               </motion.div>
               
               <motion.div 
@@ -65,7 +65,7 @@ export default function Home() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                Hello, I'm Shariq Khan
+                Hello, I'm Shariq Safdar Khan
               </motion.div>
 
               <motion.div 
@@ -105,14 +105,10 @@ export default function Home() {
               >
                 <p>
                   I'm passionate about cybersecurity and building secure, scalable applications. Currently working as an Import Analyst at Farrow while pursuing Computer Security at York University. 
-                  Always open to chat; reach me via{' '}
-                  <Link href="mailto:00khanshariq@gmail.com" className="text-blue-400 hover:text-blue-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
-                    email
-                  </Link>{' '}
-                  or{' '}
-                  <Link href="tel:+16473036451" className="text-blue-400 hover:text-blue-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
-                    phone
-                  </Link>
+                  I also write about tech and security on my{' '}
+                  <Link href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
+                    blog
+                  </Link>. Always open to chat and collaborations!
                 </p>
               </motion.div>
 
@@ -153,6 +149,15 @@ export default function Home() {
                   </Button>
                   <Button 
                     as={Link} 
+                    href="/contact"
+                    className="relative overflow-hidden bg-black/40 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-xs sm:text-sm font-mono hover:scale-105 group"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <Mail className="w-3 h-3 sm:w-4 sm:h-4 relative z-10" />
+                    <span className="relative z-10">./contact.sh</span>
+                  </Button>
+                  <Button 
+                    as={Link} 
                     href="https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -186,7 +191,7 @@ export default function Home() {
                 <div className="flex justify-center gap-3 sm:gap-4">
                   {[
                     { icon: Github, href: 'https://github.com/shariqsk', label: 'GitHub' },
-                    { icon: Linkedin, href: 'https://linkedin.com/in/shariq-khan', label: 'LinkedIn' },
+                    { icon: Linkedin, href: 'https://www.linkedin.com/in/shariq-khan-430754217/', label: 'LinkedIn' },
                     { icon: Mail, href: 'mailto:00khanshariq@gmail.com', label: 'Email' },
                     { icon: Calendar, href: 'tel:+16473036451', label: 'Phone' },
                   ].map((social, i) => (
