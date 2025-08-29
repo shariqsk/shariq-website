@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact Shariq Khan | Full-Stack Developer & Cybersecurity Expert',
+  title: 'Contact',
   description: 'Get in touch with Shariq Khan - Full-Stack Developer and Computer Security Student. Available for freelance work, collaborations, and opportunities in Toronto, Canada.',
   keywords: [
     'Contact Shariq Khan',
@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     'Shariq Khan Canada Contact',
     'Toronto Developer Contact',
     'Full Stack Developer Toronto',
-    'Cybersecurity Expert Contact',
+    'Computer Security Student Contact',
     'Web Developer Toronto',
     'React Developer Contact',
     'Next.js Developer Contact'
   ],
   openGraph: {
-    title: 'Contact Shariq Khan | Full-Stack Developer & Cybersecurity Expert',
+    title: 'Contact',
     description: 'Get in touch with Shariq Khan - Full-Stack Developer and Computer Security Student. Available for freelance work, collaborations, and opportunities in Toronto, Canada.',
     url: 'https://shariqsafdarkhan.com/contact',
     type: 'website',
@@ -31,13 +31,13 @@ export const metadata: Metadata = {
         url: 'https://shariqsafdarkhan.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Contact Shariq Khan - Full-Stack Developer & Cybersecurity Expert',
+        alt: 'Contact Shariq Khan - Computer Security Student',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contact Shariq Khan | Full-Stack Developer & Cybersecurity Expert',
+    title: 'Contact',
     description: 'Get in touch with Shariq Khan - Full-Stack Developer and Computer Security Student. Available for freelance work, collaborations, and opportunities in Toronto, Canada.',
     images: ['https://shariqsafdarkhan.com/og-image.jpg'],
   },

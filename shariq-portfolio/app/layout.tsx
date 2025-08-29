@@ -14,10 +14,10 @@ import { generateStructuredData, generateWebsiteStructuredData } from "./structu
 
 export const metadata: Metadata = {
   title: {
-    default: "Shariq Khan | Full-Stack Developer & Cybersecurity Expert",
+    default: "Shariq Khan | Home",
     template: `Shariq Khan | %s`,
   },
-  description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Expert in cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+  description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
   keywords: [
     "Shariq Khan",
     "Shariq Safdar Khan",
@@ -25,14 +25,14 @@ export const metadata: Metadata = {
     "Shariq Khan Developer",
     "Shariq Khan Toronto",
     "Shariq Khan York University",
-    "Shariq Khan Cybersecurity",
+    "Shariq Khan Computer Security Student",
     "Shariq Khan Full Stack Developer",
     "Shariq Khan Software Engineer",
     "Shariq Khan Portfolio",
     "Shariq Khan Web Developer",
     "Shariq Khan Canada",
-    "Computer Security",
-    "Cybersecurity",
+    "Computer Security Student",
+    "Cybersecurity Student",
     "Full-Stack Developer",
     "Web Developer",
     "Software Engineer",

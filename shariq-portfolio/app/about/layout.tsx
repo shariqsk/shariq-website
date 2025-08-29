@@ -1,14 +1,14 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'About Shariq Khan | Full-Stack Developer & Cybersecurity Expert',
+  title: 'About',
   description: 'Learn more about Shariq Khan - Computer Security Student at York University, Full-Stack Developer, and Import Analyst at Farrow. Based in Toronto, Canada.',
   keywords: [
     'Shariq Khan',
     'Shariq Khan About',
     'Shariq Khan York University',
     'Shariq Khan Toronto',
-    'Shariq Khan Computer Security',
+    'Shariq Khan Computer Security Student',
     'Shariq Khan Full Stack Developer',
     'Shariq Khan Farrow',
     'Shariq Khan Import Analyst',
@@ -17,10 +17,10 @@ export const metadata: Metadata = {
     'Computer Security Student',
     'York University Student',
     'Toronto Developer',
-    'Cybersecurity Expert'
+    'Cybersecurity Student'
   ],
   openGraph: {
-    title: 'About Shariq Khan | Full-Stack Developer & Cybersecurity Expert',
+    title: 'About',
     description: 'Learn more about Shariq Khan - Computer Security Student at York University, Full-Stack Developer, and Import Analyst at Farrow. Based in Toronto, Canada.',
     url: 'https://shariqsafdarkhan.com/about',
     type: 'profile',
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
         url: 'https://shariqsafdarkhan.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Shariq Khan - Full-Stack Developer & Cybersecurity Expert',
+        alt: 'Shariq Khan - Computer Security Student',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'About Shariq Khan | Full-Stack Developer & Cybersecurity Expert',
+    title: 'About',
     description: 'Learn more about Shariq Khan - Computer Security Student at York University, Full-Stack Developer, and Import Analyst at Farrow. Based in Toronto, Canada.',
     images: ['https://shariqsafdarkhan.com/og-image.jpg'],
   },
