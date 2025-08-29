@@ -9,29 +9,88 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import Navbar from "@/components/navbar";
 import CinematicBackground from "@/components/CinematicBackground";
+import Footer from "@/components/footer";
+import { generateStructuredData, generateWebsiteStructuredData } from "./structured-data";
 
 export const metadata: Metadata = {
   title: {
-    default: siteConfig.name,
+    default: "Shariq Khan | Full-Stack Developer & Cybersecurity Expert",
     template: `Shariq Khan | %s`,
   },
-  description: siteConfig.description,
-  keywords: siteConfig.keywords,
+  description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Expert in cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+  keywords: [
+    "Shariq Khan",
+    "Shariq Safdar Khan",
+    "Shariq S. Khan",
+    "Shariq Khan Developer",
+    "Shariq Khan Toronto",
+    "Shariq Khan York University",
+    "Shariq Khan Cybersecurity",
+    "Shariq Khan Full Stack Developer",
+    "Shariq Khan Software Engineer",
+    "Shariq Khan Portfolio",
+    "Shariq Khan Web Developer",
+    "Shariq Khan Canada",
+    "Computer Security",
+    "Cybersecurity",
+    "Full-Stack Developer",
+    "Web Developer",
+    "Software Engineer",
+    "York University",
+    "Toronto Developer",
+    "Canadian Developer",
+    "Portfolio",
+    "Web Development",
+    "Security",
+    "Import Analyst",
+    "Farrow",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript Developer",
+    "Node.js Developer",
+    "Database Developer",
+    "API Developer",
+    "Frontend Developer",
+    "Backend Developer"
+  ],
   authors: [{ name: siteConfig.author }],
   creator: siteConfig.creator,
   publisher: siteConfig.publisher,
   formatDetection: siteConfig.formatDetection,
   metadataBase: siteConfig.metadataBase,
-  alternates: siteConfig.alternates,
-  openGraph: siteConfig.openGraph,
-  twitter: siteConfig.twitter,
-  robots: siteConfig.robots,
+  alternates: {
+    canonical: "/",
+    languages: {
+      'en-US': '/en-US',
+    },
+  },
+  openGraph: {
+    ...siteConfig.openGraph,
+    siteName: siteConfig.name,
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    ...siteConfig.twitter,
+    site: '@shariqsk',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   },
   manifest: "/site.webmanifest",
-
   category: "technology",
   classification: "Portfolio",
   other: {
@@ -55,9 +114,25 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const structuredData = generateStructuredData();
+  const websiteStructuredData = generateWebsiteStructuredData();
+
   return (
     <html suppressHydrationWarning lang="en">
-      <head />
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(structuredData),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteStructuredData),
+          }}
+        />
+      </head>
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased",
@@ -68,6 +143,7 @@ export default function RootLayout({
           <CinematicBackground />
           <Navbar />
           {children}
+          <Footer />
         </Providers>
         <Analytics />
       </body>

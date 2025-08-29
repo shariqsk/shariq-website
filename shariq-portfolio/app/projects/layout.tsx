@@ -1,36 +1,55 @@
-import { Metadata } from "next";
-import { siteConfig } from "@/config/site";
+import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Projects",
-  description: "Explore Shariq Safdar Khan's projects in cybersecurity, web development, and full-stack applications. See my work in secure software development and innovative solutions.",
+  title: 'Shariq Khan Projects | Full-Stack Developer Portfolio',
+  description: 'Explore Shariq Khan\'s projects - Full-Stack Developer and Computer Security Student. View web applications, cybersecurity projects, and software development work.',
   keywords: [
-    "Projects",
-    "Shariq Safdar Khan",
-    "Web Development",
-    "Cybersecurity",
-    "Full-Stack Development",
-    "Portfolio",
-    "Software Projects",
-    "Security Projects"
+    'Shariq Khan Projects',
+    'Shariq Khan Portfolio',
+    'Shariq Khan Web Development',
+    'Shariq Khan Software Projects',
+    'Shariq Khan Full Stack Projects',
+    'Shariq Khan Cybersecurity Projects',
+    'Shariq Khan React Projects',
+    'Shariq Khan Next.js Projects',
+    'Shariq Khan Developer Portfolio',
+    'Shariq Khan Toronto Projects',
+    'Shariq Khan York University Projects',
+    'Web Development Projects',
+    'Full Stack Developer Portfolio',
+    'Cybersecurity Projects',
+    'React Developer Projects',
+    'Next.js Developer Projects'
   ],
   openGraph: {
-    title: "Projects",
-    description: "Explore Shariq Safdar Khan's projects in cybersecurity, web development, and full-stack applications. See my work in secure software development and innovative solutions.",
-    url: `${siteConfig.url}/projects`,
-    type: "website",
+    title: 'Shariq Khan Projects | Full-Stack Developer Portfolio',
+    description: 'Explore Shariq Khan\'s projects - Full-Stack Developer and Computer Security Student. View web applications, cybersecurity projects, and software development work.',
+    url: 'https://shariqsafdarkhan.com/projects',
+    type: 'website',
+    images: [
+      {
+        url: 'https://shariqsafdarkhan.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Shariq Khan Projects - Full-Stack Developer Portfolio',
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    title: "Projects",
-    description: "Explore Shariq Safdar Khan's projects in cybersecurity, web development, and full-stack applications.",
+    card: 'summary_large_image',
+    title: 'Shariq Khan Projects | Full-Stack Developer Portfolio',
+    description: 'Explore Shariq Khan\'s projects - Full-Stack Developer and Computer Security Student. View web applications, cybersecurity projects, and software development work.',
+    images: ['https://shariqsafdarkhan.com/og-image.jpg'],
   },
-};
+  alternates: {
+    canonical: '/projects',
+  },
+}
 
 export default function ProjectsLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  return children;
+  return children
 }

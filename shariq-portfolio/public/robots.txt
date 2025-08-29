@@ -12,7 +12,10 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /api/
 
-# Allow all other content
+# Allow all content
 Allow: /about/
 Allow: /projects/
 Allow: /contact/
+
+# Host
+Host: https://shariqsafdarkhan.com
