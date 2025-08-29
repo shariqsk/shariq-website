@@ -13,7 +13,7 @@ import CinematicBackground from "@/components/CinematicBackground";
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s - ${siteConfig.name}`,
+    template: `Shariq Khan | %s`,
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
@@ -28,8 +28,7 @@ export const metadata: Metadata = {
   robots: siteConfig.robots,
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    shortcut: "/favicon.ico",
   },
   manifest: "/site.webmanifest",
   verification: {

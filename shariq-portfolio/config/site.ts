@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Shariq Khan - Portfolio | Computer Security Student & Full-Stack Developer",
+  name: "Shariq Khan | Portfolio",
   description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
   url: "https://shariqsafdarkhan.com",
   ogImage: "https://shariqsafdarkhan.com/og-image.jpg",
@@ -38,7 +38,7 @@ export const siteConfig = {
     type: "website",
     locale: "en_US",
     url: "https://shariqsafdarkhan.com",
-    title: "Shariq Khan - Portfolio | Computer Security Student & Full-Stack Developer",
+    title: "Shariq Khan | Portfolio",
     description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
     siteName: "Shariq Khan Portfolio",
     images: [
@@ -46,13 +46,13 @@ export const siteConfig = {
         url: "https://shariqsafdarkhan.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Shariq Khan - Portfolio | Computer Security Student & Full-Stack Developer",
+        alt: "Shariq Khan | Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shariq Khan - Portfolio | Computer Security Student & Full-Stack Developer",
+    title: "Shariq Khan | Portfolio",
     description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
     images: ["https://shariqsafdarkhan.com/og-image.jpg"],
     creator: "@shariqsk",
@@ -82,10 +82,6 @@ export const siteConfig = {
       href: "/projects",
     },
     {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
       label: "Contact",
       href: "/contact",
     },
@@ -102,10 +98,6 @@ export const siteConfig = {
     {
       label: "Projects",
       href: "/projects",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
     },
     {
       label: "Contact",

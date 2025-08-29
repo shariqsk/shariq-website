@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: "About - Shariq Safdar Khan",
+  title: "About",
   description: "Learn more about Shariq Safdar Khan - Computer Security Student at York University & Full-Stack Developer. Discover my background, skills, and passion for cybersecurity.",
   keywords: [
     "About Shariq Safdar Khan",
@@ -15,14 +15,14 @@ export const metadata: Metadata = {
     "Skills"
   ],
   openGraph: {
-    title: "About - Shariq Safdar Khan",
+    title: "About",
     description: "Learn more about Shariq Safdar Khan - Computer Security Student at York University & Full-Stack Developer. Discover my background, skills, and passion for cybersecurity.",
     url: `${siteConfig.url}/about`,
     type: "website",
   },
   twitter: {
     card: "summary",
-    title: "About - Shariq Safdar Khan",
+    title: "About",
     description: "Learn more about Shariq Safdar Khan - Computer Security Student at York University & Full-Stack Developer.",
   },
 };
