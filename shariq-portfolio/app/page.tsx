@@ -55,7 +55,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="relative min-h-screen flex items-center justify-center px-4 pt-16 pb-8 overflow-hidden">
+      <div className="relative min-h-screen flex items-center justify-center px-4 pt-16 pb-8 overflow-hidden w-full">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Subtle gradient orbs with smooth animations */}
