@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 import Analytics from "./analytics";
 
 import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
+import { fontSans, fontMono } from "@/config/fonts";
 import Navbar from "@/components/navbar";
 import CinematicBackground from "@/components/CinematicBackground";
 import Footer from "@/components/footer";
@@ -137,6 +137,7 @@ export default function RootLayout({
         className={clsx(
           "min-h-screen text-foreground bg-background font-sans antialiased w-full",
           fontSans.variable,
+          fontMono.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>

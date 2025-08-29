@@ -3,13 +3,13 @@
 import { motion } from 'framer-motion';
 import { Button } from '@heroui/button';
 import { Link } from '@heroui/link';
-import { Terminal, Eye, Mail, Phone, Github, Linkedin, Calendar, ExternalLink, Shield, Code, Database, Cloud, Lock, Zap, User, Target, BookOpen, Mountain, Gamepad2, BookOpenCheck, Film } from 'lucide-react';
+import { Terminal, Eye, Mail, Phone, Github, Linkedin, Calendar, ExternalLink, Shield, Code, Database, Cloud, Lock, Zap, User, Target, BookOpen, Mountain, Gamepad2, BookOpenCheck, Film, Key, BarChart3 } from 'lucide-react';
 import React from 'react';
 
 export default function About() {
   return (
-    <div className="relative min-h-screen flex items-center justify-center px-4 pt-20 sm:pt-24 pb-8 overflow-hidden">
-      <div className="w-full max-w-5xl mx-auto relative z-10">
+    <div className="relative min-h-screen px-4 pt-24 sm:pt-28 pb-8 overflow-hidden">
+      <div className="w-full max-w-4xl mx-auto relative z-10">
         {/* Terminal Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -17,21 +17,21 @@ export default function About() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="text-center mb-6 sm:mb-8 md:mb-10"
         >
-          <div className="inline-block bg-black/60 backdrop-blur-sm border border-emerald-500/40 rounded-xl p-4 sm:p-6 md:p-8 mb-4 sm:mb-6">
+                        <div className="w-full max-w-2xl mx-auto bg-black/60 backdrop-blur-sm border border-emerald-500/40 rounded-xl p-4 sm:p-6 md:p-8 mb-4 sm:mb-6">
             <div className="flex items-center gap-3 mb-3 sm:mb-4">
               <div className="flex gap-1.5">
                 <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full"></div>
                 <div className="w-3 h-3 sm:w-4 sm:h-4 bg-yellow-500 rounded-full"></div>
                 <div className="w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full"></div>
               </div>
-              <span className="text-emerald-400 text-sm sm:text-base font-mono">about_shariq.exe</span>
+              <span className="text-emerald-400 text-sm sm:text-base font-mono">about_page.sh</span>
             </div>
-                         <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-mono">
-               $ whoami
-             </h1>
-             <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-mono">
-               Computer Security Student at York University & Full-Stack Developer
-             </p>
+            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-mono">
+              Profile
+            </h1>
+            <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-mono">
+              Computer Security Student at York University & Full-Stack Developer
+            </p>
           </div>
         </motion.div>
 
@@ -43,32 +43,28 @@ export default function About() {
           className="bg-black/60 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden"
         >
           {/* Terminal Header */}
-          <div className="flex items-center gap-2 mb-3 sm:mb-4">
-            <div className="flex gap-1">
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-emerald-400 text-xs font-mono">user_profile.sh</span>
-          </div>
+                     <div className="flex items-center gap-2 mb-3 sm:mb-4">
+             <span className="text-emerald-400 text-xs font-mono">profile_data.sh</span>
+           </div>
 
           {/* Terminal Content */}
           <div className="space-y-3 sm:space-y-4 font-mono">
-            <div className="flex items-start gap-2">
-              <span className="text-emerald-400 text-sm sm:text-base">$</span>
-              <span className="text-white text-sm sm:text-base">cat profile.txt</span>
-            </div>
+                         <div className="flex items-start gap-2">
+               <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
+                              <span className="text-white text-sm sm:text-base">Bio</span>
+             </div>
             
-            <div className="ml-4 space-y-3 sm:space-y-4 text-sm sm:text-base lg:text-lg">
-              <p className="text-gray-300 leading-relaxed">
-                I'm a Computer Security student at York University with a passion for cybersecurity and secure software development. 
-                Currently working as an Import Analyst at Farrow, I bring a unique perspective combining security knowledge with real-world business processes.
-              </p>
-              <p className="text-gray-300 leading-relaxed">
-                My focus areas include web security, cloud platforms, and building secure applications. I love learning new technologies 
-                and applying security best practices to solve real problems.
-              </p>
-                  </div>
+                         <div className="ml-4 space-y-3 sm:space-y-4 text-sm sm:text-base lg:text-lg">
+               <p className="text-white leading-relaxed">
+                 Hello! My name is Shariq and I enjoy creating secure applications that live on the internet. My interest in cybersecurity started back when I was a kid trying to bypass my parents' internet restrictions by changing MAC addresses and IP configurations, Extending game time was the goal, but the curiosity it sparked is what pulled me straight into cybersecurity.
+               </p>
+               <p className="text-white leading-relaxed">
+                 Fast-forward to today, and I've had the privilege of working as an Import Analyst at Farrow, combining my security knowledge with real-world business processes. My main focus these days is building secure, scalable applications while pursuing Computer Security at York University.
+               </p>
+               <p className="text-white leading-relaxed">
+                 I also write about tech and security on my blog, sharing insights about cybersecurity and development. Below you'll find my experience, skills, and some of the technologies I've been working with recently.
+               </p>
+             </div>
                 </div>
 
           {/* Security Badge */}
@@ -92,19 +88,14 @@ export default function About() {
             className="bg-black/40 backdrop-blur-sm border border-blue-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden"
           >
             {/* Terminal Header */}
-            <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              <div className="flex gap-1">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <span className="text-blue-400 text-xs font-mono">education.sh</span>
-            </div>
+                         <div className="flex items-center gap-2 mb-3 sm:mb-4">
+               <span className="text-blue-400 text-xs font-mono">academic_record.sh</span>
+             </div>
 
             <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
               <div className="flex items-start gap-2">
-                <span className="text-blue-400">$</span>
-                <span className="text-white">cat education.txt</span>
+                <span className="text-blue-400">{'>'}</span>
+                                 <span className="text-white">Education</span>
               </div>
               
               <div className="ml-4 space-y-2">
@@ -137,19 +128,14 @@ export default function About() {
             className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden"
           >
             {/* Terminal Header */}
-            <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              <div className="flex gap-1">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <span className="text-purple-400 text-xs font-mono">experience.sh</span>
-            </div>
+                         <div className="flex items-center gap-2 mb-3 sm:mb-4">
+               <span className="text-purple-400 text-xs font-mono">work_history.sh</span>
+             </div>
 
             <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
               <div className="flex items-start gap-2">
-                <span className="text-purple-400">$</span>
-                <span className="text-white">cat experience.txt</span>
+                <span className="text-purple-400">{'>'}</span>
+                                 <span className="text-white">Experience</span>
               </div>
               
               <div className="ml-4 space-y-2 sm:space-y-3">
@@ -195,47 +181,67 @@ export default function About() {
             className="bg-black/40 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden"
           >
           {/* Terminal Header */}
-          <div className="flex items-center gap-2 mb-3 sm:mb-4">
-            <div className="flex gap-1">
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-cyan-400 text-xs font-mono">skills_analysis.sh</span>
-          </div>
+                     <div className="flex items-center gap-2 mb-3 sm:mb-4">
+             <span className="text-cyan-400 text-xs font-mono">tech_stack.sh</span>
+           </div>
 
           <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
             <div className="flex items-start gap-2">
-              <span className="text-cyan-400">$</span>
-              <span className="text-white">./analyze_skills.sh</span>
+              <span className="text-cyan-400">{'>'}</span>
+                             <span className="text-white">Skills</span>
             </div>
 
-            <div className="ml-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-              <div>
-                <div className="text-cyan-300 font-semibold mb-2">Security & Systems</div>
-                <div className="text-gray-300 text-xs space-y-1">
-                  <div>• Firewalls, SIEM (Splunk, QRadar)</div>
-                  <div>• Antivirus, MFA, Privilege Access</div>
-                  <div>• Nmap, Wireshark, OS Hardening</div>
-                  <div>• JWT, OWASP</div>
+            <div className="ml-4 space-y-4">
+              {/* Security & Systems */}
+              <div className="bg-black/30 border border-cyan-500/20 rounded-lg p-3">
+                <div className="flex items-center gap-2 mb-3">
+                  <Shield className="w-4 h-4 text-cyan-400" />
+                  <span className="text-cyan-300 font-semibold">Security & Systems</span>
                 </div>
+                                 <div className="flex flex-wrap gap-2">
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Shield className="w-3 h-3" />Firewalls</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Database className="w-3 h-3" />SIEM</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Lock className="w-3 h-3" />MFA</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Terminal className="w-3 h-3" />Nmap</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Eye className="w-3 h-3" />Wireshark</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Key className="w-3 h-3" />JWT</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Shield className="w-3 h-3" />OWASP</span>
+                 </div>
               </div>
-              <div>
-                <div className="text-cyan-300 font-semibold mb-2">Cloud Platforms</div>
-                <div className="text-gray-300 text-xs space-y-1">
-                  <div>• AWS (CloudTrail, IAM)</div>
-                  <div>• Azure, Docker, Oracle Cloud</div>
-                  <div>• Vercel, Supabase</div>
-                  <div>• GitHub Actions</div>
+
+              {/* Cloud Platforms */}
+              <div className="bg-black/30 border border-cyan-500/20 rounded-lg p-3">
+                <div className="flex items-center gap-2 mb-3">
+                  <Cloud className="w-4 h-4 text-cyan-400" />
+                  <span className="text-cyan-300 font-semibold">Cloud Platforms</span>
                 </div>
+                                 <div className="flex flex-wrap gap-2">
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Cloud className="w-3 h-3" />AWS</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Cloud className="w-3 h-3" />Azure</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Database className="w-3 h-3" />Docker</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Cloud className="w-3 h-3" />Oracle Cloud</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Zap className="w-3 h-3" />Vercel</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Database className="w-3 h-3" />Supabase</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Github className="w-3 h-3" />GitHub Actions</span>
+                 </div>
               </div>
-              <div>
-                <div className="text-cyan-300 font-semibold mb-2">Languages & Scripting</div>
-                <div className="text-gray-300 text-xs space-y-1">
-                  <div>• Python, Bash, PowerShell</div>
-                  <div>• CMD, JavaScript, TypeScript</div>
-                  <div>• SQL, Java, R</div>
+
+              {/* Languages & Scripting */}
+              <div className="bg-black/30 border border-cyan-500/20 rounded-lg p-3">
+                <div className="flex items-center gap-2 mb-3">
+                  <Code className="w-4 h-4 text-cyan-400" />
+                  <span className="text-cyan-300 font-semibold">Languages & Scripting</span>
                 </div>
+                                 <div className="flex flex-wrap gap-2">
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Code className="w-3 h-3" />Python</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Code className="w-3 h-3" />JavaScript</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Code className="w-3 h-3" />TypeScript</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Terminal className="w-3 h-3" />Bash</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Terminal className="w-3 h-3" />PowerShell</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Database className="w-3 h-3" />SQL</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><Code className="w-3 h-3" />Java</span>
+                   <span className="px-2 py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300 text-xs flex items-center gap-1"><BarChart3 className="w-3 h-3" />R</span>
+                 </div>
               </div>
             </div>
           </div>
@@ -244,7 +250,7 @@ export default function About() {
             <div className="bg-cyan-500/20 border border-cyan-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
               <div className="flex items-center gap-1">
                 <Code className="w-2 h-2 sm:w-3 sm:h-3 text-cyan-400" />
-                <span className="text-cyan-400 text-xs font-mono">SKILLS</span>
+                                 <span className="text-cyan-400 text-xs font-mono">TOOLS</span>
               </div>
             </div>
           </div>
@@ -258,19 +264,14 @@ export default function About() {
             className="bg-black/40 backdrop-blur-sm border border-orange-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden"
           >
           {/* Terminal Header */}
-          <div className="flex items-center gap-2 mb-3 sm:mb-4">
-            <div className="flex gap-1">
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-              <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-            </div>
-            <span className="text-orange-400 text-xs font-mono">interests.sh</span>
-          </div>
+                     <div className="flex items-center gap-2 mb-3 sm:mb-4">
+             <span className="text-orange-400 text-xs font-mono">personal_hobbies.sh</span>
+           </div>
 
           <div className="space-y-2 sm:space-y-3 font-mono text-xs sm:text-sm">
             <div className="flex items-start gap-2">
-              <span className="text-orange-400">$</span>
-              <span className="text-white">cat personal_interests.txt</span>
+              <span className="text-orange-400">{'>'}</span>
+                             <span className="text-white">Interests</span>
             </div>
 
             <div className="ml-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-3 sm:gap-4">
@@ -305,12 +306,10 @@ export default function About() {
                 <Gamepad2 className="w-3 h-3 sm:w-4 sm:h-4" />
                 Beyond the Terminal
               </div>
-              <div className="text-gray-300 text-xs leading-relaxed">
-                When I'm not diving into code or studying security protocols, you'll find me scaling walls at the climbing gym, 
-                shooting hoops, or getting lost in a good book. I believe in maintaining a balance between technical skills 
-                and personal well-being - after all, the best security professionals are those who can think clearly and stay 
-                focused under pressure!
-              </div>
+                             <div className="text-gray-300 text-xs leading-relaxed">
+                 When not coding or studying security, you'll find me at the climbing gym, shooting hoops, or reading. 
+                 Balance between technical skills and personal well-being keeps me sharp and focused.
+               </div>
             </div>
           </div>
 
@@ -318,7 +317,7 @@ export default function About() {
             <div className="bg-orange-500/20 border border-orange-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
               <div className="flex items-center gap-1">
                 <User className="w-2 h-2 sm:w-3 sm:h-3 text-orange-400" />
-                <span className="text-orange-400 text-xs font-mono">HUMAN</span>
+                                 <span className="text-orange-400 text-xs font-mono">HOBBIES</span>
               </div>
             </div>
           </div>
@@ -333,19 +332,14 @@ export default function About() {
         >
           <div className="bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden">
             {/* Terminal Header */}
-            <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              <div className="flex gap-1">
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-red-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-yellow-500 rounded-full"></div>
-                <div className="w-2 h-2 sm:w-3 sm:h-3 bg-green-500 rounded-full"></div>
-              </div>
-              <span className="text-emerald-400 text-xs font-mono">actions.sh</span>
-            </div>
+                         <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                                <span className="text-emerald-400 text-xs font-mono">actions.sh</span>
+             </div>
 
             <div className="space-y-2 sm:space-y-3 font-mono">
               <div className="flex items-start gap-2">
-                <span className="text-emerald-400 text-xs sm:text-sm">$</span>
-                <span className="text-white text-xs sm:text-sm">./available_actions.sh</span>
+                <span className="text-emerald-400 text-xs sm:text-sm">{'>'}</span>
+                                 <span className="text-white text-xs sm:text-sm">Actions</span>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
@@ -355,7 +349,7 @@ export default function About() {
                   className="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 transform hover:scale-105 flex items-center justify-center gap-2 text-xs sm:text-sm font-mono border border-emerald-500/30"
                 >
                   <Terminal className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span>./view_projects.sh</span>
+                  <span>View Projects</span>
                 </Button>
                 <Button
                   as={Link}
@@ -363,7 +357,7 @@ export default function About() {
                   className="bg-black/30 hover:bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg backdrop-blur-sm transform hover:scale-105 flex items-center justify-center gap-2 text-xs sm:text-sm font-mono"
                 >
                   <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
-                  <span>./contact.sh</span>
+                  <span>Contact</span>
                 </Button>
                 <Button
                   as={Link}
@@ -375,7 +369,7 @@ export default function About() {
                   <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
-                  <span>./resume.sh</span>
+                  <span>Resume</span>
                 </Button>
               </div>
             </div>

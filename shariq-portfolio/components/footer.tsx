@@ -47,9 +47,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Navigate */}
           <div className="space-y-4">
-            <h3 className="text-emerald-400 font-bold text-lg">Quick Links</h3>
+            <h3 className="text-emerald-400 font-bold text-lg">Navigate</h3>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -86,9 +86,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Resume & Links */}
+          {/* More */}
           <div className="space-y-4">
-            <h3 className="text-emerald-400 font-bold text-lg">Resume & Links</h3>
+            <h3 className="text-emerald-400 font-bold text-lg">More</h3>
             <Link
               href={siteConfig.links.resume}
               className="inline-flex items-center text-emerald-400 hover:text-emerald-300 transition-colors text-sm"
