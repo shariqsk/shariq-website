@@ -30,6 +30,21 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      {
+        source: '/sitemap.xml',
+        has: [
+          {
+            type: 'host',
+            value: 'www.shariqsafdarkhan.com',
+          },
+        ],
+        destination: 'https://shariqsafdarkhan.com/sitemap.xml',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
