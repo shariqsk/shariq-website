@@ -30,7 +30,7 @@ export default function Projects() {
               Projects
             </h1>
             <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-sans">
-              Featured Projects & Applications
+            From Dark Screens to Sharp Scenes
             </p>
           </div>
         </motion.div>

@@ -30,7 +30,7 @@ export default function About() {
               About me
             </h1>
             <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-sans">
-            Beyond the Resume
+            Beyond the Resume...
             </p>
           </div>
         </motion.div>

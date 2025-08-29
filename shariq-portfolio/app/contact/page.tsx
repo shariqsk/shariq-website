@@ -30,7 +30,7 @@ export default function Contact() {
               Contact
             </h1>
             <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-sans">
-              Let's Connect & Collaborate
+              Let's Connect & Collaborate!
             </p>
           </div>
         </motion.div>
