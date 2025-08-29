@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   verification: {
-    google: "YOUR_ACTUAL_GOOGLE_VERIFICATION_CODE",
+    google: "xPAz4GIcUAQMoAyCa-AaSbzwvQif7DAS0fIdP9aEldA",
   },
   category: "technology",
   classification: "Portfolio",
