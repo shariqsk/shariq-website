@@ -1,12 +1,14 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Shariq Safdar Khan - Portfolio",
-  description: "Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
-  url: "https://shariqsk.com",
-  ogImage: "https://shariqsk.com/og-image.jpg",
+  name: "Shariq Khan - Portfolio | Computer Security Student & Full-Stack Developer",
+  description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
+  url: "https://shariqsafdarkhan.com",
+  ogImage: "https://shariqsafdarkhan.com/og-image.jpg",
   keywords: [
+    "Shariq Khan",
     "Shariq Safdar Khan",
+    "Shariq S. Khan",
     "Computer Security",
     "Cybersecurity",
     "Full-Stack Developer",
@@ -15,41 +17,44 @@ export const siteConfig = {
     "Web Development",
     "Security",
     "Import Analyst",
-    "Farrow"
+    "Farrow",
+    "Toronto Developer",
+    "Canadian Developer",
+    "Software Engineer"
   ],
-  author: "Shariq Safdar Khan",
-  creator: "Shariq Safdar Khan",
-  publisher: "Shariq Safdar Khan",
+  author: "Shariq Khan",
+  creator: "Shariq Khan",
+  publisher: "Shariq Khan",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://shariqsk.com"),
+  metadataBase: new URL("https://shariqsafdarkhan.com"),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://shariqsk.com",
-    title: "Shariq Safdar Khan - Portfolio",
-    description: "Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
-    siteName: "Shariq Safdar Khan Portfolio",
+    url: "https://shariqsafdarkhan.com",
+    title: "Shariq Khan - Portfolio | Computer Security Student & Full-Stack Developer",
+    description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
+    siteName: "Shariq Khan Portfolio",
     images: [
       {
-        url: "https://shariqsk.com/og-image.jpg",
+        url: "https://shariqsafdarkhan.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Shariq Safdar Khan - Portfolio",
+        alt: "Shariq Khan - Portfolio | Computer Security Student & Full-Stack Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shariq Safdar Khan - Portfolio",
-    description: "Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
-    images: ["https://shariqsk.com/og-image.jpg"],
+    title: "Shariq Khan - Portfolio | Computer Security Student & Full-Stack Developer",
+    description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
+    images: ["https://shariqsafdarkhan.com/og-image.jpg"],
     creator: "@shariqsk",
   },
   robots: {

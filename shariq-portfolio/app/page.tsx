@@ -12,13 +12,14 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Shariq Safdar Khan",
+    "alternateName": ["Shariq Khan", "Shariq S. Khan", "Shariq Safdar Khan"],
     "jobTitle": "Computer Security Student & Full-Stack Developer",
     "alumniOf": {
       "@type": "EducationalOrganization",
       "name": "York University"
     },
-    "description": "Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
-    "url": "https://shariqsk.com",
+    "description": "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
+    "url": "https://shariqsafdarkhan.com",
     "sameAs": [
       "https://github.com/shariqsk",
       "https://www.linkedin.com/in/shariq-khan-430754217/",
@@ -36,12 +37,15 @@ export default function Home() {
       "Full-Stack Development",
       "Web Development",
       "Software Development",
-      "Import Analysis"
+      "Import Analysis",
+      "Shariq Khan",
+      "Shariq Safdar Khan"
     ],
     "worksFor": {
       "@type": "Organization",
       "name": "Farrow"
-    }
+    },
+    "additionalName": "Shariq Khan"
   };
 
   return (
@@ -99,7 +103,7 @@ export default function Home() {
                   transition={{ delay: 0.2 }}
                 >
                   <span className="text-emerald-400 text-sm sm:text-base md:text-lg">$</span>
-                  <span className="text-white text-sm sm:text-base md:text-lg">echo "Hello, I'm Shariq Safdar Khan"</span>
+                  <span className="text-white text-sm sm:text-base md:text-lg">echo "Hello, I'm Shariq Khan"</span>
                 </motion.div>
                 
                 <motion.div 
@@ -108,7 +112,7 @@ export default function Home() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4 }}
                 >
-                  Hello, I'm Shariq Safdar Khan
+                  Hello, I'm Shariq Khan
                 </motion.div>
 
                 <motion.div 

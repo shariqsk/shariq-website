@@ -40,6 +40,7 @@ export const metadata: Metadata = {
   other: {
     "msapplication-TileColor": "#000000",
     "theme-color": "#000000",
+    "google-site-verification": "your-google-verification-code",
   },
 };
 
