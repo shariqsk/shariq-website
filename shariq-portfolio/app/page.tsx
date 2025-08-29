@@ -25,7 +25,7 @@ export default function Home() {
       "https://www.linkedin.com/in/shariq-khan-430754217/",
       "https://shariqsk.github.io/"
     ],
-    "email": "contact@shariqsk.com",
+         "email": "contact@shariqsafdarkhan.com",
     "telephone": "",
     "address": {
       "@type": "PostalAddress",
@@ -64,7 +64,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="bg-black/60 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-4 sm:p-5 md:p-6 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden"
+                         className="bg-black/60 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-4 sm:p-6 md:p-8 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden min-h-[600px]"
           >
             {/* Terminal Header */}
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
@@ -72,7 +72,7 @@ export default function Home() {
             </div>
 
             {/* Terminal Content */}
-            <div className="space-y-3 sm:space-y-4 font-mono">
+                         <div className="space-y-4 sm:space-y-6 font-mono">
               <div className="flex items-start gap-2">
                 <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
                 <span className="text-white text-sm sm:text-base">Greetings!</span>
@@ -102,76 +102,82 @@ export default function Home() {
               </div>
               
               <div className="ml-4 text-white text-xs sm:text-sm leading-relaxed">
-                <p>
-                  I'm passionate about cybersecurity and building secure, scalable applications. Currently working as an Import Analyst at Farrow while pursuing Computer Security at York University. 
-                  I also write about tech and security on my{' '}
-                  <Link href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
-                    blog
-                  </Link>. Always open to chat and{' '}
-                  <Link href="/contact" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
-                    collaborations
-                  </Link>!
-                </p>
+                                 <p>
+                   I'm passionate about cybersecurity and building secure, scalable applications. Currently working as an Import Analyst at Farrow while pursuing Computer Security at York University. 
+                   I also write about tech and security on my{' '}
+                                       <Link href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
+                      blog
+                    </Link>. Always open to{' '}
+                                         <Link href="/contact" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
+                       chat and collaborations
+                     </Link>!
+                 </p>
               </div>
 
-              <div className="flex items-start gap-2">
-                <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
-                <span className="text-white text-sm sm:text-base">Actions</span>
-              </div>
-              
-              <div className="ml-4">
-                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
-                  <Button 
-                    as={Link} 
-                    href="/projects" 
-                    className="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 flex items-center justify-center gap-2 text-xs sm:text-sm font-mono border border-emerald-500/30 hover:scale-105"
-                  >
-                    <Terminal className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>View Projects</span>
-                  </Button>
-                  <Button 
-                    as={Link} 
-                    href="/about" 
-                    className="bg-black/40 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-xs sm:text-sm font-mono hover:scale-105"
-                  >
-                    <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>About Me</span>
-                  </Button>
-                  <Button 
-                    as={Link} 
-                    href="/contact"
-                    className="bg-black/40 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-xs sm:text-sm font-mono hover:scale-105"
-                  >
-                    <Mail className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>Contact</span>
-                  </Button>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2">
-                <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
-                <span className="text-white text-sm sm:text-base">Social</span>
-              </div>
-              
-              <div className="ml-4">
-                <div className="flex justify-center gap-3 sm:gap-4">
-                  {[
-                    { icon: Github, href: 'https://github.com/shariqsk', label: 'GitHub' },
-                    { icon: Linkedin, href: 'https://www.linkedin.com/in/shariq-khan-430754217/', label: 'LinkedIn' },
-                    { icon: Mail, href: 'mailto:contact@shariqsk.com', label: 'Email' },
-                  ].map((social, i) => (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      className="w-8 h-8 sm:w-10 sm:h-10 rounded-md bg-black/40 hover:bg-emerald-500/30 border border-emerald-500/40 hover:border-emerald-500/60 flex items-center justify-center text-emerald-400 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25 backdrop-blur-sm hover:scale-110"
-                      title={social.label}
-                      aria-label={social.label}
+                             <div className="flex items-start gap-2">
+                 <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
+                 <span className="text-white text-sm sm:text-base">Actions</span>
+               </div>
+               
+               <div className="ml-4">
+                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center">
+                   <Button 
+                     as={Link} 
+                     href="/projects" 
+                     className="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 flex items-center justify-center gap-2 text-xs sm:text-sm font-mono border border-emerald-500/30 hover:scale-105"
+                   >
+                     <Terminal className="w-3 h-3 sm:w-4 sm:h-4" />
+                     <span>View Projects</span>
+                   </Button>
+                   <Button 
+                     as={Link} 
+                     href="/about" 
+                     className="bg-black/40 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-xs sm:text-sm font-mono hover:scale-105"
+                   >
+                     <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
+                     <span>About Me</span>
+                   </Button>
+                                      <Button 
+                      as={Link} 
+                      href="https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-black/40 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-xs sm:text-sm font-mono hover:scale-105"
                     >
-                      <social.icon className="w-3 h-3 sm:w-4 sm:h-4" />
-                    </a>
-                  ))}
-                </div>
-              </div>
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                      </svg>
+                      <span>Resume</span>
+                    </Button>
+                 </div>
+               </div>
+
+               <div className="flex items-start gap-2">
+                 <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
+                 <span className="text-white text-sm sm:text-base">Social</span>
+               </div>
+               
+               <div className="ml-4">
+                 <div className="flex justify-center gap-3 sm:gap-4">
+                   {[
+                     { icon: Github, href: 'https://github.com/shariqsk', label: 'GitHub' },
+                     { icon: Linkedin, href: 'https://www.linkedin.com/in/shariq-khan-430754217/', label: 'LinkedIn' },
+                                          { icon: Mail, href: 'mailto:contact@shariqsafdarkhan.com', label: 'Email' },
+                   ].map((social, i) => (
+                                           <a
+                         key={social.label}
+                         href={social.href}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-md bg-black/40 hover:bg-emerald-500/30 border border-emerald-500/40 hover:border-emerald-500/60 flex items-center justify-center text-emerald-400 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25 backdrop-blur-sm hover:scale-110"
+                         title={social.label}
+                         aria-label={social.label}
+                       >
+                       <social.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                     </a>
+                   ))}
+                 </div>
+               </div>
             </div>
 
             {/* Security Badge */}

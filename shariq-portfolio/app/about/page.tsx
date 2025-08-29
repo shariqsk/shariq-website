@@ -55,13 +55,13 @@ export default function About() {
              </div>
             
                          <div className="ml-4 space-y-3 sm:space-y-4 text-sm sm:text-base lg:text-lg">
-               <p className="text-white leading-relaxed">
+               <p className="text-white leading-relaxed drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
                  Hello! My name is Shariq and I enjoy creating secure applications that live on the internet. My interest in cybersecurity started back when I was a kid trying to bypass my parents' internet restrictions by changing MAC addresses and IP configurations, Extending game time was the goal, but the curiosity it sparked is what pulled me straight into cybersecurity.
                </p>
-               <p className="text-white leading-relaxed">
+               <p className="text-white leading-relaxed drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
                  Fast-forward to today, and I've had the privilege of working as an Import Analyst at Farrow, combining my security knowledge with real-world business processes. My main focus these days is building secure, scalable applications while pursuing Computer Security at York University.
                </p>
-               <p className="text-white leading-relaxed">
+               <p className="text-white leading-relaxed drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
                  I also write about tech and security on my blog, sharing insights about cybersecurity and development. Below you'll find my experience, skills, and some of the technologies I've been working with recently.
                </p>
              </div>
@@ -100,7 +100,7 @@ export default function About() {
               
               <div className="ml-4 space-y-2">
                 <div className="text-blue-300 font-semibold">York University (Toronto, ON)</div>
-                                 <div className="text-white">Specialized Honours BSc, Computer Security</div>
+                                 <div className="text-white drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">Specialized Honours BSc, Computer Security</div>
                 <div className="text-gray-400 text-xs mt-2">
                   <div>Relevant coursework:</div>
                   <div>• Cyber Security • Applied Cryptography • Network Security & Forensics</div>

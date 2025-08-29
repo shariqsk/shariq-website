@@ -64,11 +64,11 @@ export default function Projects() {
               </div>
               
               <div className="text-white space-y-2 leading-relaxed">
-                <p>
+                <p className="drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
                   Full-stack ML analytics platform predicting UFC fight outcomes with 78% accuracy using XGBoost models. 
                   AWS Cognito handles user authentication with MFA, social logins, and secure session management.
                 </p>
-                <p>
+                <p className="drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
                   Deployed on Oracle Cloud with 95% page load under 1.5s globally. Automated daily refresh for 4,000+ fighters 
                   via cron pipelines. Penetration tested with zero critical vulnerabilities.
                 </p>
@@ -133,7 +133,7 @@ export default function Projects() {
                 </div>
                 
                 <div className="text-white space-y-2 text-xs leading-relaxed">
-                  <p>
+                  <p className="drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
                     Discord bot with 150ms response time serving 10,000+ users. OAuth2 authentication, Docker containerization, 
                     and CI/CD via GitHub Actions. Reduced API calls by 65% with intelligent caching.
                   </p>

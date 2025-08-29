@@ -129,7 +129,7 @@ export const siteConfig = {
   links: {
     github: "https://github.com/shariqsk",
     linkedin: "https://www.linkedin.com/in/shariq-khan-430754217/",
-    email: "mailto:contact@shariqsk.com",
+    email: "mailto:contact@shariqsafdarkhan.com",
     phone: "",
     blog: "https://shariqsk.github.io/",
     resume: "https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing",
