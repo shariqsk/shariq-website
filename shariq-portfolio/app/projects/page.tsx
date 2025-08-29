@@ -26,10 +26,10 @@ export default function Projects() {
               </div>
               <span className="text-emerald-400 text-sm sm:text-base font-mono">projects_page.sh</span>
             </div>
-            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-mono">
+            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-sans">
               Projects
             </h1>
-            <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-mono">
+            <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-sans">
               Featured Projects & Applications
             </p>
           </div>
@@ -63,7 +63,7 @@ export default function Projects() {
                 </Link>
               </div>
               
-              <div className="text-gray-300 space-y-2 leading-relaxed">
+              <div className="text-white space-y-2 leading-relaxed">
                 <p>
                   Full-stack ML analytics platform predicting UFC fight outcomes with 78% accuracy using XGBoost models. 
                   AWS Cognito handles user authentication with MFA, social logins, and secure session management.
@@ -132,7 +132,7 @@ export default function Projects() {
                   </Link>
                 </div>
                 
-                <div className="text-gray-300 space-y-2 text-xs leading-relaxed">
+                <div className="text-white space-y-2 text-xs leading-relaxed">
                   <p>
                     Discord bot with 150ms response time serving 10,000+ users. OAuth2 authentication, Docker containerization, 
                     and CI/CD via GitHub Actions. Reduced API calls by 65% with intelligent caching.
@@ -164,7 +164,7 @@ export default function Projects() {
                   </Link>
                 </div>
                 
-                <div className="text-gray-300 space-y-2 text-xs leading-relaxed">
+                <div className="text-white space-y-2 text-xs leading-relaxed">
                   <p>
                     Terminal-themed portfolio built with Next.js and Framer Motion. Responsive design with 100% Lighthouse score. 
                     Deployed on Vercel with automatic CI/CD and edge caching.
@@ -192,7 +192,7 @@ export default function Projects() {
             <div className="bg-cyan-500/20 border border-cyan-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
               <div className="flex items-center gap-1">
                 <Bot className="w-2 h-2 sm:w-3 sm:h-3 text-cyan-400" />
-                                 <span className="text-cyan-400 text-xs font-mono">WORK</span>
+                                 <span className="text-cyan-400 text-xs font-mono">PROJECTS</span>
               </div>
             </div>
           </div>

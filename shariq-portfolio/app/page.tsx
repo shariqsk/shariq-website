@@ -55,32 +55,9 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <div className="relative min-h-screen px-4 pt-24 sm:pt-28 pb-8 overflow-hidden">
-        <div className="w-full max-w-4xl mx-auto relative z-10">
-          {/* Terminal Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center mb-6 sm:mb-8 md:mb-10"
-          >
-            <div className="w-full max-w-2xl mx-auto bg-black/60 backdrop-blur-sm border border-emerald-500/40 rounded-xl p-4 sm:p-6 md:p-8 mb-4 sm:mb-6">
-              <div className="flex items-center gap-3 mb-3 sm:mb-4">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full"></div>
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-yellow-500 rounded-full"></div>
-                  <div className="w-3 h-3 sm:w-4 sm:h-4 bg-green-500 rounded-full"></div>
-                </div>
-                <span className="text-emerald-400 text-sm sm:text-base font-mono">profile_page.sh</span>
-              </div>
-              <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-mono">
-                Shariq Khan
-              </h1>
-              <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-mono">
-                Computer Security Student & Full-Stack Developer
-              </p>
-            </div>
-          </motion.div>
+             <div className="relative min-h-screen px-4 pt-24 sm:pt-28 pb-8 overflow-hidden flex items-center justify-center">
+         <div className="w-full max-w-4xl mx-auto relative z-10">
+
 
           {/* Main Terminal Window */}
           <motion.div

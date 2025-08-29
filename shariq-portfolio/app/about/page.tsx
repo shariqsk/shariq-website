@@ -26,11 +26,11 @@ export default function About() {
               </div>
               <span className="text-emerald-400 text-sm sm:text-base font-mono">about_page.sh</span>
             </div>
-            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-mono">
-              Profile
+            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-sans">
+              About me
             </h1>
-            <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-mono">
-              Computer Security Student at York University & Full-Stack Developer
+            <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-sans">
+            Beyond the Resume
             </p>
           </div>
         </motion.div>
@@ -100,7 +100,7 @@ export default function About() {
               
               <div className="ml-4 space-y-2">
                 <div className="text-blue-300 font-semibold">York University (Toronto, ON)</div>
-                <div className="text-gray-300">Specialized Honours BSc, Computer Security</div>
+                                 <div className="text-white">Specialized Honours BSc, Computer Security</div>
                 <div className="text-gray-400 text-xs mt-2">
                   <div>Relevant coursework:</div>
                   <div>• Cyber Security • Applied Cryptography • Network Security & Forensics</div>
@@ -280,24 +280,24 @@ export default function About() {
                   <Mountain className="w-3 h-3 sm:w-4 sm:h-4" />
                   Climbing & Sports
                 </div>
-                <div className="text-gray-300 text-xs space-y-1">
-                  <div>• Rock climbing (indoor & outdoor)</div>
-                  <div>• Basketball, soccer, tennis</div>
-                  <div>• Fitness & strength training</div>
-                  <div>• Hiking and outdoor adventures</div>
-                </div>
+                                 <div className="text-white text-xs space-y-1">
+                   <div>• Rock climbing (indoor & outdoor)</div>
+                   <div>• Basketball, soccer, tennis</div>
+                   <div>• Fitness & strength training</div>
+                   <div>• Hiking and outdoor adventures</div>
+                 </div>
               </div>
               <div>
                 <div className="text-orange-300 font-semibold mb-2 flex items-center gap-2">
                   <BookOpenCheck className="w-3 h-3 sm:w-4 sm:h-4" />
                   Reading & Entertainment
                 </div>
-                <div className="text-gray-300 text-xs space-y-1">
-                  <div>• Tech books & cybersecurity literature</div>
-                  <div>• Sci-fi novels & thrillers</div>
-                  <div>• TV shows: Breaking Bad, The Wire</div>
-                  <div>• Movies: Inception, The Matrix, Interstellar</div>
-                </div>
+                                 <div className="text-white text-xs space-y-1">
+                   <div>• Tech books & cybersecurity literature</div>
+                   <div>• Sci-fi novels & thrillers</div>
+                   <div>• TV shows: Breaking Bad, The Wire</div>
+                   <div>• Movies: Inception, The Matrix, Interstellar</div>
+                 </div>
               </div>
             </div>
 
@@ -306,10 +306,10 @@ export default function About() {
                 <Gamepad2 className="w-3 h-3 sm:w-4 sm:h-4" />
                 Beyond the Terminal
               </div>
-                             <div className="text-gray-300 text-xs leading-relaxed">
-                 When not coding or studying security, you'll find me at the climbing gym, shooting hoops, or reading. 
-                 Balance between technical skills and personal well-being keeps me sharp and focused.
-               </div>
+                                             <div className="text-white text-xs leading-relaxed">
+                  When not coding or studying security, you'll find me at the climbing gym, shooting hoops, or reading. 
+                  Balance between technical skills and personal well-being keeps me sharp and focused.
+                </div>
             </div>
           </div>
 

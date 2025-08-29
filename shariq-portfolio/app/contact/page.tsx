@@ -26,10 +26,10 @@ export default function Contact() {
               </div>
               <span className="text-emerald-400 text-sm sm:text-base font-mono">contact_page.sh</span>
             </div>
-            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-mono">
+            <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-emerald-400 mb-3 sm:mb-4 tracking-tight leading-none font-sans">
               Contact
             </h1>
-            <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-mono">
+            <p className="text-emerald-300 text-base sm:text-base md:text-lg lg:text-xl xl:text-2xl font-light tracking-wide font-sans">
               Let's Connect & Collaborate
             </p>
           </div>
@@ -92,16 +92,16 @@ export default function Contact() {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-3 sm:p-4 md:p-5 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden"
+          className="bg-black/40 backdrop-blur-sm border border-blue-500/30 rounded-lg p-3 sm:p-4 md:p-5 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden"
         >
           {/* Terminal Header */}
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              <span className="text-emerald-400 text-xs font-mono">social_media.sh</span>
+              <span className="text-blue-400 text-xs font-mono">social_media.sh</span>
             </div>
 
           <div className="space-y-3 sm:space-y-4 font-mono">
             <div className="flex items-start gap-2">
-              <span className="text-emerald-400 text-xs sm:text-sm">{'>'}</span>
+              <span className="text-blue-400 text-xs sm:text-sm">{'>'}</span>
                                <span className="text-white text-xs sm:text-sm">Connect</span>
             </div>
 
@@ -114,7 +114,7 @@ export default function Contact() {
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-md bg-black/30 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/50 flex items-center justify-center text-emerald-400 transition-all duration-300 shadow-md hover:shadow-lg backdrop-blur-sm"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-md bg-black/30 hover:bg-blue-500/20 border border-blue-500/30 hover:border-blue-500/50 flex items-center justify-center text-blue-400 transition-all duration-300 shadow-md hover:shadow-lg backdrop-blur-sm"
                   title={social.label}
                   aria-label={social.label}
                   whileHover={{ scale: 1.05, y: -2 }}
@@ -130,10 +130,10 @@ export default function Contact() {
           </div>
 
           <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
-            <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
+            <div className="bg-blue-500/20 border border-blue-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
               <div className="flex items-center gap-1">
-                <User className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
-                                 <span className="text-emerald-400 text-xs font-mono">SOCIAL</span>
+                <User className="w-2 h-2 sm:w-3 sm:h-3 text-blue-400" />
+                                 <span className="text-blue-400 text-xs font-mono">SOCIAL</span>
               </div>
             </div>
           </div>
@@ -144,16 +144,16 @@ export default function Contact() {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          className="bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-3 sm:p-4 md:p-5 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden"
+          className="bg-black/40 backdrop-blur-sm border border-purple-500/30 rounded-lg p-3 sm:p-4 md:p-5 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden"
         >
           {/* Terminal Header */}
             <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              <span className="text-emerald-400 text-xs font-mono">availability.sh</span>
+              <span className="text-purple-400 text-xs font-mono">availability.sh</span>
             </div>
 
           <div className="space-y-3 sm:space-y-4 font-mono">
             <div className="flex items-start gap-2">
-              <span className="text-emerald-400 text-xs sm:text-sm">{'>'}</span>
+              <span className="text-purple-400 text-xs sm:text-sm">{'>'}</span>
                                <span className="text-white text-xs sm:text-sm">Status</span>
             </div>
             
@@ -168,10 +168,10 @@ export default function Contact() {
           </div>
 
           <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
-            <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
+            <div className="bg-purple-500/20 border border-purple-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
               <div className="flex items-center gap-1">
-                <Zap className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
-                                 <span className="text-emerald-400 text-xs font-mono">AVAILABLE</span>
+                <Zap className="w-2 h-2 sm:w-3 sm:h-3 text-purple-400" />
+                                 <span className="text-purple-400 text-xs font-mono">AVAILABLE</span>
               </div>
             </div>
           </div>
