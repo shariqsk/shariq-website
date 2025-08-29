@@ -31,15 +31,12 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
   },
   manifest: "/site.webmanifest",
-  verification: {
-    google: "xPAz4GIcUAQMoAyCa-AaSbzwvQif7DAS0fIdP9aEldA",
-  },
+
   category: "technology",
   classification: "Portfolio",
   other: {
     "msapplication-TileColor": "#000000",
     "theme-color": "#000000",
-    "google-site-verification": "xPAz4GIcUAQMoAyCa-AaSbzwvQif7DAS0fIdP9aEldA",
   },
 };
 
