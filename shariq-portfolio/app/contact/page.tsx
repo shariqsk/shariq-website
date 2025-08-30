@@ -179,53 +179,16 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        {/* Call to Action Terminal */}
+        {/* Simple Flowing Navigation */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.8, ease: "easeOut" }}
+          className="text-center mb-16 sm:mb-20 md:mb-24"
         >
-          <div className="bg-black/40 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-3 sm:p-4 md:p-5 relative overflow-hidden">
-            {/* Terminal Header */}
-            <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              <span className="text-emerald-400 text-xs font-mono">actions.sh</span>
-            </div>
-
-            <div className="space-y-3 sm:space-y-4 font-mono">
-              <div className="flex items-start gap-2">
-                <span className="text-emerald-400 text-xs sm:text-sm">{'>'}</span>
-                <span className="text-white text-xs sm:text-sm">Actions</span>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center">
-                <Button
-                  as={Link}
-                  href="/about"
-                  className="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white px-5 sm:px-6 md:px-7 py-3 sm:py-4 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 transform hover:scale-105 flex items-center justify-center gap-3 text-sm sm:text-base font-mono border border-emerald-500/30"
-                >
-                  <Eye className="w-6 h-6 sm:w-7 sm:h-7" />
-                  <span>About Me</span>
-                </Button>
-                <Button
-                  as={Link}
-                  href="/projects"
-                  className="bg-black/30 hover:bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-5 sm:px-6 md:px-7 py-3 sm:py-4 rounded-md transition-all duration-300 font-semibold shadow-lg backdrop-blur-sm transform hover:scale-105 flex items-center justify-center gap-3 text-sm sm:text-base font-mono"
-                >
-                  <Terminal className="w-6 h-6 sm:w-7 sm:h-7" />
-                  <span>View Projects</span>
-                </Button>
-              </div>
-            </div>
-
-            <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
-              <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
-                <div className="flex items-center gap-1">
-                  <Zap className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
-                  <span className="text-emerald-400 text-xs font-mono">READY</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <p className="text-emerald-300 text-base sm:text-lg font-light leading-relaxed">
+            Thanks for stopping by! While you're here, check out <Link href="https://zocraticmma.com" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 transition-colors duration-300 underline decoration-emerald-500/50 underline-offset-4">zocraticmma.com</Link>.
+          </p>
         </motion.div>
       </div>
     </div>
