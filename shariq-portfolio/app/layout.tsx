@@ -10,7 +10,7 @@ import { fontSans, fontMono } from "@/config/fonts";
 import Navbar from "@/components/navbar";
 import CinematicBackground from "@/components/CinematicBackground";
 import Footer from "@/components/footer";
-import { generateStructuredData, generateWebsiteStructuredData } from "./structured-data";
+import { generateStructuredData, generateWebsiteStructuredData, generateOrganizationStructuredData, generateSiteNavigationStructuredData, generateBreadcrumbStructuredData } from "./structured-data";
 
 export const metadata: Metadata = {
   title: {
@@ -116,6 +116,9 @@ export default function RootLayout({
 }) {
   const structuredData = generateStructuredData();
   const websiteStructuredData = generateWebsiteStructuredData();
+  const organizationStructuredData = generateOrganizationStructuredData();
+  const siteNavigationStructuredData = generateSiteNavigationStructuredData();
+  const breadcrumbStructuredData = generateBreadcrumbStructuredData();
 
   return (
     <html suppressHydrationWarning lang="en">
@@ -130,6 +133,24 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(websiteStructuredData),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationStructuredData),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteNavigationStructuredData),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(breadcrumbStructuredData),
           }}
         />
       </head>

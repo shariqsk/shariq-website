@@ -100,6 +100,18 @@ export const siteConfig = {
       href: "/projects",
     },
     {
+      label: "Skills",
+      href: "/skills",
+    },
+    {
+      label: "Blog",
+      href: "/blog",
+    },
+    {
+      label: "Resume",
+      href: "/resume",
+    },
+    {
       label: "Contact",
       href: "/contact",
     },
@@ -118,12 +130,20 @@ export const siteConfig = {
       href: "/projects",
     },
     {
-      label: "Contact",
-      href: "/contact",
+      label: "Skills",
+      href: "/skills",
+    },
+    {
+      label: "Blog",
+      href: "/blog",
     },
     {
       label: "Resume",
-      href: "https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing",
+      href: "/resume",
+    },
+    {
+      label: "Contact",
+      href: "/contact",
     },
   ],
   links: {

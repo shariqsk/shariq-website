@@ -87,7 +87,12 @@ export const generateWebsiteStructuredData = () => {
       "query-input": "required name=search_term_string"
     },
     "inLanguage": "en-US",
-    "isAccessibleForFree": true
+    "isAccessibleForFree": true,
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Shariq Khan",
+      "url": siteConfig.url
+    }
   }
 
   return structuredData
@@ -119,8 +124,122 @@ export const generateBreadcrumbStructuredData = () => {
       {
         "@type": "ListItem",
         "position": 4,
+        "name": "Skills",
+        "item": `${siteConfig.url}/skills`
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Blog",
+        "item": `${siteConfig.url}/blog`
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "Resume",
+        "item": `${siteConfig.url}/resume`
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
         "name": "Contact",
         "item": `${siteConfig.url}/contact`
+      }
+    ]
+  }
+
+  return structuredData
+}
+
+export const generateOrganizationStructuredData = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Shariq Khan Portfolio",
+    "url": siteConfig.url,
+    "logo": `${siteConfig.url}/og-image.jpg`,
+    "description": siteConfig.description,
+    "founder": {
+      "@type": "Person",
+      "name": "Shariq Khan"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "contact@shariqsafdarkhan.com"
+    },
+    "sameAs": [
+      siteConfig.links.github,
+      siteConfig.links.linkedin,
+      siteConfig.links.blog
+    ]
+  }
+
+  return structuredData
+}
+
+export const generateSiteNavigationStructuredData = () => {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Site Navigation",
+    "description": "Main navigation sections of Shariq Khan's portfolio website",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "url": siteConfig.url,
+        "description": "Main homepage with introduction and overview"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "About",
+        "url": `${siteConfig.url}/about`,
+        "description": "Detailed information about Shariq Khan's background, skills, and experience"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Projects",
+        "url": `${siteConfig.url}/projects`,
+        "description": "Portfolio of web development and software engineering projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Contact",
+        "url": `${siteConfig.url}/contact`,
+        "description": "Contact information and ways to get in touch"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
+        "name": "Resume",
+        "url": siteConfig.links.resume,
+        "description": "Professional resume and work experience"
+      },
+      {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "GitHub",
+        "url": siteConfig.links.github,
+        "description": "GitHub profile with code repositories and projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 7,
+        "name": "LinkedIn",
+        "url": siteConfig.links.linkedin,
+        "description": "Professional LinkedIn profile"
+      },
+      {
+        "@type": "ListItem",
+        "position": 8,
+        "name": "Blog",
+        "url": siteConfig.links.blog,
+        "description": "Technical blog and articles"
       }
     ]
   }
