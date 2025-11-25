@@ -90,14 +90,6 @@ export default function Navbar() {
                                      <item.icon className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:scale-110" />
                 </div>
                 
-                {/* Active indicator */}
-                {pathname === item.href && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-emerald-400 rounded-full"
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
-                )}
               </Link>
             </motion.div>
           ))}
