@@ -190,11 +190,11 @@ export default function Home() {
                          href={social.href}
                          target="_blank"
                          rel="noopener noreferrer"
-                         className="w-8 h-8 sm:w-10 sm:h-10 rounded-md bg-black/40 hover:bg-emerald-500/30 border border-emerald-500/40 hover:border-emerald-500/60 flex items-center justify-center text-emerald-400 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25 backdrop-blur-sm hover:scale-110"
+                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/40 hover:bg-emerald-500/30 border border-emerald-500/40 hover:border-emerald-500/60 flex items-center justify-center text-emerald-400 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25 backdrop-blur-sm hover:scale-110"
                          title={social.label}
                          aria-label={social.label}
                        >
-                       <social.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                      <social.icon className="w-5 h-5 sm:w-6 sm:h-6" />
                      </a>
                    ))}
                  </div>
