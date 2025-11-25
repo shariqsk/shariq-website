@@ -180,14 +180,13 @@ export default function Projects() {
 
                 <div className="mt-3 rounded-lg overflow-hidden border border-purple-500/30 bg-black/40">
                   <div className="relative w-full bg-black" style={{ aspectRatio: '16 / 9' }}>
-                    <video
-                      controls
-                      playsInline
-                      className="absolute inset-0 w-full h-full object-contain"
-                    >
-                      <source src="/CDLCareer_demo.mp4" type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                    <iframe
+                      src="https://drive.google.com/file/d/1-rbv5D9_xfggXfZdDir2Ozv_GBd6-4Am/preview"
+                      className="absolute inset-0 w-full h-full"
+                      allow="autoplay"
+                      loading="lazy"
+                      title="CDL Simulator Gameplay Demo"
+                    ></iframe>
                   </div>
                 </div>
 
