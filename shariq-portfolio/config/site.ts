@@ -109,7 +109,7 @@ export const siteConfig = {
     },
     {
       label: "Resume",
-      href: "/resume",
+      href: "https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing",
     },
     {
       label: "Contact",
@@ -139,7 +139,7 @@ export const siteConfig = {
     },
     {
       label: "Resume",
-      href: "/resume",
+      href: "https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing",
     },
     {
       label: "Contact",

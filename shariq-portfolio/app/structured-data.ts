@@ -136,12 +136,6 @@ export const generateBreadcrumbStructuredData = () => {
       {
         "@type": "ListItem",
         "position": 6,
-        "name": "Resume",
-        "item": `${siteConfig.url}/resume`
-      },
-      {
-        "@type": "ListItem",
-        "position": 7,
         "name": "Contact",
         "item": `${siteConfig.url}/contact`
       }
