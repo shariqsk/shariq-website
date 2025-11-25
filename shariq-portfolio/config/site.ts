@@ -109,7 +109,7 @@ export const siteConfig = {
     },
     {
       label: "Resume",
-      href: "https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing",
+      href: "https://drive.google.com/file/d/1H5M6Sb37TZRIOJMfOq-Xcll-08tHYv5x/view?usp=sharing",
     },
     {
       label: "Contact",
@@ -139,7 +139,7 @@ export const siteConfig = {
     },
     {
       label: "Resume",
-      href: "https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing",
+      href: "https://drive.google.com/file/d/1H5M6Sb37TZRIOJMfOq-Xcll-08tHYv5x/view?usp=sharing",
     },
     {
       label: "Contact",
@@ -152,6 +152,6 @@ export const siteConfig = {
     email: "mailto:contact@shariqsafdarkhan.com",
     phone: "",
     blog: "https://shariqsk.github.io/",
-    resume: "https://drive.google.com/file/d/1U9dGVpkArAHfgTKGVfEm_3nufE68Ea_L/view?usp=sharing",
+    resume: "https://drive.google.com/file/d/1H5M6Sb37TZRIOJMfOq-Xcll-08tHYv5x/view?usp=sharing",
   },
 };
