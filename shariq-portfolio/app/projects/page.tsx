@@ -1,12 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Button } from '@heroui/button';
 import { Link } from '@heroui/link';
-import { Terminal, Eye, Mail, ExternalLink, Github, Linkedin, Calendar, Shield, Code, Database, Cloud, Lock, Zap, User, Target, BookOpen, Bot, TrendingUp, BarChart3 } from 'lucide-react';
+import { ExternalLink, Shield, Code, Bot, TrendingUp, BarChart3 } from 'lucide-react';
 import React from 'react';
 
 export default function Projects() {
+  const [preview, setPreview] = React.useState<{ src: string; alt: string } | null>(null);
+
   return (
     <div className="relative min-h-screen px-4 pt-24 sm:pt-28 pb-8 overflow-hidden">
       <div className="w-full max-w-5xl mx-auto relative z-10">
@@ -54,10 +55,13 @@ export default function Projects() {
             </div>
             
             <div className="ml-4 space-y-2 sm:space-y-3 text-xs sm:text-sm">
-              <div className="flex items-center gap-2 mb-2 sm:mb-3">
+              <div className="flex items-center gap-2 flex-wrap mb-2 sm:mb-3">
                 <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
                 <span className="text-emerald-300 font-semibold text-sm sm:text-base">Zocratic MMA</span>
                 <span className="text-gray-400 text-xs">(2024 - Present)</span>
+                <span className="text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full border border-emerald-500/40 text-emerald-200 bg-emerald-500/10">
+                  Team Project
+                </span>
                 <Link href="https://www.zocraticmma.com" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 transition-colors">
                   <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                 </Link>
@@ -65,13 +69,37 @@ export default function Projects() {
               
               <div className="text-white space-y-2 leading-relaxed">
                 <p className="drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
-                  Full-stack ML analytics platform predicting UFC fight outcomes with 78% accuracy using XGBoost models. 
-                  AWS Cognito handles user authentication with MFA, social logins, and secure session management.
+                  Zocratic MMA is a fan-first platform where fight nerds scout athletes, study matchup data, and build smarter picks with live telemetry, tape-study annotations, and proprietary scoring tiers rendered through Next.js pages and edge-memoized queries.
                 </p>
                 <p className="drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
-                  Deployed on Oracle Cloud with 95% page load under 1.5s globally. Automated daily refresh for 4,000+ fighters 
-                  via cron pipelines. Penetration tested with zero critical vulnerabilities.
+                  Fighter datasets stream in via a Python ingestion service that normalizes stats before feeding FastAPI endpoints and PyTorch ensembles (XGBoost + NN stack) that project win-probability curves, bankroll swings, and matchup volatility.
                 </p>
+              </div>
+
+              <div className="px-3 py-2 bg-emerald-500/10 border border-emerald-500/30 rounded-md text-emerald-200 text-xs sm:text-sm font-semibold">
+                Highlight: 5K+ weekly entries track strike accuracy, bankroll swings, and leaderboard rank live while Supabase triggers recompute projections whenever new PyTorch inference batches land.
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                {[
+                  { src: '/Screenshot 2025-11-25 114637.png', alt: 'Zocratic MMA dashboard view' },
+                  { src: '/Screenshot 2025-11-25 114653.png', alt: 'Zocratic MMA analytics charts' },
+                ].map((shot) => (
+                  <button
+                    key={shot.src}
+                    type="button"
+                    onClick={() => setPreview(shot)}
+                    className="rounded-lg overflow-hidden border border-emerald-500/20 bg-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/70 cursor-zoom-in"
+                    aria-label={`Expand ${shot.alt}`}
+                  >
+                    <img
+                      src={shot.src}
+                      alt={shot.alt}
+                      className="w-full h-56 sm:h-64 object-cover"
+                      loading="lazy"
+                    />
+                  </button>
+                ))}
               </div>
 
               {/* Tech Stack */}
@@ -83,6 +111,8 @@ export default function Projects() {
                 <div className="flex flex-wrap gap-1 sm:gap-2 text-xs">
                   <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-emerald-500/20 border border-emerald-500/30 rounded text-emerald-300">Next.js</span>
                   <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-emerald-500/20 border border-emerald-500/30 rounded text-emerald-300">FastAPI</span>
+                  <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-emerald-500/20 border border-emerald-500/30 rounded text-emerald-300">Python</span>
+                  <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-emerald-500/20 border border-emerald-500/30 rounded text-emerald-300">PyTorch</span>
                   <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-emerald-500/20 border border-emerald-500/30 rounded text-emerald-300">AWS Cognito</span>
                   <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-emerald-500/20 border border-emerald-500/30 rounded text-emerald-300">XGBoost</span>
                   <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-emerald-500/20 border border-emerald-500/30 rounded text-emerald-300">Supabase</span>
@@ -122,22 +152,98 @@ export default function Projects() {
             </div>
 
             <div className="ml-4 space-y-3 sm:space-y-4">
-              <div className="bg-black/30 border border-cyan-500/20 rounded-lg p-3 sm:p-4">
-                <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                  <Bot className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-400" />
-                  <span className="text-cyan-300 font-semibold">Quote-of-the-Day Discord Bot</span>
-                  <span className="text-gray-400 text-xs">(2023 - Present)</span>
-                  <Link href="https://github.com/shariqsk/quote-bot" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:text-cyan-300 transition-colors">
+              <div className="bg-black/30 border border-purple-500/20 rounded-lg p-3 sm:p-4">
+                <div className="flex items-center gap-2 flex-wrap mb-2 sm:mb-3">
+                  <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
+                  <span className="text-purple-300 font-semibold">CDL Simulator</span>
+                  <span className="text-gray-400 text-xs">(2024)</span>
+                  <span className="text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full border border-purple-500/40 text-purple-200 bg-purple-500/10">
+                    Team Project
+                  </span>
+                  <Link href="https://github.com/shariqsk/cdlsimulator" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 transition-colors">
                     <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                   </Link>
                 </div>
                 
                 <div className="text-white space-y-2 text-xs leading-relaxed">
-                  <p className="drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
-                    Discord bot with 150ms response time serving 10,000+ users. OAuth2 authentication, Docker containerization, 
-                    and CI/CD via GitHub Actions. Reduced API calls by 65% with intelligent caching.
+                  <p>
+                    CDL Simulator is a Call of Duty esports league manager where you recruit talent, negotiate contracts, and chase majors plus Champs banners while balancing payroll, staff morale, and salary-cap rules mirrored from the real circuit.
+                  </p>
+                  <p>
+                    The sim core runs weighted Monte Carlo match scripts with hazard cards (power outages, crowd buffs, meta shifts) that influence map vetoes and roster chemistry, then persists standings/salary deltas via Supabase.
                   </p>
                 </div>
+
+                <div className="mt-3 px-3 py-2 bg-purple-500/10 border border-purple-500/30 rounded-md text-purple-100 text-xs sm:text-sm font-semibold">
+                  Highlight: Dynamic season tracker tallies Majors, Champs, and scrims while hazard events impact map pools, player form, and the scouting board in real time.
+                </div>
+
+                <div className="mt-3 rounded-lg overflow-hidden border border-purple-500/30 bg-black/40">
+                  <div className="relative w-full bg-black" style={{ aspectRatio: '16 / 9' }}>
+                    <video
+                      controls
+                      playsInline
+                      className="absolute inset-0 w-full h-full object-contain"
+                    >
+                      <source src="/CDLCareer_demo.mp4" type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                  </div>
+                </div>
+
+                <div className="mt-3 pt-2 border-t border-purple-500/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Code className="w-2 h-2 sm:w-3 sm:h-3 text-purple-400" />
+                    <span className="text-purple-400 text-xs font-semibold">TECH STACK</span>
+                  </div>
+                  <div className="flex flex-wrap gap-1 sm:gap-2 text-xs">
+                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/30 rounded text-purple-300">Next.js</span>
+                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/30 rounded text-purple-300">Framer Motion</span>
+                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/30 rounded text-purple-300">Tailwind CSS</span>
+                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/30 rounded text-purple-300">Supabase</span>
+                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/30 rounded text-purple-300">Vercel</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-black/30 border border-cyan-500/20 rounded-lg p-3 sm:p-4">
+                <div className="flex items-center gap-2 flex-wrap mb-2 sm:mb-3">
+                  <Bot className="w-3 h-3 sm:w-4 sm:h-4 text-cyan-400" />
+                  <span className="text-cyan-300 font-semibold">Quote-of-the-Day Discord Bot</span>
+                  <span className="text-gray-400 text-xs">(2023 - Present)</span>
+                  <span className="text-[10px] uppercase tracking-wide px-2 py-0.5 rounded-full border border-cyan-500/40 text-cyan-200 bg-cyan-500/10">
+                    Solo Project
+                  </span>
+                </div>
+                
+                <div className="text-white space-y-2 text-xs leading-relaxed">
+                  <p className="drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
+                    Quote-of-the-Day runs a discord.js gateway paired with a Python worker that fetches curated quotes, normalizes metadata, and stores delivery receipts for analytics dashboards.
+                  </p>
+                  <p className="drop-shadow-[0_0_2px_rgba(255,255,255,0.3)]">
+                    OAuth2 auth, Docker packaging, and GitHub Actions keep deployments atomic, while Redis caching trims third-party API calls by 65% and rate-limits slash commands to &lt;200ms responses.
+                  </p>
+                </div>
+
+                <div className="mt-3 px-3 py-2 bg-cyan-500/10 border border-cyan-500/30 rounded-md text-cyan-100 text-xs sm:text-sm font-semibold">
+                  Highlight: Schedules daily inspirational drops, fans out slash-command transcripts, and mirrors content to Notion + Supabase for newsletter reuse.
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() =>
+                    setPreview({ src: '/QOTD.png', alt: 'Quote-of-the-Day Discord bot dashboard' })
+                  }
+                  className="mt-3 rounded-lg overflow-hidden border border-cyan-500/30 bg-black/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 cursor-zoom-in"
+                  aria-label="Expand Quote-of-the-Day Discord bot screenshot"
+                >
+                  <img
+                    src="/QOTD.png"
+                    alt="Quote-of-the-Day Discord bot dashboard"
+                    className="w-full h-48 sm:h-56 object-cover"
+                    loading="lazy"
+                  />
+                </button>
 
                 {/* Tech Stack */}
                 <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-cyan-500/20">
@@ -150,38 +256,6 @@ export default function Projects() {
                     <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300">Python</span>
                     <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300">Docker</span>
                     <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-cyan-500/20 border border-cyan-500/30 rounded text-cyan-300">OAuth2</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-black/30 border border-purple-500/20 rounded-lg p-3 sm:p-4">
-                <div className="flex items-center gap-2 mb-2 sm:mb-3">
-                  <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-purple-400" />
-                  <span className="text-purple-300 font-semibold">Portfolio Website</span>
-                  <span className="text-gray-400 text-xs">(2024)</span>
-                  <Link href="https://github.com/shariqsk/portfolio" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 transition-colors">
-                    <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
-                  </Link>
-                </div>
-                
-                <div className="text-white space-y-2 text-xs leading-relaxed">
-                  <p>
-                    Terminal-themed portfolio built with Next.js and Framer Motion. Responsive design with 100% Lighthouse score. 
-                    Deployed on Vercel with automatic CI/CD and edge caching.
-                  </p>
-                </div>
-
-                {/* Tech Stack */}
-                <div className="mt-2 sm:mt-3 pt-2 sm:pt-3 border-t border-purple-500/20">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Code className="w-2 h-2 sm:w-3 sm:h-3 text-purple-400" />
-                    <span className="text-purple-400 text-xs font-semibold">TECH STACK</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1 sm:gap-2 text-xs">
-                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/30 rounded text-purple-300">Next.js</span>
-                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/30 rounded text-purple-300">Framer Motion</span>
-                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/30 rounded text-purple-300">Tailwind CSS</span>
-                    <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-purple-500/20 border border-purple-500/30 rounded text-purple-300">Vercel</span>
                   </div>
                 </div>
               </div>
@@ -210,6 +284,26 @@ export default function Projects() {
           </p>
         </motion.div>
       </div>
+
+      {preview && (
+        <button
+          type="button"
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 focus:outline-none"
+          onClick={() => setPreview(null)}
+          aria-label="Close image preview"
+        >
+          <div className="relative max-w-4xl w-full">
+            <img
+              src={preview.src}
+              alt={preview.alt}
+              className="w-full max-h-[80vh] object-contain rounded-lg border border-emerald-400/40"
+            />
+            <span className="absolute top-3 right-3 text-xs font-mono text-white/70 bg-black/70 px-2 py-1 rounded">
+              click anywhere to close
+            </span>
+          </div>
+        </button>
+      )}
     </div>
   );
 }
