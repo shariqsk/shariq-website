@@ -138,23 +138,32 @@ export default function About() {
                                  <span className="text-white">Experience</span>
               </div>
               
-              <div className="ml-4 space-y-2 sm:space-y-3">
+              <div className="ml-4 space-y-3">
+                <div>
+                  <div className="text-purple-300 font-semibold">Freelance Full-Stack Developer - Shake Shack</div>
+                  <div className="text-gray-400 text-xs">2025 - Present (Remote)</div>
+                  <div className="text-gray-300 text-xs mt-1">
+                    • Built a TypeScript UI + REST API that scans receipt IDs and stores photo evidence in a normalized DB<br/>
+                    • Added indexed search, filters, and image previews so ops resolve UberEats/DoorDash disputes fast<br/>
+                    • Standardized chargeback workflows with RBAC + audit logs collaborating with remote eng & ops
+                  </div>
+                </div>
                 <div>
                   <div className="text-purple-300 font-semibold">Import Analyst I - Farrow</div>
                   <div className="text-gray-400 text-xs">Jun 2024 - Present (Hybrid)</div>
                   <div className="text-gray-300 text-xs mt-1">
-                    • Process 55+ daily EDI manifests and CADEX releases<br/>
-                    • Audit HS codes with strict access controls<br/>
-                    • Maintain 95%+ first-attempt clearance rate
+                    • Process 55–65 daily EDI (ACI) + CADEX releases keeping customs data clean<br/>
+                    • Audit HS codes, valuation, and COO fields to cut CBSA rejections<br/>
+                    • Clear shipment holds inside 24h, protecting SLAs with a 95%+ clearance rate
                   </div>
                 </div>
                 <div>
                   <div className="text-purple-300 font-semibold">Web Developer - Saftech Designs</div>
-                  <div className="text-gray-400 text-xs">Remote</div>
+                  <div className="text-gray-400 text-xs">Jan 2023 - Apr 2024 (Remote)</div>
                   <div className="text-gray-300 text-xs mt-1">
-                    • Rebuilt corporate site on Next.js, reducing load times to under 1 second<br/>
-                    • Hardened GraphQL/REST endpoints with JWT, CSP, HSTS<br/>
-                    • Implemented CI/CD pipelines with GitHub Actions
+                    • Rebuilt the corporate site with WordPress + Next.js hitting &lt;1s TTFB/LCP and better CWV<br/>
+                    • Hardened APIs using JWT auth, CSP, HSTS, and rate limiting against OWASP top risks<br/>
+                    • Automated GitHub Actions + Vercel deploys, lifting release cadence and SEO by 25%
                   </div>
                 </div>
               </div>
