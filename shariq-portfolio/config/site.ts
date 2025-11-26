@@ -5,7 +5,7 @@ export const siteConfig = {
   description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
   url: "https://shariqsafdarkhan.com",
   ogImage: "https://shariqsafdarkhan.com/og-image.jpg",
-  keywords: [
+  keywords: [ //
     "Shariq Khan",
     "Shariq Safdar Khan", 
     "Shariq S. Khan",
