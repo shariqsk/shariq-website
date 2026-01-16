@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     ...siteConfig.twitter,
-    site: '@shariqsk',
+    site: '@shariqssk',
   },
   robots: {
     index: true,
