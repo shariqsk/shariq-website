@@ -100,14 +100,6 @@ export const siteConfig = {
       href: "/projects",
     },
     {
-      label: "Skills",
-      href: "/skills",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
-    },
-    {
       label: "Resume",
       href: "https://drive.google.com/file/d/1H5M6Sb37TZRIOJMfOq-Xcll-08tHYv5x/view?usp=sharing",
     },
@@ -128,14 +120,6 @@ export const siteConfig = {
     {
       label: "Projects",
       href: "/projects",
-    },
-    {
-      label: "Skills",
-      href: "/skills",
-    },
-    {
-      label: "Blog",
-      href: "/blog",
     },
     {
       label: "Resume",
