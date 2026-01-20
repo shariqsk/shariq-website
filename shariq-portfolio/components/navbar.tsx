@@ -10,9 +10,7 @@ export default function Navbar() {
 
   const navigation = [
     { label: "Home", href: "/", icon: Home },
-    { label: "About", href: "/about", icon: User },
     { label: "Projects", href: "/projects", icon: FolderOpen },
-    { label: "Contact", href: "/contact", icon: Mail },
     { label: "Resume", href: "https://drive.google.com/file/d/1H5M6Sb37TZRIOJMfOq-Xcll-08tHYv5x/view?usp=sharing", icon: FileText },
   ];
 

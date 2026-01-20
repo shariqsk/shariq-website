@@ -238,7 +238,7 @@ export default function Home() {
                   transition={{ delay: 1.6, duration: 0.5 }}
                   className="flex flex-wrap gap-2"
                 >
-                  {['York University', 'Farrow'].map((tag, i) => (
+                  {['York University'].map((tag, i) => (
                     <motion.span 
                       key={tag}
                       whileHover={{ 
@@ -250,7 +250,7 @@ export default function Home() {
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 1.7 + i * 0.1, type: "spring" }}
-                      className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/30 rounded-full text-emerald-400/90 text-xs sm:text-sm font-light cursor-pointer transition-all duration-300"
+                      className="px-3 py-1 bg-zinc-900/50 border border-zinc-800 rounded-full text-zinc-400 text-xs sm:text-sm font-light cursor-pointer transition-all duration-300 hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400"
                     >
                       {tag}
                     </motion.span>
@@ -306,7 +306,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.2, duration: 0.4 }}
                 >
-                  I'm a Computer Security student at York University with a deep passion for cybersecurity and building secure, scalable applications. Currently working as an Import Analyst at Farrow, I bring a unique blend of technical expertise and practical business experience to every project.
+                  I'm a 20-year-old Computer Security student at York University with a deep passion for cybersecurity and building secure, scalable applications. I bring technical expertise to every project.
                 </motion.p>
                 <motion.p 
                   initial={{ opacity: 0, y: 5 }}
@@ -415,9 +415,9 @@ export default function Home() {
                       <motion.div 
                         whileHover={{ rotate: [0, -10, 10, 0] }}
                         transition={{ duration: 0.5 }}
-                        className="w-12 h-12 rounded-full bg-zinc-800 border border-zinc-700 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/30 flex items-center justify-center transition-all duration-300"
+                        className="w-12 h-12 rounded-full bg-zinc-900/60 border border-zinc-800 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/30 flex items-center justify-center transition-all duration-300"
                       >
-                        <item.icon className="w-6 h-6 text-zinc-400 group-hover:text-emerald-400 transition-colors duration-300" />
+                        <item.icon className="w-6 h-6 text-zinc-500 group-hover:text-emerald-400 transition-colors duration-300" />
                       </motion.div>
                       <div>
                         <motion.h3 

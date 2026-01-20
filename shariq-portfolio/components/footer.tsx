@@ -38,29 +38,11 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/about"
-                  className="text-zinc-500 hover:text-emerald-400 transition-all duration-300 text-sm font-extralight flex items-center gap-2 group"
-                >
-                  <span className="w-1 h-1 rounded-full bg-emerald-500/0 group-hover:bg-emerald-400 transition-colors duration-300" />
-                  <span>About Me</span>
-                </Link>
-              </li>
-              <li>
-                <Link
                   href="/projects"
                   className="text-zinc-500 hover:text-emerald-400 transition-all duration-300 text-sm font-extralight flex items-center gap-2 group"
                 >
                   <span className="w-1 h-1 rounded-full bg-emerald-500/0 group-hover:bg-emerald-400 transition-colors duration-300" />
                   <span>Projects</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-zinc-500 hover:text-emerald-400 transition-all duration-300 text-sm font-extralight flex items-center gap-2 group"
-                >
-                  <span className="w-1 h-1 rounded-full bg-emerald-500/0 group-hover:bg-emerald-400 transition-colors duration-300" />
-                  <span>Contact</span>
                 </Link>
               </li>
             </ul>
