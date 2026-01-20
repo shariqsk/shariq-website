@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@heroui/button';
 import { Link } from '@heroui/link';
 import { Github, Linkedin, Mail, Shield, Terminal, Lock, FileText, Code2 } from 'lucide-react';
+import { FaSquareXTwitter } from "react-icons/fa6";
 import Script from 'next/script';
 import { siteConfig } from '@/config/site';
 import { useState, useEffect } from 'react';
@@ -319,6 +320,16 @@ export default function Home() {
                   >
                     <Github className="w-5 h-5 text-zinc-500 group-hover:text-emerald-400 transition-colors duration-300" />
                     <span className="text-sm font-light">GitHub</span>
+                  </a>
+                  <a
+                    href="https://twitter.com/shariqssk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 px-4 py-2 bg-zinc-900/60 border border-zinc-800 rounded-lg hover:bg-zinc-800 hover:border-zinc-700 hover:text-white transition-all duration-300"
+                    title="X (Twitter)"
+                  >
+                    <FaSquareXTwitter className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors duration-300" />
+                    <span className="text-sm font-light">X</span>
                   </a>
                   <a
                     href="https://www.linkedin.com/in/shariq-khan-430754217/"
