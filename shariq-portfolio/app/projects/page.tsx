@@ -75,12 +75,7 @@ export default function Projects() {
           className="mb-8 sm:mb-12"
         >
           <div className="flex items-center gap-3 mb-4">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-            >
-              <Terminal className="w-6 h-6 text-emerald-400" />
-            </motion.div>
+            <Terminal className="w-6 h-6 text-emerald-400" />
             <div className="flex flex-col">
               <h1 className="text-3xl sm:text-4xl md:text-5xl text-white font-thin tracking-tight">
                 Projects

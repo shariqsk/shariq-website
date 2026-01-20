@@ -255,26 +255,6 @@ export default function Home() {
                       {tag}
                     </motion.span>
                   ))}
-                  <motion.span 
-                    whileHover={{ 
-                      scale: 1.05, 
-                      y: -2,
-                      backgroundColor: "rgba(34,211,238,0.2)"
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.9, type: "spring" }}
-                    className="px-3 py-1 bg-cyan-500/10 border border-cyan-500/30 rounded-full text-cyan-400/90 text-xs sm:text-sm font-light flex items-center gap-1 cursor-pointer transition-all duration-300"
-                  >
-                    <motion.div
-                      animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      <Sparkles className="w-3 h-3" />
-                    </motion.div>
-                    Available
-                  </motion.span>
                 </motion.div>
               </motion.div>
 
@@ -285,13 +265,6 @@ export default function Home() {
                 transition={{ delay: 2.0, duration: 0.5, type: "spring" }}
                 className="flex items-start gap-2"
               >
-                <motion.span 
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                  className="text-emerald-400 text-sm sm:text-base font-mono"
-                >
-                  {">"}
-                </motion.span>
                 <span className="text-white text-sm sm:text-base font-thin">cat bio.txt</span>
               </motion.div>
               
@@ -401,16 +374,8 @@ export default function Home() {
                       stiffness: 300,
                       damping: 20
                     }}
-                    className="p-4 bg-zinc-900/40 border border-zinc-800 rounded-xl transition-all duration-300 group cursor-pointer relative overflow-hidden"
+                    className="p-4 bg-zinc-900/40 border border-zinc-800 rounded-xl transition-all duration-300 group cursor-pointer"
                   >
-                    <motion.div
-                      initial={false}
-                      whileHover={{
-                        opacity: [0, 0.1, 0],
-                        transition: { duration: 0.5 }
-                      }}
-                      className="absolute inset-0 bg-emerald-500"
-                    />
                     <div className="flex flex-col items-center text-center gap-2 relative z-10">
                       <motion.div 
                         whileHover={{ rotate: [0, -10, 10, 0] }}
@@ -460,28 +425,14 @@ export default function Home() {
                 <motion.div 
                   className="flex items-center gap-3"
                 >
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
-                  >
-                    <motion.div 
-                      animate={{ 
-                        scale: [1, 1.5, 1],
-                        opacity: [0.5, 1, 0.5]
-                      }}
-                      transition={{ duration: 1, repeat: Infinity }}
-                      className="w-2 h-2 rounded-full bg-emerald-400"
-                    />
-                    <span className="text-xs text-emerald-400/90 font-mono">Online</span>
-                  </motion.div>
-                  
-                  <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  >
-                    <Shield className="w-4 h-4 text-emerald-500/50" />
-                  </motion.div>
+                  <motion.div 
+                  className="flex items-center gap-3 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
+                >
+                  <Terminal className="w-2 h-2 text-emerald-400" />
+                  <span className="text-xs text-emerald-400/90 font-mono">Online</span>
+                </motion.div>
+
+                <Shield className="w-4 h-4 text-emerald-500/50" />
                 </motion.div>
               </div>
             </motion.div>
