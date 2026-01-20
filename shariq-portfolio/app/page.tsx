@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { Button } from '@heroui/button';
 import { Link } from '@heroui/link';
-import { Github, Linkedin, Mail, Shield, Terminal, Lock, FileText, Code2, Sparkles } from 'lucide-react';
+import { Github, Linkedin, Mail, Shield, Terminal, Lock, FileText, Code2 } from 'lucide-react';
 import Script from 'next/script';
 import { siteConfig } from '@/config/site';
 import { useState, useEffect } from 'react';
@@ -65,12 +65,6 @@ export default function Home() {
     "additionalName": "Shariq Khan"
   };
 
-  const connectButtons = [
-    { icon: Github, href: 'https://github.com/shariqsk', label: 'GitHub', desc: 'Check out my work' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/shariq-khan-430754217/', label: 'LinkedIn', desc: 'Let\'s connect' },
-    { icon: Mail, href: 'mailto:contact@shariqsafdarkhan.com', label: 'Email', desc: 'Send a message' },
-  ];
-
   return (
     <>
       <Script
@@ -105,18 +99,6 @@ export default function Home() {
               ease: "linear"
             }}
             className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-500/15 rounded-full filter blur-[100px]"
-          />
-          <motion.div 
-            animate={{ 
-              y: [-20, 20, -20],
-              scale: [1, 1.1, 1],
-            }}
-            transition={{ 
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-emerald-400/10 rounded-full filter blur-[80px]"
           />
         </div>
 
@@ -179,13 +161,7 @@ export default function Home() {
                 transition={{ delay: 0.6, duration: 0.5, type: "spring" }}
                 className="flex items-start gap-2"
               >
-                <motion.span 
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="text-emerald-400 text-sm sm:text-base font-mono"
-                >
-                  {">"}
-                </motion.span>
+                <span className="text-emerald-400 text-sm sm:text-base font-mono">{">"}</span>
                 <div className="flex-1">
                   <span className="text-white text-sm sm:text-base font-thin">whoami</span>
                 </div>
@@ -258,7 +234,7 @@ export default function Home() {
               
               <motion.div 
                 initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 2.1, duration: 0.5, type: "spring" }}
                 className="ml-4 text-zinc-300 font-light text-sm sm:text-base leading-relaxed space-y-3"
               >
@@ -325,13 +301,6 @@ export default function Home() {
                 transition={{ delay: 2.8, duration: 0.5, type: "spring" }}
                 className="flex items-start gap-2"
               >
-                <motion.span 
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                  className="text-emerald-400 text-sm sm:text-base font-mono"
-                >
-                  {">"}
-                </motion.span>
                 <span className="text-white text-sm sm:text-base font-thin">./connect.sh</span>
               </motion.div>
               
@@ -339,91 +308,49 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 2.9, duration: 0.5, type: "spring" }}
-                className="ml-4 grid grid-cols-1 md:grid-cols-3 gap-4"
+                className="ml-4"
               >
-                {connectButtons.map((item, i) => (
-                  <motion.a
-                    key={item.label}
-                    href={item.href}
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href="https://github.com/shariqsk"
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    whileHover={{ 
-                      scale: 1.05, 
-                      y: -4,
-                      borderColor: "rgba(16,185,129,0.6)",
-                      backgroundColor: "rgba(16,185,129,0.15)"
-                    }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ 
-                      delay: 3.0 + i * 0.1, 
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 20
-                    }}
-                    className="p-4 bg-zinc-900/40 border border-zinc-800 rounded-xl transition-all duration-300 group cursor-pointer"
+                    className="group flex items-center gap-2 px-4 py-2 bg-zinc-900/60 border border-zinc-800 rounded-lg hover:bg-zinc-800 hover:border-zinc-700 hover:text-white transition-all duration-300"
+                    title="GitHub"
                   >
-                    <div className="flex flex-col items-center text-center gap-2 relative z-10">
-                      <motion.div 
-                        whileHover={{ rotate: [0, -10, 10, 0] }}
-                        transition={{ duration: 0.5 }}
-                        className="w-12 h-12 rounded-full bg-zinc-900/60 border border-zinc-800 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/30 flex items-center justify-center transition-all duration-300"
-                      >
-                        <item.icon className="w-6 h-6 text-zinc-500 group-hover:text-emerald-400 transition-colors duration-300" />
-                      </motion.div>
-                      <div>
-                        <motion.h3 
-                          whileHover={{ y: -2 }}
-                          className="text-zinc-300 font-light text-base group-hover:text-white transition-transform duration-300"
-                        >
-                          {item.label}
-                        </motion.h3>
-                        <motion.p 
-                          whileHover={{ y: -2 }}
-                          className="text-zinc-600 font-extralight text-xs group-hover:text-zinc-400 transition-colors duration-300"
-                        >
-                          {item.desc}
-                        </motion.p>
-                      </div>
-                    </div>
-                  </motion.a>
-                ))}
+                    <Github className="w-5 h-5 text-zinc-500 group-hover:text-emerald-400 transition-colors duration-300" />
+                    <span className="text-sm font-light">GitHub</span>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/shariq-khan-430754217/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 px-4 py-2 bg-zinc-900/60 border border-zinc-800 rounded-lg hover:bg-[#0077b5]/20 hover:border-[#0077b5]/40 hover:text-white transition-all duration-300"
+                    title="LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors duration-300" />
+                    <span className="text-sm font-light">LinkedIn</span>
+                  </a>
+                  <a
+                    href="mailto:contact@shariqsafdarkhan.com"
+                    className="group flex items-center gap-2 px-4 py-2 bg-zinc-900/60 border border-zinc-800 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-500/40 hover:text-white transition-all duration-300"
+                    title="Email"
+                  >
+                    <Mail className="w-5 h-5 text-zinc-500 group-hover:text-emerald-400 transition-colors duration-300" />
+                    <span className="text-sm font-light">Email</span>
+                  </a>
+                </div>
               </motion.div>
 
             </div>
 
-            {/* Enhanced Footer */}
-            <motion.div 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 3.5, duration: 0.5 }}
-              className="absolute bottom-4 left-4 right-4"
-            >
-              <div className="flex items-center justify-between">
-                <motion.div
-                  animate={{ opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                  className="text-xs text-zinc-600 font-mono flex items-center gap-2"
-                >
-                  <Terminal className="w-3 h-3" />
-                  <span>~/portfolio</span>
-                </motion.div>
-                
-                <motion.div 
-                  className="flex items-center gap-3"
-                >
-                  <motion.div 
-                  className="flex items-center gap-3 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
-                >
-                  <Terminal className="w-2 h-2 text-emerald-400" />
-                  <span className="text-xs text-emerald-400/90 font-mono">Online</span>
-                </motion.div>
-
-                <Shield className="w-4 h-4 text-emerald-500/50" />
-                </motion.div>
+            {/* Terminal Footer */}
+            <div className="absolute bottom-4 left-4 right-4">
+              <div className="text-xs text-zinc-600 font-mono flex items-center gap-2">
+                <Terminal className="w-3 h-3" />
+                <span>~/portfolio</span>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
 
         </div>
