@@ -19,68 +19,56 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
-      className="fixed top-0 left-0 right-0 z-50"
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-50"
     >
-      <div className="relative">
-        {/* Subtle top border line */}
-        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
-        
-        {/* Main navbar */}
-        <div className="relative flex items-center justify-center gap-1 px-6 py-4 bg-black/30 backdrop-blur-md">
-          {navigation.map((item) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ 
-                delay: navigation.indexOf(item) * 0.08, 
-                duration: 0.4,
-                ease: "easeOut"
-              }}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="relative flex items-center gap-3 px-4 py-3 bg-black/40 backdrop-blur-xl border border-zinc-800/50 rounded-full shadow-2xl shadow-black/50"
+      >
+        {navigation.map((item, index) => (
+          <motion.div
+            key={item.label}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              delay: 0.4 + index * 0.1,
+              duration: 0.4,
+              ease: "easeOut"
+            }}
+          >
+            <Link
+              href={item.href}
+              className={`relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 group ${
+                pathname === item.href
+                  ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
+                  : 'text-zinc-500 hover:text-white hover:bg-zinc-800/50'
+              }`}
+              title={item.label}
+              target={item.href.startsWith('http') ? '_blank' : undefined}
+              rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
             >
-              <Link
-                href={item.href}
-                className={`relative flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 group ${
-                  pathname === item.href
-                    ? 'text-emerald-400'
-                    : 'text-zinc-500 hover:text-white'
-                }`}
-                title={item.label}
-                target={item.href.startsWith('http') ? '_blank' : undefined}
-                rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+              <motion.span
+                whileHover={{ scale: 1.15, rotate: 5 }}
+                transition={{ duration: 0.2 }}
               >
-                {/* Icon */}
-                <motion.span
-                  whileHover={{ scale: 1.1 }}
-                  className="relative z-10"
-                >
-                  <item.icon className="w-4 h-4" />
-                </motion.span>
-                
-                {/* Label */}
-                <span className="text-sm font-light relative z-10">{item.label}</span>
-                
-                {/* Active indicator */}
-                {pathname === item.href && (
-                  <motion.div
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-0.5 bg-emerald-400 rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: 24 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-                
-                {/* Hover underline */}
-                <motion.span
-                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-px bg-emerald-400/0 group-hover:bg-emerald-400/50 transition-colors duration-300 ${
-                    pathname === item.href ? 'w-6' : 'w-0'
-                  }`}
+                <item.icon className="w-4 h-4" />
+              </motion.span>
+              <span className="text-sm font-light hidden sm:inline">{item.label}</span>
+              
+              {pathname === item.href && (
+                <motion.div
+                  className="absolute inset-0 rounded-full bg-emerald-500/10"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3 }}
                 />
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+              )}
+            </Link>
+          </motion.div>
+        ))}
+      </motion.div>
     </motion.nav>
   );
 }

@@ -48,7 +48,7 @@ const projects: Project[] = [
 const cards = projects.map((project) => ({
   title: project.name,
   description: project.description,
-  src: project.image,
+  src: project.image || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23181818'/%3E%3C/svg%3E",
   ctaText: project.live || project.repo ? "View Project" : "Details",
   ctaLink: project.live || project.repo || "#",
   tags: project.tags,
@@ -178,7 +178,7 @@ export default function ExpandableCardDemo() {
                 <img
                   width={200}
                   height={200}
-                  src={active.src}
+                  src={active.src || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23181818'/%3E%3C/svg%3E"}
                   alt={active.title}
                   className="w-full h-32 md:h-40 object-cover object-top"
                 />
@@ -233,7 +233,7 @@ export default function ExpandableCardDemo() {
                 <img
                   width={100}
                   height={100}
-                  src={card.src}
+                  src={card.src || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23181818'/%3E%3C/svg%3E"}
                   alt={card.title}
                   className="w-full h-40 md:w-32 md:h-32 rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
                 />
