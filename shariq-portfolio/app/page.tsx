@@ -353,14 +353,6 @@ export default function Home() {
               </motion.div>
 
             </div>
-
-            {/* Terminal Footer */}
-            <div className="absolute bottom-4 left-4 right-4">
-              <div className="text-xs text-zinc-600 font-mono flex items-center gap-2">
-                <Terminal className="w-3 h-3" />
-                <span>~/portfolio</span>
-              </div>
-            </div>
           </motion.div>
 
         </div>
