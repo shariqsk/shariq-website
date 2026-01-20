@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     default: "Shariq Khan | Home",
     template: `Shariq Khan | %s`,
   },
-  description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+  description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
   keywords: [
     "Shariq Khan",
     "Shariq Safdar Khan",
@@ -25,13 +25,13 @@ export const metadata: Metadata = {
     "Shariq Khan Developer",
     "Shariq Khan Toronto",
     "Shariq Khan York University",
-    "Shariq Khan Computer Security Student",
+    "Shariq Khan Cybersecurity Student",
     "Shariq Khan Full Stack Developer",
     "Shariq Khan Software Engineer",
     "Shariq Khan Portfolio",
     "Shariq Khan Web Developer",
     "Shariq Khan Canada",
-    "Computer Security Student",
+    "Cybersecurity Student",
     "Cybersecurity Student",
     "Full-Stack Developer",
     "Web Developer",
@@ -162,8 +162,7 @@ export default function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-          <CinematicBackground />
-          <Navbar />
+          <CinematicBackground />          <Navbar />
           {children}
           <Footer />
         </Providers>

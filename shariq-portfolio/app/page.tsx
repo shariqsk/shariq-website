@@ -30,12 +30,12 @@ export default function Home() {
     "@type": "Person",
     "name": "Shariq Safdar Khan",
     "alternateName": ["Shariq Khan", "Shariq S. Khan", "Shariq Safdar Khan"],
-    "jobTitle": "Computer Security Student & Full-Stack Developer",
+    "jobTitle": "Cybersecurity Student & Full-Stack Developer",
     "alumniOf": {
       "@type": "EducationalOrganization",
       "name": "York University"
     },
-    "description": "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
+    "description": "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
     "url": "https://shariqsafdarkhan.com",
     "sameAs": [
       "https://github.com/shariqsk",
@@ -49,7 +49,6 @@ export default function Home() {
       "addressCountry": "CA"
     },
     "knowsAbout": [
-      "Computer Security",
       "Cybersecurity",
       "Full-Stack Development",
       "Web Development",
@@ -194,7 +193,7 @@ export default function Home() {
                   transition={{ delay: 1.5, duration: 0.5 }}
                   className="text-emerald-400/90 text-base sm:text-lg md:text-xl font-light mb-3"
                 >
-                  Computer Security Student & Full-Stack Developer
+                  Cybersecurity Student & Full-Stack Developer
                 </motion.p>
                 <motion.div 
                   initial={{ opacity: 0, y: 10 }}
@@ -243,7 +242,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 2.2, duration: 0.4 }}
                 >
-                  I'm a 20-year-old Computer Security student at York University with a deep passion for cybersecurity and building secure, scalable applications. I bring technical expertise to every project.
+                  I'm a 20-year-old Cybersecurity student at York University with a deep passion for cybersecurity and building secure, scalable applications. I bring technical expertise to every project.
                 </motion.p>
                 <motion.p 
                   initial={{ opacity: 0, y: 5 }}

@@ -2,7 +2,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "Shariq Khan",
-  description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+  description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
   url: "https://shariqsafdarkhan.com",
   ogImage: "https://shariqsafdarkhan.com/og-image.jpg",
   keywords: [ //
@@ -18,7 +18,6 @@ export const siteConfig = {
     "Shariq Khan Portfolio",
     "Shariq Khan Web Developer",
     "Shariq Khan Canada",
-    "Computer Security",
     "Cybersecurity",
     "Full-Stack Developer",
     "Web Developer",
@@ -57,21 +56,21 @@ export const siteConfig = {
     locale: "en_US",
     url: "https://shariqsafdarkhan.com",
     title: "Shariq Khan",
-    description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+    description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
     siteName: "Shariq Khan Portfolio",
     images: [
       {
         url: "https://shariqsafdarkhan.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Shariq Khan | Full-Stack Developer & Computer Security Student",
+        alt: "Shariq Khan | Full-Stack Developer & Cybersecurity Student",
       },
     ],
   },
       twitter: {
       card: "summary_large_image",
       title: "Shariq Khan",
-    description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+    description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
     images: ["https://shariqsafdarkhan.com/og-image.jpg"],
     creator: "@shariqsk",
   },
