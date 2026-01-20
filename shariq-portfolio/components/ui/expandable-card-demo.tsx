@@ -29,10 +29,12 @@ const projects: Project[] = [
     name: "CDL Simulator",
     description: "Call of Duty esports league manager with custom sim engine that models player clashes, utility trades, map control swings, and hazard events through state machines.",
     tags: ["Next.js", "Framer Motion", "Supabase", "Vercel"],
-    live: null,
+    live: "https://cdlsimulator.com",
     repo: "https://github.com/shariqsk/cdlsimulator",
-    image: "/Screenshot 2025-11-25 114653.png",
+    image: null,
+    videoId: "1-rbv5D9_xfggXfZdDir2Ozv_GBd6-4Am",
     highlight: "Dynamic season tracking",
+    isVideo: true,
   },
   {
     name: "QOTD Discord Bot",
@@ -55,6 +57,8 @@ const cards = projects.map((project) => ({
   highlight: project.highlight,
   live: project.live,
   repo: project.repo,
+  isVideo: (project as any).isVideo || false,
+  videoId: (project as any).videoId || null,
   content: () => (
     <div className="flex flex-col gap-4">
       <p className="text-sm leading-relaxed">{project.description}</p>
@@ -86,17 +90,6 @@ const cards = projects.map((project) => ({
           >
             <ExternalLink className="w-4 h-4" />
             Live Site
-          </a>
-        )}
-        {project.repo && (
-          <a
-            href={project.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-500/40 transition-colors"
-          >
-            <Github className="w-4 h-4" />
-            Repository
           </a>
         )}
       </div>
@@ -175,14 +168,25 @@ export default function ExpandableCardDemo() {
                 layoutId={`image-${active.title}-${id}`}
                 className="relative flex-shrink-0"
               >
-                <img
-                  width={200}
-                  height={200}
-                  src={active.src || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23181818'/%3E%3C/svg%3E"}
-                  alt={active.title}
-                  className="w-full h-32 md:h-40 object-cover object-top"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent" />
+                {(active as any).isVideo && (active as any).videoId ? (
+                  <div className="relative w-full h-32 md:h-40 bg-black overflow-hidden">
+                    <iframe
+                      src={`https://drive.google.com/file/d/${(active as any).videoId}/preview`}
+                      className="absolute inset-0 w-full h-full object-cover border-0"
+                      allow="autoplay; fullscreen"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <img
+                    width={200}
+                    height={200}
+                    src={active.src || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23181818'/%3E%3C/svg%3E"}
+                    alt={active.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent pointer-events-none" />
               </motion.div>
 
               <div className="flex-1 overflow-hidden flex flex-col p-6">
@@ -230,14 +234,25 @@ export default function ExpandableCardDemo() {
                 layoutId={`image-${card.title}-${id}`}
                 className="relative flex-shrink-0"
               >
-                <img
-                  width={100}
-                  height={100}
-                  src={card.src || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23181818'/%3E%3C/svg%3E"}
-                  alt={card.title}
-                  className="w-full h-40 md:w-32 md:h-32 rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                {(card as any).isVideo && (card as any).videoId ? (
+                  <div className="relative w-full h-40 md:w-32 md:h-32 rounded-xl bg-black overflow-hidden">
+                    <iframe
+                      src={`https://drive.google.com/file/d/${(card as any).videoId}/preview`}
+                      className="absolute inset-0 w-full h-full object-cover border-0"
+                      allow="autoplay; fullscreen"
+                      allowFullScreen
+                    />
+                  </div>
+                ) : (
+                  <img
+                    width={100}
+                    height={100}
+                    src={card.src || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23181818'/%3E%3C/svg%3E"}
+                    alt={card.title}
+                    className="w-full h-40 md:w-32 md:h-32 rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                )}
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
               </motion.div>
 
               <div className="flex-1 flex flex-col justify-between">
@@ -288,19 +303,10 @@ export default function ExpandableCardDemo() {
                     )}
                     <motion.button
                       layoutId={`button-${card.title}-${id}`}
-                      className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-zinc-800 border border-zinc-700 text-zinc-400 text-[10px] md:text-xs md:text-sm rounded-full transition-all duration-300 hover:bg-emerald-500 hover:border-emerald-500 hover:text-white"
+                      className="md:hidden flex items-center gap-1.5 px-3 py-2 bg-zinc-800 border border-zinc-700 text-zinc-400 text-[10px] rounded-full transition-all duration-300 hover:bg-emerald-500 hover:border-emerald-500 hover:text-white"
                     >
-                      {card.repo ? (
-                        <>
-                          <Github className="w-3 h-3 md:w-4 md:h-4" />
-                          <span className="hidden md:inline">GitHub</span>
-                        </>
-                      ) : (
-                        <>
-                          Details
-                          <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
-                        </>
-                      )}
+                      Details
+                      <ArrowRight className="w-3 h-3" />
                     </motion.button>
                   </div>
                 </div>
