@@ -164,20 +164,8 @@ export default function Home() {
                 />
               </div>
               <div className="flex items-center gap-2">
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                >
-                  <Terminal className="w-4 h-4 text-emerald-400" />
-                </motion.div>
-                <motion.span 
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5, duration: 0.4 }}
-                  className="text-emerald-400 font-mono text-xs sm:text-sm"
-                >
-                  welcome.sh
-                </motion.span>
+                <Terminal className="w-4 h-4 text-emerald-400" />
+                <span className="text-emerald-400 font-mono text-xs sm:text-sm">welcome.sh</span>
               </div>
             </div>
 
