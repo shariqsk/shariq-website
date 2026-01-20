@@ -13,6 +13,8 @@ interface Project {
   repo: string | null;
   image: string | null;
   highlight: string | null;
+  isVideo?: boolean;
+  videoId?: string | null;
 }
 
 const projects: Project[] = [

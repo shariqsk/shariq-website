@@ -257,7 +257,7 @@ export default function Home() {
                   transition={{ delay: 2.4, duration: 0.4 }}
                   className="space-y-1"
                 >
-                  Whether you're looking for a developer who prioritizes security from the ground up or someone to collaborate on innovative tech projects, I'm always open to new opportunities. Check out my{' '}
+                  Whether you're looking for a developer who prioritizes security from the ground up or someone to collaborate on innovative tech projects, I'm always open to new chat!. Check out my{' '}
                   <Link 
                     href="/projects" 
                     className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2 decoration-emerald-500/30 hover:decoration-emerald-500 transition-all duration-300"
