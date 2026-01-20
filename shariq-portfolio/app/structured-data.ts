@@ -15,7 +15,7 @@ export const generateStructuredData = () => {
       siteConfig.links.linkedin,
       siteConfig.links.blog
     ],
-    "jobTitle": "Full-Stack Developer & Computer Security Student",
+    "jobTitle": "Full-Stack Developer & Cybersecurity Student",
     "worksFor": {
       "@type": "Organization",
       "name": "York University",
@@ -27,7 +27,6 @@ export const generateStructuredData = () => {
       "url": "https://www.yorku.ca"
     },
     "knowsAbout": [
-      "Computer Security",
       "Cybersecurity",
       "Full-Stack Development",
       "Web Development",

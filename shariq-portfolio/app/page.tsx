@@ -3,37 +3,52 @@
 import { motion } from 'framer-motion';
 import { Button } from '@heroui/button';
 import { Link } from '@heroui/link';
-import { Github, Linkedin, Mail, Terminal, Eye, User } from 'lucide-react';
-import React from 'react';
+import { Github, Linkedin, Mail, Shield, Terminal, Lock, FileText, Code2 } from 'lucide-react';
 import Script from 'next/script';
 import { siteConfig } from '@/config/site';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+  const [typedText, setTypedText] = useState('');
+  const fullText = 'Shariq Khan';
+  
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= fullText.length) {
+        setTypedText(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+      }
+    }, 100);
+    return () => clearInterval(timer);
+  }, []);
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Shariq Safdar Khan",
     "alternateName": ["Shariq Khan", "Shariq S. Khan", "Shariq Safdar Khan"],
-    "jobTitle": "Computer Security Student & Full-Stack Developer",
+    "jobTitle": "Cybersecurity Student & Full-Stack Developer",
     "alumniOf": {
       "@type": "EducationalOrganization",
       "name": "York University"
     },
-    "description": "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
+    "description": "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Passionate about cybersecurity and building secure, scalable applications.",
     "url": "https://shariqsafdarkhan.com",
     "sameAs": [
       "https://github.com/shariqsk",
       "https://www.linkedin.com/in/shariq-khan-430754217/",
       "https://shariqsk.github.io/"
     ],
-         "email": "contact@shariqsafdarkhan.com",
+    "email": "contact@shariqsafdarkhan.com",
     "telephone": "",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "CA"
     },
     "knowsAbout": [
-      "Computer Security",
       "Cybersecurity",
       "Full-Stack Development",
       "Web Development",
@@ -56,141 +71,287 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-             <div className="relative min-h-screen px-4 pt-24 sm:pt-28 pb-8 overflow-hidden flex items-center justify-center">
-         <div className="w-full max-w-4xl mx-auto relative z-10">
+      
+      <div className="relative min-h-screen px-4 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-32 pb-16 overflow-hidden flex items-center justify-center">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+            }}
+            transition={{ 
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/15 rounded-full filter blur-[100px]"
+          />
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.3, 1],
+              rotate: [360, 180, 0],
+            }}
+            transition={{ 
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-cyan-500/15 rounded-full filter blur-[100px]"
+          />
+        </div>
 
-
+        <div className="w-full max-w-3xl md:max-w-4xl relative z-10">
+          
           {/* Main Terminal Window */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                         className="bg-black/60 backdrop-blur-sm border border-emerald-500/30 rounded-lg p-4 sm:p-6 md:p-8 mb-4 sm:mb-5 md:mb-6 relative overflow-hidden min-h-[600px]"
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+            className="bg-black/70 backdrop-blur-2xl border border-emerald-500/40 rounded-2xl p-6 sm:p-8 md:p-10 relative overflow-hidden min-h-[600px] md:min-h-[700px]"
           >
-            {/* Terminal Header */}
-            <div className="flex items-center gap-2 mb-3 sm:mb-4">
-              <span className="text-emerald-400 text-xs font-mono">welcome.sh</span>
+            {/* Animated scanline effect */}
+            <div className="absolute inset-0 pointer-events-none">
+              <motion.div
+                animate={{ y: ['-100%', '100%'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                className="w-full h-1 bg-gradient-to-b from-transparent via-emerald-500/10 to-transparent"
+              />
+            </div>
+            
+            {/* Header Bar */}
+            <div className="flex items-center justify-between mb-6 sm:mb-8 pb-4 border-b border-emerald-500/30">
+              <div className="flex gap-1.5">
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.2, type: "spring", stiffness: 260 }}
+                  whileHover={{ scale: 1.2 }}
+                  className="w-2.5 h-2.5 rounded-full bg-red-500/70 hover:bg-red-500 transition-colors cursor-pointer"
+                />
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.3, type: "spring", stiffness: 260 }}
+                  whileHover={{ scale: 1.2 }}
+                  className="w-2.5 h-2.5 rounded-full bg-yellow-500/70 hover:bg-yellow-500 transition-colors cursor-pointer"
+                />
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.4, type: "spring", stiffness: 260 }}
+                  whileHover={{ scale: 1.2 }}
+                  className="w-2.5 h-2.5 rounded-full bg-green-500/70 hover:bg-green-500 transition-colors cursor-pointer"
+                />
+              </div>
+              <div className="flex items-center gap-2">
+                <Terminal className="w-4 h-4 text-emerald-400" />
+                <span className="text-emerald-400 font-mono text-xs sm:text-sm">welcome.sh</span>
+              </div>
             </div>
 
             {/* Terminal Content */}
-                         <div className="space-y-4 sm:space-y-6 font-mono">
-              <div className="flex items-start gap-2">
-                <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
-                <span className="text-white text-sm sm:text-base">Greetings!</span>
-              </div>
+            <div className="space-y-5 sm:space-y-6 md:space-y-7 font-mono">
               
-              <div className="ml-4 text-emerald-300 text-sm sm:text-base">
-                I'm Shariq Khan
-              </div>
-
-              <div className="flex items-start gap-2">
-                <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
-                <span className="text-white text-sm sm:text-base">Status</span>
-              </div>
+              {/* Greeting */}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.5, type: "spring" }}
+                className="flex items-start gap-2"
+              >
+                <span className="text-emerald-400 text-sm sm:text-base font-mono">{">"}</span>
+                <div className="flex-1">
+                  <span className="text-white text-sm sm:text-base font-thin">whoami</span>
+                </div>
+              </motion.div>
               
-              <div className="ml-4 text-white text-xs sm:text-sm leading-relaxed">
-                Computer Security Student at York University & Full-Stack Developer
-                <br />
-                Currently working on{' '}
-                <Link href="https://www.zocraticmma.com" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
-                  Zocratic MMA
-                </Link>
-              </div>
-
-              <div className="flex items-start gap-2">
-                <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
-                <span className="text-white text-sm sm:text-base">Intro</span>
-              </div>
-              
-              <div className="ml-4 text-white text-xs sm:text-sm leading-relaxed">
-                                 <p>
-                   I'm passionate about cybersecurity and building secure, scalable applications. Currently working as an Import Analyst at Farrow while pursuing Computer Security at York University. 
-                   I also write about tech and security on my{' '}
-                                       <Link href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
-                      blog
-                    </Link>. Always open to{' '}
-                                         <Link href="/contact" className="text-emerald-400 hover:text-emerald-300 underline font-medium transition-colors duration-300 hover:scale-105 inline-block">
-                       chat and collaborations
-                     </Link>!
-                 </p>
-              </div>
-
-                             <div className="flex items-start gap-2">
-                 <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
-                 <span className="text-white text-sm sm:text-base">Actions</span>
-               </div>
-               
-               <div className="ml-4">
-                 <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-center flex-wrap">
-                   <Button 
-                     as={Link} 
-                     href="/projects" 
-                     className="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold shadow-lg hover:shadow-emerald-500/25 flex items-center justify-center gap-2 text-xs sm:text-sm font-mono border border-emerald-500/30 hover:scale-105"
-                   >
-                     <Terminal className="w-3 h-3 sm:w-4 sm:h-4" />
-                     <span>View Projects</span>
-                   </Button>
-                  <Button 
-                    as={Link} 
-                    href="/about" 
-                    className="bg-black/40 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-xs sm:text-sm font-mono hover:scale-105"
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.7, duration: 0.5, type: "spring" }}
+                className="ml-4 pl-4 border-l border-emerald-500/30"
+              >
+                <motion.h1 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8, duration: 0.5 }}
+                  className="text-2xl sm:text-3xl md:text-4xl text-white font-thin mb-2 flex items-center gap-2"
+                >
+                  {typedText}
+                  <motion.span 
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ repeat: Infinity, duration: 0.8 }}
+                    className="text-emerald-400"
                   >
-                    <Eye className="w-3 h-3 sm:w-4 sm:h-4" />
-                    <span>About Me</span>
-                  </Button>
-                 <Button
-                    as={Link} 
+                    |
+                  </motion.span>
+                </motion.h1>
+                <motion.p 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.5, duration: 0.5 }}
+                  className="text-emerald-400/90 text-base sm:text-lg md:text-xl font-light mb-3"
+                >
+                  Cybersecurity Student & Full-Stack Developer
+                </motion.p>
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.6, duration: 0.5 }}
+                  className="flex flex-wrap gap-2"
+                >
+                  {['York University'].map((tag, i) => (
+                    <motion.span 
+                      key={tag}
+                      whileHover={{ 
+                        scale: 1.05, 
+                        y: -2,
+                        backgroundColor: "rgba(16,185,129,0.2)"
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 1.7 + i * 0.1, type: "spring" }}
+                      className="px-3 py-1 bg-zinc-900/50 border border-zinc-800 rounded-full text-zinc-400 text-xs sm:text-sm font-light cursor-pointer transition-all duration-300 hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400"
+                    >
+                      {tag}
+                    </motion.span>
+                  ))}
+                </motion.div>
+              </motion.div>
+
+              {/* Bio Section */}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 2.0, duration: 0.5, type: "spring" }}
+                className="flex items-start gap-2"
+              >
+                <span className="text-white text-sm sm:text-base font-thin">cat bio.txt</span>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.1, duration: 0.5, type: "spring" }}
+                className="ml-4 text-zinc-300 font-light text-sm sm:text-base leading-relaxed space-y-3"
+              >
+                <motion.p 
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2.2, duration: 0.4 }}
+                >
+                  I'm a 20-year-old Cybersecurity student at York University with a deep passion for cybersecurity and building secure, scalable applications. I bring technical expertise to every project.
+                </motion.p>
+                <motion.p 
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2.3, duration: 0.4 }}
+                >
+                  My journey in tech has equipped me with strong skills in full-stack development, system security analysis, and defensive cybersecurity practices. I love tackling complex challenges and staying current with emerging threats and security best practices.
+                </motion.p>
+                <motion.p 
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 2.4, duration: 0.4 }}
+                  className="space-y-1"
+                >
+                  Whether you're looking for a developer who prioritizes security from the ground up or someone to collaborate on innovative tech projects, I'm always open to new chat!. Check out my{' '}
+                  <Link 
+                    href="/projects" 
+                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2 decoration-emerald-500/30 hover:decoration-emerald-500 transition-all duration-300"
+                  >
+                    projects
+                  </Link>
+                  , view my{' '}
+                  <Link 
                     href={siteConfig.links.resume} 
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-black/40 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 rounded-md transition-all duration-300 font-semibold flex items-center justify-center gap-2 text-xs sm:text-sm font-mono hover:scale-105"
+                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2 decoration-emerald-500/30 hover:decoration-emerald-500 transition-all duration-300"
                   >
-                     <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                     </svg>
-                     <span>Resume</span>
-                   </Button>
-                 </div>
-               </div>
+                    resume
+                  </Link>
+                  , or learn more{' '}
+                  <Link 
+                    href="/about" 
+                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2 decoration-emerald-500/30 hover:decoration-emerald-500 transition-all duration-300"
+                  >
+                    about me
+                  </Link>
+                  . I also write about tech and security on my{' '}
+                  <Link 
+                    href="https://shariqsk.github.io/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2 decoration-emerald-500/30 hover:decoration-emerald-500 transition-all duration-300"
+                  >
+                    blog
+                  </Link>
+                  .
+                </motion.p>
+              </motion.div>
 
-               <div className="flex items-start gap-2">
-                 <span className="text-emerald-400 text-sm sm:text-base">{'>'}</span>
-                 <span className="text-white text-sm sm:text-base">Social</span>
-               </div>
-               
-               <div className="ml-4">
-                 <div className="flex justify-center gap-3 sm:gap-4">
-                   {[
-                     { icon: Github, href: 'https://github.com/shariqsk', label: 'GitHub' },
-                     { icon: Linkedin, href: 'https://www.linkedin.com/in/shariq-khan-430754217/', label: 'LinkedIn' },
-                                          { icon: Mail, href: 'mailto:contact@shariqsafdarkhan.com', label: 'Email' },
-                   ].map((social, i) => (
-                                           <a
-                         key={social.label}
-                         href={social.href}
-                         target="_blank"
-                         rel="noopener noreferrer"
-                      className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/40 hover:bg-emerald-500/30 border border-emerald-500/40 hover:border-emerald-500/60 flex items-center justify-center text-emerald-400 transition-all duration-300 shadow-lg hover:shadow-emerald-500/25 backdrop-blur-sm hover:scale-110"
-                         title={social.label}
-                         aria-label={social.label}
-                       >
-                      <social.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                     </a>
-                   ))}
-                 </div>
-               </div>
+              {/* Connect Section */}
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 2.8, duration: 0.5, type: "spring" }}
+                className="flex items-start gap-2"
+              >
+                <span className="text-white text-sm sm:text-base font-thin">./connect.sh</span>
+              </motion.div>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 2.9, duration: 0.5, type: "spring" }}
+                className="ml-4"
+              >
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href="https://github.com/shariqsk"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 px-4 py-2 bg-zinc-900/60 border border-zinc-800 rounded-lg hover:bg-zinc-800 hover:border-zinc-700 hover:text-white transition-all duration-300"
+                    title="GitHub"
+                  >
+                    <Github className="w-5 h-5 text-zinc-500 group-hover:text-emerald-400 transition-colors duration-300" />
+                    <span className="text-sm font-light">GitHub</span>
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/shariq-khan-430754217/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 px-4 py-2 bg-zinc-900/60 border border-zinc-800 rounded-lg hover:bg-[#0077b5]/20 hover:border-[#0077b5]/40 hover:text-white transition-all duration-300"
+                    title="LinkedIn"
+                  >
+                    <Linkedin className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors duration-300" />
+                    <span className="text-sm font-light">LinkedIn</span>
+                  </a>
+                  <a
+                    href="mailto:contact@shariqsafdarkhan.com"
+                    className="group flex items-center gap-2 px-4 py-2 bg-zinc-900/60 border border-zinc-800 rounded-lg hover:bg-emerald-500/20 hover:border-emerald-500/40 hover:text-white transition-all duration-300"
+                    title="Email"
+                  >
+                    <Mail className="w-5 h-5 text-zinc-500 group-hover:text-emerald-400 transition-colors duration-300" />
+                    <span className="text-sm font-light">Email</span>
+                  </a>
+                </div>
+              </motion.div>
+
             </div>
 
-            {/* Security Badge */}
-            <div className="absolute top-2 sm:top-3 md:top-4 right-2 sm:right-3 md:right-4">
-              <div className="bg-emerald-500/20 border border-emerald-500/40 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1">
-                <div className="flex items-center gap-1">
-                  <User className="w-2 h-2 sm:w-3 sm:h-3 text-emerald-400" />
-                  <span className="text-emerald-400 text-xs font-mono">ACTIVE</span>
-                </div>
+            {/* Terminal Footer */}
+            <div className="absolute bottom-4 left-4 right-4">
+              <div className="text-xs text-zinc-600 font-mono flex items-center gap-2">
+                <Terminal className="w-3 h-3" />
+                <span>~/portfolio</span>
               </div>
             </div>
           </motion.div>
+
         </div>
       </div>
     </>
