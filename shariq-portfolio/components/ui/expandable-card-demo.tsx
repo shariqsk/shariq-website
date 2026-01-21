@@ -5,6 +5,19 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "@/hooks/use-outside-click";
 import { ExternalLink, Github, ArrowRight, Terminal, Globe } from "lucide-react";
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  return isMobile;
+}
+
 interface Project {
   name: string;
   description: string;
@@ -105,6 +118,7 @@ export default function ExpandableCardDemo() {
   );
   const ref = useRef<HTMLDivElement>(null);
   const id = useId();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -123,51 +137,61 @@ export default function ExpandableCardDemo() {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [active]);
 
-  useOutsideClick(ref, () => setActive(null));
-
   return (
     <>
       <AnimatePresence>
         {active && typeof active === "object" && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            exit={isMobile ? { opacity: 1 } : { opacity: 0 }}
+            transition={isMobile ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
             className="fixed inset-0 bg-black/40 h-full w-full z-10 backdrop-blur-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              setActive(null);
+            }}
           />
         )}
       </AnimatePresence>
       <AnimatePresence>
         {active && typeof active === "object" ? (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            exit={isMobile ? { opacity: 1 } : { opacity: 0 }}
+            transition={isMobile ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 overflow-hidden"
+            onClick={(e) => {
+              e.stopPropagation();
+              setActive(null);
+            }}
           >
             <motion.button
               key={`button-${active.title}-${id}`}
-              initial={{ opacity: 0 }}
+              initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.15 }}
+              exit={isMobile ? { opacity: 1 } : { opacity: 0 }}
+              transition={isMobile ? { duration: 0 } : { duration: 0.15 }}
               className="absolute top-4 right-4 z-10 flex items-center justify-center bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 rounded-full h-10 w-10 transition-colors"
-              onClick={() => setActive(null)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setActive(null);
+              }}
             >
               <CloseIcon />
             </motion.button>
             <motion.div
               ref={ref}
-              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              initial={isMobile ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              exit={isMobile ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 10 }}
+              transition={isMobile ? { duration: 0 } : { duration: 0.3, ease: "easeOut" }}
               className="w-full max-w-[600px] md:max-w-[800px] max-h-[85vh] flex flex-col bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 relative"
+              onClick={(e) => e.stopPropagation()}
             >
               <motion.div
-                layoutId={`image-${active.title}-${id}`}
+                layoutId={isMobile ? undefined : `image-${active.title}-${id}`}
                 className="relative flex-shrink-0"
               >
                 {(active as any).isVideo && (active as any).videoId ? (
@@ -194,13 +218,13 @@ export default function ExpandableCardDemo() {
               <div className="flex-1 overflow-hidden flex flex-col p-6">
                 <div className="mb-4 flex-shrink-0">
                   <motion.h3
-                    layoutId={`title-${active.title}-${id}`}
+                    layoutId={isMobile ? undefined : `title-${active.title}-${id}`}
                     className="font-bold text-white text-2xl md:text-3xl mb-2"
                   >
                     {active.title}
                   </motion.h3>
                   <motion.p
-                    layoutId={`description-${active.description}-${id}`}
+                    layoutId={isMobile ? undefined : `description-${active.description}-${id}`}
                     className="text-zinc-400 text-sm md:text-base"
                   >
                     {active.description}
@@ -208,10 +232,10 @@ export default function ExpandableCardDemo() {
                 </div>
                 <div className="flex-1 overflow-y-auto overflow-x-hidden pr-2">
                   <motion.div
-                    initial={{ opacity: 0 }}
+                    initial={isMobile ? { opacity: 1 } : { opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25, delay: 0.1 }}
+                    exit={isMobile ? { opacity: 1 } : { opacity: 0 }}
+                    transition={isMobile ? { duration: 0 } : { duration: 0.25, delay: 0.1 }}
                     className="text-zinc-400 text-sm md:text-base flex flex-col gap-4 pb-4"
                   >
                     {typeof active.content === "function"
@@ -228,12 +252,16 @@ export default function ExpandableCardDemo() {
         {cards.map((card, index) => (
           <motion.div
             key={`card-${card.title}-${id}`}
-            onClick={() => setActive(card)}
+            onClick={(e) => {
+              if (!active) {
+                setActive(card);
+              }
+            }}
             className="group relative bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5 hover:-translate-y-1"
           >
             <div className="p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-6">
               <motion.div
-                layoutId={`image-${card.title}-${id}`}
+                layoutId={isMobile ? undefined : `image-${card.title}-${id}`}
                 className="relative flex-shrink-0"
               >
                 {(card as any).isVideo && (card as any).videoId ? (
@@ -260,13 +288,13 @@ export default function ExpandableCardDemo() {
               <div className="flex-1 flex flex-col justify-between">
                 <div className="mb-3 md:mb-4">
                   <motion.h3
-                    layoutId={`title-${card.title}-${id}`}
+                    layoutId={isMobile ? undefined : `title-${card.title}-${id}`}
                     className="font-medium text-white text-lg md:text-xl mb-2 group-hover:text-emerald-400 transition-colors duration-300"
                   >
                     {card.title}
                   </motion.h3>
                   <motion.p
-                    layoutId={`description-${card.description}-${id}`}
+                    layoutId={isMobile ? undefined : `description-${card.description}-${id}`}
                     className="text-zinc-500 text-xs md:text-sm leading-relaxed line-clamp-2"
                   >
                     {card.description}
@@ -304,7 +332,7 @@ export default function ExpandableCardDemo() {
                       </a>
                     )}
                     <motion.button
-                      layoutId={`button-${card.title}-${id}`}
+                      layoutId={isMobile ? undefined : `button-${card.title}-${id}`}
                       className="md:hidden flex items-center gap-1.5 px-3 py-2 bg-zinc-800 border border-zinc-700 text-zinc-400 text-[10px] rounded-full transition-all duration-300 hover:bg-emerald-500 hover:border-emerald-500 hover:text-white"
                     >
                       Details
