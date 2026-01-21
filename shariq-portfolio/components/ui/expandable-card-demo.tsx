@@ -185,10 +185,10 @@ export default function ExpandableCardDemo() {
                     height={200}
                     src={active.src || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23181818'/%3E%3C/svg%3E"}
                     alt={active.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-32 md:h-40 object-cover"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-900/50 to-zinc-900 pointer-events-none" />
               </motion.div>
 
               <div className="flex-1 overflow-hidden flex flex-col p-6">
@@ -237,7 +237,7 @@ export default function ExpandableCardDemo() {
                 className="relative flex-shrink-0"
               >
                 {(card as any).isVideo && (card as any).videoId ? (
-                  <div className="relative w-full h-40 md:w-32 md:h-32 rounded-xl bg-black overflow-hidden">
+                  <div className="relative w-32 h-32 md:w-32 md:h-32 rounded-xl bg-black overflow-hidden">
                     <iframe
                       src={`https://drive.google.com/file/d/${(card as any).videoId}/preview`}
                       className="absolute inset-0 w-full h-full object-cover border-0"
@@ -251,10 +251,10 @@ export default function ExpandableCardDemo() {
                     height={100}
                     src={card.src || "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23181818'/%3E%3C/svg%3E"}
                     alt={card.title}
-                    className="w-full h-40 md:w-32 md:h-32 rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-32 h-32 md:w-32 md:h-32 rounded-xl object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 )}
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-t from-black/70 via-black/50 to-black/20 pointer-events-none" />
               </motion.div>
 
               <div className="flex-1 flex flex-col justify-between">

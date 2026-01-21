@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     default: "Shariq Khan | Home",
     template: `Shariq Khan | %s`,
   },
-  description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+  description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
   keywords: [
     "Shariq Khan",
     "Shariq Safdar Khan",
@@ -32,9 +32,7 @@ export const metadata: Metadata = {
     "Shariq Khan Web Developer",
     "Shariq Khan Canada",
     "Cybersecurity Student",
-    "Cybersecurity Student",
     "Full-Stack Developer",
-    "Web Developer",
     "Software Engineer",
     "York University",
     "Toronto Developer",

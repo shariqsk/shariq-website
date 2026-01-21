@@ -2,7 +2,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "Shariq Khan",
-  description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+  description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
   url: "https://shariqsafdarkhan.com",
   ogImage: "https://shariqsafdarkhan.com/og-image.jpg",
   keywords: [ //
@@ -56,7 +56,7 @@ export const siteConfig = {
     locale: "en_US",
     url: "https://shariqsafdarkhan.com",
     title: "Shariq Khan",
-    description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+    description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
     siteName: "Shariq Khan Portfolio",
     images: [
       {
@@ -70,7 +70,7 @@ export const siteConfig = {
       twitter: {
       card: "summary_large_image",
       title: "Shariq Khan",
-    description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Learning cybersecurity, web development, and building secure applications. Based in Toronto, Canada.",
+    description: "Shariq Khan - Cybersecurity Student at York University & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
     images: ["https://shariqsafdarkhan.com/og-image.jpg"],
     creator: "@shariqsk",
   },

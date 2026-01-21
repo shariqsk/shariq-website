@@ -197,7 +197,7 @@ export const generateSiteNavigationStructuredData = () => {
         "position": 3,
         "name": "Projects",
         "url": `${siteConfig.url}/projects`,
-        "description": "Portfolio of web development and software engineering projects"
+        "description": "Portfolio of full-stack development and cybersecurity projects"
       },
       {
         "@type": "ListItem",
