@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { siteConfig } from '@/config/site';
-import { Github, Linkedin, Mail, Terminal, Heart } from 'lucide-react';
+import { Github, Linkedin, Mail, Terminal } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -54,7 +54,7 @@ export default function Footer() {
             <div className="flex gap-3">
               <Link
                 href={siteConfig.links.github}
-                className="w-10 h-10 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-emerald-500/40 hover:bg-emerald-500/10 flex items-center justify-center text-zinc-500 hover:text-emerald-400 transition-all duration-300 group"
+                className="w-10 h-10 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:bg-white/20 hover:border-white/40 hover:text-white flex items-center justify-center text-zinc-500 transition-all duration-300 group"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -63,7 +63,7 @@ export default function Footer() {
               </Link>
               <Link
                 href={siteConfig.links.linkedin}
-                className="w-10 h-10 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-emerald-500/40 hover:bg-emerald-500/10 flex items-center justify-center text-zinc-500 hover:text-emerald-400 transition-all duration-300 group"
+                className="w-10 h-10 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:bg-[#0077b5]/20 hover:border-[#0077b5]/40 hover:text-white flex items-center justify-center text-zinc-500 transition-all duration-300 group"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -72,7 +72,7 @@ export default function Footer() {
               </Link>
               <Link
                 href={siteConfig.links.email}
-                className="w-10 h-10 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:border-emerald-500/40 hover:bg-emerald-500/10 flex items-center justify-center text-zinc-500 hover:text-emerald-400 transition-all duration-300 group"
+                className="w-10 h-10 rounded-lg bg-zinc-900/50 border border-zinc-800 hover:bg-emerald-500/20 hover:border-emerald-500/40 hover:text-white flex items-center justify-center text-zinc-500 transition-all duration-300 group"
                 aria-label="Email"
               >
                 <Mail className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
@@ -97,10 +97,6 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-zinc-600 font-extralight text-sm flex items-center gap-2">
               © {currentYear} Shariq Khan
-              <span className="w-1 h-1 rounded-full bg-zinc-700" />
-              Built with
-              <Heart className="w-3 h-3 text-emerald-500/50" />
-              and code
             </p>
             <p className="text-zinc-600 font-extralight text-xs">
               Toronto, Canada
