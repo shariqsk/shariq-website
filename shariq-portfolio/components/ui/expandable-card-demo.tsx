@@ -286,7 +286,7 @@ export default function ExpandableCardDemo() {
                 setActive(card);
               }
             }}
-            className="group relative bg-zinc-900/40 backdrop-blur-xl border border-zinc-800/50 rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5 hover:-translate-y-1"
+            className="group relative bg-zinc-900/60 border border-zinc-800/50 rounded-2xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-emerald-500/30 hover:shadow-lg hover:shadow-emerald-500/5 hover:-translate-y-1"
           >
             <div className="p-4 md:p-6 flex flex-col md:flex-row gap-4 md:gap-6">
               <motion.div
