@@ -38,7 +38,7 @@ const projects: Project[] = [
     live: "https://www.zocraticmma.com",
     repo: "https://github.com/shariqsk",
     image: "/Screenshot 2025-11-25 114637.png",
-    highlight: "78% model win rate",
+    highlight: "20+ daily users",
   },
   {
     name: "CDL Simulator",
