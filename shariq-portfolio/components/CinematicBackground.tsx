@@ -70,16 +70,7 @@ export default function CinematicBackground(): JSX.Element {
       const colW = isMobile() ? 36 : 32;
       ctx.font = `${isMobile() ? 10 : 12}px JetBrains Mono, monospace`;
       const glyphs = "<>/\\{}[]:=+-*#;~^|";
-      for (let c = 0; c < rainColsRef.current.length; c++) {
-        const x = c * colW + 5;
-        const y = rainColsRef.current[c];
-        const char = glyphs[(c + Math.floor(t / 420)) % glyphs.length]; // slower character change
-        ctx.fillStyle = "rgba(0,255,180,0.12)";
-        ctx.fillText(char, x, y);
-        const step = isMobile() ? 0.3 : 0.5; // very slow, soothing fall
-        const ny = y > h ? -Math.random() * h * 0.1 : y + step;
-        rainColsRef.current[c] = ny;
-      }
+      // Falling text hidden
 
       ctx.fillStyle = "rgba(255,255,255,0.03)";
       for (let sy = 0; sy < h; sy += 4) ctx.fillRect(0, sy, w, 1);
