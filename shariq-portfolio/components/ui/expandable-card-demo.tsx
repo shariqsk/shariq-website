@@ -18,6 +18,33 @@ function useIsMobile() {
   return isMobile;
 }
 
+const getTagColor = (tag: string) => {
+  const colorMap: Record<string, { bg: string; border: string; text: string }> = {
+    "Next.js": { bg: "bg-white/10", border: "border-white/20", text: "text-white" },
+    "React": { bg: "bg-cyan-500/10", border: "border-cyan-500/30", text: "text-cyan-400" },
+    "FastAPI": { bg: "bg-emerald-500/10", border: "border-emerald-500/30", text: "text-emerald-400" },
+    "Python": { bg: "bg-yellow-500/10", border: "border-yellow-500/30", text: "text-yellow-400" },
+    "PyTorch": { bg: "bg-orange-500/10", border: "border-orange-500/30", text: "text-orange-400" },
+    "Supabase": { bg: "bg-emerald-500/10", border: "border-emerald-500/30", text: "text-emerald-400" },
+    "AWS": { bg: "bg-orange-400/10", border: "border-orange-400/30", text: "text-orange-300" },
+    "Framer Motion": { bg: "bg-purple-500/10", border: "border-purple-500/30", text: "text-purple-400" },
+    "Vercel": { bg: "bg-white/10", border: "border-white/20", text: "text-white" },
+    "discord.js": { bg: "bg-indigo-500/10", border: "border-indigo-500/30", text: "text-indigo-400" },
+    "Docker": { bg: "bg-blue-500/10", border: "border-blue-500/30", text: "text-blue-400" },
+    "OAuth2": { bg: "bg-pink-500/10", border: "border-pink-500/30", text: "text-pink-400" },
+    "Redis": { bg: "bg-red-500/10", border: "border-red-500/30", text: "text-red-400" },
+    "GitHub Actions": { bg: "bg-slate-500/10", border: "border-slate-500/30", text: "text-slate-400" },
+    "Security Education": { bg: "bg-emerald-500/10", border: "border-emerald-500/30", text: "text-emerald-400" },
+    "Interactive Learning": { bg: "bg-violet-500/10", border: "border-violet-500/30", text: "text-violet-400" },
+    "MediaPipe": { bg: "bg-blue-500/10", border: "border-blue-500/30", text: "text-blue-400" },
+    "OpenCV": { bg: "bg-green-500/10", border: "border-green-500/30", text: "text-green-400" },
+    "PyQt6": { bg: "bg-green-600/10", border: "border-green-600/30", text: "text-green-400" },
+    "Computer Vision": { bg: "bg-sky-500/10", border: "border-sky-500/30", text: "text-sky-400" },
+    "ML": { bg: "bg-fuchsia-500/10", border: "border-fuchsia-500/30", text: "text-fuchsia-400" },
+  };
+  return colorMap[tag] || { bg: "bg-zinc-800/50", border: "border-zinc-700/50", text: "text-zinc-500" };
+};
+
 interface Project {
   name: string;
   description: string;
@@ -104,14 +131,17 @@ const cards = projects.map((project) => ({
         </div>
       )}
       <div className="flex flex-wrap gap-2">
-        {project.tags.map((tag) => (
-          <span
-            key={tag}
-            className="px-2 py-1 bg-zinc-800 border border-zinc-700 rounded-md text-zinc-500 text-xs"
-          >
-            {tag}
-          </span>
-        ))}
+        {project.tags.map((tag) => {
+          const colors = getTagColor(tag);
+          return (
+            <span
+              key={tag}
+              className={`px-2 py-1 ${colors.bg} border ${colors.border} rounded-md ${colors.text} text-xs`}
+            >
+              {tag}
+            </span>
+          );
+        })}
       </div>
       <div className="flex gap-2 pt-2">
         {project.live && (
@@ -332,14 +362,17 @@ export default function ExpandableCardDemo() {
 
                 <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-0">
                   <div className="flex flex-wrap gap-1 md:gap-2 mb-2 md:mb-0">
-                    {card.tags.slice(0, 3).map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 md:px-3 py-1 bg-zinc-800/50 border border-zinc-700/50 rounded-full text-zinc-500 text-[10px] md:text-xs group-hover:border-emerald-500/30 transition-colors"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    {card.tags.slice(0, 3).map((tag) => {
+                      const colors = getTagColor(tag);
+                      return (
+                        <span
+                          key={tag}
+                          className={`px-2 md:px-3 py-1 ${colors.bg} border ${colors.border} rounded-full ${colors.text} text-[10px] md:text-xs transition-colors`}
+                        >
+                          {tag}
+                        </span>
+                      );
+                    })}
                     {card.tags.length > 3 && (
                       <span className="px-2 md:px-3 py-1 text-zinc-600 text-[10px] md:text-xs">
                         +{card.tags.length - 3} more
