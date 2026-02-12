@@ -52,15 +52,6 @@ const projects: Project[] = [
     isVideo: true,
   },
   {
-    name: "QOTD Discord Bot",
-    description: "Discord bot that delivers daily inspirational quotes with OAuth2 auth, Docker packaging, and Redis caching for 65% API call reduction.",
-    tags: ["discord.js", "Python", "Docker", "OAuth2", "Redis", "GitHub Actions"],
-    live: null,
-    repo: null,
-    image: "/QOTD.png",
-    highlight: "<200ms response times",
-  },
-  {
     name: "Phintic",
     description: "A practical security education site teaching fundamentals through 8 security topics, interactive simulations, and knowledge tests to help build good security habits against modern threats like deepfakes and AI impersonation.",
     tags: ["Next.js", "React", "Security Education", "Interactive Learning"],
@@ -68,6 +59,15 @@ const projects: Project[] = [
     repo: null,
     image: "/phintic.png",
     highlight: "Interactive security simulations",
+  },
+  {
+    name: "QOTD Discord Bot",
+    description: "Discord bot that delivers daily inspirational quotes with OAuth2 auth, Docker packaging, and Redis caching for 65% API call reduction.",
+    tags: ["discord.js", "Python", "Docker", "OAuth2", "Redis", "GitHub Actions"],
+    live: null,
+    repo: null,
+    image: "/QOTD.png",
+    highlight: "<200ms response times",
   },
   {
     name: "Blink!",
