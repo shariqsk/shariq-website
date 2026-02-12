@@ -60,6 +60,24 @@ const projects: Project[] = [
     image: "/QOTD.png",
     highlight: "<200ms response times",
   },
+  {
+    name: "Phintic",
+    description: "A practical security education site teaching fundamentals through 8 security topics, interactive simulations, and knowledge tests to help build good security habits against modern threats like deepfakes and AI impersonation.",
+    tags: ["Next.js", "React", "Security Education", "Interactive Learning"],
+    live: "https://phintic.com",
+    repo: null,
+    image: "/phintic.png",
+    highlight: "Interactive security simulations",
+  },
+  {
+    name: "Blink!",
+    description: "A desktop application leveraging computer vision to monitor ocular health patterns. Uses real-time webcam analysis with on-device processing to track blink frequency and deliver configurable visual alerts for maintaining healthy eye habits during extended work sessions.",
+    tags: ["Python", "MediaPipe", "OpenCV", "PyQt6", "Computer Vision", "ML"],
+    live: null,
+    repo: "https://github.com/shariqsk/blink",
+    image: null,
+    highlight: "Privacy-first on-device processing",
+  },
 ];
 
 const cards = projects.map((project) => ({
@@ -105,6 +123,17 @@ const cards = projects.map((project) => ({
           >
             <ExternalLink className="w-4 h-4" />
             Live Site
+          </a>
+        )}
+        {project.repo && (
+          <a
+            href={project.repo}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg text-zinc-400 hover:text-white hover:border-white/40 transition-colors"
+          >
+            <Github className="w-4 h-4" />
+            GitHub
           </a>
         )}
       </div>
@@ -329,6 +358,18 @@ export default function ExpandableCardDemo() {
                       >
                         <Globe className="w-3 h-3 md:w-4 md:h-4" />
                         <span className="hidden md:inline">Website</span>
+                      </a>
+                    )}
+                    {card.repo && (
+                      <a
+                        href={card.repo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-2 md:py-2.5 bg-zinc-800 border border-zinc-700 text-zinc-400 text-[10px] md:text-xs md:text-sm rounded-full transition-all duration-300 hover:bg-white hover:border-white hover:text-black"
+                      >
+                        <Github className="w-3 h-3 md:w-4 md:h-4" />
+                        <span className="hidden md:inline">GitHub</span>
                       </a>
                     )}
                     <motion.button
