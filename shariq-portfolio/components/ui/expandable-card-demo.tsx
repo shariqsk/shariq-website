@@ -48,7 +48,7 @@ const projects: Project[] = [
     repo: "https://github.com/shariqsk/cdlsimulator",
     image: null,
     videoId: "1-rbv5D9_xfggXfZdDir2Ozv_GBd6-4Am",
-    highlight: "Dynamic season tracking",
+    highlight: "50K+ impressions, 10K+ visitors",
     isVideo: true,
   },
   {
