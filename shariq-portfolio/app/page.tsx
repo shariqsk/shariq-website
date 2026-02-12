@@ -175,18 +175,18 @@ export default function Home() {
                   className="flex flex-wrap gap-2"
                 >
                   {['York University'].map((tag, i) => (
-                    <motion.span 
+                    <motion.span
                       key={tag}
-                      whileHover={{ 
-                        scale: 1.05, 
+                      whileHover={{
+                        scale: 1.05,
                         y: -2,
-                        backgroundColor: "rgba(16,185,129,0.2)"
+                        backgroundColor: "rgba(239,68,68,0.2)"
                       }}
                       whileTap={{ scale: 0.95 }}
                       initial={{ opacity: 0, scale: 0.9 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 1.7 + i * 0.1, type: "spring" }}
-                      className="px-3 py-1 bg-zinc-900/50 border border-zinc-800 rounded-full text-zinc-400 text-xs sm:text-sm font-light cursor-pointer transition-all duration-300 hover:border-emerald-500/50 hover:bg-emerald-500/10 hover:text-emerald-400"
+                      className="px-3 py-1 bg-zinc-900/50 border border-zinc-800 rounded-full text-zinc-400 text-xs sm:text-sm font-light cursor-pointer transition-all duration-300 hover:border-red-500/50 hover:bg-red-500/10 hover:text-red-400"
                     >
                       {tag}
                     </motion.span>
