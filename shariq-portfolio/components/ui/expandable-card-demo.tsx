@@ -41,6 +41,10 @@ const getTagColor = (tag: string) => {
     "PyQt6": { bg: "bg-green-600/10", border: "border-green-600/30", text: "text-green-400" },
     "Computer Vision": { bg: "bg-sky-500/10", border: "border-sky-500/30", text: "text-sky-400" },
     "ML": { bg: "bg-fuchsia-500/10", border: "border-fuchsia-500/30", text: "text-fuchsia-400" },
+    "TypeScript": { bg: "bg-blue-600/10", border: "border-blue-600/30", text: "text-blue-400" },
+    "Tailwind CSS": { bg: "bg-cyan-400/10", border: "border-cyan-400/30", text: "text-cyan-300" },
+    "AI": { bg: "bg-violet-500/10", border: "border-violet-500/30", text: "text-violet-400" },
+    "LaTeX": { bg: "bg-teal-500/10", border: "border-teal-500/30", text: "text-teal-400" },
   };
   return colorMap[tag] || { bg: "bg-zinc-800/50", border: "border-zinc-700/50", text: "text-zinc-500" };
 };
@@ -104,6 +108,15 @@ const projects: Project[] = [
     repo: "https://github.com/shariqsk/blink",
     image: null,
     highlight: "Privacy-first on-device processing",
+  },
+  {
+    name: "ResuSense",
+    description: "An AI-powered resume optimization tool that tailors your LaTeX resume to specific job descriptions. Features real-time PDF preview with actual LaTeX compilation, job URL scraping for auto-extracting descriptions, and keyword matching to highlight job requirements found in your resume.",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "AI"],
+    live: null,
+    repo: "https://github.com/shariqsk/ResuSense",
+    image: "/ResuSense.png",
+    highlight: "Real LaTeX compilation with live preview",
   },
 ];
 
