@@ -38,9 +38,10 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
   const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    // Check if already booted this session
+    // Check if already booted this session — skip animation entirely
     const hasBooted = sessionStorage.getItem('sk_os_booted');
     if (hasBooted) {
+      setExiting(true);
       onComplete();
       return;
     }
