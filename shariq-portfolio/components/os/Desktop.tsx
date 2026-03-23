@@ -6,11 +6,12 @@ import { AnimatePresence } from 'framer-motion';
 import Window from './Window';
 import Taskbar, { TaskbarWindow } from './Taskbar';
 import DesktopIcon, {
-  FolderIcon,
-  TerminalIcon,
-  DocumentIcon,
-  LockIcon,
-  GlobeIcon,
+  ProjectsAppIcon,
+  AboutAppIcon,
+  ContactAppIcon,
+  ResumeAppIcon,
+  BlogAppIcon,
+  TerminalAppIcon,
 } from './DesktopIcon';
 
 import AboutWindow    from './windows/AboutWindow';
@@ -18,42 +19,95 @@ import ProjectsWindow from './windows/ProjectsWindow';
 import ContactWindow  from './windows/ContactWindow';
 import TerminalWindow from './windows/TerminalWindow';
 
-/* ── Window registry ────────────────────────────────────────────────── */
-interface WinDef {
+/* ── App registry ───────────────────────────────────────────────────── */
+interface AppDef {
   id: string;
   title: string;
+  accentColor: string;
   content: React.ReactNode;
   defaultSize?: { width: number; height: number };
 }
 
-const WIN_DEFS: Record<string, WinDef> = {
+const APP_DEFS: Record<string, AppDef> = {
   projects: {
     id: 'projects',
-    title: '~/projects',
+    title: 'Projects',
+    accentColor: '#4f8ef7',
     content: <ProjectsWindow />,
-    defaultSize: { width: 700, height: 500 },
+    defaultSize: { width: 720, height: 500 },
   },
   about: {
     id: 'about',
-    title: 'whoami.sh',
+    title: 'About Me',
+    accentColor: '#34d399',
     content: <AboutWindow />,
     defaultSize: { width: 600, height: 540 },
   },
   contact: {
     id: 'contact',
-    title: 'contact.gpg',
+    title: 'Contact',
+    accentColor: '#f472b6',
     content: <ContactWindow />,
-    defaultSize: { width: 520, height: 440 },
+    defaultSize: { width: 500, height: 430 },
   },
   terminal: {
     id: 'terminal',
-    title: 'terminal',
+    title: 'Terminal',
+    accentColor: '#fbbf24',
     content: <TerminalWindow />,
     defaultSize: { width: 580, height: 420 },
   },
 };
 
-/* ── State shape ─────────────────────────────────────────────────────── */
+/* ── Desktop icon config ────────────────────────────────────────────── */
+const ICONS = [
+  {
+    id: 'projects',
+    label: 'Projects',
+    icon: <ProjectsAppIcon />,
+    color: '#4f8ef7',
+    action: 'open' as const,
+  },
+  {
+    id: 'about',
+    label: 'About Me',
+    icon: <AboutAppIcon />,
+    color: '#34d399',
+    action: 'open' as const,
+  },
+  {
+    id: 'contact',
+    label: 'Contact',
+    icon: <ContactAppIcon />,
+    color: '#f472b6',
+    action: 'open' as const,
+  },
+  {
+    id: 'resume',
+    label: 'Resume',
+    icon: <ResumeAppIcon />,
+    color: '#fb923c',
+    action: 'link' as const,
+    href: 'https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view',
+  },
+  {
+    id: 'blog',
+    label: 'Blog',
+    icon: <BlogAppIcon />,
+    color: '#a78bfa',
+    action: 'link' as const,
+    href: 'https://shariqsk.github.io/',
+  },
+  {
+    id: 'terminal',
+    label: 'Terminal',
+    icon: <TerminalAppIcon />,
+    color: '#fbbf24',
+    action: 'open' as const,
+  },
+];
+
+/* ── Window state ───────────────────────────────────────────────────── */
 interface WinState {
   id: string;
   zIndex: number;
@@ -62,60 +116,16 @@ interface WinState {
 
 let zCounter = 100;
 
-/* ── Desktop icons config ────────────────────────────────────────────── */
-const ICONS = [
-  {
-    id: 'projects',
-    label: 'projects',
-    icon: <FolderIcon />,
-    action: 'open' as const,
-  },
-  {
-    id: 'about',
-    label: 'whoami.sh',
-    icon: <TerminalIcon />,
-    action: 'open' as const,
-  },
-  {
-    id: 'contact',
-    label: 'contact.gpg',
-    icon: <LockIcon />,
-    action: 'open' as const,
-  },
-  {
-    id: 'resume',
-    label: 'resume.pdf',
-    icon: <DocumentIcon />,
-    action: 'link' as const,
-    href: 'https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view',
-  },
-  {
-    id: 'blog',
-    label: 'blog.link',
-    icon: <GlobeIcon />,
-    action: 'link' as const,
-    href: 'https://shariqsk.github.io/',
-  },
-  {
-    id: 'terminal',
-    label: 'terminal',
-    icon: <TerminalIcon />,
-    action: 'open' as const,
-  },
-];
-
 export default function Desktop() {
   const [openWindows, setOpenWindows] = useState<WinState[]>([]);
-  const [focusedId, setFocusedId] = useState<string | null>(null);
+  const [focusedId, setFocusedId]     = useState<string | null>(null);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
-  const desktopRef = useRef<HTMLDivElement>(null);
 
-  /* ── Window management ─────────────────────────────────────────────── */
+  /* ── Window management ─────────────────────────────────────────── */
   const openWindow = useCallback((id: string) => {
     setOpenWindows((prev) => {
       const existing = prev.find((w) => w.id === id);
       if (existing) {
-        // un-minimize and focus
         return prev.map((w) =>
           w.id === id ? { ...w, isMinimized: false, zIndex: ++zCounter } : w,
         );
@@ -159,7 +169,7 @@ export default function Desktop() {
     [openWindows, focusedId, openWindow, minimizeWindow, focusWindow],
   );
 
-  /* ── Icon click ─────────────────────────────────────────────────────── */
+  /* ── Icon click ─────────────────────────────────────────────────── */
   const handleIconClick = useCallback(
     (icon: (typeof ICONS)[number]) => {
       setSelectedIcon(icon.id);
@@ -172,29 +182,29 @@ export default function Desktop() {
     [openWindow],
   );
 
-  /* ── Taskbar window list ────────────────────────────────────────────── */
+  /* ── Taskbar list ───────────────────────────────────────────────── */
   const taskbarWindows: TaskbarWindow[] = openWindows.map((w) => ({
     id: w.id,
-    title: WIN_DEFS[w.id]?.title ?? w.id,
+    title: APP_DEFS[w.id]?.title ?? w.id,
+    accentColor: APP_DEFS[w.id]?.accentColor ?? '#4f8ef7',
     isMinimized: w.isMinimized,
     isFocused: w.id === focusedId,
   }));
 
   return (
     <div
-      ref={desktopRef}
       className="os-desktop"
       onClick={() => setSelectedIcon(null)}
     >
-      {/* Desktop icons — top-right column */}
+      {/* Desktop icons — right column */}
       <div
         style={{
           position: 'absolute',
           top: 16,
-          right: 16,
+          right: 12,
           display: 'flex',
           flexDirection: 'column',
-          gap: 4,
+          gap: 2,
           zIndex: 10,
         }}
         onClick={(e) => e.stopPropagation()}
@@ -204,19 +214,20 @@ export default function Desktop() {
             key={icon.id}
             label={icon.label}
             icon={icon.icon}
+            color={icon.color}
             onOpen={() => handleIconClick(icon)}
             selected={selectedIcon === icon.id}
           />
         ))}
       </div>
 
-      {/* Welcome hint — only shown when no windows open */}
+      {/* Welcome hint */}
       {openWindows.length === 0 && (
         <div
           style={{
             position: 'absolute',
             top: '50%',
-            left: '50%',
+            left: '44%',
             transform: 'translate(-50%, -50%)',
             textAlign: 'center',
             pointerEvents: 'none',
@@ -225,16 +236,17 @@ export default function Desktop() {
         >
           <div
             style={{
-              fontSize: 11,
-              color: 'rgba(245,158,11,0.2)',
+              color: 'rgba(255,255,255,0.07)',
               fontFamily: 'monospace',
-              letterSpacing: '0.15em',
-              textTransform: 'uppercase',
-              lineHeight: 2,
+              letterSpacing: '0.08em',
             }}
           >
-            <div style={{ fontSize: 28, marginBottom: 8, opacity: 0.25 }}>sk_os</div>
-            <div>click an icon to get started</div>
+            <div style={{ fontSize: 52, fontWeight: 700, marginBottom: 10, letterSpacing: '-0.02em' }}>
+              sk_os
+            </div>
+            <div style={{ fontSize: 11, letterSpacing: '0.2em', textTransform: 'uppercase' }}>
+              click an icon to get started →
+            </div>
           </div>
         </div>
       )}
@@ -242,13 +254,14 @@ export default function Desktop() {
       {/* Open windows */}
       <AnimatePresence>
         {openWindows.map((w) => {
-          const def = WIN_DEFS[w.id];
+          const def = APP_DEFS[w.id];
           if (!def) return null;
           return (
             <Window
               key={w.id}
               id={w.id}
               title={def.title}
+              accentColor={def.accentColor}
               defaultSize={def.defaultSize}
               onClose={closeWindow}
               onFocus={focusWindow}

@@ -23,7 +23,7 @@ function ProgressBar({ pct, delay }: { pct: number; delay: number }) {
   const bar = '█'.repeat(blocks) + '░'.repeat(20 - blocks);
 
   return (
-    <span style={{ color: 'var(--os-amber-dim)', fontFamily: 'monospace', letterSpacing: '-0.02em' }}>
+    <span style={{ color: 'var(--window-accent, #34d399)', fontFamily: 'monospace', letterSpacing: '-0.02em', opacity: 0.7 }}>
       {bar}
     </span>
   );

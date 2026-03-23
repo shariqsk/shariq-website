@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { FolderIcon, DocumentIcon } from '@/components/os/DesktopIcon';
 
 interface Project {
   name: string;

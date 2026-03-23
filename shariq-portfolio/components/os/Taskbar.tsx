@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 export interface TaskbarWindow {
   id: string;
   title: string;
+  accentColor?: string;
   isMinimized: boolean;
   isFocused: boolean;
 }
@@ -20,9 +21,9 @@ function Clock() {
   useEffect(() => {
     const update = () => {
       const now = new Date();
-      const h = now.getHours().toString().padStart(2, '0');
-      const m = now.getMinutes().toString().padStart(2, '0');
-      const day = now.toLocaleDateString('en-US', { weekday: 'short' });
+      const h   = now.getHours().toString().padStart(2, '0');
+      const m   = now.getMinutes().toString().padStart(2, '0');
+      const day = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
       setTime(`${day}  ${h}:${m}`);
     };
     update();
@@ -45,6 +46,11 @@ export default function Taskbar({ windows, onWindowClick }: TaskbarProps) {
           <button
             key={w.id}
             className={`os-taskbar__win-btn ${w.isFocused && !w.isMinimized ? 'os-taskbar__win-btn--active' : ''}`}
+            style={
+              w.isFocused && !w.isMinimized && w.accentColor
+                ? ({ '--btn-accent': w.accentColor } as React.CSSProperties)
+                : undefined
+            }
             onClick={() => onWindowClick(w.id)}
             title={w.title}
           >

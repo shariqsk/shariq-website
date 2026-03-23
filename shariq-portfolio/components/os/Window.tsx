@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 export interface WindowProps {
   id: string;
   title: string;
+  accentColor?: string;
   children: React.ReactNode;
   initialPosition?: { x: number; y: number };
   defaultSize?: { width: number; height: number };
@@ -20,6 +21,7 @@ export interface WindowProps {
 export default function Window({
   id,
   title,
+  accentColor = '#4f8ef7',
   children,
   initialPosition,
   defaultSize,
@@ -93,7 +95,8 @@ export default function Window({
             width: size.width,
             height: size.height,
             zIndex,
-          }}
+            '--window-accent': accentColor,
+          } as React.CSSProperties}
           onMouseDown={() => onFocus(id)}
         >
           {/* Title bar */}
