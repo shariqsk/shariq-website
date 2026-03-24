@@ -4,41 +4,44 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const BOOT_LINES = [
-  'sk_os  version 1.0.0  (build 2024)',
-  'Copyright (c) Shariq Khan. All rights reserved.',
+  'SK-OS  Version 4.00.950  A',
+  'Copyright (c) Shariq Khan 1995-2025.',
   '',
-  'Performing POST...',
-  'CPU: Intel Core — OK',
-  'Memory: 16384 MB — OK',
-  'Storage: /dev/ssd0 — OK',
+  'Performing system check...',
+  'CPU: OK',
+  'Memory test: 16384 KB OK',
+  'Hard Disk: OK',
   '',
-  'Loading kernel modules...',
+  'Loading device drivers...',
   'Loading security subsystem...',
-  'Mounting filesystems...',
-  '  /     [OK]',
-  '  /home  [OK]',
-  '  /projects  [OK]',
+  'Initializing file system...',
+  '  C:\\ [OK]',
+  '  C:\\projects [OK]',
+  '  C:\\users\\shariq [OK]',
   '',
   'Starting services...',
-  '  firewall         [RUNNING]',
-  '  ssh-agent        [RUNNING]',
-  '  portfolio-daemon [RUNNING]',
+  '  firewall.exe     [OK]',
+  '  ssh-agent.exe    [OK]',
+  '  portfolio.exe    [OK]',
   '',
-  'Loading user profile: shariq',
+  'Loading user profile: Shariq',
   '',
-  'Welcome back.',
+  'Welcome.',
 ];
 
 interface BootScreenProps {
   onComplete: () => void;
 }
 
+const TOTAL_BLOCKS = 14;
+
 export default function BootScreen({ onComplete }: BootScreenProps) {
   const [visibleLines, setVisibleLines] = useState<string[]>([]);
   const [exiting, setExiting] = useState(false);
 
+  const filledBlocks = Math.floor(Math.min((visibleLines.length / BOOT_LINES.length) * TOTAL_BLOCKS, TOTAL_BLOCKS));
+
   useEffect(() => {
-    // Check if already booted this session — skip animation entirely
     const hasBooted = sessionStorage.getItem('sk_os_booted');
     if (hasBooted) {
       setExiting(true);
@@ -46,12 +49,11 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
       return;
     }
 
-    let idx = 0;
     const delays: number[] = BOOT_LINES.map((line) => {
-      if (line === '') return 40;
-      if (line.startsWith('  ')) return 60;
-      if (line.includes('[OK]') || line.includes('[RUNNING]')) return 50;
-      return 90;
+      if (line === '') return 35;
+      if (line.startsWith('  ')) return 50;
+      if (line.includes('[OK]')) return 55;
+      return 80;
     });
 
     let elapsed = 0;
@@ -67,7 +69,7 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
             setTimeout(() => {
               sessionStorage.setItem('sk_os_booted', '1');
               onComplete();
-            }, 600);
+            }, 500);
           }, 400);
           timers.push(done);
         }
@@ -78,6 +80,14 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
     return () => timers.forEach(clearTimeout);
   }, [onComplete]);
 
+  const skip = () => {
+    setExiting(true);
+    setTimeout(() => {
+      sessionStorage.setItem('sk_os_booted', '1');
+      onComplete();
+    }, 300);
+  };
+
   return (
     <AnimatePresence>
       {!exiting && (
@@ -85,57 +95,60 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
           key="boot"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
           className="os-boot"
-          onClick={() => {
-            // Allow skipping
-            setExiting(true);
-            setTimeout(() => {
-              sessionStorage.setItem('sk_os_booted', '1');
-              onComplete();
-            }, 300);
-          }}
+          onClick={skip}
         >
+          {/* Logo */}
+          <div className="os-boot__logo">SK-OS</div>
+          <div className="os-boot__version">Version 4.00.950</div>
+
+          {/* Terminal output */}
           <div className="os-boot__terminal">
             {visibleLines.map((line, i) => (
-              <div key={i} style={{ minHeight: '1.8em' }}>
+              <div key={i} style={{ minHeight: '1.5em' }}>
                 {line === '' ? (
                   <span>&nbsp;</span>
                 ) : (
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.1 }}
+                  <span
                     style={{
-                      color: line.includes('[OK]') || line.includes('[RUNNING]')
-                        ? '#22c55e'
-                        : line.includes('[WARN]') || line.includes('[FAIL]')
-                        ? '#ef4444'
-                        : line.startsWith('  ')
-                        ? 'rgba(245,158,11,0.7)'
-                        : '#f59e0b',
+                      color:
+                        line.includes('[OK]')
+                          ? '#ffffff'
+                          : line.startsWith('  ')
+                          ? '#aaaaaa'
+                          : line.startsWith('SK-OS') || line.startsWith('Copyright')
+                          ? '#888888'
+                          : line === 'Welcome.'
+                          ? '#ffffff'
+                          : '#cccccc',
                     }}
                   >
                     {line}
-                  </motion.span>
+                  </span>
                 )}
               </div>
             ))}
             {!exiting && <span className="os-boot__cursor" />}
           </div>
 
-          <div
-            style={{
-              position: 'fixed',
-              bottom: 16,
-              right: 20,
-              fontSize: 10,
-              color: 'rgba(245,158,11,0.3)',
-              fontFamily: 'monospace',
-              letterSpacing: '0.1em',
-            }}
-          >
-            click anywhere to skip
+          {/* Win95 block progress bar */}
+          <div className="os-boot__bar-wrap">
+            {Array.from({ length: TOTAL_BLOCKS }).map((_, i) => (
+              <div
+                key={i}
+                className="os-boot__bar-block"
+                style={{ opacity: i < filledBlocks ? 1 : 0 }}
+              />
+            ))}
+          </div>
+
+          <div style={{
+            position: 'fixed', bottom: 12, right: 16,
+            fontSize: 10, color: '#555',
+            fontFamily: "'Courier New', monospace",
+          }}>
+            Click to skip
           </div>
         </motion.div>
       )}

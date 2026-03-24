@@ -3,147 +3,113 @@
 import { useState, useEffect } from 'react';
 
 const SKILLS = [
-  { name: 'Next.js / React',      pct: 88 },
-  { name: 'Python / FastAPI',     pct: 82 },
-  { name: 'TypeScript',           pct: 85 },
-  { name: 'Cybersecurity',        pct: 72 },
-  { name: 'Docker / AWS',         pct: 65 },
-  { name: 'Machine Learning',     pct: 60 },
+  { name: 'Next.js / React',  pct: 88 },
+  { name: 'TypeScript',       pct: 85 },
+  { name: 'Python / FastAPI', pct: 82 },
+  { name: 'Cybersecurity',    pct: 72 },
+  { name: 'Docker / AWS',     pct: 65 },
+  { name: 'Machine Learning', pct: 60 },
+];
+
+const INFO_ROWS: [string, string][] = [
+  ['Location',  'Toronto, Ontario, Canada'],
+  ['Education', 'BSc Cybersecurity — York University'],
+  ['Currently', 'Import Analyst @ Farrow'],
+  ['Email',     'contact@shariqsafdarkhan.com'],
 ];
 
 function ProgressBar({ pct, delay }: { pct: number; delay: number }) {
   const [filled, setFilled] = useState(0);
-
   useEffect(() => {
     const t = setTimeout(() => setFilled(pct), delay);
     return () => clearTimeout(t);
   }, [pct, delay]);
 
-  const blocks = Math.round((filled / 100) * 20);
-  const bar = '█'.repeat(blocks) + '░'.repeat(20 - blocks);
-
   return (
-    <span style={{ color: 'var(--window-accent, #34d399)', fontFamily: 'monospace', letterSpacing: '-0.02em', opacity: 0.7 }}>
-      {bar}
+    <span className="os-progress-track">
+      <span className="os-progress-fill" style={{ width: `${filled}%` }} />
     </span>
   );
 }
 
 export default function AboutWindow() {
-  const [showContent, setShowContent] = useState(false);
-
-  useEffect(() => {
-    const t = setTimeout(() => setShowContent(true), 120);
-    return () => clearTimeout(t);
-  }, []);
-
-  if (!showContent) return null;
-
   return (
-    <div className="os-pane" style={{ overflowY: 'auto', lineHeight: 1.7 }}>
+    <div className="os-pane" style={{ overflowY: 'auto' }}>
 
-      {/* whoami output */}
-      <div style={{ marginBottom: 20 }}>
-        <div className="os-prompt">
-          <span className="os-prompt-path">shariq@sk_os:~$</span>{' '}
-          <span style={{ color: 'var(--os-amber-bright)' }}>whoami</span>
+      {/* Header card */}
+      <div style={{
+        display: 'flex', alignItems: 'center', gap: 12,
+        marginBottom: 10, padding: '6px 8px',
+        background: '#fff',
+        boxShadow: 'inset 1px 1px #808080, inset -1px -1px #fff',
+      }}>
+        <div style={{
+          width: 44, height: 44, background: '#000080',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          color: '#fff', fontWeight: 700, fontSize: 14, flexShrink: 0,
+          border: '1px solid #000',
+        }}>
+          SK
         </div>
-        <div style={{ marginTop: 10, paddingLeft: 8, borderLeft: '2px solid var(--os-border-dim)' }}>
-          <div style={{ fontSize: 20, color: 'var(--os-amber-bright)', fontWeight: 600, marginBottom: 4, letterSpacing: '0.04em' }}>
-            Shariq Khan
-          </div>
-          <div style={{ color: 'var(--os-amber-dim)', fontSize: 12, marginBottom: 12 }}>
-            Cybersecurity Student &amp; Full-Stack Developer
-          </div>
-          <table style={{ fontSize: 11, borderSpacing: '0 4px', borderCollapse: 'separate' }}>
-            <tbody>
-              {[
-                ['uid',      '1000(shariq)'],
-                ['groups',   'developers, security, york-university'],
-                ['location', 'Toronto, Ontario, Canada'],
-                ['education','BSc Cybersecurity — York University'],
-                ['work',     'Import Analyst @ Farrow'],
-                ['email',    'contact@shariqsafdarkhan.com'],
-              ].map(([k, v]) => (
-                <tr key={k}>
-                  <td style={{ color: 'var(--os-amber-dim)', paddingRight: 16, whiteSpace: 'nowrap' }}>{k}</td>
-                  <td style={{ color: 'var(--os-text-bright)' }}>{v}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div>
+          <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 2 }}>Shariq Khan</div>
+          <div style={{ color: '#444', fontSize: 11 }}>Cybersecurity Student &amp; Full-Stack Developer</div>
+          <div style={{ fontSize: 10, color: '#808080', marginTop: 2 }}>Toronto · York University</div>
         </div>
       </div>
 
-      {/* cat bio.txt */}
-      <div style={{ marginBottom: 20 }}>
-        <div className="os-prompt">
-          <span className="os-prompt-path">shariq@sk_os:~$</span>{' '}
-          <span style={{ color: 'var(--os-amber-bright)' }}>cat bio.txt</span>
-        </div>
-        <div style={{ marginTop: 8, paddingLeft: 8, borderLeft: '2px solid var(--os-border-dim)', color: 'rgba(245,158,11,0.65)', fontSize: 12, lineHeight: 1.8 }}>
-          <p style={{ margin: '0 0 8px' }}>
-            I'm a 20-year-old Cybersecurity student at York University building secure,
-            scalable applications with a security-first approach.
-          </p>
-          <p style={{ margin: 0 }}>
-            I solve complex engineering challenges across the full stack — from real-time
-            fight analytics platforms to on-device computer vision tools — while keeping
-            security baked in from the ground up, not bolted on after.
-          </p>
-        </div>
+      {/* Bio */}
+      <div className="w95-groupbox">
+        <span className="w95-groupbox__label">About</span>
+        <p style={{ fontSize: 11, lineHeight: 1.7, color: '#000' }}>
+          I&apos;m a 20-year-old Cybersecurity student at York University building secure,
+          scalable applications with a security-first approach. I solve complex engineering
+          challenges across the full stack — from real-time fight analytics to on-device
+          computer vision — while keeping security baked in from the ground up.
+        </p>
       </div>
 
-      {/* skills */}
-      <div style={{ marginBottom: 20 }}>
-        <div className="os-prompt">
-          <span className="os-prompt-path">shariq@sk_os:~$</span>{' '}
-          <span style={{ color: 'var(--os-amber-bright)' }}>cat /proc/skills</span>
-        </div>
-        <div style={{ marginTop: 10, paddingLeft: 8 }}>
+      {/* Info */}
+      <div className="w95-groupbox">
+        <span className="w95-groupbox__label">Info</span>
+        <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 11 }}>
+          <tbody>
+            {INFO_ROWS.map(([k, v]) => (
+              <tr key={k}>
+                <td style={{ color: '#808080', fontWeight: 700, paddingRight: 12, paddingBottom: 4, whiteSpace: 'nowrap', width: 80 }}>{k}:</td>
+                <td style={{ paddingBottom: 4 }}>{v}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* Skills */}
+      <div className="w95-groupbox">
+        <span className="w95-groupbox__label">Skills</span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
           {SKILLS.map(({ name, pct }, i) => (
-            <div
-              key={name}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-                marginBottom: 8,
-                fontSize: 11,
-              }}
-            >
-              <span style={{ color: 'var(--os-text)', width: 160, flexShrink: 0 }}>{name}</span>
+            <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11 }}>
+              <span style={{ width: 130, flexShrink: 0 }}>{name}</span>
               <ProgressBar pct={pct} delay={i * 80} />
-              <span style={{ color: 'var(--os-amber-dim)', fontSize: 10, width: 32, textAlign: 'right' }}>
-                {pct}%
-              </span>
+              <span style={{ color: '#000080', fontWeight: 700, width: 32, textAlign: 'right' }}>{pct}%</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* links */}
-      <div>
-        <div className="os-prompt">
-          <span className="os-prompt-path">shariq@sk_os:~$</span>{' '}
-          <span style={{ color: 'var(--os-amber-bright)' }}>ls -la ./links/</span>
-        </div>
-        <div style={{ marginTop: 10, paddingLeft: 8, display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+      {/* Links */}
+      <div className="w95-groupbox">
+        <span className="w95-groupbox__label">Links</span>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
           {[
-            { label: 'github',   href: 'https://github.com/shariqsk' },
-            { label: 'linkedin', href: 'https://www.linkedin.com/in/shariq-khan-430754217/' },
-            { label: 'twitter',  href: 'https://twitter.com/shariqssk' },
-            { label: 'blog',     href: 'https://shariqsk.github.io/' },
+            { label: 'GitHub',   href: 'https://github.com/shariqsk' },
+            { label: 'LinkedIn', href: 'https://www.linkedin.com/in/shariq-khan-430754217/' },
+            { label: 'Twitter',  href: 'https://twitter.com/shariqssk' },
+            { label: 'Blog',     href: 'https://shariqsk.github.io/' },
           ].map(({ label, href }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="os-btn"
-              style={{ fontSize: 11 }}
-            >
-              ./{label}
+            <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="os-btn">
+              {label}
             </a>
           ))}
         </div>

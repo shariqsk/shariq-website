@@ -21,7 +21,6 @@ export interface WindowProps {
 export default function Window({
   id,
   title,
-  accentColor = '#4f8ef7',
   children,
   initialPosition,
   defaultSize,
@@ -39,16 +38,18 @@ export default function Window({
   }, []);
 
   const getDefaultPos = () => {
-    if (typeof window === 'undefined') return { x: 100, y: 60 };
-    const w = defaultSize?.width ?? 700;
-    const h = defaultSize?.height ?? 520;
+    if (typeof window === 'undefined') return { x: 60, y: 40 };
+    const w = defaultSize?.width ?? 640;
+    const h = defaultSize?.height ?? 480;
+    // Menubar: 20px top, Taskbar: 28px bottom
+    const availH = window.innerHeight - 20 - 28 - 40;
     const x = Math.max(20, (window.innerWidth - w) / 2 + (Math.random() * 60 - 30));
-    const y = Math.max(20, (window.innerHeight - h) / 2 + (Math.random() * 40 - 20));
+    const y = Math.max(28, 20 + (availH - h) / 2 + (Math.random() * 30 - 15));
     return initialPosition ?? { x, y };
   };
 
   const [position, setPosition] = useState(getDefaultPos);
-  const [size] = useState(defaultSize ?? { width: 700, height: 520 });
+  const [size] = useState(defaultSize ?? { width: 640, height: 480 });
 
   const dragging = useRef(false);
   const origin = useRef({ mx: 0, my: 0, px: 0, py: 0 });
@@ -65,7 +66,7 @@ export default function Window({
         if (!dragging.current) return;
         setPosition({
           x: origin.current.px + ev.clientX - origin.current.mx,
-          y: Math.max(0, origin.current.py + ev.clientY - origin.current.my),
+          y: Math.max(20, origin.current.py + ev.clientY - origin.current.my),
         });
       };
       const up = () => {
@@ -84,10 +85,10 @@ export default function Window({
       {!isMinimized && (
         <motion.div
           key={id}
-          initial={{ opacity: 0, scale: 0.92, y: 12 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.88, y: 16 }}
-          transition={{ duration: 0.18, ease: 'easeOut' }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.92 }}
+          transition={{ duration: 0.1, ease: 'easeOut' }}
           className={`os-window ${isFocused ? 'os-window--focused' : ''}`}
           style={{
             left: position.x,
@@ -95,8 +96,7 @@ export default function Window({
             width: size.width,
             height: size.height,
             zIndex,
-            '--window-accent': accentColor,
-          } as React.CSSProperties}
+          }}
           onMouseDown={() => onFocus(id)}
         >
           {/* Title bar */}
@@ -104,27 +104,24 @@ export default function Window({
             className={`os-title-bar ${isFocused ? '' : 'os-title-bar--unfocused'}`}
             onMouseDown={onTitleMouseDown}
           >
-            <div style={{ display: 'flex', gap: 6 }}>
+            <div style={{ display: 'flex', gap: 2, marginRight: 4 }}>
               <button
-                className="os-title-btn os-title-btn--close"
+                className="os-title-btn"
                 onClick={(e) => { e.stopPropagation(); onClose(id); }}
                 title="Close"
-              />
+              >×</button>
               <button
-                className="os-title-btn os-title-btn--minimize"
+                className="os-title-btn"
                 onClick={(e) => { e.stopPropagation(); onMinimize(id); }}
                 title="Minimize"
-              />
+              >─</button>
               <button
-                className="os-title-btn os-title-btn--expand"
-                title="Expand"
-              />
+                className="os-title-btn"
+                title="Maximize"
+              >□</button>
             </div>
 
             <span className="os-title-label">{title}</span>
-
-            {/* Empty right spacer to balance title */}
-            <div style={{ width: 42 }} />
           </div>
 
           {/* Body */}

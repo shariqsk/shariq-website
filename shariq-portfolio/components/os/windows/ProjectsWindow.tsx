@@ -16,9 +16,8 @@ interface Project {
 const PROJECTS: Project[] = [
   {
     name: 'Zocratic MMA',
-    filename: 'zocratic/',
-    description:
-      'A comprehensive fight analytics platform where fight nerds scout athletes, study matchup data, and build smarter picks with live telemetry and proprietary scoring tiers.',
+    filename: 'Zocratic MMA',
+    description: 'A comprehensive fight analytics platform where fight nerds scout athletes, study matchup data, and build smarter picks with live telemetry and proprietary scoring tiers.',
     tags: ['Next.js', 'FastAPI', 'PyTorch', 'Supabase', 'AWS'],
     highlight: '20+ daily users',
     live: 'https://www.zocraticmma.com',
@@ -27,9 +26,8 @@ const PROJECTS: Project[] = [
   },
   {
     name: 'CDL Simulator',
-    filename: 'cdl-sim/',
-    description:
-      'Call of Duty esports league manager with a custom sim engine that models player clashes, utility trades, map control swings, and hazard events through state machines.',
+    filename: 'CDL Simulator',
+    description: 'Call of Duty esports league manager with a custom sim engine that models player clashes, utility trades, map control swings, and hazard events through state machines.',
     tags: ['Next.js', 'Framer Motion', 'Supabase', 'Vercel'],
     highlight: '50K+ impressions · 10K+ visitors',
     live: 'https://cdlsimulator.com',
@@ -38,9 +36,8 @@ const PROJECTS: Project[] = [
   },
   {
     name: 'Phintic',
-    filename: 'phintic/',
-    description:
-      'A practical security education site teaching fundamentals through 8 security topics, interactive simulations, and knowledge tests to build good habits against modern threats.',
+    filename: 'Phintic',
+    description: 'A practical security education site teaching fundamentals through 8 security topics, interactive simulations, and knowledge tests to build good habits against modern threats.',
     tags: ['Next.js', 'React', 'Security Education'],
     highlight: 'Interactive security simulations',
     live: 'https://phintic.com',
@@ -50,8 +47,7 @@ const PROJECTS: Project[] = [
   {
     name: 'QOTD Bot',
     filename: 'qotd.py',
-    description:
-      'Discord bot that delivers daily inspirational quotes with OAuth2 auth, Docker packaging, and Redis caching for 65% API call reduction.',
+    description: 'Discord bot that delivers daily inspirational quotes with OAuth2 auth, Docker packaging, and Redis caching for 65% API call reduction.',
     tags: ['Python', 'Docker', 'Redis', 'OAuth2'],
     highlight: '<200ms response times',
     live: null,
@@ -61,8 +57,7 @@ const PROJECTS: Project[] = [
   {
     name: 'Blink!',
     filename: 'blink.py',
-    description:
-      'Desktop app leveraging computer vision to monitor ocular health. Real-time webcam analysis with on-device processing to track blink frequency and send configurable alerts.',
+    description: 'Desktop app leveraging computer vision to monitor ocular health. Real-time webcam analysis with on-device processing to track blink frequency and send configurable alerts.',
     tags: ['Python', 'MediaPipe', 'OpenCV', 'PyQt6', 'ML'],
     highlight: 'Privacy-first on-device processing',
     live: null,
@@ -71,9 +66,8 @@ const PROJECTS: Project[] = [
   },
   {
     name: 'ResuSense',
-    filename: 'resumense/',
-    description:
-      'AI-powered resume optimizer that tailors LaTeX resumes to specific job descriptions. Features real-time PDF preview, job URL scraping, and keyword matching.',
+    filename: 'ResuSense',
+    description: 'AI-powered resume optimizer that tailors LaTeX resumes to specific job descriptions. Features real-time PDF preview, job URL scraping, and keyword matching.',
     tags: ['Next.js', 'TypeScript', 'AI', 'LaTeX'],
     highlight: 'Real LaTeX compilation with live preview',
     live: null,
@@ -82,97 +76,86 @@ const PROJECTS: Project[] = [
   },
 ];
 
+/* Small inline folder/file SVG for the sidebar list */
+function FileIcon({ isFolder }: { isFolder?: boolean }) {
+  if (isFolder) {
+    return (
+      <svg width="16" height="16" viewBox="0 0 16 16" shapeRendering="crispEdges" style={{ flexShrink: 0 }}>
+        <rect x="0" y="4" width="6" height="3" fill="#c8960c" stroke="#000" strokeWidth="0.5"/>
+        <rect x="0" y="6" width="16" height="9" fill="#ffcc44" stroke="#000" strokeWidth="0.5"/>
+      </svg>
+    );
+  }
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" shapeRendering="crispEdges" style={{ flexShrink: 0 }}>
+      <polygon points="2,1 10,1 14,5 14,15 2,15" fill="#fff" stroke="#000" strokeWidth="0.5"/>
+      <polygon points="10,1 14,5 10,5" fill="#808080" stroke="#000" strokeWidth="0.5"/>
+    </svg>
+  );
+}
+
 export default function ProjectsWindow() {
   const [selected, setSelected] = useState<Project>(PROJECTS[0]);
 
   return (
-    <div style={{ display: 'flex', height: '100%', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', height: '100%', overflow: 'hidden', fontFamily: "'Tahoma', Arial, sans-serif", fontSize: 11 }}>
 
-      {/* Left pane: file list */}
-      <div
-        style={{
-          width: 200,
-          flexShrink: 0,
-          borderRight: '1px solid var(--os-border-dim)',
-          overflowY: 'auto',
-          padding: '8px 0',
-        }}
-      >
-        <div
-          style={{
-            padding: '4px 12px 8px',
-            fontSize: 9,
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            color: 'var(--os-text-dim)',
-            borderBottom: '1px solid var(--os-border-dim)',
-            marginBottom: 4,
-          }}
-        >
-          ~/projects
+      {/* Left file list */}
+      <div style={{
+        width: 180, flexShrink: 0,
+        borderRight: '2px solid #808080',
+        overflowY: 'auto',
+        background: '#fff',
+        boxShadow: 'inset 2px 2px #808080, inset -2px -2px #fff',
+      }}>
+        <div style={{
+          background: '#000080', color: '#fff',
+          padding: '2px 6px', fontSize: 11, fontWeight: 700,
+          borderBottom: '1px solid #000',
+        }}>
+          All Projects
         </div>
-
-        {PROJECTS.map((p) => (
-          <div
-            key={p.filename}
-            className={`os-project-item ${selected.filename === p.filename ? 'os-project-item--active' : ''}`}
-            onClick={() => setSelected(p)}
-          >
-            <div style={{ width: 16, flexShrink: 0, opacity: 0.7 }}>
-              {p.isFolder ? (
-                <svg width="14" height="13" viewBox="0 0 40 36" fill="none">
-                  <path
-                    d="M2 8C2 6.34 3.34 5 5 5H15L19 9H35C36.66 9 38 10.34 38 12V30C38 31.66 36.66 33 35 33H5C3.34 33 2 31.66 2 30V8Z"
-                    stroke="currentColor" strokeWidth="2" fill="rgba(245,158,11,0.15)"
-                  />
-                </svg>
-              ) : (
-                <svg width="12" height="14" viewBox="0 0 36 40" fill="none">
-                  <path
-                    d="M4 2H22L34 14V38C34 39.1 33.1 40 32 40H4C2.9 40 2 39.1 2 38V4C2 2.9 2.9 2 4 2Z"
-                    stroke="currentColor" strokeWidth="2.5" fill="rgba(245,158,11,0.08)"
-                  />
-                </svg>
-              )}
-            </div>
-            <span style={{ fontSize: 11, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {p.filename}
-            </span>
-          </div>
-        ))}
+        <div>
+          {PROJECTS.map((p) => {
+            const isActive = selected.filename === p.filename;
+            return (
+              <div
+                key={p.filename}
+                className={`os-project-item ${isActive ? 'os-project-item--active' : ''}`}
+                onClick={() => setSelected(p)}
+              >
+                <FileIcon isFolder={p.isFolder} />
+                <span>{p.name}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Right pane: detail */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: 20 }}>
-        <div style={{ marginBottom: 16 }}>
-          <div style={{ fontSize: 16, color: 'var(--os-amber-bright)', fontWeight: 600, marginBottom: 4 }}>
-            {selected.name}
-          </div>
+      {/* Right detail pane */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '10px 12px', background: '#c0c0c0' }}>
+
+        {/* Title row */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
+          <FileIcon isFolder={selected.isFolder} />
+          <span style={{ fontWeight: 700, fontSize: 13 }}>{selected.name}</span>
           {selected.highlight && (
-            <div
-              style={{
-                display: 'inline-block',
-                fontSize: 10,
-                padding: '2px 8px',
-                border: '1px solid var(--os-border)',
-                borderRadius: 2,
-                color: 'var(--os-amber-dim)',
-                marginBottom: 12,
-                letterSpacing: '0.05em',
-              }}
-            >
-              ▸ {selected.highlight}
-            </div>
+            <span className="os-tag" style={{ marginLeft: 4 }}>{selected.highlight}</span>
           )}
-          <p style={{ fontSize: 12, color: 'rgba(245,158,11,0.6)', lineHeight: 1.75, margin: '0 0 16px' }}>
-            {selected.description}
-          </p>
         </div>
 
-        {/* Tags */}
-        <div style={{ marginBottom: 16 }}>
-          <div className="os-section-title">stack</div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+        <div className="w95-separator" />
+
+        {/* Description */}
+        <div className="w95-groupbox">
+          <span className="w95-groupbox__label">Description</span>
+          <p style={{ fontSize: 11, lineHeight: 1.7, color: '#000' }}>{selected.description}</p>
+        </div>
+
+        {/* Stack */}
+        <div className="w95-groupbox">
+          <span className="w95-groupbox__label">Stack</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
             {selected.tags.map((t) => (
               <span key={t} className="os-tag">{t}</span>
             ))}
@@ -181,29 +164,30 @@ export default function ProjectsWindow() {
 
         {/* Links */}
         {(selected.live || selected.repo) && (
-          <div>
-            <div className="os-section-title">links</div>
-            <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <div className="w95-groupbox">
+            <span className="w95-groupbox__label">Links</span>
+            <div style={{ display: 'flex', gap: 8 }}>
               {selected.live && (
                 <a href={selected.live} target="_blank" rel="noopener noreferrer" className="os-btn">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
                   </svg>
-                  live site
+                  Live Site
                 </a>
               )}
               {selected.repo && (
                 <a href={selected.repo} target="_blank" rel="noopener noreferrer" className="os-btn">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
                   </svg>
-                  github
+                  GitHub
                 </a>
               )}
             </div>
           </div>
         )}
+
       </div>
     </div>
   );
