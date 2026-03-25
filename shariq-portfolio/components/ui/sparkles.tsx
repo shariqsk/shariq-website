@@ -1,96 +1,77 @@
 "use client";
 
-import React, { useId } from "react";
 import { useEffect, useState } from "react";
-import Particles, { initParticlesEngine } from "@tsparticles/react";
-import type { Container } from "@tsparticles/engine";
-import { loadSlim } from "@tsparticles/slim";
-import { motion, useAnimation } from "framer-motion";
+
+type Particle = { id: number; x: number; delay: number; duration: number; size: number; opacity: number };
 
 type SparklesProps = {
-  id?: string;
   className?: string;
-  background?: string;
-  minSize?: number;
-  maxSize?: number;
-  speed?: number;
   particleColor?: string;
   particleDensity?: number;
+  speed?: number;
+  minSize?: number;
+  maxSize?: number;
+  // unused but kept for API compat
+  background?: string;
+  id?: string;
 };
 
-export const SparklesCore = (props: SparklesProps) => {
-  const {
-    id,
-    className,
-    background = "transparent",
-    minSize = 0.4,
-    maxSize = 1,
-    speed = 4,
-    particleColor = "#ffffff",
-    particleDensity = 800,
-  } = props;
-
-  const [init, setInit] = useState(false);
-  const controls = useAnimation();
-  const generatedId = useId();
+export function SparklesCore({
+  className,
+  particleColor = "#ffffff",
+  particleDensity = 80,
+  speed = 1,
+  minSize = 0.5,
+  maxSize = 1.5,
+}: SparklesProps) {
+  const [particles, setParticles] = useState<Particle[]>([]);
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => setInit(true));
+    setParticles(
+      Array.from({ length: particleDensity }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        delay: Math.random() * 5,
+        duration: (2.5 + Math.random() * 3) / speed,
+        size: minSize + Math.random() * (maxSize - minSize),
+        opacity: 0.5 + Math.random() * 0.5,
+      }))
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const particlesLoaded = async (container?: Container) => {
-    if (container) {
-      controls.start({ opacity: 1, transition: { duration: 1 } });
-    }
-  };
-
   return (
-    <motion.div animate={controls} initial={{ opacity: 0 }} className={className}>
-      {init && (
-        <Particles
-          id={id || generatedId}
-          className="h-full w-full"
-          particlesLoaded={particlesLoaded}
-          options={{
-            background: { color: { value: background } },
-            fullScreen: { enable: false, zIndex: 1 },
-            fpsLimit: 120,
-            interactivity: { events: { resize: true as never } },
-            particles: {
-              color: { value: particleColor },
-              move: {
-                direction: "none",
-                enable: true,
-                outModes: { default: "out" },
-                random: false,
-                speed: { min: 0.1, max: 0.6 },
-                straight: false,
-              },
-              number: {
-                density: { enable: true, width: 400, height: 400 },
-                value: particleDensity,
-              },
-              opacity: {
-                value: { min: 0.1, max: 1 },
-                animation: {
-                  enable: true,
-                  speed,
-                  sync: false,
-                  startValue: "random",
-                  destroy: "none",
-                },
-              },
-              shape: { type: "circle" },
-              size: {
-                value: { min: minSize, max: maxSize },
-              },
-            },
-            detectRetina: true,
+    <div
+      className={className}
+      style={{ position: "relative", background: "transparent", overflow: "hidden" }}
+    >
+      <style>{`
+        @keyframes _sparkle-twinkle {
+          0%   { opacity: 0; transform: scale(0.3) translateY(0px); }
+          20%  { opacity: var(--sp-op); transform: scale(1) translateY(-8px); }
+          80%  { opacity: calc(var(--sp-op) * 0.7); transform: scale(0.8) translateY(-60px); }
+          100% { opacity: 0; transform: scale(0.2) translateY(-100px); }
+        }
+      `}</style>
+      {particles.map((p) => (
+        <div
+          key={p.id}
+          style={{
+            position: "absolute",
+            left: `${p.x}%`,
+            bottom: "0%",
+            width: `${p.size}px`,
+            height: `${p.size}px`,
+            borderRadius: "50%",
+            background: particleColor,
+            boxShadow: `0 0 ${p.size * 2}px 0px ${particleColor}`,
+            // @ts-expect-error css var
+            "--sp-op": p.opacity,
+            opacity: 0,
+            animation: `_sparkle-twinkle ${p.duration}s ${p.delay}s infinite ease-out`,
           }}
         />
-      )}
-    </motion.div>
+      ))}
+    </div>
   );
-};
+}

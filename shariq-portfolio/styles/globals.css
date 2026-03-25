@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* ─── tsparticles canvas transparency fix ───────────────────────────── */
+.sparkles-wrapper canvas {
+  background: transparent !important;
+}
+
 /* ─── Windows 95 Design System ──────────────────────────────────────── */
 :root {
   --w95-desktop:   #008080;
