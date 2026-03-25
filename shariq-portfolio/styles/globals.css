@@ -40,7 +40,7 @@ html, body {
 .os-menubar {
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 20px;
+  height: 30px;
   background: var(--w95-surface);
   display: flex;
   align-items: center;
@@ -50,26 +50,26 @@ html, body {
 }
 
 .os-menubar__icon {
-  width: 20px; height: 20px;
+  width: 24px; height: 24px;
   display: flex; align-items: center; justify-content: center;
   margin: 0 2px 0 4px;
-  font-size: 13px;
+  font-size: 15px;
   flex-shrink: 0;
 }
 
 .os-menubar__brand {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   color: #000;
-  padding: 1px 6px;
-  margin-right: 2px;
+  padding: 2px 10px;
+  margin-right: 4px;
   cursor: default;
   white-space: nowrap;
 }
 
 .os-menubar__item {
-  padding: 1px 8px;
-  font-size: 11px;
+  padding: 2px 12px;
+  font-size: 13px;
   color: #000;
   cursor: pointer;
   white-space: nowrap;
@@ -83,9 +83,9 @@ html, body {
 .os-menubar__spacer { flex: 1; }
 
 .os-menubar__clock {
-  font-size: 11px;
+  font-size: 13px;
   color: #000;
-  padding: 1px 8px;
+  padding: 2px 10px;
   border-left: 1px solid var(--w95-dark);
   white-space: nowrap;
 }
@@ -205,10 +205,10 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
-  padding: 4px;
+  gap: 4px;
+  padding: 6px;
   cursor: pointer;
-  width: 76px;
+  width: 96px;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   border: 1px solid transparent;
@@ -217,19 +217,19 @@ html, body {
 .os-icon--selected { border: 1px dotted rgba(255,255,255,0.9); }
 
 .os-icon__glyph {
-  width: 32px; height: 32px;
+  width: 48px; height: 48px;
   display: flex; align-items: center; justify-content: center;
   position: relative;
 }
 
 .os-icon__label {
-  font-size: 11px;
+  font-size: 12px;
   font-family: 'Tahoma', Arial, sans-serif;
   color: #ffffff;
   text-align: center;
   line-height: 1.2;
   word-break: break-word;
-  max-width: 70px;
+  max-width: 90px;
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
 .os-icon--selected .os-icon__label {
@@ -242,11 +242,11 @@ html, body {
 .os-taskbar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
-  height: 28px;
+  height: 38px;
   background: var(--w95-surface);
   display: flex;
   align-items: center;
-  padding: 2px 4px;
+  padding: 3px 6px;
   gap: 4px;
   z-index: 9990;
   box-shadow:
@@ -259,9 +259,9 @@ html, body {
 .os-taskbar__brand {
   display: flex;
   align-items: center;
-  gap: 5px;
-  padding: 2px 8px;
-  font-size: 11px;
+  gap: 6px;
+  padding: 3px 12px;
+  font-size: 13px;
   font-weight: 700;
   color: #000;
   background: var(--w95-surface);
@@ -286,7 +286,7 @@ html, body {
 }
 
 .os-taskbar__divider {
-  width: 3px; height: 20px;
+  width: 3px; height: 26px;
   box-shadow: inset -1px 0 #fff, inset 1px 0 #808080;
   flex-shrink: 0;
 }
@@ -300,11 +300,11 @@ html, body {
 }
 
 .os-taskbar__win-btn {
-  padding: 2px 8px;
-  min-width: 100px;
-  max-width: 150px;
-  height: 22px;
-  font-size: 11px;
+  padding: 3px 10px;
+  min-width: 110px;
+  max-width: 160px;
+  height: 28px;
+  font-size: 12px;
   font-family: 'Tahoma', Arial, sans-serif;
   color: #000;
   background: var(--w95-surface);
@@ -332,10 +332,10 @@ html, body {
 }
 
 .os-taskbar__clock {
-  font-size: 11px;
+  font-size: 13px;
   font-family: 'Tahoma', Arial, sans-serif;
   color: #000;
-  padding: 2px 8px;
+  padding: 3px 10px;
   flex-shrink: 0;
   box-shadow: inset 1px 1px #808080, inset -1px -1px #fff;
 }
@@ -561,9 +561,9 @@ html, body {
   .os-window {
     position: fixed !important;
     left: 0 !important; right: 0 !important;
-    top: 20px !important; bottom: 28px !important;
+    top: 30px !important; bottom: 38px !important;
     width: 100% !important;
-    height: calc(100dvh - 48px) !important;
+    height: calc(100dvh - 68px) !important;
   }
-  .os-icon { width: 68px; }
+  .os-icon { width: 80px; }
 }

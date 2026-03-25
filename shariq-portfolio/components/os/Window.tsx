@@ -41,10 +41,10 @@ export default function Window({
     if (typeof window === 'undefined') return { x: 60, y: 40 };
     const w = defaultSize?.width ?? 640;
     const h = defaultSize?.height ?? 480;
-    // Menubar: 20px top, Taskbar: 28px bottom
-    const availH = window.innerHeight - 20 - 28 - 40;
+    // Menubar: 30px top, Taskbar: 38px bottom
+    const availH = window.innerHeight - 30 - 38 - 40;
     const x = Math.max(20, (window.innerWidth - w) / 2 + (Math.random() * 60 - 30));
-    const y = Math.max(28, 20 + (availH - h) / 2 + (Math.random() * 30 - 15));
+    const y = Math.max(38, 30 + (availH - h) / 2 + (Math.random() * 30 - 15));
     return initialPosition ?? { x, y };
   };
 
@@ -66,7 +66,7 @@ export default function Window({
         if (!dragging.current) return;
         setPosition({
           x: origin.current.px + ev.clientX - origin.current.mx,
-          y: Math.max(20, origin.current.py + ev.clientY - origin.current.my),
+          y: Math.max(30, origin.current.py + ev.clientY - origin.current.my),
         });
       };
       const up = () => {

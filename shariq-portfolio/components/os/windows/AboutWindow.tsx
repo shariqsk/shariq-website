@@ -1,15 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-const SKILLS = [
-  { name: 'Next.js / React',  pct: 88 },
-  { name: 'TypeScript',       pct: 85 },
-  { name: 'Python / FastAPI', pct: 82 },
-  { name: 'Cybersecurity',    pct: 72 },
-  { name: 'Docker / AWS',     pct: 65 },
-  { name: 'Machine Learning', pct: 60 },
-];
+const SKILLS: Record<string, string[]> = {
+  'Frontend': ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+  'Backend':  ['Python', 'FastAPI', 'Node.js', 'PostgreSQL', 'Redis'],
+  'Security': ['Penetration Testing', 'Defensive Security', 'OSINT', 'Cryptography'],
+  'Infra':    ['Docker', 'AWS', 'Vercel', 'Linux', 'Git'],
+  'ML / CV':  ['PyTorch', 'MediaPipe', 'OpenCV', 'scikit-learn'],
+};
 
 const INFO_ROWS: [string, string][] = [
   ['Location',  'Toronto, Ontario, Canada'],
@@ -17,20 +14,6 @@ const INFO_ROWS: [string, string][] = [
   ['Currently', 'Import Analyst @ Farrow'],
   ['Email',     'contact@shariqsafdarkhan.com'],
 ];
-
-function ProgressBar({ pct, delay }: { pct: number; delay: number }) {
-  const [filled, setFilled] = useState(0);
-  useEffect(() => {
-    const t = setTimeout(() => setFilled(pct), delay);
-    return () => clearTimeout(t);
-  }, [pct, delay]);
-
-  return (
-    <span className="os-progress-track">
-      <span className="os-progress-fill" style={{ width: `${filled}%` }} />
-    </span>
-  );
-}
 
 export default function AboutWindow() {
   return (
@@ -63,7 +46,7 @@ export default function AboutWindow() {
         <span className="w95-groupbox__label">About</span>
         <p style={{ fontSize: 11, lineHeight: 1.7, color: '#000' }}>
           I&apos;m a 20-year-old Cybersecurity student at York University building secure,
-          scalable applications with a security-first approach. I solve complex engineering
+          scalable applications with a security-first approach. I solve engineering
           challenges across the full stack — from real-time fight analytics to on-device
           computer vision — while keeping security baked in from the ground up.
         </p>
@@ -87,12 +70,17 @@ export default function AboutWindow() {
       {/* Skills */}
       <div className="w95-groupbox">
         <span className="w95-groupbox__label">Skills</span>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          {SKILLS.map(({ name, pct }, i) => (
-            <div key={name} style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11 }}>
-              <span style={{ width: 130, flexShrink: 0 }}>{name}</span>
-              <ProgressBar pct={pct} delay={i * 80} />
-              <span style={{ color: '#000080', fontWeight: 700, width: 32, textAlign: 'right' }}>{pct}%</span>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {Object.entries(SKILLS).map(([category, tags]) => (
+            <div key={category} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+              <span style={{ width: 72, flexShrink: 0, fontWeight: 700, fontSize: 11, color: '#808080', paddingTop: 2 }}>
+                {category}
+              </span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
+                {tags.map((t) => (
+                  <span key={t} className="os-tag">{t}</span>
+                ))}
+              </div>
             </div>
           ))}
         </div>

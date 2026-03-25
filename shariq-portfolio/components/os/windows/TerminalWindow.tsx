@@ -10,7 +10,7 @@ interface Line {
 const COMMANDS: Record<string, string[]> = {
   help: [
     'Available commands:',
-    '  whoami       — who am i',
+    '  whoami       — who am I',
     '  ls           — list files',
     '  cat <file>   — read a file',
     '  pwd          — current directory',
@@ -87,15 +87,15 @@ const COMMANDS: Record<string, string[]> = {
     'linkedin: https://www.linkedin.com/in/shariq-khan-430754217/',
     'twitter:  https://twitter.com/shariqssk',
   ],
-  uname: ['sk_os 1.0.0 #1 SMP Fri Jan 1 00:00:00 UTC 2024 x86_64 x86_64 x86_64 sk_os/sk_os'],
-  'uname -a': ['sk_os 1.0.0 #1 SMP Fri Jan 1 00:00:00 UTC 2024 x86_64 x86_64 x86_64 sk_os/sk_os'],
+  uname: ['sk_os 1.0.0 #1 SMP Fri Jan 1 00:00:00 UTC 2025 x86_64 GNU/Linux'],
+  'uname -a': ['sk_os 1.0.0 #1 SMP Fri Jan 1 00:00:00 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux'],
   date: [new Date().toString()],
   'sudo rm -rf /': [
     'sudo: nice try.',
     'This action has been logged.',
     'Please do not attempt to delete Shariq.',
   ],
-  'rm -rf /': ['rm: refusing to remove / — use --no-preserve-root to override (please don\'t)'],
+  'rm -rf /': ["rm: refusing to remove '/' — use --no-preserve-root to override (please don't)"],
   hack: ['Hacking... just kidding. Try: help'],
   exit: ['logout', 'Session terminated. Goodbye.'],
 };
@@ -106,12 +106,12 @@ const INITIAL: Line[] = [
 ];
 
 export default function TerminalWindow() {
-  const [lines, setLines] = useState<Line[]>(INITIAL);
-  const [input, setInput] = useState('');
+  const [lines, setLines]   = useState<Line[]>(INITIAL);
+  const [input, setInput]   = useState('');
   const [history, setHistory] = useState<string[]>([]);
   const [histIdx, setHistIdx] = useState(-1);
   const bottomRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef  = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -131,7 +131,6 @@ export default function TerminalWindow() {
       return;
     }
 
-    // echo
     if (cmd.startsWith('echo ')) {
       newLines.push({ type: 'output', text: cmd.slice(5) });
     } else if (COMMANDS[cmd]) {
@@ -141,10 +140,7 @@ export default function TerminalWindow() {
     } else if (cmd.startsWith('cd ')) {
       newLines.push({ type: 'error', text: `${cmd.slice(3)}: not a real filesystem. yet.` });
     } else {
-      newLines.push({
-        type: 'error',
-        text: `sh: command not found: ${cmd} — try "help"`,
-      });
+      newLines.push({ type: 'error', text: `sh: command not found: ${cmd} — try "help"` });
     }
 
     newLines.push({ type: 'blank', text: '' });
@@ -178,31 +174,27 @@ export default function TerminalWindow() {
         display: 'flex',
         flexDirection: 'column',
         background: '#000',
-        padding: 12,
+        padding: '8px 10px',
         cursor: 'text',
+        fontFamily: "'Courier New', monospace",
+        fontSize: 12,
       }}
       onClick={() => inputRef.current?.focus()}
     >
-      <div style={{ flex: 1, overflowY: 'auto', fontSize: 12, lineHeight: 1.8 }}>
+      <div style={{ flex: 1, overflowY: 'auto', lineHeight: 1.8 }}>
         {lines.map((l, i) => {
-          if (l.type === 'blank') return <div key={i} style={{ height: '0.6em' }} />;
+          if (l.type === 'blank') return <div key={i} style={{ height: '0.4em' }} />;
           return (
-            <div key={i} style={{ display: 'flex', gap: 8 }}>
+            <div key={i} style={{ display: 'flex', gap: 8, whiteSpace: 'pre' }}>
               {l.type === 'input' && (
-                <span style={{ color: 'var(--os-amber-dim)', flexShrink: 0 }}>
-                  shariq@sk_os:~$
-                </span>
+                <span style={{ color: '#55ff55', flexShrink: 0 }}>shariq@sk_os:~$</span>
               )}
               <span
                 style={{
                   color:
-                    l.type === 'input'
-                      ? 'var(--os-amber-bright)'
-                      : l.type === 'error'
-                      ? '#ef4444'
-                      : 'rgba(245,158,11,0.65)',
-                  fontFamily: 'monospace',
-                  whiteSpace: 'pre',
+                    l.type === 'input' ? '#ffffff'
+                    : l.type === 'error' ? '#ff5555'
+                    : '#aaaaaa',
                 }}
               >
                 {l.text}
@@ -214,9 +206,9 @@ export default function TerminalWindow() {
       </div>
 
       {/* Input row */}
-      <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 4 }}>
-        <span style={{ color: 'var(--os-amber-dim)', fontSize: 12, flexShrink: 0, fontFamily: 'monospace' }}>
-          shariq@sk_os:~$
+      <div style={{ display: 'flex', alignItems: 'center', marginTop: 4 }}>
+        <span style={{ color: '#55ff55', fontSize: 12, flexShrink: 0, whiteSpace: 'pre', fontFamily: "'Courier New', monospace" }}>
+          shariq@sk_os:~$&nbsp;
         </span>
         <input
           ref={inputRef}

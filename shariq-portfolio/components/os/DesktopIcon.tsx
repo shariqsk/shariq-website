@@ -34,7 +34,7 @@ export default function DesktopIcon({
 
 export function ProjectsAppIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" shapeRendering="crispEdges">
+    <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges">
       {/* Folder tab */}
       <rect x="1" y="9" width="11" height="4" fill="#c8960c" stroke="#000" strokeWidth="1"/>
       {/* Folder body */}
@@ -50,7 +50,7 @@ export function ProjectsAppIcon() {
 
 export function AboutAppIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" shapeRendering="crispEdges">
+    <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges">
       {/* Monitor bezel */}
       <rect x="2" y="3" width="28" height="22" fill="#c0c0c0" stroke="#000" strokeWidth="1"/>
       {/* Screen */}
@@ -69,7 +69,7 @@ export function AboutAppIcon() {
 
 export function ContactAppIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" shapeRendering="crispEdges">
+    <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges">
       {/* Envelope body */}
       <rect x="2" y="8" width="28" height="18" fill="#ffffff" stroke="#000" strokeWidth="1"/>
       {/* Envelope flap (V shape) */}
@@ -83,7 +83,7 @@ export function ContactAppIcon() {
 
 export function ResumeAppIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" shapeRendering="crispEdges">
+    <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges">
       {/* Page body */}
       <polygon points="5,2 23,2 27,6 27,30 5,30" fill="#ffffff" stroke="#000" strokeWidth="1"/>
       {/* Folded corner */}
@@ -99,7 +99,7 @@ export function ResumeAppIcon() {
 
 export function BlogAppIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" shapeRendering="crispEdges">
+    <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges">
       {/* Back page */}
       <rect x="8" y="4" width="18" height="24" fill="#dfdfdf" stroke="#000" strokeWidth="1"/>
       {/* Front page */}
@@ -116,7 +116,7 @@ export function BlogAppIcon() {
 
 export function TerminalAppIcon() {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" shapeRendering="crispEdges">
+    <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges">
       {/* Window chrome */}
       <rect x="1" y="2" width="30" height="28" fill="#000080" stroke="#000" strokeWidth="1"/>
       {/* Title bar */}
