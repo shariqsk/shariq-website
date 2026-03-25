@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { playType } from '@/lib/sounds';
 
 const BOOT_LINES = [
   'SK-OS  Version 4.00.950  A',
@@ -42,13 +43,6 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
   const filledBlocks = Math.floor(Math.min((visibleLines.length / BOOT_LINES.length) * TOTAL_BLOCKS, TOTAL_BLOCKS));
 
   useEffect(() => {
-    const hasBooted = sessionStorage.getItem('sk_os_booted');
-    if (hasBooted) {
-      setExiting(true);
-      onComplete();
-      return;
-    }
-
     const delays: number[] = BOOT_LINES.map((line) => {
       if (line === '') return 35;
       if (line.startsWith('  ')) return 50;
@@ -63,6 +57,7 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
       elapsed += delays[i];
       const t = setTimeout(() => {
         setVisibleLines((prev) => [...prev, line]);
+        if (line !== '') playType();
         if (i === BOOT_LINES.length - 1) {
           const done = setTimeout(() => {
             setExiting(true);

@@ -111,12 +111,14 @@ export default function RecruiterPage() {
             Back
           </Link>
           <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.1)', margin: '0 6px' }} />
-          <span className="r-nav-links" style={{ display: 'contents' }}>{['Experience', 'Projects', 'Skills', 'Education'].map(s => (
-            <a key={s} href={`#${s.toLowerCase()}`} style={{ fontSize: 14, color: '#64748b', textDecoration: 'none', padding: '8px 20px', borderRadius: 999, transition: 'color 0.12s, background 0.12s' }}
-              onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = '#64748b'; e.currentTarget.style.background = 'transparent'; }}
-            >{s}</a>
-          ))}</span>
+          <div className="r-nav-links" style={{ display: 'flex', gap: 2 }}>
+            {['Experience', 'Projects', 'Skills', 'Education'].map(s => (
+              <a key={s} href={`#${s.toLowerCase()}`} style={{ fontSize: 14, color: '#64748b', textDecoration: 'none', padding: '8px 20px', borderRadius: 999, transition: 'color 0.12s, background 0.12s' }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; }}
+                onMouseLeave={e => { e.currentTarget.style.color = '#64748b'; e.currentTarget.style.background = 'transparent'; }}
+              >{s}</a>
+            ))}
+          </div>
           <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.1)', margin: '0 6px' }} />
           <a href="https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view" target="_blank" rel="noopener noreferrer"
             style={{ fontSize: 14, color: '#fff', textDecoration: 'none', padding: '8px 24px', background: teal, borderRadius: 999, fontWeight: 600, transition: 'opacity 0.15s' }}

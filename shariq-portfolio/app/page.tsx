@@ -12,13 +12,7 @@ export default function Home() {
   const [showBoot, setShowBoot] = useState(false);
 
   useEffect(() => {
-    if (sessionStorage.getItem('sk_os_booted')) {
-      // Already seen boot — go straight to desktop
-      setBooted(true);
-    } else {
-      // First visit — show boot sequence
-      setShowBoot(true);
-    }
+    setShowBoot(true);
   }, []);
 
   const handleBootComplete = () => {
@@ -27,9 +21,9 @@ export default function Home() {
   };
 
   return (
-    <>
+    <div style={{ background: '#000', minHeight: '100vh' }}>
       {showBoot && <BootScreen onComplete={handleBootComplete} />}
       {booted   && <Desktop />}
-    </>
+    </div>
   );
 }

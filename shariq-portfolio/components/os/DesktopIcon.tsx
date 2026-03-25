@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { playClick } from '@/lib/sounds';
 
 interface DesktopIconProps {
   label: string;
@@ -23,7 +24,7 @@ export default function DesktopIcon({
   return (
     <div
       className={`os-icon ${selected ? 'os-icon--selected' : ''}`}
-      onClick={onOpen}
+      onClick={(e) => { playClick(); onOpen(e); }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       role="button"
