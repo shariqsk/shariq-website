@@ -67,7 +67,7 @@ export default function Taskbar({ windows, onWindowClick }: TaskbarProps) {
           <button
             key={w.id}
             className={`os-taskbar__win-btn ${w.isFocused && !w.isMinimized ? 'os-taskbar__win-btn--active' : ''}`}
-            onClick={() => onWindowClick(w.id)}
+            onClick={() => { playClick(); onWindowClick(w.id); }}
             title={w.title}
           >
             <TaskbarIcon id={w.id} />

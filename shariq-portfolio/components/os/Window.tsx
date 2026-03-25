@@ -200,7 +200,7 @@ export default function Window({
           <div style={{ display: 'flex', gap: 2, marginRight: 4 }}>
             <button className="os-title-btn" onClick={(e) => { e.stopPropagation(); playClick(); onClose(id); }} title="Close">×</button>
             <button className="os-title-btn" onClick={(e) => { e.stopPropagation(); playClick(); onMinimize(id); }} title="Minimize">─</button>
-            <button className="os-title-btn" title="Maximize">□</button>
+            <button className="os-title-btn" onClick={(e) => { e.stopPropagation(); playClick(); }} title="Maximize">□</button>
           </div>
           <span className="os-title-label">{title}</span>
         </div>

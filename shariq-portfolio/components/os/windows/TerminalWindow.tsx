@@ -4,8 +4,9 @@ import { useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { playType } from '@/lib/sounds';
 
 interface Line {
-  type: 'input' | 'output' | 'error' | 'blank';
+  type: 'input' | 'output' | 'error' | 'blank' | 'image';
   text: string;
+  src?: string;
 }
 
 const COMMANDS: Record<string, string[]> = {
@@ -21,6 +22,7 @@ const COMMANDS: Record<string, string[]> = {
     '  clear        — clear terminal',
     '  echo <text>  — echo text',
     '  uname        — system info',
+    '  meow         — meow',
     '  sudo rm -rf /— nice try',
   ],
   whoami: [
@@ -132,6 +134,13 @@ export default function TerminalWindow() {
       return;
     }
 
+    if (cmd === 'meow') {
+      newLines.push({ type: 'image', text: 'meow', src: '/meow.jpg' });
+      newLines.push({ type: 'blank', text: '' });
+      setLines((prev) => [...prev, ...newLines]);
+      return;
+    }
+
     if (cmd.startsWith('echo ')) {
       newLines.push({ type: 'output', text: cmd.slice(5) });
     } else if (COMMANDS[cmd]) {
@@ -185,6 +194,11 @@ export default function TerminalWindow() {
       <div style={{ flex: 1, overflowY: 'auto', lineHeight: 1.8 }}>
         {lines.map((l, i) => {
           if (l.type === 'blank') return <div key={i} style={{ height: '0.4em' }} />;
+          if (l.type === 'image') return (
+            <div key={i} style={{ margin: '6px 0' }}>
+              <img src={l.src} alt="meow" style={{ maxWidth: 180, maxHeight: 180, display: 'block', imageRendering: 'auto' }} />
+            </div>
+          );
           return (
             <div key={i} style={{ display: 'flex', gap: 8, whiteSpace: 'pre' }}>
               {l.type === 'input' && (

@@ -123,42 +123,47 @@ export function AboutAppIcon({ hovered }: { hovered: boolean }) {
 export function ContactAppIcon({ hovered }: { hovered: boolean }) {
   return (
     <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges" overflow="visible">
-      {/* Envelope body */}
-      <rect x="2" y="10" width="28" height="16" fill="#ffffff" stroke="#000" strokeWidth="1"/>
-      {/* Envelope bottom fold lines */}
-      <line x1="2" y1="26" x2="16" y2="18" stroke="#c0c0c0" strokeWidth="0.5"/>
-      <line x1="30" y1="26" x2="16" y2="18" stroke="#c0c0c0" strokeWidth="0.5"/>
-      {/*
-       * Flap: closed = V-shape pointing down (peak at y=20).
-       * Open = scaleY(-1) from y=10 → V-shape points up (peak at y=0).
-       * No rotateX needed — pure 2D transform.
-       */}
+      {/* 1. Open flap — fades in first (y=2..9, pointing up) */}
       <polygon
-        points="2,10 16,20 30,10"
-        fill={hovered ? '#f0f0f0' : '#e0e0e0'}
-        stroke="#000"
-        strokeWidth="1"
-        style={{
-          transformOrigin: '16px 10px',
-          transform: hovered ? 'scaleY(-1)' : 'scaleY(1)',
-          transition: 'transform 0.22s ease-out, fill 0.15s',
-        }}
+        points="2,9 16,2 30,9"
+        fill="#e8e8e8" stroke="#222" strokeWidth="1"
+        style={{ opacity: hovered ? 1 : 0, transition: 'opacity 0.18s' }}
       />
-      {/* Letter peeking out on hover */}
-      <rect
-        x="7" y="5" width="18" height="11"
-        fill="#ffffc0" stroke="#808080" strokeWidth="0.5"
-        style={{
-          opacity: hovered ? 1 : 0,
-          transform: hovered ? 'translateY(0px)' : 'translateY(8px)',
-          transition: 'opacity 0.15s 0.08s, transform 0.18s ease-out',
-        }}
+
+      {/* 2. Letter — CSS translateY slides it up from inside the envelope.
+              At translateY(9): sits at y=10..24, fully behind the face mask below.
+              At translateY(0): sits at y=1..15, with y=1..9 peeking above mask. */}
+      <g style={{
+        opacity: hovered ? 1 : 0,
+        transform: hovered ? 'translateY(0px)' : 'translateY(9px)',
+        transition: 'opacity 0.15s 0.16s, transform 0.25s 0.1s ease-out',
+      }}>
+        <rect x="8" y="1" width="16" height="14" fill="#ffffff" stroke="#aaa" strokeWidth="0.5"/>
+        <line x1="11" y1="4"  x2="21" y2="4"  stroke="#ccc" strokeWidth="0.8"/>
+        <line x1="11" y1="7"  x2="21" y2="7"  stroke="#ccc" strokeWidth="0.8"/>
+        <line x1="11" y1="10" x2="17" y2="10" stroke="#ccc" strokeWidth="0.8"/>
+      </g>
+
+      {/* 3. Envelope face mask — white rect covering y=9..26.
+              Drawn AFTER the letter so it hides any part of the letter still inside.
+              The letter is only visible above y=9 (the envelope opening). */}
+      <rect x="2" y="9" width="28" height="17" fill="#ffffff" stroke="none"/>
+
+      {/* 4. Closed flap — fades out on hover */}
+      <polygon
+        points="2,9 16,13 30,9"
+        fill="#c8c8c8" stroke="#222" strokeWidth="1"
+        style={{ opacity: hovered ? 0 : 1, transition: 'opacity 0.15s' }}
       />
-      {/* Letter lines */}
-      <line x1="10" y1="8"  x2="22" y2="8"  stroke="#aaa" strokeWidth="0.5"
-        style={{ opacity: hovered ? 1 : 0, transition: 'opacity 0.15s 0.12s' }}/>
-      <line x1="10" y1="11" x2="22" y2="11" stroke="#aaa" strokeWidth="0.5"
-        style={{ opacity: hovered ? 1 : 0, transition: 'opacity 0.15s 0.16s' }}/>
+
+      {/* 5. Bottom fold lines */}
+      <line x1="2" y1="26" x2="16" y2="19" stroke="#bbb" strokeWidth="0.6"/>
+      <line x1="30" y1="26" x2="16" y2="19" stroke="#bbb" strokeWidth="0.6"/>
+
+      {/* 6. Envelope outline — 3 sides */}
+      <line x1="2"  y1="9"  x2="2"  y2="26" stroke="#222" strokeWidth="1"/>
+      <line x1="2"  y1="26" x2="30" y2="26" stroke="#222" strokeWidth="1"/>
+      <line x1="30" y1="9"  x2="30" y2="26" stroke="#222" strokeWidth="1"/>
     </svg>
   );
 }
