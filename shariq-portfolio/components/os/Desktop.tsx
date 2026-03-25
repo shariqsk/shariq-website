@@ -56,18 +56,18 @@ const APP_DEFS: Record<string, AppDef> = {
 
 /* ── Desktop icon list ──────────────────────────────────────────────── */
 const ICONS = [
-  { id: 'projects', label: 'Projects',       icon: <ProjectsAppIcon />, action: 'open'  as const },
-  { id: 'about',    label: 'About Me',        icon: <AboutAppIcon />,    action: 'open'  as const },
-  { id: 'contact',  label: 'Contact',         icon: <ContactAppIcon />,  action: 'open'  as const },
-  { id: 'terminal', label: 'Command Prompt',  icon: <TerminalAppIcon />, action: 'open'  as const },
-  { id: 'resume',   label: 'Resume.pdf',      icon: <ResumeAppIcon />,   action: 'link'  as const,
+  { id: 'projects', label: 'Projects',       icon: ProjectsAppIcon, action: 'open'  as const },
+  { id: 'about',    label: 'About Me',        icon: AboutAppIcon,    action: 'open'  as const },
+  { id: 'contact',  label: 'Contact',         icon: ContactAppIcon,  action: 'open'  as const },
+  { id: 'terminal', label: 'Command Prompt',  icon: TerminalAppIcon, action: 'open'  as const },
+  { id: 'resume',   label: 'Resume.pdf',      icon: ResumeAppIcon,   action: 'link'  as const,
     href: 'https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view' },
-  { id: 'blog',     label: 'Blog',            icon: <BlogAppIcon />,     action: 'link'  as const,
+  { id: 'blog',     label: 'Blog',            icon: BlogAppIcon,     action: 'link'  as const,
     href: 'https://shariqsk.github.io/' },
 ];
 
 /* ── Window state ───────────────────────────────────────────────────── */
-interface WinState { id: string; zIndex: number; isMinimized: boolean; }
+interface WinState { id: string; zIndex: number; isMinimized: boolean; iconPos?: { x: number; y: number }; }
 let zCounter = 100;
 
 export default function Desktop() {
@@ -75,11 +75,11 @@ export default function Desktop() {
   const [focusedId, setFocusedId]       = useState<string | null>(null);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
 
-  const openWindow = useCallback((id: string) => {
+  const openWindow = useCallback((id: string, iconPos?: { x: number; y: number }) => {
     setOpenWindows((prev) => {
       const existing = prev.find((w) => w.id === id);
       if (existing) return prev.map((w) => w.id === id ? { ...w, isMinimized: false, zIndex: ++zCounter } : w);
-      return [...prev, { id, zIndex: ++zCounter, isMinimized: false }];
+      return [...prev, { id, zIndex: ++zCounter, isMinimized: false, iconPos }];
     });
     setFocusedId(id);
   }, []);
@@ -107,13 +107,22 @@ export default function Desktop() {
     else                        focusWindow(id);
   }, [openWindows, focusedId, openWindow, minimizeWindow, focusWindow]);
 
-  const handleIconClick = useCallback((icon: typeof ICONS[number]) => {
+  const handleIconClick = useCallback((icon: typeof ICONS[number], e: React.MouseEvent) => {
     setSelectedIcon(icon.id);
     if (icon.action === 'link' && 'href' in icon) {
       window.open(icon.href, '_blank', 'noopener,noreferrer');
     } else {
-      openWindow(icon.id);
+      // Capture icon center so the window animates from this position
+      const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+      const iconPos = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+      openWindow(icon.id, iconPos);
     }
+  }, [openWindow]);
+
+  const handleMenuClick = useCallback((id: string, e: React.MouseEvent) => {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    const iconPos = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    openWindow(id, iconPos);
   }, [openWindow]);
 
   const taskbarWindows: TaskbarWindow[] = openWindows.map((w) => ({
@@ -129,10 +138,10 @@ export default function Desktop() {
       {/* ── Menubar ─────────────────────────────────────────────────── */}
       <div className="os-menubar" onClick={(e) => e.stopPropagation()}>
         <span className="os-menubar__brand">sk_os</span>
-        <span className="os-menubar__item" onClick={() => openWindow('projects')}>Projects</span>
-        <span className="os-menubar__item" onClick={() => openWindow('about')}>About</span>
-        <span className="os-menubar__item" onClick={() => openWindow('contact')}>Contact</span>
-        <span className="os-menubar__item" onClick={() => openWindow('terminal')}>Terminal</span>
+        <span className="os-menubar__item" onClick={(e) => handleMenuClick('projects', e)}>Projects</span>
+        <span className="os-menubar__item" onClick={(e) => handleMenuClick('about', e)}>About</span>
+        <span className="os-menubar__item" onClick={(e) => handleMenuClick('contact', e)}>Contact</span>
+        <span className="os-menubar__item" onClick={(e) => handleMenuClick('terminal', e)}>Terminal</span>
         <span className="os-menubar__spacer" />
       </div>
 
@@ -154,8 +163,9 @@ export default function Desktop() {
             key={icon.id}
             label={icon.label}
             icon={icon.icon}
-            onOpen={() => handleIconClick(icon)}
+            onOpen={(e) => handleIconClick(icon, e)}
             selected={selectedIcon === icon.id}
+            isOpen={openWindows.some((w) => w.id === icon.id && !w.isMinimized)}
           />
         ))}
       </div>
@@ -171,6 +181,7 @@ export default function Desktop() {
               id={w.id}
               title={def.title}
               defaultSize={def.defaultSize}
+              iconPos={w.iconPos}
               onClose={closeWindow}
               onFocus={focusWindow}
               onMinimize={minimizeWindow}

@@ -213,8 +213,8 @@ html, body {
   user-select: none;
   border: 1px solid transparent;
 }
-.os-icon:hover { border-color: rgba(255,255,255,0.4); }
-.os-icon--selected { border: 1px dotted rgba(255,255,255,0.9); }
+.os-icon:hover { border-color: transparent; }
+.os-icon--selected { border-color: transparent; }
 
 .os-icon__glyph {
   width: 48px; height: 48px;
@@ -233,9 +233,7 @@ html, body {
   text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
 .os-icon--selected .os-icon__label {
-  background: var(--w95-selected);
-  color: #fff;
-  text-shadow: none;
+  text-shadow: 1px 1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
 }
 
 /* ─── Taskbar ─────────────────────────────────────────────────────────── */
@@ -390,6 +388,11 @@ html, body {
 }
 
 @keyframes blink-block {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes icon-blink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }
 }
