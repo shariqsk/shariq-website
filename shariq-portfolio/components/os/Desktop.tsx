@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
+import { playClick } from '@/lib/sounds';
 
 import Window from './Window';
 import Taskbar, { TaskbarWindow } from './Taskbar';
@@ -140,7 +141,7 @@ export default function Desktop() {
       {/* ── Menubar ─────────────────────────────────────────────────── */}
       <div className="os-menubar" onClick={(e) => e.stopPropagation()}>
         <span className="os-menubar__brand">sk_os</span>
-        <span className="os-menubar__item os-menubar__item--recruiter" onClick={() => router.push('/recruiter')}>For Recruiters</span>
+        <span className="os-menubar__item os-menubar__item--recruiter" onClick={() => { playClick(); router.push('/recruiter'); }}>For Recruiters</span>
         <span className="os-menubar__spacer" />
       </div>
 

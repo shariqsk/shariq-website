@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import { playType } from '@/lib/sounds';
 
 interface Line {
   type: 'input' | 'output' | 'error' | 'blank';
@@ -214,7 +215,7 @@ export default function TerminalWindow() {
           ref={inputRef}
           className="os-terminal-input"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => { if (e.target.value.length > input.length) playType(); setInput(e.target.value); }}
           onKeyDown={onKeyDown}
           autoFocus
           spellCheck={false}

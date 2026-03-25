@@ -2,6 +2,7 @@
 
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { playClick } from '@/lib/sounds';
 
 export interface WindowProps {
   id: string;
@@ -197,8 +198,8 @@ export default function Window({
           onMouseDown={onTitleMouseDown}
         >
           <div style={{ display: 'flex', gap: 2, marginRight: 4 }}>
-            <button className="os-title-btn" onClick={(e) => { e.stopPropagation(); onClose(id); }} title="Close">×</button>
-            <button className="os-title-btn" onClick={(e) => { e.stopPropagation(); onMinimize(id); }} title="Minimize">─</button>
+            <button className="os-title-btn" onClick={(e) => { e.stopPropagation(); playClick(); onClose(id); }} title="Close">×</button>
+            <button className="os-title-btn" onClick={(e) => { e.stopPropagation(); playClick(); onMinimize(id); }} title="Minimize">─</button>
             <button className="os-title-btn" title="Maximize">□</button>
           </div>
           <span className="os-title-label">{title}</span>

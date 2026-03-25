@@ -12,7 +12,7 @@ function getClick(): HTMLAudioElement {
 function getType(): HTMLAudioElement {
   if (!typeAudio) {
     typeAudio = new Audio('/keyboardclick.mp3');
-    typeAudio.volume = 0.5;
+    typeAudio.volume = 0.08;
   }
   return typeAudio;
 }

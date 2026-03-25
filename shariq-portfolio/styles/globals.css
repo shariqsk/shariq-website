@@ -285,6 +285,8 @@ html, body {
   color: #000;
   background: var(--w95-surface);
   -webkit-text-fill-color: #000;
+  user-select: none;
+  outline: none;
   background-clip: unset;
   -webkit-background-clip: unset;
   flex-shrink: 0;

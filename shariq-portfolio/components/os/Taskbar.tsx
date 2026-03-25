@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { playClick } from '@/lib/sounds';
 
 export interface TaskbarWindow {
   id: string;
@@ -49,7 +50,7 @@ function TaskbarIcon({ id }: { id: string }) {
 export default function Taskbar({ windows, onWindowClick }: TaskbarProps) {
   return (
     <div className="os-taskbar">
-      <span className="os-taskbar__brand">
+      <span className="os-taskbar__brand" onClick={playClick}>
         <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
           <rect x="0" y="0" width="6" height="6" fill="#ff0000"/>
           <rect x="8" y="0" width="6" height="6" fill="#00ff00"/>
