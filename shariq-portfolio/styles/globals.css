@@ -212,7 +212,10 @@ html, body {
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   border: 1px solid transparent;
+  outline: none;
 }
+.os-icon:focus { outline: none; }
+.os-icon:focus-visible { outline: none; }
 .os-icon:hover { border-color: transparent; }
 .os-icon--selected { border-color: transparent; }
 
