@@ -97,13 +97,13 @@ export default function RecruiterPage() {
       {/* ── Floating Nav ── */}
       <div style={{ position: 'fixed', top: 20, left: 0, right: 0, zIndex: 50, display: 'flex', justifyContent: 'center', pointerEvents: 'none' }}>
         <nav className="r-nav" style={{
-          pointerEvents: 'auto', display: 'flex', alignItems: 'center', gap: 2,
+          pointerEvents: 'auto', display: 'flex', alignItems: 'center', gap: 4,
           background: 'rgba(8,20,28,0.85)', backdropFilter: 'blur(24px)',
           border: '1px solid rgba(255,255,255,0.1)', borderRadius: 999,
-          padding: '7px 10px', minWidth: 560,
+          padding: '10px 14px', minWidth: 680,
           boxShadow: '0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05)',
         }}>
-          <Link href="/" style={{ color: '#64748b', textDecoration: 'none', fontSize: 12, display: 'flex', alignItems: 'center', gap: 5, padding: '6px 16px', borderRadius: 999, transition: 'color 0.12s, background 0.12s' }}
+          <Link href="/" style={{ color: '#64748b', textDecoration: 'none', fontSize: 14, display: 'flex', alignItems: 'center', gap: 6, padding: '8px 20px', borderRadius: 999, transition: 'color 0.12s, background 0.12s' }}
             onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; }}
             onMouseLeave={e => { e.currentTarget.style.color = '#64748b'; e.currentTarget.style.background = 'transparent'; }}
           >
@@ -112,14 +112,14 @@ export default function RecruiterPage() {
           </Link>
           <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.1)', margin: '0 6px' }} />
           <span className="r-nav-links" style={{ display: 'contents' }}>{['Experience', 'Projects', 'Skills', 'Education'].map(s => (
-            <a key={s} href={`#${s.toLowerCase()}`} style={{ fontSize: 12, color: '#64748b', textDecoration: 'none', padding: '6px 16px', borderRadius: 999, transition: 'color 0.12s, background 0.12s' }}
+            <a key={s} href={`#${s.toLowerCase()}`} style={{ fontSize: 14, color: '#64748b', textDecoration: 'none', padding: '8px 20px', borderRadius: 999, transition: 'color 0.12s, background 0.12s' }}
               onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.background = 'rgba(255,255,255,0.07)'; }}
               onMouseLeave={e => { e.currentTarget.style.color = '#64748b'; e.currentTarget.style.background = 'transparent'; }}
             >{s}</a>
           ))}</span>
           <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.1)', margin: '0 6px' }} />
           <a href="https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view" target="_blank" rel="noopener noreferrer"
-            style={{ fontSize: 12, color: '#fff', textDecoration: 'none', padding: '6px 20px', background: teal, borderRadius: 999, fontWeight: 600, transition: 'opacity 0.15s' }}
+            style={{ fontSize: 14, color: '#fff', textDecoration: 'none', padding: '8px 24px', background: teal, borderRadius: 999, fontWeight: 600, transition: 'opacity 0.15s' }}
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
           >Resume ↗</a>
