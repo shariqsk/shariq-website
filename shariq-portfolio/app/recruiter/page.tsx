@@ -94,37 +94,54 @@ const T = { primary: '#ffffff', secondary: '#e2e8f0', muted: '#94a3b8', dim: '#6
 export default function RecruiterPage() {
   return (
     <div style={{
-      position: 'fixed', inset: 0, overflowY: 'auto',
+      position: 'fixed', inset: 0, overflowY: 'auto', scrollBehavior: 'smooth',
       background: 'linear-gradient(160deg, #0f2027 0%, #203a43 40%, #2c5364 100%)',
       color: T.secondary,
       fontFamily: "'Segoe UI', system-ui, -apple-system, sans-serif",
       fontSize: 14, lineHeight: 1.6,
     }}>
 
-      {/* ── Nav ── */}
-      <nav style={{
-        position: 'sticky', top: 0, zIndex: 50,
-        background: 'rgba(15,32,39,0.85)', backdropFilter: 'blur(16px)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-        padding: '0 40px', height: 52,
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-      }}>
-        <Link href="/" style={{ color: T.muted, textDecoration: 'none', fontSize: 13, display: 'flex', alignItems: 'center', gap: 6, transition: 'color 0.15s' }}
-          onMouseEnter={e => (e.currentTarget.style.color = T.secondary)}
-          onMouseLeave={e => (e.currentTarget.style.color = T.muted)}
-        >
-          <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-            <path d="M8.5 1.5L3.5 6.5l5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Back to desktop
-        </Link>
-        <a href="https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view"
-          target="_blank" rel="noopener noreferrer"
-          style={{ fontSize: 12, color: '#fff', textDecoration: 'none', padding: '6px 16px', background: '#0d9488', borderRadius: 6, fontWeight: 600, letterSpacing: '0.02em', transition: 'background 0.15s' }}
-          onMouseEnter={e => (e.currentTarget.style.background = '#0f766e')}
-          onMouseLeave={e => (e.currentTarget.style.background = '#0d9488')}
-        >Resume PDF ↗</a>
-      </nav>
+      {/* ── Floating Nav ── */}
+      <div style={{ position: 'fixed', top: 20, left: 0, right: 0, zIndex: 50, display: 'flex', justifyContent: 'center', pointerEvents: 'none' }}>
+        <nav style={{
+          pointerEvents: 'auto',
+          display: 'flex', alignItems: 'center', gap: 2,
+          background: 'rgba(10,25,32,0.75)', backdropFilter: 'blur(20px)',
+          border: '1px solid rgba(255,255,255,0.1)',
+          borderRadius: 999, padding: '6px 8px',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 0 0.5px rgba(255,255,255,0.05)',
+        }}>
+          <Link href="/"
+            style={{ color: T.muted, textDecoration: 'none', fontSize: 12, display: 'flex', alignItems: 'center', gap: 5, padding: '5px 14px', borderRadius: 999, transition: 'color 0.12s, background 0.12s' }}
+            onMouseEnter={e => { e.currentTarget.style.color = T.primary; e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
+            onMouseLeave={e => { e.currentTarget.style.color = T.muted; e.currentTarget.style.background = 'transparent'; }}
+          >
+            <svg width="11" height="11" viewBox="0 0 13 13" fill="none">
+              <path d="M8.5 1.5L3.5 6.5l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            Back
+          </Link>
+
+          <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.12)', margin: '0 4px' }} />
+
+          {(['Experience', 'Projects', 'Skills', 'Education'] as const).map(s => (
+            <a key={s} href={`#${s.toLowerCase()}`}
+              style={{ fontSize: 12, color: T.muted, textDecoration: 'none', padding: '5px 14px', borderRadius: 999, transition: 'color 0.12s, background 0.12s' }}
+              onMouseEnter={e => { e.currentTarget.style.color = T.primary; e.currentTarget.style.background = 'rgba(255,255,255,0.08)'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = T.muted; e.currentTarget.style.background = 'transparent'; }}
+            >{s}</a>
+          ))}
+
+          <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.12)', margin: '0 4px' }} />
+
+          <a href="https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view"
+            target="_blank" rel="noopener noreferrer"
+            style={{ fontSize: 12, color: '#fff', textDecoration: 'none', padding: '5px 14px', background: '#0d9488', borderRadius: 999, fontWeight: 600, letterSpacing: '0.02em', transition: 'background 0.15s' }}
+            onMouseEnter={e => (e.currentTarget.style.background = '#0f766e')}
+            onMouseLeave={e => (e.currentTarget.style.background = '#0d9488')}
+          >Resume ↗</a>
+        </nav>
+      </div>
 
       {/* ── Hero ── */}
       <section style={{ maxWidth: 900, margin: '0 auto', padding: '80px 48px 0' }}>
@@ -164,7 +181,7 @@ export default function RecruiterPage() {
       </section>
 
       {/* ── Experience ── */}
-      <section style={{ maxWidth: 900, margin: '0 auto', padding: '0 48px 80px' }}>
+      <section id="experience" style={{ maxWidth: 900, margin: '0 auto', padding: '0 48px 80px' }}>
         <SectionLabel>Experience</SectionLabel>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           {EXPERIENCE.map(job => (
@@ -197,7 +214,7 @@ export default function RecruiterPage() {
       </section>
 
       {/* ── Projects ── */}
-      <section style={{ maxWidth: 900, margin: '0 auto', padding: '0 48px 80px' }}>
+      <section id="projects" style={{ maxWidth: 900, margin: '0 auto', padding: '0 48px 80px' }}>
         <SectionLabel>Projects</SectionLabel>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: 14 }}>
           {PROJECTS.map(p => (
@@ -226,7 +243,7 @@ export default function RecruiterPage() {
       </section>
 
       {/* ── Skills ── */}
-      <section style={{ maxWidth: 900, margin: '0 auto', padding: '0 48px 80px' }}>
+      <section id="skills" style={{ maxWidth: 900, margin: '0 auto', padding: '0 48px 80px' }}>
         <SectionLabel>Skills</SectionLabel>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {SKILLS.map(([cat, items]) => (
@@ -243,7 +260,7 @@ export default function RecruiterPage() {
       </section>
 
       {/* ── Education ── */}
-      <section style={{ maxWidth: 900, margin: '0 auto', padding: '0 48px 80px' }}>
+      <section id="education" style={{ maxWidth: 900, margin: '0 auto', padding: '0 48px 80px' }}>
         <SectionLabel>Education</SectionLabel>
         <div style={{ ...CARD, padding: '24px 28px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8, marginBottom: 8 }}>
