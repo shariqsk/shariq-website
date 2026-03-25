@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
 
 import Window from './Window';
@@ -71,6 +72,7 @@ interface WinState { id: string; zIndex: number; isMinimized: boolean; iconPos?:
 let zCounter = 100;
 
 export default function Desktop() {
+  const router = useRouter();
   const [openWindows, setOpenWindows]   = useState<WinState[]>([]);
   const [focusedId, setFocusedId]       = useState<string | null>(null);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
@@ -138,10 +140,7 @@ export default function Desktop() {
       {/* ── Menubar ─────────────────────────────────────────────────── */}
       <div className="os-menubar" onClick={(e) => e.stopPropagation()}>
         <span className="os-menubar__brand">sk_os</span>
-        <span className="os-menubar__item" onClick={(e) => handleMenuClick('projects', e)}>Projects</span>
-        <span className="os-menubar__item" onClick={(e) => handleMenuClick('about', e)}>About</span>
-        <span className="os-menubar__item" onClick={(e) => handleMenuClick('contact', e)}>Contact</span>
-        <span className="os-menubar__item" onClick={(e) => handleMenuClick('terminal', e)}>Terminal</span>
+        <span className="os-menubar__item os-menubar__item--recruiter" onClick={() => router.push('/recruiter')}>For Recruiters</span>
         <span className="os-menubar__spacer" />
       </div>
 

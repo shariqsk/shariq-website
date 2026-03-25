@@ -263,7 +263,7 @@ export function TerminalAppIcon({ hovered }: { hovered: boolean }) {
         height="8"
         fill={hovered ? '#55ff55' : '#c0c0c0'}
         style={{
-          animation: 'icon-blink 0.65s step-end infinite',
+          animation: hovered ? 'icon-blink 0.65s step-end infinite' : 'none',
           transition: 'fill 0.15s, x 0.1s',
         }}
       />

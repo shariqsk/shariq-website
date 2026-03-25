@@ -84,6 +84,14 @@ html, body {
   color: #fff;
 }
 
+.os-menubar__item--recruiter {
+  font-weight: 700;
+}
+.os-menubar__item--recruiter:hover {
+  background: #005050;
+  color: #fff;
+}
+
 .os-menubar__spacer { flex: 1; }
 
 .os-menubar__clock {
