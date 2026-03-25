@@ -26,7 +26,7 @@
 html, body {
   width: 100%; height: 100%;
   overflow: hidden;
-  background: var(--w95-desktop);
+  background: #000;
   color: var(--w95-text);
   font-family: 'Tahoma', 'MS Sans Serif', Arial, sans-serif;
   font-size: 12px;
