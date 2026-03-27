@@ -69,12 +69,12 @@ const COMMANDS: Record<string, string[]> = {
     '-----END PGP MESSAGE-----',
   ],
   skills: [
-    'Next.js / React     ████████████████░░░░  82%',
-    'TypeScript          █████████████████░░░  85%',
-    'Python / FastAPI    ████████████████░░░░  80%',
-    'Cybersecurity       ██████████████░░░░░░  72%',
-    'Docker / AWS        █████████████░░░░░░░  65%',
-    'Machine Learning    ████████████░░░░░░░░  60%',
+    'Next.js / React',
+    'TypeScript',
+    'Python / FastAPI',
+    'Cybersecurity',
+    'Docker / AWS',
+    'Machine Learning',
   ],
   projects: [
     'zocratic/      — Fight analytics platform   [Next.js, FastAPI, PyTorch]',
