@@ -10,7 +10,7 @@ const SKILLS: Record<string, string[]> = {
 
 const INFO_ROWS: [string, string][] = [
   ['Location',  'Toronto, Ontario, Canada'],
-  ['Education', 'BSc Cybersecurity, York University'],
+  ['Education', 'BSc Cybersecurity, York University (expected 2028)'],
   ['Currently', 'Import Analyst @ Farrow'],
   ['Email',     'contact@shariqsafdarkhan.com'],
 ];
@@ -36,8 +36,8 @@ export default function AboutWindow() {
         </div>
         <div>
           <div style={{ fontWeight: 700, fontSize: 13, marginBottom: 2 }}>Shariq Khan</div>
-          <div style={{ color: '#444', fontSize: 11 }}>Cybersecurity Student &amp; Full-Stack Developer</div>
-          <div style={{ fontSize: 10, color: '#808080', marginTop: 2 }}>Toronto · York University</div>
+          <div style={{ color: '#444', fontSize: 11 }}>Cybersecurity student (expected 2028) &amp; Full-Stack Developer</div>
+          <div style={{ fontSize: 10, color: '#808080', marginTop: 2 }}>Toronto · York University · expected 2028</div>
         </div>
       </div>
 
@@ -45,7 +45,7 @@ export default function AboutWindow() {
       <div className="w95-groupbox">
         <span className="w95-groupbox__label">About</span>
         <p style={{ fontSize: 11, lineHeight: 1.7, color: '#000' }}>
-          I&apos;m a 20-year-old Cybersecurity student at York University building secure,
+          I&apos;m a 20-year-old Cybersecurity student at York University (expected 2028) building secure,
           scalable applications with a security-first approach. I solve engineering
           challenges across the full stack, from real-time fight analytics to on-device
           computer vision, while keeping security baked in from the ground up.

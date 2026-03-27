@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Explore Shariq Khan\'s projects - Full-Stack Developer and Cybersecurity Student. View web applications, cybersecurity projects, and software development work.',
+  description: 'Explore Shariq Khan\'s projects — Full-Stack Developer and York University cybersecurity student (expected 2028). Web applications, security work, and software development.',
   keywords: [
     'Shariq Khan Projects',
     'Shariq Khan Portfolio',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     title: 'Projects',
-    description: 'Explore Shariq Khan\'s projects - Full-Stack Developer and Cybersecurity Student. View web applications, cybersecurity projects, and software development work.',
+    description: 'Explore Shariq Khan\'s projects — Full-Stack Developer and York University cybersecurity student (expected 2028). Web applications, security work, and software development.',
     url: 'https://shariqsafdarkhan.com/projects',
     type: 'website',
     images: [
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
         url: 'https://shariqsafdarkhan.com/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Shariq Khan Projects - Cybersecurity Student',
+        alt: 'Shariq Khan Projects — cybersecurity student (expected 2028)',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Projects',
-    description: 'Explore Shariq Khan\'s projects - Full-Stack Developer and Cybersecurity Student. View web applications, cybersecurity projects, and software development work.',
+    description: 'Explore Shariq Khan\'s projects — Full-Stack Developer and York University cybersecurity student (expected 2028). Web applications, security work, and software development.',
     images: ['https://shariqsafdarkhan.com/og-image.jpg'],
   },
   alternates: {

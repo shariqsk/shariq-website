@@ -144,7 +144,7 @@ export default function RecruiterPage() {
           </h1>
           <div style={{ height: 1, background: `linear-gradient(to right, ${teal}, rgba(45,212,191,0.3) 50%, transparent)`, marginBottom: 32, opacity: 0.6 }} />
           <p style={{ fontSize: 18, color: '#94a3b8', maxWidth: 520, lineHeight: 1.75, margin: '0 0 36px' }}>
-            Full-stack developer who ships. Cybersecurity student at York University building things with real users, not just side projects.
+            Full-stack developer who ships. Cybersecurity student at York University (expected 2028) building things with real users, not just side projects.
           </p>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             <a href="mailto:00khanshariq@gmail.com" style={{ fontSize: 13, color: '#fff', textDecoration: 'none', padding: '10px 22px', background: teal, borderRadius: 8, fontWeight: 600, transition: 'opacity 0.15s' }}
@@ -161,7 +161,7 @@ export default function RecruiterPage() {
         <div className="r-hero-right" style={{ padding: '130px 72px 80px 64px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 24 }}>
           {/* Stats row */}
           <div className="r-hero-stats" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            {[['3+', 'Years shipping'], ['100+', 'Active users'], ['4', 'Live projects'], ['2027', 'Graduating']].map(([n, l]) => (
+            {[['3+', 'Years shipping'], ['100+', 'Active users'], ['4', 'Live projects'], ['2028', 'Graduating']].map(([n, l]) => (
               <div key={l} style={{ background: G.bg, border: G.br, borderRadius: G.r, padding: '22px 24px' }}>
                 <div style={{ fontSize: 34, fontWeight: 800, color: '#fff', lineHeight: 1 }}>{n}</div>
                 <div style={{ fontSize: 12, color: '#475569', marginTop: 6 }}>{l}</div>
@@ -291,7 +291,7 @@ export default function RecruiterPage() {
           <div style={{ fontSize: 10, color: teal, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: 20 }}>Education</div>
           <div style={{ fontSize: 28, fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', marginBottom: 8 }}>York University</div>
           <div style={{ fontSize: 14, color: teal, marginBottom: 4 }}>Specialized Honours BSc</div>
-          <div style={{ fontSize: 13, color: '#475569', marginBottom: 20 }}>Cyber Security · Expected 2027 · Toronto</div>
+          <div style={{ fontSize: 13, color: '#475569', marginBottom: 20 }}>Cyber Security · Expected 2028 · Toronto</div>
           <p style={{ margin: 0, fontSize: 13, color: '#475569', lineHeight: 1.75 }}>Coursework: Advanced OOP, Discrete Mathematics, Computer Organization, Software Tools.</p>
         </div>
         <div className="r-cta-inner" style={{ background: 'rgba(45,212,191,0.04)', border: '1px solid rgba(45,212,191,0.15)', borderRadius: G.r, padding: '40px 52px', display: 'grid', gridTemplateColumns: '1fr auto', gap: 48, alignItems: 'center' }}>

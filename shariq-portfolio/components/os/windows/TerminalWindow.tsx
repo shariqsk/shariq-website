@@ -28,7 +28,7 @@ const COMMANDS: Record<string, string[]> = {
   whoami: [
     'shariq',
     'Shariq Khan — Cybersecurity Student & Full-Stack Developer',
-    'York University · Toronto, Canada',
+    'York University · Toronto, Canada · expected 2028',
   ],
   pwd: ['/home/shariq'],
   ls: [
@@ -48,7 +48,7 @@ const COMMANDS: Record<string, string[]> = {
     'lrwxrwxrwx  shariq  blog -> https://shariqsk.github.io',
   ],
   'cat bio.txt': [
-    "I'm a 20-year-old Cybersecurity student at York University.",
+    "I'm a 20-year-old Cybersecurity student at York University (expected 2028).",
     'Building secure, scalable applications with a security-first approach.',
     '',
     'Skills: Full-stack dev · System security · Defensive cybersecurity',
