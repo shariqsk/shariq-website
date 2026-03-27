@@ -116,7 +116,7 @@ export default function ContactWindow() {
       <div className="w95-groupbox">
         <span className="w95-groupbox__label">Resume</span>
         <a
-          href="https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view"
+          href="https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
           className="os-btn"

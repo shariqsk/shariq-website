@@ -63,7 +63,7 @@ const ICONS = [
   { id: 'contact',  label: 'Contact',         icon: ContactAppIcon,  action: 'open'  as const },
   { id: 'terminal', label: 'Command Prompt',  icon: TerminalAppIcon, action: 'open'  as const },
   { id: 'resume',   label: 'Resume.pdf',      icon: ResumeAppIcon,   action: 'link'  as const,
-    href: 'https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view' },
+    href: 'https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing' },
   { id: 'blog',     label: 'Blog',            icon: BlogAppIcon,     action: 'link'  as const,
     href: 'https://shariqsk.github.io/' },
 ];

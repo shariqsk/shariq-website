@@ -56,7 +56,7 @@ const COMMANDS: Record<string, string[]> = {
   ],
   'cat resume.pdf': [
     'Error: binary file — opening in browser...',
-    'https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view',
+    'https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing',
   ],
   'cat contact.gpg': [
     '-----BEGIN PGP MESSAGE-----',
