@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface Project {
   name: string;
@@ -105,13 +106,40 @@ function FileIcon({ isFolder }: { isFolder?: boolean }) {
 export default function ProjectsWindow() {
   const [selected, setSelected] = useState<Project>(PROJECTS[0]);
   const [imageFailed, setImageFailed] = useState(false);
+  const [isImageFullscreen, setIsImageFullscreen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setImageFailed(false);
+    setIsImageFullscreen(false);
   }, [selected.filename]);
 
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isImageFullscreen) {
+      document.body.style.overflow = '';
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setIsImageFullscreen(false);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [isImageFullscreen]);
+
   return (
-    <div style={{ display: 'flex', height: '100%', overflow: 'hidden', fontFamily: "'Tahoma', Arial, sans-serif", fontSize: 11 }}>
+    <>
+      <div style={{ display: 'flex', height: '100%', overflow: 'hidden', fontFamily: "'Tahoma', Arial, sans-serif", fontSize: 11 }}>
 
       {/* Left file list */}
       <div style={{
@@ -177,6 +205,10 @@ export default function ProjectsWindow() {
               maxWidth: 420,
               aspectRatio: '16 / 9',
               overflow: 'hidden',
+              cursor: selected.image && !imageFailed ? 'zoom-in' : 'default',
+            }}
+            onClick={() => {
+              if (selected.image && !imageFailed) setIsImageFullscreen(true);
             }}
           >
             {selected.image && !imageFailed ? (
@@ -204,6 +236,22 @@ export default function ProjectsWindow() {
               </div>
             )}
           </div>
+          {selected.image && !imageFailed && (
+            <div style={{ marginTop: 6, color: '#444', fontSize: 10, display: 'flex', alignItems: 'center', gap: 8 }}>
+              <span>Click image to preview</span>
+              <button
+                type="button"
+                className="os-btn"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  setIsImageFullscreen(true);
+                }}
+                style={{ fontSize: 10, padding: '1px 6px' }}
+              >
+                Open
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Stack */}
@@ -243,6 +291,138 @@ export default function ProjectsWindow() {
         )}
 
       </div>
-    </div>
+
+      </div>
+
+      {isClient && isImageFullscreen && selected.image && !imageFailed && createPortal((
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selected.name} image preview`}
+          onClick={() => setIsImageFullscreen(false)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 9999,
+            background: 'rgba(0, 0, 0, 0.7)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 20,
+          }}
+        >
+          <div
+            onClick={(event) => event.stopPropagation()}
+            style={{
+              width: 'min(960px, 96vw)',
+              height: 'min(760px, 92vh)',
+              background: '#c0c0c0',
+              border: '2px solid #000',
+              boxShadow: 'inset 1px 1px #fff, inset -1px -1px #808080',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div
+              style={{
+                background: '#000080',
+                color: '#fff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '3px 6px',
+                borderBottom: '1px solid #000',
+                fontWeight: 700,
+                fontSize: 11,
+              }}
+            >
+              <span>{selected.name} - Image Preview</span>
+              <button
+                type="button"
+                className="os-btn"
+                onClick={() => setIsImageFullscreen(false)}
+                style={{ minWidth: 18, padding: '0 4px', lineHeight: 1 }}
+                aria-label="Close image preview"
+              >
+                X
+              </button>
+            </div>
+
+            <div
+              style={{
+                padding: 10,
+                background: '#808080',
+                borderTop: '1px solid #fff',
+                borderLeft: '1px solid #fff',
+                borderRight: '1px solid #404040',
+                borderBottom: '1px solid #404040',
+                overflow: 'auto',
+                flex: 1,
+                minHeight: 0,
+              }}
+            >
+              <img
+                src={selected.image}
+                alt={`${selected.name} fullscreen preview`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                  background: '#111',
+                  border: '1px solid #000',
+                }}
+              />
+            </div>
+
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'flex-end',
+                gap: 8,
+                padding: '8px 10px',
+                borderTop: '1px solid #808080',
+              }}
+            >
+              {selected.live && (
+                <a
+                  href={selected.live}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="os-btn"
+                >
+                  Live Site
+                </a>
+              )}
+              {selected.repo && (
+                <a
+                  href={selected.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="os-btn"
+                >
+                  GitHub
+                </a>
+              )}
+              <a
+                href={selected.image}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="os-btn"
+              >
+                Open Image
+              </a>
+              <button
+                type="button"
+                className="os-btn"
+                onClick={() => setIsImageFullscreen(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      ), document.body)}
+    </>
   );
 }
