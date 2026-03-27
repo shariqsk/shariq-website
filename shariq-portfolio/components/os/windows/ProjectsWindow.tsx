@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 interface Project {
@@ -24,7 +25,7 @@ const PROJECTS: Project[] = [
     tags: ['Next.js', 'FastAPI', 'PyTorch', 'Supabase', 'AWS'],
     highlight: '20+ daily users',
     live: 'https://www.zocraticmma.com',
-    repo: 'https://github.com/shariqsk',
+    repo: null,
     image: '/Screenshot 2025-11-25 114637.png',
     isFolder: true,
   },
@@ -35,7 +36,7 @@ const PROJECTS: Project[] = [
     tags: ['Next.js', 'Framer Motion', 'Supabase', 'Vercel'],
     highlight: '50K+ impressions · 10K+ visitors',
     live: 'https://cdlsimulator.com',
-    repo: 'https://github.com/shariqsk/cdlsimulator',
+    repo: null,
     image: null,
     isFolder: true,
   },
@@ -108,6 +109,20 @@ export default function ProjectsWindow() {
   const [imageFailed, setImageFailed] = useState(false);
   const [isImageFullscreen, setIsImageFullscreen] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [previewPosition, setPreviewPosition] = useState({ x: 0, y: 0 });
+  const dragOffsetRef = useRef<{ x: number; y: number } | null>(null);
+
+  const openImagePreview = () => {
+    if (typeof window !== 'undefined') {
+      const width = Math.min(960, Math.floor(window.innerWidth * 0.96));
+      const height = Math.min(760, Math.floor(window.innerHeight * 0.92));
+      setPreviewPosition({
+        x: Math.max(10, Math.floor((window.innerWidth - width) / 2)),
+        y: Math.max(10, Math.floor((window.innerHeight - height) / 2)),
+      });
+    }
+    setIsImageFullscreen(true);
+  };
 
   useEffect(() => {
     setImageFailed(false);
@@ -130,10 +145,33 @@ export default function ProjectsWindow() {
       if (event.key === 'Escape') setIsImageFullscreen(false);
     };
 
+    const onMouseMove = (event: MouseEvent) => {
+      const dragOffset = dragOffsetRef.current;
+      if (!dragOffset) return;
+
+      const width = Math.min(960, Math.floor(window.innerWidth * 0.96));
+      const height = Math.min(760, Math.floor(window.innerHeight * 0.92));
+      const nextX = event.clientX - dragOffset.x;
+      const nextY = event.clientY - dragOffset.y;
+      setPreviewPosition({
+        x: Math.min(Math.max(0, nextX), Math.max(0, window.innerWidth - width)),
+        y: Math.min(Math.max(0, nextY), Math.max(0, window.innerHeight - height)),
+      });
+    };
+
+    const onMouseUp = () => {
+      dragOffsetRef.current = null;
+    };
+
     window.addEventListener('keydown', onKeyDown);
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onMouseUp);
     return () => {
       window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onMouseUp);
       document.body.style.overflow = '';
+      dragOffsetRef.current = null;
     };
   }, [isImageFullscreen]);
 
@@ -208,7 +246,7 @@ export default function ProjectsWindow() {
               cursor: selected.image && !imageFailed ? 'zoom-in' : 'default',
             }}
             onClick={() => {
-              if (selected.image && !imageFailed) setIsImageFullscreen(true);
+              if (selected.image && !imageFailed) openImagePreview();
             }}
           >
             {selected.image && !imageFailed ? (
@@ -244,7 +282,7 @@ export default function ProjectsWindow() {
                 className="os-btn"
                 onClick={(event) => {
                   event.stopPropagation();
-                  setIsImageFullscreen(true);
+                  openImagePreview();
                 }}
                 style={{ fontSize: 10, padding: '1px 6px' }}
               >
@@ -305,10 +343,6 @@ export default function ProjectsWindow() {
             inset: 0,
             zIndex: 9999,
             background: 'rgba(0, 0, 0, 0.7)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 20,
           }}
         >
           <div
@@ -316,6 +350,9 @@ export default function ProjectsWindow() {
             style={{
               width: 'min(960px, 96vw)',
               height: 'min(760px, 92vh)',
+              position: 'absolute',
+              left: previewPosition.x,
+              top: previewPosition.y,
               background: '#c0c0c0',
               border: '2px solid #000',
               boxShadow: 'inset 1px 1px #fff, inset -1px -1px #808080',
@@ -334,12 +371,21 @@ export default function ProjectsWindow() {
                 borderBottom: '1px solid #000',
                 fontWeight: 700,
                 fontSize: 11,
+                cursor: 'move',
+                userSelect: 'none',
+              }}
+              onMouseDown={(event) => {
+                dragOffsetRef.current = {
+                  x: event.clientX - previewPosition.x,
+                  y: event.clientY - previewPosition.y,
+                };
               }}
             >
               <span>{selected.name} - Image Preview</span>
               <button
                 type="button"
                 className="os-btn"
+                onMouseDown={(event) => event.stopPropagation()}
                 onClick={() => setIsImageFullscreen(false)}
                 style={{ minWidth: 18, padding: '0 4px', lineHeight: 1 }}
                 aria-label="Close image preview"
@@ -350,38 +396,15 @@ export default function ProjectsWindow() {
 
             <div
               style={{
-                padding: 10,
-                background: '#808080',
-                borderTop: '1px solid #fff',
-                borderLeft: '1px solid #fff',
-                borderRight: '1px solid #404040',
-                borderBottom: '1px solid #404040',
-                overflow: 'auto',
-                flex: 1,
-                minHeight: 0,
-              }}
-            >
-              <img
-                src={selected.image}
-                alt={`${selected.name} fullscreen preview`}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'contain',
-                  display: 'block',
-                  background: '#111',
-                  border: '1px solid #000',
-                }}
-              />
-            </div>
-
-            <div
-              style={{
                 display: 'flex',
                 justifyContent: 'flex-end',
                 gap: 8,
                 padding: '8px 10px',
-                borderTop: '1px solid #808080',
+                borderTop: '1px solid #fff',
+                borderLeft: '1px solid #fff',
+                borderRight: '1px solid #808080',
+                borderBottom: '1px solid #808080',
+                background: '#c0c0c0',
               }}
             >
               {selected.live && (
@@ -419,6 +442,33 @@ export default function ProjectsWindow() {
               >
                 Close
               </button>
+            </div>
+
+            <div
+              style={{
+                padding: 10,
+                background: '#808080',
+                borderTop: '1px solid #fff',
+                borderLeft: '1px solid #fff',
+                borderRight: '1px solid #404040',
+                borderBottom: '1px solid #404040',
+                overflow: 'auto',
+                flex: 1,
+                minHeight: 0,
+              }}
+            >
+              <img
+                src={selected.image}
+                alt={`${selected.name} fullscreen preview`}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain',
+                  display: 'block',
+                  background: '#111',
+                  border: '1px solid #000',
+                }}
+              />
             </div>
           </div>
         </div>
