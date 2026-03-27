@@ -10,7 +10,7 @@ const SKILLS: Record<string, string[]> = {
 
 const INFO_ROWS: [string, string][] = [
   ['Location',  'Toronto, Ontario, Canada'],
-  ['Education', 'BSc Cybersecurity — York University'],
+  ['Education', 'BSc Cybersecurity, York University'],
   ['Currently', 'Import Analyst @ Farrow'],
   ['Email',     'contact@shariqsafdarkhan.com'],
 ];
@@ -47,8 +47,8 @@ export default function AboutWindow() {
         <p style={{ fontSize: 11, lineHeight: 1.7, color: '#000' }}>
           I&apos;m a 20-year-old Cybersecurity student at York University building secure,
           scalable applications with a security-first approach. I solve engineering
-          challenges across the full stack — from real-time fight analytics to on-device
-          computer vision — while keeping security baked in from the ground up.
+          challenges across the full stack, from real-time fight analytics to on-device
+          computer vision, while keeping security baked in from the ground up.
         </p>
       </div>
 

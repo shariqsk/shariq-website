@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 interface Project {
   name: string;
@@ -10,6 +11,7 @@ interface Project {
   highlight: string | null;
   live: string | null;
   repo: string | null;
+  image: string | null;
   isFolder?: boolean;
 }
 
@@ -22,6 +24,7 @@ const PROJECTS: Project[] = [
     highlight: '20+ daily users',
     live: 'https://www.zocraticmma.com',
     repo: 'https://github.com/shariqsk',
+    image: '/Screenshot 2025-11-25 114637.png',
     isFolder: true,
   },
   {
@@ -32,6 +35,7 @@ const PROJECTS: Project[] = [
     highlight: '50K+ impressions · 10K+ visitors',
     live: 'https://cdlsimulator.com',
     repo: 'https://github.com/shariqsk/cdlsimulator',
+    image: null,
     isFolder: true,
   },
   {
@@ -42,6 +46,7 @@ const PROJECTS: Project[] = [
     highlight: 'Interactive security simulations',
     live: 'https://phintic.com',
     repo: null,
+    image: '/phintic.png',
     isFolder: true,
   },
   {
@@ -52,6 +57,7 @@ const PROJECTS: Project[] = [
     highlight: '<200ms response times',
     live: null,
     repo: null,
+    image: '/QOTD.png',
     isFolder: false,
   },
   {
@@ -62,6 +68,7 @@ const PROJECTS: Project[] = [
     highlight: 'Privacy-first on-device processing',
     live: null,
     repo: 'https://github.com/shariqsk/blink',
+    image: null,
     isFolder: false,
   },
   {
@@ -72,6 +79,7 @@ const PROJECTS: Project[] = [
     highlight: 'Real LaTeX compilation with live preview',
     live: null,
     repo: 'https://github.com/shariqsk/ResuSense',
+    image: '/ResuSense.png',
     isFolder: true,
   },
 ];
@@ -96,6 +104,11 @@ function FileIcon({ isFolder }: { isFolder?: boolean }) {
 
 export default function ProjectsWindow() {
   const [selected, setSelected] = useState<Project>(PROJECTS[0]);
+  const [imageFailed, setImageFailed] = useState(false);
+
+  useEffect(() => {
+    setImageFailed(false);
+  }, [selected.filename]);
 
   return (
     <div style={{ display: 'flex', height: '100%', overflow: 'hidden', fontFamily: "'Tahoma', Arial, sans-serif", fontSize: 11 }}>
@@ -150,6 +163,47 @@ export default function ProjectsWindow() {
         <div className="w95-groupbox">
           <span className="w95-groupbox__label">Description</span>
           <p style={{ fontSize: 11, lineHeight: 1.7, color: '#000' }}>{selected.description}</p>
+        </div>
+
+        {/* Image */}
+        <div className="w95-groupbox">
+          <span className="w95-groupbox__label">Image</span>
+          <div
+            style={{
+              background: '#000',
+              border: '1px solid #808080',
+              boxShadow: 'inset 1px 1px #404040, inset -1px -1px #fff',
+              width: '100%',
+              maxWidth: 420,
+              aspectRatio: '16 / 9',
+              overflow: 'hidden',
+            }}
+          >
+            {selected.image && !imageFailed ? (
+              <img
+                src={selected.image}
+                alt={`${selected.name} preview`}
+                style={{ width: '100%', height: '100%', objectFit: 'contain', display: 'block', background: '#111' }}
+                onError={() => setImageFailed(true)}
+              />
+            ) : (
+              <div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#c0c0c0',
+                  fontSize: 11,
+                  textAlign: 'center',
+                  padding: 10,
+                }}
+              >
+                No project image available
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Stack */}
