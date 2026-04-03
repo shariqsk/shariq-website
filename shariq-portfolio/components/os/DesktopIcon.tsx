@@ -239,8 +239,7 @@ export function BlogAppIcon({ hovered }: { hovered: boolean }) {
   );
 }
 
-export function TerminalAppIcon({ hovered }: { hovered: boolean }) {
-  return (
+export function TerminalAppIcon({ hovered }: { hovered: boolean }) {  return (
     <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges">
       {/* Window chrome (navy) */}
       <rect x="1" y="1" width="30" height="30" fill="#000080" stroke="#000" strokeWidth="1"/>
@@ -273,6 +272,72 @@ export function TerminalAppIcon({ hovered }: { hovered: boolean }) {
           transition: 'fill 0.15s, x 0.1s',
         }}
       />
+    </svg>
+  );
+}
+
+export function SpaceInvadersAppIcon({ hovered }: { hovered: boolean }) {
+  return (
+    <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges" overflow="visible">
+      {/* Space background */}
+      <rect x="0" y="0" width="32" height="32"
+        fill={hovered ? '#000811' : '#001122'}
+        style={{ transition: 'fill 0.18s' }}
+      />
+      {/* Stars */}
+      <rect x="4"  y="2"  width="1" height="1" fill="rgba(255,255,255,0.8)"/>
+      <rect x="14" y="5"  width="1" height="1" fill="rgba(255,255,255,0.6)"/>
+      <rect x="26" y="3"  width="1" height="1" fill="rgba(255,255,255,0.9)"/>
+      <rect x="8"  y="9"  width="1" height="1" fill="rgba(255,255,255,0.5)"/>
+      <rect x="28" y="10" width="1" height="1" fill="rgba(255,255,255,0.7)"/>
+
+      {/* Invader body — squid type */}
+      <rect x="11" y="6"  width="10" height="2" fill="#55ff55"/>
+      <rect x="9"  y="8"  width="14" height="2" fill="#55ff55"/>
+      <rect x="7"  y="10" width="18" height="2" fill="#55ff55"/>
+      <rect x="9"  y="12" width="14" height="2" fill="#55ff55"/>
+      {/* Eyes (dark holes) */}
+      <rect x="10" y="10" width="3"  height="2" fill="#000811"/>
+      <rect x="19" y="10" width="3"  height="2" fill="#000811"/>
+      {/* Legs — animate on hover */}
+      <rect x="8"  y="14" width="2" height="3"
+        style={{ transform: hovered ? 'translateY(1px)' : 'translateY(0)', transition: 'transform 0.15s step-end' }}
+        fill="#55ff55"
+      />
+      <rect x="13" y="14" width="2" height="3"
+        style={{ transform: hovered ? 'translateY(1px)' : 'translateY(0)', transition: 'transform 0.15s step-end 0.05s' }}
+        fill="#55ff55"
+      />
+      <rect x="17" y="14" width="2" height="3"
+        style={{ transform: hovered ? 'translateY(1px)' : 'translateY(0)', transition: 'transform 0.15s step-end 0.05s' }}
+        fill="#55ff55"
+      />
+      <rect x="22" y="14" width="2" height="3"
+        style={{ transform: hovered ? 'translateY(1px)' : 'translateY(0)', transition: 'transform 0.15s step-end' }}
+        fill="#55ff55"
+      />
+
+      {/* Player ship */}
+      <rect x="13" y="24" width="6"  height="2" fill="#00ff80"/>
+      <rect x="11" y="26" width="10" height="2" fill="#00ff80"/>
+      <rect x="9"  y="28" width="14" height="2" fill="#00ff80"/>
+      {/* Player cannon */}
+      <rect x="15" y="22" width="2"  height="2" fill="#00ff80"/>
+
+      {/* Bullet — glows on hover */}
+      <rect
+        x="15" y={hovered ? 18 : 21} width="2" height="4"
+        fill={hovered ? '#55ff55' : '#00ff80'}
+        style={{ transition: 'y 0.15s ease-out, fill 0.1s' }}
+      />
+
+      {/* Ground line */}
+      <rect x="0" y="30" width="32" height="1" fill="rgba(0,255,128,0.4)"/>
+
+      {/* Glow overlay on hover */}
+      {hovered && (
+        <rect x="0" y="0" width="32" height="32" fill="rgba(0,255,128,0.05)"/>
+      )}
     </svg>
   );
 }
