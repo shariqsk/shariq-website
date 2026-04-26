@@ -15,7 +15,6 @@ import DesktopIcon, {
   BlogAppIcon,
   TerminalAppIcon,
   MusicAppIcon,
-  SpaceInvadersAppIcon,
 } from './DesktopIcon';
 
 import AboutWindow    from './windows/AboutWindow';
@@ -23,7 +22,6 @@ import ProjectsWindow from './windows/ProjectsWindow';
 import ContactWindow  from './windows/ContactWindow';
 import TerminalWindow from './windows/TerminalWindow';
 import MusicWindow from './windows/MusicWindow';
-import SpaceInvadersWindow from './windows/SpaceInvadersWindow';
 
 /* ── App registry ───────────────────────────────────────────────────── */
 interface AppDef {
@@ -64,12 +62,6 @@ const APP_DEFS: Record<string, AppDef> = {
     content: <MusicWindow />,
     defaultSize: { width: 640, height: 460 },
   },
-  spaceinvaders: {
-    id: 'spaceinvaders',
-    title: 'Space Invaders',
-    content: <SpaceInvadersWindow />,
-    defaultSize: { width: 520, height: 560 },
-  },
 };
 
 /* ── Desktop icon list ──────────────────────────────────────────────── */
@@ -83,7 +75,6 @@ const ICONS = [
     href: 'https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing' },
   { id: 'blog',          label: 'Blog',            icon: BlogAppIcon,          action: 'link'  as const,
     href: 'https://shariqsk.github.io/' },
-  { id: 'spaceinvaders', label: 'Space Invaders',  icon: SpaceInvadersAppIcon, action: 'open'  as const },
 ];
 
 /* ── Window state ───────────────────────────────────────────────────── */
