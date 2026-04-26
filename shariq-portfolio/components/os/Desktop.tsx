@@ -14,6 +14,7 @@ import DesktopIcon, {
   ResumeAppIcon,
   BlogAppIcon,
   TerminalAppIcon,
+  MusicAppIcon,
   SpaceInvadersAppIcon,
 } from './DesktopIcon';
 
@@ -21,6 +22,7 @@ import AboutWindow    from './windows/AboutWindow';
 import ProjectsWindow from './windows/ProjectsWindow';
 import ContactWindow  from './windows/ContactWindow';
 import TerminalWindow from './windows/TerminalWindow';
+import MusicWindow from './windows/MusicWindow';
 import SpaceInvadersWindow from './windows/SpaceInvadersWindow';
 
 /* ── App registry ───────────────────────────────────────────────────── */
@@ -56,6 +58,12 @@ const APP_DEFS: Record<string, AppDef> = {
     content: <TerminalWindow />,
     defaultSize: { width: 560, height: 400 },
   },
+  music: {
+    id: 'music',
+    title: 'Music Player',
+    content: <MusicWindow />,
+    defaultSize: { width: 640, height: 460 },
+  },
   spaceinvaders: {
     id: 'spaceinvaders',
     title: 'Space Invaders',
@@ -70,6 +78,7 @@ const ICONS = [
   { id: 'about',         label: 'About Me',        icon: AboutAppIcon,         action: 'open'  as const },
   { id: 'contact',       label: 'Contact',         icon: ContactAppIcon,       action: 'open'  as const },
   { id: 'terminal',      label: 'Command Prompt',  icon: TerminalAppIcon,      action: 'open'  as const },
+  { id: 'music',         label: 'Music Player',    icon: MusicAppIcon,         action: 'open'  as const },
   { id: 'resume',        label: 'Resume.pdf',      icon: ResumeAppIcon,        action: 'link'  as const,
     href: 'https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing' },
   { id: 'blog',          label: 'Blog',            icon: BlogAppIcon,          action: 'link'  as const,

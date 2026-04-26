@@ -276,6 +276,31 @@ export function TerminalAppIcon({ hovered }: { hovered: boolean }) {  return (
   );
 }
 
+export function MusicAppIcon({ hovered }: { hovered: boolean }) {
+  return (
+    <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges" overflow="visible">
+      <rect x="1" y="1" width="30" height="30" fill="#c0c0c0" stroke="#000" strokeWidth="1" />
+      <rect x="3" y="3" width="26" height="26" fill="#1e293b" stroke="#0f172a" strokeWidth="1" />
+
+      <rect x="5" y="5" width="22" height="4" fill={hovered ? '#38bdf8' : '#7dd3fc'} opacity={0.95} />
+
+      <rect x="6" y="12" width="20" height="12" fill="#111827" stroke="#334155" strokeWidth="1" />
+      <rect x="8" y="14" width="16" height="8" fill="#0f172a" />
+
+      <circle cx="16" cy="18" r="5" fill="#0b1220" stroke={hovered ? '#22d3ee' : '#64748b'} strokeWidth="1" />
+      <circle cx="16" cy="18" r="2.2" fill={hovered ? '#67e8f9' : '#94a3b8'} />
+      <circle cx="16" cy="18" r="0.8" fill="#0f172a" />
+
+      <rect x="22" y="10" width="2" height="10" fill="#94a3b8" />
+      <rect x="22" y="10" width="6" height="2" fill={hovered ? '#22d3ee' : '#38bdf8'} />
+      <rect x="22" y="18" width="3" height="2" fill={hovered ? '#22d3ee' : '#38bdf8'} />
+
+      <rect x="3" y="27" width="26" height="1" fill="rgba(255,255,255,0.35)" />
+      {hovered && <rect x="3" y="3" width="26" height="26" fill="rgba(34,211,238,0.06)" />}
+    </svg>
+  );
+}
+
 export function SpaceInvadersAppIcon({ hovered }: { hovered: boolean }) {
   return (
     <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges" overflow="visible">
