@@ -280,23 +280,22 @@ export function MusicAppIcon({ hovered }: { hovered: boolean }) {
   return (
     <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="crispEdges" overflow="visible">
       <rect x="1" y="1" width="30" height="30" fill="#c0c0c0" stroke="#000" strokeWidth="1" />
-      <rect x="3" y="3" width="26" height="26" fill="#1e293b" stroke="#0f172a" strokeWidth="1" />
+      <rect x="3" y="3" width="26" height="26" fill="#0f172a" stroke="#020617" strokeWidth="1" />
 
-      <rect x="5" y="5" width="22" height="4" fill={hovered ? '#38bdf8' : '#7dd3fc'} opacity={0.95} />
+      <rect x="5" y="5" width="22" height="3" fill={hovered ? '#22d3ee' : '#38bdf8'} />
+      <rect x="5" y="8" width="22" height="1" fill="rgba(255,255,255,0.3)" />
 
-      <rect x="6" y="12" width="20" height="12" fill="#111827" stroke="#334155" strokeWidth="1" />
-      <rect x="8" y="14" width="16" height="8" fill="#0f172a" />
+      <rect x="8" y="12" width="2.4" height="10" fill={hovered ? '#a5f3fc' : '#bae6fd'} />
+      <rect x="10.1" y="12" width="8.4" height="2.2" fill={hovered ? '#a5f3fc' : '#bae6fd'} />
+      <rect x="16.5" y="12" width="2.4" height="8.6" fill={hovered ? '#a5f3fc' : '#bae6fd'} />
 
-      <circle cx="16" cy="18" r="5" fill="#0b1220" stroke={hovered ? '#22d3ee' : '#64748b'} strokeWidth="1" />
-      <circle cx="16" cy="18" r="2.2" fill={hovered ? '#67e8f9' : '#94a3b8'} />
-      <circle cx="16" cy="18" r="0.8" fill="#0f172a" />
+      <ellipse cx="8.8" cy="23.2" rx="3.2" ry="2.6" fill={hovered ? '#67e8f9' : '#93c5fd'} />
+      <ellipse cx="17.4" cy="21.6" rx="3.2" ry="2.6" fill={hovered ? '#67e8f9' : '#93c5fd'} />
 
-      <rect x="22" y="10" width="2" height="10" fill="#94a3b8" />
-      <rect x="22" y="10" width="6" height="2" fill={hovered ? '#22d3ee' : '#38bdf8'} />
-      <rect x="22" y="18" width="3" height="2" fill={hovered ? '#22d3ee' : '#38bdf8'} />
+      <rect x="21.8" y="13.2" width="1.8" height="9.8" fill="#64748b" />
+      <rect x="24.3" y="11.8" width="1.8" height="11.2" fill="#64748b" />
 
-      <rect x="3" y="27" width="26" height="1" fill="rgba(255,255,255,0.35)" />
-      {hovered && <rect x="3" y="3" width="26" height="26" fill="rgba(34,211,238,0.06)" />}
+      <rect x="3" y="27" width="26" height="1" fill="rgba(255,255,255,0.3)" />
     </svg>
   );
 }
