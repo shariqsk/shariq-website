@@ -19,7 +19,7 @@ export default function Footer() {
               <span className="text-white font-thin text-lg">Shariq Khan</span>
             </div>
             <p className="text-zinc-400 font-extralight text-sm leading-relaxed">
-              Cybersecurity student at York University (expected 2028) & Full-Stack Developer based in Toronto, Canada. Passionate about building secure, scalable applications.
+              Computer Security Student & Full-Stack Developer based in Toronto, Canada. Passionate about building secure, scalable applications.
             </p>
           </div>
 

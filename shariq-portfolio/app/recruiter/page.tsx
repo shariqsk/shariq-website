@@ -7,41 +7,53 @@ const EXPERIENCE = [
     company: 'Shake Shack',
     role: 'Freelance Full-Stack Developer',
     period: 'Dec 2025 – Feb 2026',
-    location: '',
+    location: 'Remote',
     stack: ['React Native', 'Spring Boot', 'AWS S3'],
     bullets: [
-      'Led requirements gathering with store operations managers to scope ReceiptGuard across the mobile client, Spring Boot API, and AWS S3.',
-      'Built a React Native app for iOS and Android capturing GPS-tagged, timestamped photo evidence at each order handoff from one shared codebase.',
-      'Designed a Java Spring Boot REST API storing immutable AWS S3 records for a tamper-evident chargeback trail across tens of thousands of daily orders.',
-      'Wrote 40+ JUnit tests covering data integrity, access control, and error handling; handed off the system with zero onboarding issues.',
+      'Built a React Native app replacing a paper-based receipt process, giving store staff a photo/scan trail for chargeback disputes.',
+      'Spring Boot API + AWS S3 to store and retrieve order metadata and photo evidence across high-traffic stores.',
+      'Reduced staff scan errors noticeably during peak hours.',
+    ],
+  },
+  {
+    company: 'Farrow',
+    role: 'Import Analyst',
+    period: 'Jun 2024 – Dec 2025',
+    location: 'Hybrid · Toronto',
+    stack: ['EDI', 'ACI', 'CADEX'],
+    bullets: [
+      '55-65 daily EDI releases for enterprise clients, maintaining 95%+ clearance rates.',
+      'Resolved customs holds within 24 hours without breaking client SLAs.',
     ],
   },
   {
     company: 'Saftech Designs',
-    role: 'Full-Stack Developer',
+    role: 'Web Developer',
     period: 'Jan 2023 – Apr 2024',
-    location: '',
-    stack: ['Next.js', 'Security Hardening', 'Performance'],
+    location: 'Remote',
+    stack: ['Next.js', 'JWT', 'Vercel'],
     bullets: [
-      'Cut page load from about 4 seconds to under 1 second through code splitting, lazy loading, image compression, and render-blocking script removal.',
-      'Audited 15+ API endpoints and hardened authentication, security headers, and rate limiting to reduce common web vulnerability exposure.',
-      'Rebuilt the platform in Next.js, migrating off a legacy CMS with security limitations that could no longer be patched effectively.',
+      'Rebuilt the platform in Next.js. TTFB and LCP both under 1s, 25% SEO gain from Core Web Vitals.',
+      'Hardened all endpoints: JWT auth, CSP, HSTS, rate limiting. Cleared OWASP Top 10.',
+      'Set up staging/prod pipeline on Vercel. Deployments became boring, which is the goal.',
     ],
   },
 ];
 
 const PROJECTS = [
-  { name: 'Zocratic MMA', tagline: 'UFC fight prediction platform', desc: 'Built and monetized a subscription platform end-to-end. Python ETL scraped and normalized stats for 4,000+ UFC fighters into PostgreSQL, and an XGBoost classifier now reaches 75% win-prediction accuracy with automated daily retraining.', stack: ['Next.js', 'FastAPI', 'PostgreSQL', 'XGBoost', 'AWS', 'Python'], href: 'https://zocraticmma.com', badge: '30+ users', accent: '#0d9488' },
-  { name: 'PostBridge', tagline: 'Social media scheduling desktop app', desc: 'Electron and React desktop app for drafting, scheduling, and publishing to X, Facebook, Instagram, and TikTok from one interface. Uses Playwright automation against real web UIs with per-account SQLite session isolation.', stack: ['Electron', 'React', 'TypeScript', 'SQLite', 'Playwright'], href: 'https://github.com/shariqsk/allinonesocials', badge: 'Windows + Mac', accent: '#7c3aed' },
-  { name: 'CDL Manager', tagline: 'Call of Duty League fantasy simulator', desc: 'Full-stack fantasy simulation platform based on real CDL rules. FastAPI backend handles match outcomes, standings, contracts, and roster logic for a React and TypeScript frontend with consistent multi-session state.', stack: ['React', 'TypeScript', 'FastAPI', 'Python'], href: 'https://cdlsimulator.com', badge: '10,000+ visitors', accent: '#b45309' },
+  { name: 'Zocratic MMA', tagline: 'Sports analytics SaaS', desc: 'XGBoost win-probability model (~65% accuracy) trained on scraped UFC data for 4,000+ fighters. Role-based premium access via AWS Cognito. 100+ active users.', stack: ['Next.js', 'FastAPI', 'PostgreSQL', 'XGBoost', 'AWS'], href: 'https://zocraticmma.com', badge: '100+ users', accent: '#0d9488' },
+  { name: 'Social Desk', tagline: 'Cross-platform social scheduler', desc: 'Electron desktop app posting to X, Facebook, Instagram, and TikTok. Per-account session isolation in SQLite.', stack: ['Electron', 'React', 'TypeScript', 'SQLite', 'Playwright'], href: 'https://github.com/shariqsk', badge: 'Desktop app', accent: '#7c3aed' },
+  { name: 'CDL Simulator', tagline: 'Esports management sim', desc: 'Full-stack sim with Elo ratings, salary caps, and playoff brackets. FastAPI engine, persistent React UI.', stack: ['React', 'TypeScript', 'FastAPI'], href: 'https://cdlsim.com', badge: '1,500+ visitors', accent: '#b45309' },
+  { name: 'Phintic', tagline: 'Computer Security education', desc: 'Interactive platform covering phishing, scamware, and account takeover with simulation drills and assessments.', stack: ['React', 'TypeScript'], href: 'https://github.com/shariqsk', badge: 'Open source', accent: '#dc2626' },
 ];
 
 const SKILLS: [string, string[]][] = [
-  ['Languages',  ['Python', 'Java', 'C', 'SQL', 'JavaScript', 'TypeScript', 'Bash', 'HTML', 'CSS']],
-  ['Frameworks & Tools', ['React', 'React Native', 'Next.js', 'Node.js', 'FastAPI', 'Spring Boot', 'Electron']],
-  ['Data / ML',  ['PostgreSQL', 'Supabase', 'SQLite', 'XGBoost', 'Pandas']],
-  ['Cloud / Infra', ['AWS (S3, Cognito)', 'Docker', 'GitHub Actions']],
-  ['Testing / Automation', ['Playwright', 'JUnit']],
+  ['Languages',  ['TypeScript', 'Python', 'JavaScript', 'Java', 'SQL', 'Bash', 'C']],
+  ['Frontend',   ['React', 'Next.js', 'React Native', 'Tailwind CSS', 'Electron']],
+  ['Backend',    ['FastAPI', 'Node.js', 'Express.js', 'Spring Boot']],
+  ['Data / ML',  ['PostgreSQL', 'Supabase', 'Redis', 'SQLite', 'XGBoost', 'Prisma']],
+  ['Infra',      ['AWS (S3, Cognito)', 'Docker', 'Vercel', 'Nginx', 'GitHub Actions']],
+  ['Security',   ['JWT', 'CSP / HSTS', 'OWASP Top 10', 'Rate Limiting', 'Playwright']],
 ];
 
 const teal = '#2dd4bf';
@@ -108,7 +120,7 @@ export default function RecruiterPage() {
             ))}
           </div>
           <div style={{ width: 1, height: 16, background: 'rgba(255,255,255,0.1)', margin: '0 6px' }} />
-          <a href="https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing" target="_blank" rel="noopener noreferrer"
+          <a href="https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view" target="_blank" rel="noopener noreferrer"
             style={{ fontSize: 14, color: '#fff', textDecoration: 'none', padding: '8px 24px', background: teal, borderRadius: 999, fontWeight: 600, transition: 'opacity 0.15s' }}
             onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')}
             onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
@@ -127,17 +139,18 @@ export default function RecruiterPage() {
           </span>
           <h1 style={{ fontSize: 'clamp(80px, 9vw, 130px)', fontWeight: 900, color: '#fff', lineHeight: 0.92, margin: '0 0 32px', letterSpacing: '-0.04em' }}>
             Shariq<br />
-            <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.3)', color: 'transparent' }}>Khan.</span>
+            <span style={{ WebkitTextStroke: '2px rgba(255,255,255,0.3)', color: 'transparent' }}>Safdar</span><br />
+            Khan.
           </h1>
           <div style={{ height: 1, background: `linear-gradient(to right, ${teal}, rgba(45,212,191,0.3) 50%, transparent)`, marginBottom: 32, opacity: 0.6 }} />
           <p style={{ fontSize: 18, color: '#94a3b8', maxWidth: 520, lineHeight: 1.75, margin: '0 0 36px' }}>
-            Full-stack developer and York University cybersecurity student building products with real usage, measurable performance gains, and production-level security discipline.
+            Full-stack developer who ships. Computer Security student at York University building things with real users, not just side projects.
           </p>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             <a href="mailto:00khanshariq@gmail.com" style={{ fontSize: 13, color: '#fff', textDecoration: 'none', padding: '10px 22px', background: teal, borderRadius: 8, fontWeight: 600, transition: 'opacity 0.15s' }}
               onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')} onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
             >Email me</a>
-            <a href="https://www.linkedin.com/in/shariq-khan-430754217/" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#94a3b8', textDecoration: 'none', padding: '10px 22px', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 8, transition: 'all 0.15s' }}
+            <a href="https://linkedin.com/in/shariq-khan" target="_blank" rel="noopener noreferrer" style={{ fontSize: 13, color: '#94a3b8', textDecoration: 'none', padding: '10px 22px', border: '1px solid rgba(255,255,255,0.18)', borderRadius: 8, transition: 'all 0.15s' }}
               onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.45)'; }}
               onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.18)'; }}
             >LinkedIn ↗</a>
@@ -148,7 +161,7 @@ export default function RecruiterPage() {
         <div className="r-hero-right" style={{ padding: '130px 72px 80px 64px', display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: 24 }}>
           {/* Stats row */}
           <div className="r-hero-stats" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            {[['3+', 'Years shipping'], ['30+', 'Paying users'], ['10k+', 'Project visitors'], ['2028', 'Graduating']].map(([n, l]) => (
+            {[['3+', 'Years shipping'], ['100+', 'Active users'], ['4', 'Live projects'], ['2027', 'Graduating']].map(([n, l]) => (
               <div key={l} style={{ background: G.bg, border: G.br, borderRadius: G.r, padding: '22px 24px' }}>
                 <div style={{ fontSize: 34, fontWeight: 800, color: '#fff', lineHeight: 1 }}>{n}</div>
                 <div style={{ fontSize: 12, color: '#475569', marginTop: 6 }}>{l}</div>
@@ -160,7 +173,7 @@ export default function RecruiterPage() {
           <div style={{ background: G.bg, border: G.br, borderRadius: G.r, padding: '24px' }}>
             <div style={{ fontSize: 10, color: teal, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: 14 }}>Tech I work with</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
-              {['Python', 'Java', 'TypeScript', 'React', 'Next.js', 'FastAPI', 'Spring Boot', 'AWS', 'PostgreSQL'].map(t => (
+              {['TypeScript', 'Python', 'React', 'Next.js', 'FastAPI', 'Node.js', 'PostgreSQL', 'AWS', 'Docker'].map(t => (
                 <span key={t} style={{ fontSize: 12, color: '#e2e8f0', background: 'rgba(255,255,255,0.07)', padding: '5px 12px', borderRadius: 6, border: '1px solid rgba(255,255,255,0.1)' }}>{t}</span>
               ))}
             </div>
@@ -171,7 +184,8 @@ export default function RecruiterPage() {
             {[
               { icon: '✉', label: '00khanshariq@gmail.com', href: 'mailto:00khanshariq@gmail.com' },
               { icon: '↗', label: 'github.com/shariqsk', href: 'https://github.com/shariqsk' },
-              { icon: '↗', label: 'linkedin.com/in/shariq-khan-430754217', href: 'https://www.linkedin.com/in/shariq-khan-430754217/' },
+              { icon: '↗', label: 'linkedin.com/in/shariq-khan', href: 'https://linkedin.com/in/shariq-khan' },
+              { icon: '☎', label: '(647) 303-6451', href: 'tel:6473036451' },
             ].map(({ icon, label, href }) => (
               <a key={href} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
                 style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: '#475569', textDecoration: 'none', transition: 'color 0.12s' }}
@@ -194,28 +208,28 @@ export default function RecruiterPage() {
             <div>
               <div style={{ fontSize: 20, fontWeight: 700, color: '#fff', marginBottom: 4 }}>{EXPERIENCE[0].company}</div>
               <div style={{ fontSize: 13, color: teal, marginBottom: 18, fontWeight: 500 }}>{EXPERIENCE[0].role}</div>
-              <div style={{ fontSize: 11, color: '#475569', marginBottom: EXPERIENCE[0].location ? 2 : 18 }}>{EXPERIENCE[0].period}</div>
-              {EXPERIENCE[0].location ? <div style={{ fontSize: 11, color: '#334155', marginBottom: 18 }}>{EXPERIENCE[0].location}</div> : null}
+              <div style={{ fontSize: 11, color: '#475569', marginBottom: 2 }}>{EXPERIENCE[0].period}</div>
+              <div style={{ fontSize: 11, color: '#334155', marginBottom: 18 }}>{EXPERIENCE[0].location}</div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5 }}>
                 {EXPERIENCE[0].stack.map(t => <span key={t} style={{ fontSize: 10, color: '#94a3b8', background: 'rgba(255,255,255,0.07)', padding: '2px 8px', borderRadius: 4, border: '1px solid rgba(255,255,255,0.1)' }}>{t}</span>)}
               </div>
             </div>
             {/* Bullets split across 2 columns */}
-            {[[EXPERIENCE[0].bullets[0], EXPERIENCE[0].bullets[1]], [EXPERIENCE[0].bullets[2], EXPERIENCE[0].bullets[3]]].map((group, gi) => (
+            {[[EXPERIENCE[0].bullets[0]], [EXPERIENCE[0].bullets[1], EXPERIENCE[0].bullets[2]]].map((group, gi) => (
               <ul key={gi} className="r-exp-main-bullets" style={{ margin: 0, padding: '0 0 0 16px', display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {group.map((b, i) => <li key={i} style={{ fontSize: 14, color: '#cbd5e1', lineHeight: 1.75 }}>{b}</li>)}
               </ul>
             ))}
           </div>
-          {/* Remaining jobs */}
-          <div className="r-exp-side" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 10 }}>
+          {/* Next two jobs: side by side */}
+          <div className="r-exp-side" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {EXPERIENCE.slice(1).map(job => (
               <div key={job.company} className="r-exp-side-card" style={{ background: G.bg, border: G.br, borderRadius: G.r, borderLeft: `2px solid rgba(45,212,191,0.3)`, padding: '28px 32px', display: 'grid', gridTemplateColumns: '180px 1fr', gap: 28 }}>
                 <div>
                   <div style={{ fontSize: 17, fontWeight: 700, color: '#fff', marginBottom: 3 }}>{job.company}</div>
                   <div style={{ fontSize: 12, color: teal, marginBottom: 14, fontWeight: 500 }}>{job.role}</div>
-                  <div style={{ fontSize: 11, color: '#475569', marginBottom: job.location ? 2 : 14 }}>{job.period}</div>
-                  {job.location ? <div style={{ fontSize: 11, color: '#334155', marginBottom: 14 }}>{job.location}</div> : null}
+                  <div style={{ fontSize: 11, color: '#475569', marginBottom: 2 }}>{job.period}</div>
+                  <div style={{ fontSize: 11, color: '#334155', marginBottom: 14 }}>{job.location}</div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
                     {job.stack.map(t => <span key={t} style={{ fontSize: 10, color: '#64748b', background: 'rgba(255,255,255,0.05)', padding: '2px 7px', borderRadius: 3, border: '1px solid rgba(255,255,255,0.08)' }}>{t}</span>)}
                   </div>
@@ -229,13 +243,18 @@ export default function RecruiterPage() {
         </div>
       </section>
 
-      {/* ══════ PROJECTS — 2fr 1fr responsive bento ══════ */}
+      {/* ══════ PROJECTS — 5fr 3fr 2fr bento ══════ */}
       <section id="projects" className="r-proj" style={{ padding: '0 72px 96px' }}>
         <SectionLabel>Projects</SectionLabel>
-        <div className="r-proj-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gridTemplateRows: '1fr 1fr', gap: 12, minHeight: 480 }}>
+        <div className="r-proj-grid" style={{ display: 'grid', gridTemplateColumns: '5fr 3fr 2fr', gridTemplateRows: '1fr 1fr', gap: 12, minHeight: 480 }}>
+          {/* Big: col1, both rows */}
           <Pcard p={PROJECTS[0]} style={{ gridColumn: '1', gridRow: '1 / 3' }} large />
+          {/* Medium: col2 row1 */}
           <Pcard p={PROJECTS[1]} style={{ gridColumn: '2', gridRow: '1' }} />
-          <Pcard p={PROJECTS[2]} style={{ gridColumn: '2', gridRow: '2' }} />
+          {/* Small: col3 row1 */}
+          <Pcard p={PROJECTS[2]} style={{ gridColumn: '3', gridRow: '1' }} />
+          {/* Wide bottom: col2+3 row2 */}
+          <Pcard p={PROJECTS[3]} style={{ gridColumn: '2 / 4', gridRow: '2' }} wide />
         </div>
       </section>
 
@@ -250,7 +269,7 @@ export default function RecruiterPage() {
             </div>
           </div>
           <div className="r-skills-front" style={{ background: G.bg, border: G.br, borderRadius: G.r, padding: '28px', gridColumn: '2 / 4' }}>
-            <div style={{ fontSize: 10, color: teal, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: 14 }}>Frameworks &amp; Tools</div>
+            <div style={{ fontSize: 10, color: teal, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: 14 }}>Frontend</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 7 }}>
               {SKILLS[1][1].map(item => <span key={item} style={{ fontSize: 13, color: '#e2e8f0', background: 'rgba(255,255,255,0.07)', padding: '7px 14px', borderRadius: 7, border: '1px solid rgba(255,255,255,0.1)' }}>{item}</span>)}
             </div>
@@ -272,8 +291,8 @@ export default function RecruiterPage() {
           <div style={{ fontSize: 10, color: teal, textTransform: 'uppercase', letterSpacing: '0.12em', fontWeight: 700, marginBottom: 20 }}>Education</div>
           <div style={{ fontSize: 28, fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', marginBottom: 8 }}>York University</div>
           <div style={{ fontSize: 14, color: teal, marginBottom: 4 }}>Specialized Honours BSc</div>
-          <div style={{ fontSize: 13, color: '#475569', marginBottom: 20 }}>Specialized Honours BSc in Cyber Security · Expected April 2028 · Toronto, ON</div>
-          <p style={{ margin: 0, fontSize: 13, color: '#475569', lineHeight: 1.75 }}>Relevant coursework: Advanced Object-Oriented Programming, Discrete Mathematics, Computer Organization, Software Tools.</p>
+          <div style={{ fontSize: 13, color: '#475569', marginBottom: 20 }}>Computer Security · Expected 2028 · Toronto</div>
+          <p style={{ margin: 0, fontSize: 13, color: '#475569', lineHeight: 1.75 }}>Coursework: Advanced OOP, Discrete Mathematics, Computer Organization, Software Tools.</p>
         </div>
         <div className="r-cta-inner" style={{ background: 'rgba(45,212,191,0.04)', border: '1px solid rgba(45,212,191,0.15)', borderRadius: G.r, padding: '40px 52px', display: 'grid', gridTemplateColumns: '1fr auto', gap: 48, alignItems: 'center' }}>
           <div>
@@ -285,7 +304,7 @@ export default function RecruiterPage() {
             <a href="mailto:00khanshariq@gmail.com" style={{ textAlign: 'center', fontSize: 14, fontWeight: 600, color: '#fff', textDecoration: 'none', padding: '14px 28px', background: teal, borderRadius: 10, transition: 'opacity 0.15s' }}
               onMouseEnter={e => (e.currentTarget.style.opacity = '0.8')} onMouseLeave={e => (e.currentTarget.style.opacity = '1')}
             >Email me</a>
-            <a href="https://www.linkedin.com/in/shariq-khan-430754217/" target="_blank" rel="noopener noreferrer" style={{ textAlign: 'center', fontSize: 14, fontWeight: 600, color: '#94a3b8', textDecoration: 'none', padding: '14px 28px', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 10, transition: 'all 0.15s' }}
+            <a href="https://linkedin.com/in/shariq-khan" target="_blank" rel="noopener noreferrer" style={{ textAlign: 'center', fontSize: 14, fontWeight: 600, color: '#94a3b8', textDecoration: 'none', padding: '14px 28px', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 10, transition: 'all 0.15s' }}
               onMouseEnter={e => { e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'; }}
               onMouseLeave={e => { e.currentTarget.style.color = '#94a3b8'; e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)'; }}
             >LinkedIn ↗</a>

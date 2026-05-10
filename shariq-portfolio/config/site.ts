@@ -2,7 +2,7 @@ export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
   name: "Shariq Khan",
-  description: "Shariq Khan - Cybersecurity student at York University (expected 2028) & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
+  description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
   url: "https://shariqsafdarkhan.com",
   ogImage: "https://shariqsafdarkhan.com/og-image.jpg",
   keywords: [ //
@@ -12,13 +12,13 @@ export const siteConfig = {
     "Shariq Khan Developer",
     "Shariq Khan Toronto",
     "Shariq Khan York University",
-    "Shariq Khan Cybersecurity",
+    "Shariq Khan Computer Security",
     "Shariq Khan Full Stack Developer",
     "Shariq Khan Software Engineer",
     "Shariq Khan Portfolio",
     "Shariq Khan Web Developer",
     "Shariq Khan Canada",
-    "Cybersecurity",
+    "Computer Security",
     "Full-Stack Developer",
     "Web Developer",
     "Software Engineer",
@@ -56,21 +56,21 @@ export const siteConfig = {
     locale: "en_US",
     url: "https://shariqsafdarkhan.com",
     title: "Shariq Khan",
-    description: "Shariq Khan - Cybersecurity student at York University (expected 2028) & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
+    description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
     siteName: "Shariq Khan Portfolio",
     images: [
       {
         url: "https://shariqsafdarkhan.com/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Shariq Khan | Full-Stack Developer & York University cybersecurity student (expected 2028)",
+        alt: "Shariq Khan | Full-Stack Developer & Computer Security Student",
       },
     ],
   },
       twitter: {
       card: "summary_large_image",
       title: "Shariq Khan",
-    description: "Shariq Khan - Cybersecurity student at York University (expected 2028) & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
+    description: "Shariq Khan - Computer Security Student at York University & Full-Stack Developer. Building secure, scalable applications. Based in Toronto, Canada.",
     images: ["https://shariqsafdarkhan.com/og-image.jpg"],
     creator: "@shariqsk",
   },
@@ -100,7 +100,7 @@ export const siteConfig = {
     },
     {
       label: "Resume",
-      href: "https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing",
+      href: "https://drive.google.com/file/d/1H5M6Sb37TZRIOJMfOq-Xcll-08tHYv5x/view?usp=sharing",
     },
     {
       label: "Contact",
@@ -122,7 +122,7 @@ export const siteConfig = {
     },
     {
       label: "Resume",
-      href: "https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing",
+      href: "https://drive.google.com/file/d/1H5M6Sb37TZRIOJMfOq-Xcll-08tHYv5x/view?usp=sharing",
     },
     {
       label: "Contact",
@@ -135,6 +135,6 @@ export const siteConfig = {
     email: "mailto:contact@shariqsafdarkhan.com",
     phone: "",
     blog: "https://shariqsk.github.io/",
-    resume: "https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing",
+    resume: "https://drive.google.com/file/d/1H5M6Sb37TZRIOJMfOq-Xcll-08tHYv5x/view?usp=sharing",
   },
 };

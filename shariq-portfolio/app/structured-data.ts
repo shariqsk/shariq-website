@@ -15,7 +15,7 @@ export const generateStructuredData = () => {
       siteConfig.links.linkedin,
       siteConfig.links.blog
     ],
-    "jobTitle": "Full-Stack Developer & Cybersecurity student at York University (expected 2028)",
+    "jobTitle": "Full-Stack Developer & Computer Security Student",
     "worksFor": {
       "@type": "Organization",
       "name": "York University",
@@ -27,7 +27,7 @@ export const generateStructuredData = () => {
       "url": "https://www.yorku.ca"
     },
     "knowsAbout": [
-      "Cybersecurity",
+      "Computer Security",
       "Full-Stack Development",
       "Web Development",
       "Software Engineering",
@@ -197,7 +197,7 @@ export const generateSiteNavigationStructuredData = () => {
         "position": 3,
         "name": "Projects",
         "url": `${siteConfig.url}/projects`,
-        "description": "Portfolio of full-stack development and cybersecurity projects"
+        "description": "Portfolio of full-stack development and computer security projects"
       },
       {
         "@type": "ListItem",

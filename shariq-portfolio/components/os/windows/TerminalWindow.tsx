@@ -27,8 +27,8 @@ const COMMANDS: Record<string, string[]> = {
   ],
   whoami: [
     'shariq',
-    'Shariq Khan — Cybersecurity Student & Full-Stack Developer',
-    'York University · Toronto, Canada · expected 2028',
+    'Shariq Khan — Computer Security Student & Full-Stack Developer',
+    'York University · Toronto, Canada',
   ],
   pwd: ['/home/shariq'],
   ls: [
@@ -48,7 +48,7 @@ const COMMANDS: Record<string, string[]> = {
     'lrwxrwxrwx  shariq  blog -> https://shariqsk.github.io',
   ],
   'cat bio.txt': [
-    "I'm a 20-year-old Cybersecurity student at York University (expected 2028).",
+    "I'm a 20-year-old Computer Security student at York University.",
     'Building secure, scalable applications with a security-first approach.',
     '',
     'Skills: Full-stack dev · System security · Defensive cybersecurity',
@@ -56,7 +56,7 @@ const COMMANDS: Record<string, string[]> = {
   ],
   'cat resume.pdf': [
     'Error: binary file — opening in browser...',
-    'https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing',
+    'https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view',
   ],
   'cat contact.gpg': [
     '-----BEGIN PGP MESSAGE-----',
@@ -69,12 +69,12 @@ const COMMANDS: Record<string, string[]> = {
     '-----END PGP MESSAGE-----',
   ],
   skills: [
-    'Next.js / React',
-    'TypeScript',
-    'Python / FastAPI',
-    'Cybersecurity',
-    'Docker / AWS',
-    'Machine Learning',
+    'Next.js / React     ████████████████░░░░  82%',
+    'TypeScript          █████████████████░░░  85%',
+    'Python / FastAPI    ████████████████░░░░  80%',
+    'Cybersecurity       ██████████████░░░░░░  72%',
+    'Docker / AWS        █████████████░░░░░░░  65%',
+    'Machine Learning    ████████████░░░░░░░░  60%',
   ],
   projects: [
     'zocratic/      — Fight analytics platform   [Next.js, FastAPI, PyTorch]',
