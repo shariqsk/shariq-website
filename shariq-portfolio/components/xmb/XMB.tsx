@@ -2,14 +2,9 @@
 
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import dynamic from 'next/dynamic';
 
-/* Games are code-split so the XMB itself stays light */
-const LightPainting = dynamic(() => import('./games/LightPainting'), { ssr: false });
-const KoiPond       = dynamic(() => import('./games/KoiPond'),       { ssr: false });
-const Spark         = dynamic(() => import('./games/Spark'),         { ssr: false });
-const Conductor     = dynamic(() => import('./games/Conductor'),     { ssr: false });
-
+/* Each game is its own route — /lightpaint, /koi, /spark, /conductor.
+ * Launching a game navigates there; the GameId doubles as the path. */
 type GameId = 'lightpaint' | 'koi' | 'spark' | 'conductor';
 
 /* ── Asset paths (RetroArch systematic XMB theme + PS3 system sounds) ─ */
@@ -553,7 +548,6 @@ export default function XMB() {
   const [bgmOn, setBgmOn] = useState(false);
   const [themeIdx, setThemeIdx] = useState(0);
   const [track, setTrack] = useState<Track | null>(null);
-  const [game, setGame] = useState<GameId | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { play, startBgm, stopBgm, toggleBgm } = useSound();
 
@@ -566,14 +560,8 @@ export default function XMB() {
     setThemeIdx,
     themeIdx,
     playTrack: (t) => { stopBgm(); setBgmOn(false); setTrack(t); },
-    launchGame: (id) => { stopBgm(); setGame(id); },
-  }), [themeIdx, stopBgm]);
-
-  /* leave a game — restore the ambient music if it was on */
-  const closeGame = useCallback(() => {
-    setGame(null);
-    if (bgmOn) startBgm();
-  }, [bgmOn, startBgm]);
+    launchGame: (id) => { stopBgm(); router.push(`/${id}`); },
+  }), [themeIdx, stopBgm, router]);
 
   const setItem = useCallback((c: number, v: number) => {
     setItemIdx((prev) => ({ ...prev, [c]: v }));
@@ -603,10 +591,26 @@ export default function XMB() {
 
   const handleStart = useCallback(() => {
     setStarted(true);
+    sessionStorage.setItem('xmb-started', '1');
     startBgm();
     setBgmOn(true);
     setTimeout(() => containerRef.current?.focus(), 0);
   }, [startBgm]);
+
+  /* Coming back from a game route: skip the splash and resume music/column */
+  useEffect(() => {
+    if (sessionStorage.getItem('xmb-started') === '1') {
+      setStarted(true);
+      startBgm();
+      setBgmOn(true);
+    }
+    const c = Number(sessionStorage.getItem('xmb-cat'));
+    if (Number.isInteger(c) && c >= 0 && c < CATEGORIES.length) setCatIdx(c);
+  }, [startBgm]);
+
+  useEffect(() => {
+    sessionStorage.setItem('xmb-cat', String(catIdx));
+  }, [catIdx]);
 
   const cycleTheme = useCallback(() => {
     setThemeIdx((i) => (i + 1) % THEMES.length);
@@ -631,11 +635,6 @@ export default function XMB() {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleStart(); }
         return;
       }
-      if (game) {
-        // a game is open — only Escape (return to XMB) is handled here
-        if (e.key === 'Escape') { e.preventDefault(); closeGame(); }
-        return;
-      }
       switch (e.key) {
         case 'ArrowLeft':  case 'a': case 'A': e.preventDefault(); moveHoriz(-1); break;
         case 'ArrowRight': case 'd': case 'D': e.preventDefault(); moveHoriz(1);  break;
@@ -649,7 +648,7 @@ export default function XMB() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [started, game, closeGame, moveHoriz, moveVert, activate, handleStart, play, toggleBgm, cycleTheme, router]);
+  }, [started, moveHoriz, moveVert, activate, handleStart, play, toggleBgm, cycleTheme, router]);
 
   /* Layout anchors */
   const CAT_TOP_PCT = 42; // category bar centre, % of viewport
@@ -941,16 +940,6 @@ export default function XMB() {
       <div className="xmb-hint">
         ↑ ↓ ← →  NAV    ⏎  SELECT    T  THEME    M  {bgmOn ? 'MUTE' : 'MUSIC'}    ESC  BACK
       </div>
-
-      {/* Launched game overlay */}
-      {game && (
-        <div style={{ position: 'fixed', inset: 0, zIndex: 100 }}>
-          {game === 'lightpaint' && <LightPainting onExit={closeGame} />}
-          {game === 'koi'        && <KoiPond       onExit={closeGame} />}
-          {game === 'spark'      && <Spark         onExit={closeGame} />}
-          {game === 'conductor'  && <Conductor     onExit={closeGame} />}
-        </div>
-      )}
     </div>
   );
 }
