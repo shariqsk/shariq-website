@@ -557,6 +557,8 @@ export default function XMB() {
   const [bgmOn, setBgmOn] = useState(false);
   const [themeIdx, setThemeIdx] = useState(0);
   const [track, setTrack] = useState<Track | null>(null);
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 720px)').matches);
   const containerRef = useRef<HTMLDivElement>(null);
   const { play, startBgm, stopBgm, toggleBgm } = useSound();
 
@@ -645,6 +647,15 @@ export default function XMB() {
       const img = new Image();
       img.src = `/xmb/previews/${id}.jpg`;
     });
+  }, []);
+
+  /* Track viewport size so the layout can adapt on phones */
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 720px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
   }, []);
 
   useEffect(() => {
@@ -782,6 +793,11 @@ export default function XMB() {
           transition: opacity 0.2s, background 0.2s;
         }
         .xmb-theme-pill:hover { opacity: 1; background: rgba(0,0,0,0.5); }
+        @media (max-width: 720px) {
+          .xmb-hint { display: none; }
+          .xmb-theme-pill { top: auto; bottom: 16px; }
+          .xmb-back { top: 12px; left: 12px; padding: 5px 10px; }
+        }
       `}</style>
 
       {/* Animated wave background */}
@@ -820,10 +836,10 @@ export default function XMB() {
           }}
         >
           <div style={{ fontSize: 28, fontWeight: 300, letterSpacing: 4, textShadow: '0 2px 8px rgba(0,0,0,0.9)' }}>
-            PRESS ENTER
+            {isMobile ? 'TAP TO START' : 'PRESS ENTER'}
           </div>
           <div style={{ marginTop: 12, fontSize: 12, opacity: 0.7, letterSpacing: 2 }}>
-            click anywhere to start (audio)
+            {isMobile ? 'tap anywhere to begin' : 'click anywhere to start (audio)'}
           </div>
         </button>
       )}
@@ -844,7 +860,7 @@ export default function XMB() {
         onClick={() => { cycleTheme(); play('ok'); }}
         onKeyDown={(e) => { if (e.key === 'Enter') { cycleTheme(); play('ok'); } }}
       >
-        {theme.label.toUpperCase()}  ·  T to cycle
+        {theme.label.toUpperCase()}{isMobile ? '  ·  tap' : '  ·  T to cycle'}
       </div>
       <Clock />
 
@@ -853,10 +869,12 @@ export default function XMB() {
         style={{
           position: 'absolute',
           top: `${CAT_TOP_PCT}%`,
-          left: '38%',
-          /* slide distance MUST equal category width (120) + gap (40) = 160,
-             otherwise the active category drifts off the 38% anchor */
-          transform: `translate(${-catIdx * 160}px, -50%)`,
+          /* slide distance MUST equal category width (120) + gap (40) = 160.
+             On phones the active category is centred (50% minus half a slot). */
+          left: isMobile ? '50%' : '38%',
+          transform: isMobile
+            ? `translate(calc(${-catIdx * 160}px - 60px), -50%)`
+            : `translate(${-catIdx * 160}px, -50%)`,
           transition: 'transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1)',
           display: 'flex',
           gap: 40,
@@ -888,8 +906,9 @@ export default function XMB() {
           position: 'absolute',
           top: `calc(${CAT_TOP_PCT}% + ${ITEMS_TOP_OFFSET}px)`,
           bottom: 90,
-          left: `calc(38% - 40px)`,
-          width: 480,
+          left: isMobile ? '50%' : 'calc(38% - 40px)',
+          transform: isMobile ? 'translateX(-50%)' : undefined,
+          width: isMobile ? 'min(440px, 94vw)' : 480,
           overflow: 'hidden',
           /* Soft top fade so items scrolling up disappear before reaching the category bar.
              Keep the fade short — active item sits at paddingTop and must stay fully opaque. */
@@ -931,9 +950,9 @@ export default function XMB() {
         </div>
       </div>
 
-      {/* Description / preview pane — height-clamped so it never collides
-          with the category bar on shorter viewports */}
-      {curItem?.body && (
+      {/* Description / preview pane — desktop only; no room for a side
+          panel on phones, the item label/sublabel carry the info there */}
+      {!isMobile && curItem?.body && (
         <div style={{
           position: 'absolute',
           top: 80,
