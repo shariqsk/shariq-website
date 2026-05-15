@@ -5,7 +5,7 @@ import type { NextRequest } from 'next/server';
  * root. Harmless until that subdomain + DNS is set up — the host never
  * matches on the normal domain, so nothing changes there. */
 export function middleware(req: NextRequest) {
-  const host = req.headers.get('host') ?? '';
+  const host = req.headers.get('x-forwarded-host') ?? req.headers.get('host') ?? '';
   if (host.startsWith('home.') && req.nextUrl.pathname === '/') {
     const url = req.nextUrl.clone();
     url.pathname = '/xmb';
