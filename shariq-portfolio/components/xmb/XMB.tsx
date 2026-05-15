@@ -360,40 +360,49 @@ function Wave({ theme }: { theme: Theme }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [hue, setHue] = useState(0);
 
-  /* Rainbow theme: continuously sweep hue-rotate over time */
+  /* Rainbow theme: sweep the tint colour through the spectrum. The wave
+     video is greyscale, so colour comes from the tint behind it — not a
+     hue-rotate on the video (which does nothing to greyscale). */
   useEffect(() => {
     if (!theme.rainbow) return;
     let raf = 0;
-    let start = performance.now();
+    const start = performance.now();
     const tick = (now: number) => {
-      const t = (now - start) / 1000;
-      setHue(Math.round(((t * 30) % 360))); // 12s per full cycle
+      setHue(((now - start) / 1000 * 36) % 360); // 10s per full cycle
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [theme.rainbow]);
 
-  /* Make sure autoplay actually plays (some browsers need a nudge) */
+  /* Nudge autoplay on the first interaction of any kind */
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     v.muted = true;
     v.playsInline = true;
-    const tryPlay = () => v.play().catch(() => {});
+    let done = false;
+    const tryPlay = () => {
+      if (done) return;
+      v.play().then(() => { done = true; }).catch(() => {});
+    };
     tryPlay();
-    document.addEventListener('click', tryPlay, { once: true });
-    return () => document.removeEventListener('click', tryPlay);
+    const evs = ['click', 'keydown', 'pointerdown', 'touchstart'];
+    evs.forEach((e) => document.addEventListener(e, tryPlay));
+    return () => evs.forEach((e) => document.removeEventListener(e, tryPlay));
   }, []);
 
-  const filter = theme.rainbow
-    ? `hue-rotate(${hue}deg) saturate(1.4)`
-    : theme.filter;
+  const tint = theme.rainbow ? `hsla(${hue}, 80%, 34%, 0.6)` : theme.bgTint;
+  const filter = theme.filter || 'none';
 
   return (
     <>
-      {/* Background tint behind the video for mood */}
-      <div style={{ position: 'absolute', inset: 0, background: theme.bgTint, transition: 'background 0.6s ease' }} />
+      {/* Background tint behind the video — themes (and the rainbow sweep) get
+          their colour from here, showing through the greyscale wave */}
+      <div style={{
+        position: 'absolute', inset: 0, background: tint,
+        transition: theme.rainbow ? 'none' : 'background 0.6s ease',
+      }} />
       <video
         ref={videoRef}
         src={WAVE_VIDEO}
