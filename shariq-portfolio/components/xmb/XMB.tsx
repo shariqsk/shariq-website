@@ -2,6 +2,15 @@
 
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
+
+/* Games are code-split so the XMB itself stays light */
+const LightPainting = dynamic(() => import('./games/LightPainting'), { ssr: false });
+const KoiPond       = dynamic(() => import('./games/KoiPond'),       { ssr: false });
+const Spark         = dynamic(() => import('./games/Spark'),         { ssr: false });
+const Conductor     = dynamic(() => import('./games/Conductor'),     { ssr: false });
+
+type GameId = 'lightpaint' | 'koi' | 'spark' | 'conductor';
 
 /* ── Asset paths (RetroArch systematic XMB theme + PS3 system sounds) ─ */
 const ICON_BASE = '/ps3-original/PS3%20Icons%20%2B%20Sounds/Icons/systematic/png';
@@ -45,6 +54,10 @@ type Item = {
   action?: (ctx: XmbContext) => void;
   body?: React.ReactNode;
   track?: Track;
+  /* CSS background shown behind the XMB while this item is highlighted —
+     a gradient now, swap for `url('/xmb/previews/<id>.jpg') center/cover`
+     once a real screenshot exists */
+  preview?: string;
 };
 
 type Category = {
@@ -58,6 +71,7 @@ interface XmbContext {
   setThemeIdx: (i: number) => void;
   themeIdx: number;
   playTrack: (t: Track) => void;
+  launchGame: (id: GameId) => void;
 }
 
 const VANSIRE: Track = {
@@ -221,15 +235,62 @@ const CATEGORIES: Category[] = [
     icon: `${ICON_BASE}/retroarch.png`,
     items: [
       {
-        id: 'easter',
-        label: '???',
-        sublabel: 'Press Enter',
-        icon: `${ICON_BASE}/menu_quickmenu.png`,
+        id: 'lightpaint',
+        label: 'Light Painting',
+        sublabel: 'Paint with glowing light',
+        icon: `${ICON_BASE}/image.png`,
+        preview: "url('/xmb/previews/lightpaint.jpg') center/cover no-repeat, radial-gradient(circle at 26% 32%, #ff2d95 0%, transparent 38%), radial-gradient(circle at 74% 60%, #2dd4ff 0%, transparent 42%), #000",
+        action: (ctx) => ctx.launchGame('lightpaint'),
         body: (
           <div>
-            <h2 style={{ fontSize: 26, fontWeight: 300, marginBottom: 8 }}>Konami time</h2>
-            <p>↑ ↑ ↓ ↓ ← → ← → B A</p>
-            <p style={{ opacity: 0.6 }}>(or just enjoy the wave)</p>
+            <h2 style={{ fontSize: 26, fontWeight: 300, marginBottom: 8 }}>Light Painting</h2>
+            <p>A black canvas and a brush of living light. Move slow to bloom, fast to streak.</p>
+            <p style={{ opacity: 0.7, marginTop: 6 }}>Save your piece as an image.</p>
+          </div>
+        ),
+      },
+      {
+        id: 'koi',
+        label: 'Koi Pond',
+        sublabel: 'A pond that swims on its own',
+        icon: `${ICON_BASE}/menu_overlay.png`,
+        preview: "url('/xmb/previews/koi.jpg') center/cover no-repeat, radial-gradient(ellipse at 50% 40%, #11514c 0%, #0a3a37 55%, #062523 100%)",
+        action: (ctx) => ctx.launchGame('koi'),
+        body: (
+          <div>
+            <h2 style={{ fontSize: 26, fontWeight: 300, marginBottom: 8 }}>Koi Pond</h2>
+            <p>Koi drift through still water on their own. Ripple the surface, scatter food, watch them chase it.</p>
+            <p style={{ opacity: 0.7, marginTop: 6 }}>No score. Just stillness.</p>
+          </div>
+        ),
+      },
+      {
+        id: 'spark',
+        label: 'Spark',
+        sublabel: 'Conversation cards',
+        icon: `${ICON_BASE}/menu_help.png`,
+        preview: "radial-gradient(ellipse at 50% 32%, #6d3bf5 0%, #b14be8 46%, #14121f 88%)",
+        action: (ctx) => ctx.launchGame('spark'),
+        body: (
+          <div>
+            <h2 style={{ fontSize: 26, fontWeight: 300, marginBottom: 8 }}>Spark</h2>
+            <p>A deck of prompts to break the ice — deep, playful, or unhinged.</p>
+            <p style={{ opacity: 0.7, marginTop: 6 }}>Flip a card, start a conversation.</p>
+          </div>
+        ),
+      },
+      {
+        id: 'conductor',
+        label: 'Conductor',
+        sublabel: 'Play music with your hands',
+        icon: `${ICON_BASE}/menu_record.png`,
+        preview: "url('/xmb/previews/conductor.png') center/cover no-repeat, radial-gradient(circle at 38% 44%, rgba(90,150,255,0.4) 0%, transparent 50%), radial-gradient(circle at 66% 56%, rgba(220,110,255,0.34) 0%, transparent 52%), #06060c",
+        action: (ctx) => ctx.launchGame('conductor'),
+        body: (
+          <div>
+            <h2 style={{ fontSize: 26, fontWeight: 300, marginBottom: 8 }}>Conductor</h2>
+            <p>Raise your hands to the camera and shape a live ambient soundscape — height picks the note, openness swells it.</p>
+            <p style={{ opacity: 0.7, marginTop: 6 }}>Needs camera access.</p>
           </div>
         ),
       },
@@ -492,6 +553,7 @@ export default function XMB() {
   const [bgmOn, setBgmOn] = useState(false);
   const [themeIdx, setThemeIdx] = useState(0);
   const [track, setTrack] = useState<Track | null>(null);
+  const [game, setGame] = useState<GameId | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const { play, startBgm, stopBgm, toggleBgm } = useSound();
 
@@ -504,6 +566,7 @@ export default function XMB() {
     setThemeIdx,
     themeIdx,
     playTrack: (t) => { stopBgm(); setBgmOn(false); setTrack(t); },
+    launchGame: (id) => setGame(id),
   }), [themeIdx, stopBgm]);
 
   const setItem = useCallback((c: number, v: number) => {
@@ -562,6 +625,11 @@ export default function XMB() {
         if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleStart(); }
         return;
       }
+      if (game) {
+        // a game is open — only Escape (return to XMB) is handled here
+        if (e.key === 'Escape') { e.preventDefault(); setGame(null); }
+        return;
+      }
       switch (e.key) {
         case 'ArrowLeft':  case 'a': case 'A': e.preventDefault(); moveHoriz(-1); break;
         case 'ArrowRight': case 'd': case 'D': e.preventDefault(); moveHoriz(1);  break;
@@ -575,7 +643,7 @@ export default function XMB() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [started, moveHoriz, moveVert, activate, handleStart, play, toggleBgm, cycleTheme, router]);
+  }, [started, game, moveHoriz, moveVert, activate, handleStart, play, toggleBgm, cycleTheme, router]);
 
   /* Layout anchors */
   const CAT_TOP_PCT = 42; // category bar centre, % of viewport
@@ -695,6 +763,26 @@ export default function XMB() {
 
       {/* Animated wave background */}
       <Wave theme={theme} />
+
+      {/* Game preview — when a Game-category item is highlighted its
+          artwork takes over the background, PS3-style */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
+          background: curItem?.preview ?? 'transparent',
+          opacity: curItem?.preview ? 1 : 0,
+          transition: 'opacity 0.45s ease',
+          pointerEvents: 'none',
+        }}
+      >
+        {/* left scrim so the menu text stays readable over artwork */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(100deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 38%, rgba(0,0,0,0.05) 70%)',
+        }} />
+      </div>
 
       {/* Splash to gain user gesture for audio */}
       {!started && (
@@ -847,6 +935,16 @@ export default function XMB() {
       <div className="xmb-hint">
         ↑ ↓ ← →  NAV    ⏎  SELECT    T  THEME    M  {bgmOn ? 'MUTE' : 'MUSIC'}    ESC  BACK
       </div>
+
+      {/* Launched game overlay */}
+      {game && (
+        <div style={{ position: 'fixed', inset: 0, zIndex: 100 }}>
+          {game === 'lightpaint' && <LightPainting onExit={() => setGame(null)} />}
+          {game === 'koi'        && <KoiPond       onExit={() => setGame(null)} />}
+          {game === 'spark'      && <Spark         onExit={() => setGame(null)} />}
+          {game === 'conductor'  && <Conductor     onExit={() => setGame(null)} />}
+        </div>
+      )}
     </div>
   );
 }

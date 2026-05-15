@@ -24,6 +24,7 @@
     "@heroui/switch": "2.2.22",
     "@heroui/system": "2.4.20",
     "@heroui/theme": "2.4.20",
+    "@mediapipe/tasks-vision": "^0.10.35",
     "@react-aria/ssr": "3.9.10",
     "@react-aria/visually-hidden": "3.8.26",
     "@tsparticles/engine": "^3.9.1",
