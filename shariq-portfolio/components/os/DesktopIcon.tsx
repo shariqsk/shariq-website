@@ -300,3 +300,28 @@ export function MusicAppIcon({ hovered }: { hovered: boolean }) {
   );
 }
 
+export function XmbAppIcon({ hovered }: { hovered: boolean }) {
+  return (
+    <svg width="48" height="48" viewBox="0 0 32 32" shapeRendering="geometricPrecision" overflow="visible">
+      <defs>
+        <linearGradient id="xmb-tile" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"  stopColor={hovered ? '#0a4a85' : '#062a4a'} />
+          <stop offset="100%" stopColor="#01101e" />
+        </linearGradient>
+      </defs>
+      <rect x="1" y="1" width="30" height="30" rx="3" fill="url(#xmb-tile)" stroke="#000" strokeWidth="1" />
+      <path d="M2 16 Q 7 12 12 16 T 22 16 T 32 16" fill="none"
+            stroke={hovered ? '#bff3ff' : '#7fdcff'} strokeWidth="0.9" opacity="0.95" />
+      <path d="M2 18 Q 7 14 12 18 T 22 18 T 32 18" fill="none"
+            stroke="#7fdcff" strokeWidth="0.6" opacity="0.5" />
+      <circle cx="9"  cy="16" r="1.2" fill="#fff" opacity="0.55" />
+      <circle cx="16" cy="16" r={hovered ? 2.2 : 1.8} fill="#fff" />
+      <circle cx="23" cy="16" r="1.2" fill="#fff" opacity="0.55" />
+      <rect x="14.8" y="19.5" width="2.4" height="2.4" fill="#fff" opacity="0.9" />
+      <rect x="14.8" y="23"   width="2.4" height="2.4" fill="#fff" opacity="0.55" />
+      <rect x="14.8" y="26.5" width="2.4" height="2.4" fill="#fff" opacity="0.3" />
+    </svg>
+  );
+}
+
+

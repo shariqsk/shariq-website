@@ -15,6 +15,7 @@ import DesktopIcon, {
   BlogAppIcon,
   TerminalAppIcon,
   MusicAppIcon,
+  XmbAppIcon,
 } from './DesktopIcon';
 
 import AboutWindow    from './windows/AboutWindow';
@@ -71,6 +72,8 @@ const ICONS = [
   { id: 'contact',       label: 'Contact',         icon: ContactAppIcon,       action: 'open'  as const },
   { id: 'terminal',      label: 'Command Prompt',  icon: TerminalAppIcon,      action: 'open'  as const },
   { id: 'music',         label: 'Music Player',    icon: MusicAppIcon,         action: 'open'  as const },
+  { id: 'xmb',           label: 'XMB',             icon: XmbAppIcon,           action: 'route' as const,
+    href: '/xmb' },
   { id: 'resume',        label: 'Resume.pdf',      icon: ResumeAppIcon,        action: 'link'  as const,
     href: 'https://drive.google.com/file/d/1OR1LvVnBO5A61yTYNxE0aM3IxmpCDv4g/view?usp=sharing' },
   { id: 'blog',          label: 'Blog',            icon: BlogAppIcon,          action: 'link'  as const,
@@ -123,6 +126,8 @@ export default function Desktop() {
     setSelectedIcon(icon.id);
     if (icon.action === 'link' && 'href' in icon) {
       window.open(icon.href, '_blank', 'noopener,noreferrer');
+    } else if (icon.action === 'route' && 'href' in icon) {
+      router.push(icon.href);
     } else {
       // Capture icon center so the window animates from this position
       const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
