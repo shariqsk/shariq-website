@@ -543,6 +543,19 @@ export default function XMB() {
     setThemeIdx((i) => (i + 1) % THEMES.length);
   }, []);
 
+  /* Restore the last-used theme on load */
+  useEffect(() => {
+    const saved = Number(localStorage.getItem('xmb-theme'));
+    if (Number.isInteger(saved) && saved >= 0 && saved < THEMES.length) {
+      setThemeIdx(saved);
+    }
+  }, []);
+
+  /* Persist theme choice */
+  useEffect(() => {
+    localStorage.setItem('xmb-theme', String(themeIdx));
+  }, [themeIdx]);
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!started) {
@@ -673,8 +686,11 @@ export default function XMB() {
           border: 1px solid rgba(255,255,255,0.18);
           border-radius: 999px;
           opacity: 0.85;
+          cursor: pointer;
           text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+          transition: opacity 0.2s, background 0.2s;
         }
+        .xmb-theme-pill:hover { opacity: 1; background: rgba(0,0,0,0.5); }
       `}</style>
 
       {/* Animated wave background */}
@@ -682,13 +698,14 @@ export default function XMB() {
 
       {/* Splash to gain user gesture for audio */}
       {!started && (
-        <div
+        <button
           onClick={handleStart}
           style={{
             position: 'absolute', inset: 0,
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             background: 'rgba(0,0,0,0.55)',
             cursor: 'pointer', flexDirection: 'column', zIndex: 20,
+            border: 'none', color: '#fff', font: 'inherit',
           }}
         >
           <div style={{ fontSize: 28, fontWeight: 300, letterSpacing: 4, textShadow: '0 2px 8px rgba(0,0,0,0.9)' }}>
@@ -697,13 +714,27 @@ export default function XMB() {
           <div style={{ marginTop: 12, fontSize: 12, opacity: 0.7, letterSpacing: 2 }}>
             click anywhere to start (audio)
           </div>
-        </div>
+        </button>
       )}
 
-      <div className="xmb-back" onClick={() => { play('cancel'); router.push('/'); }}>
+      <div
+        className="xmb-back"
+        role="button"
+        tabIndex={0}
+        onClick={() => { play('cancel'); router.push('/'); }}
+        onKeyDown={(e) => { if (e.key === 'Enter') { play('cancel'); router.push('/'); } }}
+      >
         ← BACK
       </div>
-      <div className="xmb-theme-pill">{theme.label.toUpperCase()}  ·  T to cycle</div>
+      <div
+        className="xmb-theme-pill"
+        role="button"
+        tabIndex={0}
+        onClick={() => { cycleTheme(); play('ok'); }}
+        onKeyDown={(e) => { if (e.key === 'Enter') { cycleTheme(); play('ok'); } }}
+      >
+        {theme.label.toUpperCase()}  ·  T to cycle
+      </div>
       <Clock />
 
       {/* Category bar */}
@@ -712,7 +743,9 @@ export default function XMB() {
           position: 'absolute',
           top: `${CAT_TOP_PCT}%`,
           left: '38%',
-          transform: `translate(${-catIdx * 150}px, -50%)`,
+          /* slide distance MUST equal category width (120) + gap (40) = 160,
+             otherwise the active category drifts off the 38% anchor */
+          transform: `translate(${-catIdx * 160}px, -50%)`,
           transition: 'transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1)',
           display: 'flex',
           gap: 40,
@@ -727,7 +760,12 @@ export default function XMB() {
             onClick={() => { if (i === catIdx) activate(); else { play(i > catIdx ? 'down' : 'up'); setCatIdx(i); } }}
             style={{ opacity: Math.max(0.25, 1 - Math.abs(i - catIdx) * 0.2) }}
           >
-            <img src={c.icon} alt={c.label} draggable={false} />
+            <img
+              src={c.icon}
+              alt={c.label}
+              draggable={false}
+              onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
+            />
             <div className="xmb-cat-label">{c.label}</div>
           </div>
         ))}
@@ -767,7 +805,12 @@ export default function XMB() {
               }}
               onDoubleClick={activate}
             >
-              <img src={it.icon} alt="" draggable={false} />
+              <img
+                src={it.icon}
+                alt=""
+                draggable={false}
+                onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
+              />
               <div className="xmb-item-text">
                 <div className="xmb-item-label">{it.label}</div>
                 {it.sublabel && <div className="xmb-item-sub">{it.sublabel}</div>}
@@ -777,13 +820,16 @@ export default function XMB() {
         </div>
       </div>
 
-      {/* Description / preview pane */}
+      {/* Description / preview pane — height-clamped so it never collides
+          with the category bar on shorter viewports */}
       {curItem?.body && (
         <div style={{
           position: 'absolute',
           top: 80,
           left: 32,
           maxWidth: 320,
+          maxHeight: `calc(${CAT_TOP_PCT}% - 150px)`,
+          overflow: 'hidden',
           fontSize: 14,
           lineHeight: 1.55,
           textShadow: '0 1px 3px rgba(0,0,0,0.85)',
