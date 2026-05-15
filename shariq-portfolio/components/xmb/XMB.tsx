@@ -742,14 +742,16 @@ export default function XMB() {
           left: `calc(38% - 40px)`,
           width: 480,
           overflow: 'hidden',
-          /* Soft top fade so items scrolling up disappear before reaching the category bar */
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0, rgba(0,0,0,0.4) 24px, #000 60px, #000 calc(100% - 30px), transparent 100%)',
-          maskImage:       'linear-gradient(to bottom, transparent 0, rgba(0,0,0,0.4) 24px, #000 60px, #000 calc(100% - 30px), transparent 100%)',
+          /* Soft top fade so items scrolling up disappear before reaching the category bar.
+             Keep the fade short — active item sits at paddingTop and must stay fully opaque. */
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 30px), transparent 100%)',
+          maskImage:       'linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 30px), transparent 100%)',
           zIndex: 4,
         }}
       >
         <div
           style={{
+            paddingTop: 24,
             transform: `translateY(${-curItemIdx * ITEM_GAP}px)`,
             transition: 'transform 0.3s cubic-bezier(0.22, 0.61, 0.36, 1)',
             display: 'flex', flexDirection: 'column', gap: 4,
