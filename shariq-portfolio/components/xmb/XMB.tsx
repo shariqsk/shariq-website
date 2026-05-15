@@ -8,65 +8,29 @@ const ICON_BASE = '/ps3-original/PS3%20Icons%20%2B%20Sounds/Icons/systematic/png
 const SND_BASE  = '/ps3-original/PS3%20Icons%20%2B%20Sounds/oggs';
 const FONT_URL  = '/ps3-original/PS3%20Icons%20%2B%20Sounds/Icons/systematic/font.ttf';
 
-/* ── Themes (color variations of the XMB wave) ───────────────────────── */
+/* Wave background — the original PS3 wave video. */
+const WAVE_VIDEO = '/ps3-original/ps3-wave.1920x1080.mp4';
+
+/* ── Themes ──────────────────────────────────────────────────────────
+ * Each theme just maps to a CSS filter applied to the wave video +
+ * a soft background tint behind it. Rainbow = continuous hue rotation.
+ * ─────────────────────────────────────────────────────────────────── */
 type Theme = {
   id: string;
   label: string;
-  bg: string;       // CSS background (gradient)
-  wave: string;     // primary wave colour
-  wave2: string;    // secondary wave colour
-  particle: string; // particle colour
+  bgTint: string;   // colour painted behind / over the video for vibe
+  filter: string;   // CSS filter applied to the wave video
+  rainbow?: boolean;
 };
 
 const THEMES: Theme[] = [
-  {
-    id: 'classic',
-    label: 'Classic',
-    bg: 'radial-gradient(ellipse at 30% 40%, #1a1a1a 0%, #050505 70%, #000 100%)',
-    wave: '#cfd8e6',
-    wave2: '#8fa0b8',
-    particle: '#ffffff',
-  },
-  {
-    id: 'aqua',
-    label: 'Aqua',
-    bg: 'radial-gradient(ellipse at 40% 50%, #053a6e 0%, #021830 60%, #00080f 100%)',
-    wave: '#9fe4ff',
-    wave2: '#4fb0e8',
-    particle: '#d8f4ff',
-  },
-  {
-    id: 'amethyst',
-    label: 'Amethyst',
-    bg: 'radial-gradient(ellipse at 35% 45%, #3b0a55 0%, #1a0322 60%, #060008 100%)',
-    wave: '#e6b3ff',
-    wave2: '#9a5acc',
-    particle: '#f5d8ff',
-  },
-  {
-    id: 'crimson',
-    label: 'Crimson',
-    bg: 'radial-gradient(ellipse at 35% 45%, #5a0815 0%, #220406 60%, #0a0002 100%)',
-    wave: '#ff9aa8',
-    wave2: '#d04060',
-    particle: '#ffd0d6',
-  },
-  {
-    id: 'verdant',
-    label: 'Verdant',
-    bg: 'radial-gradient(ellipse at 35% 45%, #053d20 0%, #021a0e 60%, #000805 100%)',
-    wave: '#9affc0',
-    wave2: '#3fc070',
-    particle: '#d8ffe6',
-  },
-  {
-    id: 'sunset',
-    label: 'Sunset',
-    bg: 'radial-gradient(ellipse at 35% 45%, #4a2200 0%, #1c0c00 60%, #080400 100%)',
-    wave: '#ffc77a',
-    wave2: '#e07a30',
-    particle: '#ffe6c0',
-  },
+  { id: 'classic',  label: 'Classic',  bgTint: 'rgba(0,0,0,0.35)',          filter: 'none' },
+  { id: 'aqua',     label: 'Aqua',     bgTint: 'rgba(0,30,60,0.45)',        filter: 'hue-rotate(200deg) saturate(1.4) brightness(0.95)' },
+  { id: 'amethyst', label: 'Amethyst', bgTint: 'rgba(40,0,60,0.45)',        filter: 'hue-rotate(280deg) saturate(1.6) brightness(0.95)' },
+  { id: 'crimson',  label: 'Crimson',  bgTint: 'rgba(70,0,15,0.45)',        filter: 'hue-rotate(330deg) saturate(1.8) brightness(0.9)' },
+  { id: 'verdant',  label: 'Verdant',  bgTint: 'rgba(0,40,15,0.45)',        filter: 'hue-rotate(90deg) saturate(1.6) brightness(0.95)' },
+  { id: 'sunset',   label: 'Sunset',   bgTint: 'rgba(60,25,0,0.45)',        filter: 'hue-rotate(30deg) saturate(1.7) brightness(1.0)' },
+  { id: 'rainbow',  label: 'Rainbow',  bgTint: 'rgba(0,0,0,0.35)',          filter: '', rainbow: true },
 ];
 
 /* ── Categories / items ──────────────────────────────────────────────── */
@@ -335,126 +299,65 @@ function useSound() {
   return { play, startBgm, stopBgm, toggleBgm };
 }
 
-/* ── Animated horizontal wave (canvas) ───────────────────────────────── */
+/* ── Wave background (video + per-theme CSS filter) ─────────────────── */
 function Wave({ theme }: { theme: Theme }) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [hue, setHue] = useState(0);
 
+  /* Rainbow theme: continuously sweep hue-rotate over time */
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
+    if (!theme.rainbow) return;
     let raf = 0;
-    let t = 0;
-
-    const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width  = Math.floor(window.innerWidth  * dpr);
-      canvas.height = Math.floor(window.innerHeight * dpr);
-      canvas.style.width  = '100vw';
-      canvas.style.height = '100vh';
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    let start = performance.now();
+    const tick = (now: number) => {
+      const t = (now - start) / 1000;
+      setHue(Math.round(((t * 30) % 360))); // 12s per full cycle
+      raf = requestAnimationFrame(tick);
     };
-    resize();
-    window.addEventListener('resize', resize);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [theme.rainbow]);
 
-    /* Hex → rgba helper */
-    const rgba = (hex: string, a: number) => {
-      const m = hex.replace('#', '');
-      const r = parseInt(m.slice(0, 2), 16);
-      const g = parseInt(m.slice(2, 4), 16);
-      const b = parseInt(m.slice(4, 6), 16);
-      return `rgba(${r},${g},${b},${a})`;
-    };
+  /* Make sure autoplay actually plays (some browsers need a nudge) */
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    v.playsInline = true;
+    const tryPlay = () => v.play().catch(() => {});
+    tryPlay();
+    document.addEventListener('click', tryPlay, { once: true });
+    return () => document.removeEventListener('click', tryPlay);
+  }, []);
 
-    /* Particles drifting along the wave */
-    const particles = Array.from({ length: 90 }).map(() => ({
-      x: Math.random(),
-      y: Math.random(),
-      vx: 0.0005 + Math.random() * 0.0012,
-      r: 0.6 + Math.random() * 1.8,
-      a: 0.2 + Math.random() * 0.6,
-      phase: Math.random() * Math.PI * 2,
-    }));
-
-    const draw = () => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      ctx.clearRect(0, 0, w, h);
-
-      /* Glow band that follows the wave centre */
-      const cy = h * 0.55;
-      const glow = ctx.createLinearGradient(0, cy - h * 0.3, 0, cy + h * 0.3);
-      glow.addColorStop(0, rgba(theme.wave, 0));
-      glow.addColorStop(0.5, rgba(theme.wave, 0.05));
-      glow.addColorStop(1, rgba(theme.wave, 0));
-      ctx.fillStyle = glow;
-      ctx.fillRect(0, 0, w, h);
-
-      /* Ribbon layers — wide translucent curves with varying amplitude/phase */
-      const layers = [
-        { amp: 90,  freq: 0.0018, phase: t * 0.6,  thick: 220, alpha: 0.13, color: theme.wave },
-        { amp: 70,  freq: 0.0024, phase: t * 0.8 + 1.2, thick: 170, alpha: 0.18, color: theme.wave2 },
-        { amp: 50,  freq: 0.0032, phase: t * 1.1 + 2.4, thick: 110, alpha: 0.20, color: theme.wave },
-        { amp: 35,  freq: 0.0042, phase: t * 1.4 + 0.6, thick: 60,  alpha: 0.30, color: theme.wave },
-        { amp: 25,  freq: 0.0055, phase: t * 1.7 + 3.1, thick: 22,  alpha: 0.55, color: '#ffffff' },
-      ];
-
-      for (const L of layers) {
-        ctx.beginPath();
-        for (let x = -20; x <= w + 20; x += 6) {
-          const y = cy
-            + Math.sin(x * L.freq + L.phase) * L.amp
-            + Math.cos(x * L.freq * 0.5 + L.phase * 0.7) * L.amp * 0.35;
-          if (x === -20) ctx.moveTo(x, y);
-          else ctx.lineTo(x, y);
-        }
-        ctx.lineWidth = L.thick;
-        ctx.strokeStyle = rgba(L.color, L.alpha);
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        // Soft glow via shadow
-        ctx.shadowColor = rgba(L.color, 0.6);
-        ctx.shadowBlur  = L.thick * 0.6;
-        ctx.stroke();
-      }
-      ctx.shadowBlur = 0;
-
-      /* Floating particles riding the wave */
-      for (const p of particles) {
-        p.x += p.vx;
-        if (p.x > 1.05) p.x = -0.05;
-        const px = p.x * w;
-        const py = cy
-          + Math.sin(px * 0.0032 + t * 1.1 + p.phase) * 60
-          + (p.y - 0.5) * h * 0.5;
-        const radius = p.r * 1.6;
-        const grad = ctx.createRadialGradient(px, py, 0, px, py, radius * 4);
-        grad.addColorStop(0, rgba(theme.particle, p.a));
-        grad.addColorStop(1, rgba(theme.particle, 0));
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(px, py, radius * 4, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      t += 0.012;
-      raf = requestAnimationFrame(draw);
-    };
-    raf = requestAnimationFrame(draw);
-
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', resize);
-    };
-  }, [theme]);
+  const filter = theme.rainbow
+    ? `hue-rotate(${hue}deg) saturate(1.4)`
+    : theme.filter;
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{ position: 'absolute', inset: 0, width: '100vw', height: '100vh', pointerEvents: 'none' }}
-    />
+    <>
+      {/* Background tint behind the video for mood */}
+      <div style={{ position: 'absolute', inset: 0, background: theme.bgTint, transition: 'background 0.6s ease' }} />
+      <video
+        ref={videoRef}
+        src={WAVE_VIDEO}
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          pointerEvents: 'none',
+          mixBlendMode: 'screen',
+          filter,
+          transition: theme.rainbow ? 'none' : 'filter 0.6s ease',
+        }}
+      />
+    </>
   );
 }
 
@@ -675,11 +578,10 @@ export default function XMB() {
         inset: 0,
         overflow: 'hidden',
         outline: 'none',
-        background: theme.bg,
+        background: '#000',
         color: '#fff',
         fontFamily: '"XMBFont", "Helvetica Neue", Helvetica, Arial, sans-serif',
         userSelect: 'none',
-        transition: 'background 0.7s ease',
       }}
     >
       <style>{`
