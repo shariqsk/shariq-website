@@ -3,17 +3,22 @@
 import { useRef, useEffect, useState } from 'react';
 import { GameBar } from './LightPainting';
 
-/* Conductor — webcam hand tracking that shapes a generative ambient
- * soundscape. Hand height picks the note, openness swells the volume,
- * left/right pans it. Two hands play two voices. Pure Web Audio, no
- * samples — every sound is synthesised live. */
+/* Conductor — webcam hand tracking that shapes a live ambient soundscape.
+ * A soft drone always plays; raise a hand and its height picks a note from
+ * a always-visible ladder, openness swells it, left/right pans it. Two
+ * hands play two voices. Every sound is synthesised — no samples. */
 
 const WASM = 'https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.35/wasm';
 const MODEL = 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task';
 
-/* C major pentatonic, low to high — always consonant, never a wrong note */
-const SCALE = [130.81, 164.81, 196.0, 220.0, 261.63, 329.63, 392.0, 440.0, 523.25, 659.25];
-const NOTE_NAMES = ['C', 'E', 'G', 'A', 'C', 'E', 'G', 'A', 'C', 'E'];
+/* C major pentatonic, low → high. Always consonant. */
+const SCALE = [261.63, 293.66, 329.63, 392.0, 440.0, 523.25, 587.33, 659.25];
+const NAMES = ['C', 'D', 'E', 'G', 'A', 'C', 'D', 'E'];
+const N = SCALE.length;
+
+/* the comfortable vertical band a hand actually reaches (fraction of frame) */
+const BAND_TOP = 0.16;
+const BAND_BOT = 0.86;
 
 type Pt = { x: number; y: number };
 type Status = 'loading' | 'ready' | 'error';
@@ -23,22 +28,23 @@ interface Voice {
   filter: BiquadFilterNode;
   pan: StereoPannerNode;
   gain: GainNode;
+  note: number;
 }
 
 function buildVoice(ctx: AudioContext, master: GainNode, send: GainNode): Voice {
   const filter = ctx.createBiquadFilter();
   filter.type = 'lowpass';
-  filter.frequency.value = 900;
-  filter.Q.value = 3;
+  filter.frequency.value = 1100;
+  filter.Q.value = 2;
   const pan = ctx.createStereoPanner();
   const gain = ctx.createGain();
   gain.gain.value = 0;
   const oscs: OscillatorNode[] = [];
-  for (const detune of [-6, 0, 7]) {
+  for (const detune of [-7, 0, 8]) {
     const o = ctx.createOscillator();
     o.type = 'triangle';
     o.detune.value = detune;
-    o.frequency.value = 220;
+    o.frequency.value = 330;
     o.connect(filter);
     o.start();
     oscs.push(o);
@@ -47,59 +53,82 @@ function buildVoice(ctx: AudioContext, master: GainNode, send: GainNode): Voice 
   pan.connect(gain);
   gain.connect(master);
   gain.connect(send);
-  return { oscs, filter, pan, gain };
+  return { oscs, filter, pan, gain, note: -1 };
 }
 
-/* a decaying-noise impulse response for the reverb */
 function makeImpulse(ctx: AudioContext, seconds: number, decay: number) {
-  const rate = ctx.sampleRate;
-  const len = rate * seconds;
-  const buf = ctx.createBuffer(2, len, rate);
+  const len = ctx.sampleRate * seconds;
+  const buf = ctx.createBuffer(2, len, ctx.sampleRate);
   for (let ch = 0; ch < 2; ch++) {
     const d = buf.getChannelData(ch);
-    for (let i = 0; i < len; i++) {
-      d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
-    }
+    for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
   }
   return buf;
 }
 
-function hueFor(noteIdx: number) {
-  return 200 + (noteIdx / (SCALE.length - 1)) * 140; // blue → magenta
-}
+const hueFor = (i: number) => 196 + (i / (N - 1)) * 150;
+const ladderY = (i: number, H: number) =>
+  (BAND_TOP + (1 - i / (N - 1)) * (BAND_BOT - BAND_TOP)) * H;
+
+type Bloom = { x: number; y: number; r: number; life: number; hue: number };
 
 export default function Conductor({ onExit }: { onExit: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [status, setStatus] = useState<Status>('loading');
   const [err, setErr] = useState('');
+  const [handsUp, setHandsUp] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     let raf = 0;
     let stream: MediaStream | null = null;
     let landmarker: { detectForVideo: (v: HTMLVideoElement, t: number) => {
-      landmarks?: Pt[][];
-      handedness?: { categoryName: string }[][];
+      landmarks?: Pt[][]; handedness?: { categoryName: string }[][];
     }; close?: () => void } | null = null;
     let audio: AudioContext | null = null;
 
     const trails: Record<string, Pt[]> = { Left: [], Right: [] };
+    const blooms: Bloom[] = [];
 
     (async () => {
       try {
-        // ── audio graph ──────────────────────────────────────────
+        // ── audio ────────────────────────────────────────────────
         audio = new AudioContext();
         await audio.resume();
         const master = audio.createGain();
-        master.gain.value = 0.55;
+        master.gain.value = 0.6;
         const reverb = audio.createConvolver();
-        reverb.buffer = makeImpulse(audio, 3.2, 2.4);
+        reverb.buffer = makeImpulse(audio, 3.4, 2.3);
         const send = audio.createGain();
-        send.gain.value = 0.45;
+        send.gain.value = 0.5;
         send.connect(reverb);
         reverb.connect(audio.destination);
         master.connect(audio.destination);
+
+        // soft always-on drone bed (root + fifth, two octaves down)
+        for (const f of [65.41, 98.0]) {
+          const o = audio.createOscillator();
+          o.type = 'sine';
+          o.frequency.value = f;
+          const lp = audio.createBiquadFilter();
+          lp.type = 'lowpass';
+          lp.frequency.value = 320;
+          const g = audio.createGain();
+          g.gain.value = 0.07;
+          o.connect(lp); lp.connect(g);
+          g.connect(master); g.connect(send);
+          o.start();
+          // gentle slow swell
+          const lfo = audio.createOscillator();
+          lfo.frequency.value = 0.07;
+          const lfoGain = audio.createGain();
+          lfoGain.gain.value = 0.025;
+          lfo.connect(lfoGain);
+          lfoGain.connect(g.gain);
+          lfo.start();
+        }
+
         const voices: Record<string, Voice> = {
           Left: buildVoice(audio, master, send),
           Right: buildVoice(audio, master, send),
@@ -124,6 +153,7 @@ export default function Conductor({ onExit }: { onExit: () => void }) {
         setStatus('ready');
 
         const active: Record<string, boolean> = { Left: false, Right: false };
+        let pulse = 0;
 
         const loop = () => {
           raf = requestAnimationFrame(loop);
@@ -139,24 +169,29 @@ export default function Conductor({ onExit }: { onExit: () => void }) {
           const W = canvas.width, H = canvas.height;
           ctx.clearRect(0, 0, W, H);
 
-          // scale guide lines
-          for (let i = 0; i < SCALE.length; i++) {
-            const y = H - (i / (SCALE.length - 1)) * H * 0.86 - H * 0.07;
-            ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.moveTo(0, y);
-            ctx.lineTo(W, y);
-            ctx.stroke();
-          }
-
           let result;
           try { result = landmarker.detectForVideo(v, performance.now()); }
           catch { return; }
           const hands = result.landmarks ?? [];
           const handed = result.handedness ?? [];
-
           const seen: Record<string, boolean> = { Left: false, Right: false };
+
+          // ── note ladder (left side, always visible) ─────────────
+          let totalGain = 0;
+          for (let i = 0; i < N; i++) {
+            const y = ladderY(i, H);
+            ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(70, y);
+            ctx.lineTo(W - 24, y);
+            ctx.stroke();
+            ctx.fillStyle = 'rgba(255,255,255,0.32)';
+            ctx.font = '600 17px "Helvetica Neue", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(NAMES[i], 40, y);
+          }
 
           for (let h = 0; h < hands.length; h++) {
             const lm = hands[h];
@@ -164,96 +199,139 @@ export default function Conductor({ onExit }: { onExit: () => void }) {
             seen[label] = true;
             const voice = voices[label];
 
-            // palm centre + size
-            const idx = [0, 5, 9, 13, 17];
+            // palm centre + hand size
+            const ji = [0, 5, 9, 13, 17];
             let px = 0, py = 0;
-            idx.forEach((i) => { px += lm[i].x; py += lm[i].y; });
-            px /= idx.length; py /= idx.length;
+            ji.forEach((i) => { px += lm[i].x; py += lm[i].y; });
+            px /= ji.length; py /= ji.length;
             const handSize = Math.hypot(lm[0].x - lm[9].x, lm[0].y - lm[9].y);
 
-            // continuous openness from how far the fingertips reach
-            const fingers: [number, number][] = [[8, 5], [12, 9], [16, 13], [20, 17]];
+            // continuous openness
             let ratio = 0;
-            fingers.forEach(([tip, mcp]) => {
-              const dTip = Math.hypot(lm[tip].x - px, lm[tip].y - py);
-              const dMcp = Math.hypot(lm[mcp].x - px, lm[mcp].y - py) || 0.001;
-              ratio += dTip / dMcp;
+            ([[8, 5], [12, 9], [16, 13], [20, 17]] as [number, number][]).forEach(([tip, mcp]) => {
+              const dT = Math.hypot(lm[tip].x - px, lm[tip].y - py);
+              const dM = Math.hypot(lm[mcp].x - px, lm[mcp].y - py) || 0.001;
+              ratio += dT / dM;
             });
             ratio /= 4;
-            const openness = Math.max(0, Math.min(1, (ratio - 1.15) / 0.95));
+            const openness = Math.max(0, Math.min(1, (ratio - 1.12) / 0.95));
 
-            // note from palm height
-            const noteIdx = Math.max(0, Math.min(SCALE.length - 1,
-              Math.round((1 - py) * (SCALE.length - 1))));
+            // note from the comfortable band (clamped — never off ladder)
+            const frac = Math.max(0, Math.min(1, (py - BAND_TOP) / (BAND_BOT - BAND_TOP)));
+            const noteIdx = Math.round((1 - frac) * (N - 1));
             const freq = SCALE[noteIdx];
             const t = audio.currentTime;
-            voice.oscs.forEach((o) => o.frequency.setTargetAtTime(freq, t, 0.12));
-            voice.gain.gain.setTargetAtTime(openness * 0.3, t, 0.18);
-            voice.filter.frequency.setTargetAtTime(500 + (1 - py) * 3600, t, 0.15);
-            voice.pan.pan.setTargetAtTime(((1 - px) - 0.5) * 1.4, t, 0.15);
+            voice.oscs.forEach((o) => o.frequency.setTargetAtTime(freq, t, 0.1));
+            const vg = 0.06 + openness * 0.26;
+            voice.gain.gain.setTargetAtTime(vg, t, 0.16);
+            voice.filter.frequency.setTargetAtTime(700 + (1 - frac) * 3200, t, 0.14);
+            const visX = 1 - px; // video is mirrored for display
+            voice.pan.pan.setTargetAtTime((visX - 0.5) * 1.4, t, 0.14);
             active[label] = true;
+            totalGain += vg;
 
-            // ── visuals ──────────────────────────────────────────
-            const cx = px * W, cy = py * H;
+            // note-change bloom
             const hue = hueFor(noteIdx);
-            const trail = trails[label];
-            trail.push({ x: cx, y: cy });
-            if (trail.length > 22) trail.shift();
+            if (voice.note !== noteIdx) {
+              voice.note = noteIdx;
+              blooms.push({ x: visX * W, y: ladderY(noteIdx, H), r: 10, life: 1, hue });
+            }
+
+            // ── visuals ───────────────────────────────────────────
+            const cx = visX * W;
+            const cy = Math.max(30, Math.min(H - 30, py * H));
+
+            // active ladder line + marker
+            const ly = ladderY(noteIdx, H);
+            ctx.strokeStyle = `hsla(${hue},90%,68%,${0.4 + openness * 0.5})`;
+            ctx.lineWidth = 2.5;
+            ctx.beginPath();
+            ctx.moveTo(70, ly);
+            ctx.lineTo(W - 24, ly);
+            ctx.stroke();
+            ctx.fillStyle = `hsl(${hue},95%,72%)`;
+            ctx.font = '700 19px "Helvetica Neue", Arial, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(NAMES[noteIdx], 40, ly);
 
             // trail
+            const trail = trails[label];
+            trail.push({ x: cx, y: cy });
+            if (trail.length > 20) trail.shift();
             ctx.lineCap = 'round';
             for (let i = 1; i < trail.length; i++) {
               const a = i / trail.length;
-              ctx.strokeStyle = `hsla(${hue},90%,68%,${a * 0.5})`;
-              ctx.lineWidth = a * 10;
+              ctx.strokeStyle = `hsla(${hue},90%,70%,${a * 0.45})`;
+              ctx.lineWidth = a * 9;
               ctx.beginPath();
               ctx.moveTo(trail[i - 1].x, trail[i - 1].y);
               ctx.lineTo(trail[i].x, trail[i].y);
               ctx.stroke();
             }
 
-            // active scale line
-            const ly = H - (noteIdx / (SCALE.length - 1)) * H * 0.86 - H * 0.07;
-            ctx.strokeStyle = `hsla(${hue},90%,70%,${0.25 + openness * 0.5})`;
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(0, ly);
-            ctx.lineTo(W, ly);
-            ctx.stroke();
-
+            // pulse rings sized by openness
+            const baseR = handSize * W * 0.9;
+            for (let ring = 0; ring < 3; ring++) {
+              const rr = baseR * (1 + ring * 0.55) * (0.6 + openness);
+              ctx.strokeStyle = `hsla(${hue},90%,72%,${(0.32 - ring * 0.09) * (0.4 + openness)})`;
+              ctx.lineWidth = 2;
+              ctx.beginPath();
+              ctx.arc(cx, cy, rr, 0, Math.PI * 2);
+              ctx.stroke();
+            }
             // orb
-            const r = handSize * W * (0.7 + openness * 1.4);
+            const r = baseR * (0.55 + openness * 0.7);
             const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
-            grd.addColorStop(0, `hsla(${hue},95%,75%,${0.35 + openness * 0.5})`);
-            grd.addColorStop(1, `hsla(${hue},95%,55%,0)`);
+            grd.addColorStop(0, `hsla(${hue},96%,78%,${0.45 + openness * 0.45})`);
+            grd.addColorStop(1, `hsla(${hue},96%,58%,0)`);
             ctx.fillStyle = grd;
             ctx.beginPath();
             ctx.arc(cx, cy, r, 0, Math.PI * 2);
             ctx.fill();
-            ctx.fillStyle = `hsla(${hue},100%,92%,${0.6 + openness * 0.4})`;
-            ctx.beginPath();
-            ctx.arc(cx, cy, 5 + openness * 7, 0, Math.PI * 2);
-            ctx.fill();
-
-            // note label (drawn un-mirrored)
-            ctx.save();
-            ctx.translate(cx, cy - r - 14);
-            ctx.scale(-1, 1);
-            ctx.fillStyle = `hsla(${hue},100%,85%,0.9)`;
-            ctx.font = '600 22px "Helvetica Neue", Arial, sans-serif';
+            // note letter inside the orb — always on screen
+            ctx.fillStyle = `hsla(${hue},100%,95%,${0.8 + openness * 0.2})`;
+            ctx.font = `700 ${Math.round(20 + openness * 16)}px "Helvetica Neue", Arial, sans-serif`;
             ctx.textAlign = 'center';
-            ctx.fillText(NOTE_NAMES[noteIdx], 0, 0);
-            ctx.restore();
+            ctx.textBaseline = 'middle';
+            ctx.fillText(NAMES[noteIdx], cx, cy);
           }
 
-          // fade out voices whose hand left the frame
+          // fade voices whose hand left frame
           (['Left', 'Right'] as const).forEach((label) => {
             if (!seen[label] && active[label] && audio) {
-              voices[label].gain.gain.setTargetAtTime(0, audio.currentTime, 0.3);
+              voices[label].gain.gain.setTargetAtTime(0, audio.currentTime, 0.35);
+              voices[label].note = -1;
               active[label] = false;
               trails[label].length = 0;
             }
           });
+
+          // note blooms
+          for (let i = blooms.length - 1; i >= 0; i--) {
+            const b = blooms[i];
+            b.r += 6;
+            b.life -= 0.03;
+            if (b.life <= 0) { blooms.splice(i, 1); continue; }
+            ctx.strokeStyle = `hsla(${b.hue},90%,72%,${b.life * 0.6})`;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(b.x, b.y, b.r, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+
+          // whole-scene breath with the music
+          pulse += 0.05;
+          const glow = totalGain * 0.5;
+          if (glow > 0.01) {
+            const vg2 = ctx.createRadialGradient(W / 2, H / 2, H * 0.2, W / 2, H / 2, H * 0.9);
+            vg2.addColorStop(0, `rgba(150,180,255,${glow * 0.12 * (0.8 + Math.sin(pulse) * 0.2)})`);
+            vg2.addColorStop(1, 'rgba(150,180,255,0)');
+            ctx.fillStyle = vg2;
+            ctx.fillRect(0, 0, W, H);
+          }
+
+          const up = seen.Left || seen.Right;
+          setHandsUp((prev) => (prev !== up ? up : prev));
         };
         raf = requestAnimationFrame(loop);
       } catch (e) {
@@ -280,20 +358,21 @@ export default function Conductor({ onExit }: { onExit: () => void }) {
       position: 'fixed', inset: 0, background: '#06060c', overflow: 'hidden',
       fontFamily: '"Helvetica Neue", Arial, sans-serif', color: '#fff',
     }}>
-      <div style={{ position: 'absolute', inset: 0, transform: 'scaleX(-1)' }}>
-        <video
-          ref={videoRef}
-          muted
-          playsInline
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: 0.4 }}
-        />
-        <canvas
-          ref={canvasRef}
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-        />
-      </div>
-
-      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', boxShadow: 'inset 0 0 240px rgba(0,0,0,0.9)' }} />
+      {/* camera is mirrored; the canvas is not (drawn in screen space) */}
+      <video
+        ref={videoRef}
+        muted
+        playsInline
+        style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          objectFit: 'cover', opacity: 0.34, transform: 'scaleX(-1)',
+        }}
+      />
+      <canvas
+        ref={canvasRef}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+      />
+      <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', boxShadow: 'inset 0 0 240px rgba(0,0,0,0.92)' }} />
 
       {status === 'loading' && (
         <Centered>
@@ -307,13 +386,16 @@ export default function Conductor({ onExit }: { onExit: () => void }) {
           <div style={{ fontSize: 14, opacity: 0.75, maxWidth: 360, textAlign: 'center', lineHeight: 1.5 }}>{err}</div>
         </Centered>
       )}
-      {status === 'ready' && (
+      {status === 'ready' && !handsUp && (
         <div style={{
-          position: 'absolute', bottom: 20, left: '50%', transform: 'translateX(-50%)',
-          fontSize: 13, letterSpacing: 1.4, opacity: 0.8, textAlign: 'center',
-          textShadow: '0 1px 4px #000',
+          position: 'absolute', bottom: 70, left: '50%', transform: 'translateX(-50%)',
+          fontSize: 15, letterSpacing: 1, opacity: 0.9, textAlign: 'center',
+          textShadow: '0 1px 6px #000', lineHeight: 1.6,
         }}>
-          raise a hand to play · higher = higher note · open your palm to swell · move sideways to pan
+          a soft drone is already playing — raise a hand to add a melody<br />
+          <span style={{ fontSize: 13, opacity: 0.7 }}>
+            higher = higher note · open your palm to swell it · move sideways to pan
+          </span>
         </div>
       )}
 
@@ -328,7 +410,7 @@ function Centered({ children }: { children: React.ReactNode }) {
       position: 'absolute', inset: 0, zIndex: 2,
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
-      background: 'rgba(6,6,12,0.6)',
+      background: 'rgba(6,6,12,0.62)',
     }}>
       {children}
     </div>

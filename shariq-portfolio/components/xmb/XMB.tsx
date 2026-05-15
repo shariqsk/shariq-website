@@ -269,7 +269,7 @@ const CATEGORIES: Category[] = [
         label: 'Spark',
         sublabel: 'Conversation cards',
         icon: `${ICON_BASE}/menu_help.png`,
-        preview: "radial-gradient(ellipse at 50% 32%, #6d3bf5 0%, #b14be8 46%, #14121f 88%)",
+        preview: "url('/xmb/previews/spark.jpg') center/cover no-repeat, radial-gradient(ellipse at 50% 32%, #6d3bf5 0%, #b14be8 46%, #14121f 88%)",
         action: (ctx) => ctx.launchGame('spark'),
         body: (
           <div>
@@ -284,7 +284,7 @@ const CATEGORIES: Category[] = [
         label: 'Conductor',
         sublabel: 'Play music with your hands',
         icon: `${ICON_BASE}/menu_record.png`,
-        preview: "url('/xmb/previews/conductor.png') center/cover no-repeat, radial-gradient(circle at 38% 44%, rgba(90,150,255,0.4) 0%, transparent 50%), radial-gradient(circle at 66% 56%, rgba(220,110,255,0.34) 0%, transparent 52%), #06060c",
+        preview: "url('/xmb/previews/conductor.jpg') center/cover no-repeat, radial-gradient(circle at 38% 44%, rgba(90,150,255,0.4) 0%, transparent 50%), radial-gradient(circle at 66% 56%, rgba(220,110,255,0.34) 0%, transparent 52%), #06060c",
         action: (ctx) => ctx.launchGame('conductor'),
         body: (
           <div>
@@ -340,7 +340,7 @@ function useSound() {
   }, []);
 
   const startBgm = useCallback(() => {
-    if (bgmRef.current) return;
+    if (bgmRef.current) { void bgmRef.current.play().catch(() => {}); return; }
     const a = new Audio(`${SND_BASE}/bgm.ogg`);
     a.loop = true; a.volume = 0.35;
     bgmRef.current = a;
@@ -566,8 +566,14 @@ export default function XMB() {
     setThemeIdx,
     themeIdx,
     playTrack: (t) => { stopBgm(); setBgmOn(false); setTrack(t); },
-    launchGame: (id) => setGame(id),
+    launchGame: (id) => { stopBgm(); setGame(id); },
   }), [themeIdx, stopBgm]);
+
+  /* leave a game — restore the ambient music if it was on */
+  const closeGame = useCallback(() => {
+    setGame(null);
+    if (bgmOn) startBgm();
+  }, [bgmOn, startBgm]);
 
   const setItem = useCallback((c: number, v: number) => {
     setItemIdx((prev) => ({ ...prev, [c]: v }));
@@ -627,7 +633,7 @@ export default function XMB() {
       }
       if (game) {
         // a game is open — only Escape (return to XMB) is handled here
-        if (e.key === 'Escape') { e.preventDefault(); setGame(null); }
+        if (e.key === 'Escape') { e.preventDefault(); closeGame(); }
         return;
       }
       switch (e.key) {
@@ -643,7 +649,7 @@ export default function XMB() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [started, game, moveHoriz, moveVert, activate, handleStart, play, toggleBgm, cycleTheme, router]);
+  }, [started, game, closeGame, moveHoriz, moveVert, activate, handleStart, play, toggleBgm, cycleTheme, router]);
 
   /* Layout anchors */
   const CAT_TOP_PCT = 42; // category bar centre, % of viewport
@@ -939,10 +945,10 @@ export default function XMB() {
       {/* Launched game overlay */}
       {game && (
         <div style={{ position: 'fixed', inset: 0, zIndex: 100 }}>
-          {game === 'lightpaint' && <LightPainting onExit={() => setGame(null)} />}
-          {game === 'koi'        && <KoiPond       onExit={() => setGame(null)} />}
-          {game === 'spark'      && <Spark         onExit={() => setGame(null)} />}
-          {game === 'conductor'  && <Conductor     onExit={() => setGame(null)} />}
+          {game === 'lightpaint' && <LightPainting onExit={closeGame} />}
+          {game === 'koi'        && <KoiPond       onExit={closeGame} />}
+          {game === 'spark'      && <Spark         onExit={closeGame} />}
+          {game === 'conductor'  && <Conductor     onExit={closeGame} />}
         </div>
       )}
     </div>
