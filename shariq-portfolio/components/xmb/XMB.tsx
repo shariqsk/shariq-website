@@ -234,7 +234,7 @@ const CATEGORIES: Category[] = [
         label: 'Light Painting',
         sublabel: 'Paint with glowing light',
         icon: `${ICON_BASE}/image.png`,
-        preview: "url('/xmb/previews/lightpaint.jpg') center/cover no-repeat, radial-gradient(circle at 26% 32%, #ff2d95 0%, transparent 38%), radial-gradient(circle at 74% 60%, #2dd4ff 0%, transparent 42%), #000",
+        preview: "url('/xmb/previews/lightpaint.jpg') center / cover no-repeat",
         action: (ctx) => ctx.launchGame('lightpaint'),
         body: (
           <div>
@@ -249,7 +249,7 @@ const CATEGORIES: Category[] = [
         label: 'Koi Pond',
         sublabel: 'A pond that swims on its own',
         icon: `${ICON_BASE}/menu_overlay.png`,
-        preview: "url('/xmb/previews/koi.jpg') center/cover no-repeat, radial-gradient(ellipse at 50% 40%, #11514c 0%, #0a3a37 55%, #062523 100%)",
+        preview: "url('/xmb/previews/koi.jpg') center / cover no-repeat",
         action: (ctx) => ctx.launchGame('koi'),
         body: (
           <div>
@@ -264,7 +264,7 @@ const CATEGORIES: Category[] = [
         label: 'Spark',
         sublabel: 'Conversation cards',
         icon: `${ICON_BASE}/menu_help.png`,
-        preview: "url('/xmb/previews/spark.jpg') center/cover no-repeat, radial-gradient(ellipse at 50% 32%, #6d3bf5 0%, #b14be8 46%, #14121f 88%)",
+        preview: "url('/xmb/previews/spark.jpg') center / cover no-repeat",
         action: (ctx) => ctx.launchGame('spark'),
         body: (
           <div>
@@ -279,7 +279,7 @@ const CATEGORIES: Category[] = [
         label: 'Conductor',
         sublabel: 'Play music with your hands',
         icon: `${ICON_BASE}/menu_record.png`,
-        preview: "url('/xmb/previews/conductor.jpg') center/cover no-repeat, radial-gradient(circle at 38% 44%, rgba(90,150,255,0.4) 0%, transparent 50%), radial-gradient(circle at 66% 56%, rgba(220,110,255,0.34) 0%, transparent 52%), #06060c",
+        preview: "url('/xmb/previews/conductor.jpg') center / cover no-repeat",
         action: (ctx) => ctx.launchGame('conductor'),
         body: (
           <div>
@@ -637,6 +637,15 @@ export default function XMB() {
   useEffect(() => {
     localStorage.setItem('xmb-theme', String(themeIdx));
   }, [themeIdx]);
+
+  /* Preload game preview images so highlighting a game shows the real
+     screenshot instantly — no flash of an unstyled background */
+  useEffect(() => {
+    ['lightpaint', 'koi', 'spark', 'conductor'].forEach((id) => {
+      const img = new Image();
+      img.src = `/xmb/previews/${id}.jpg`;
+    });
+  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
