@@ -6,7 +6,7 @@ import { Providers } from "./providers";
 import Analytics from "./analytics";
 
 import { siteConfig } from "@/config/site";
-import { fontSans, fontMono, fontPixel } from "@/config/fonts";
+import { fontSans, fontMono, fontPixel, fontUi } from "@/config/fonts";
 
 export const metadata: Metadata = {
   title: {
@@ -93,6 +93,7 @@ export default function RootLayout({
           fontSans.variable,
           fontMono.variable,
           fontPixel.variable,
+          fontUi.variable,
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>

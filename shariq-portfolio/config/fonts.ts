@@ -1,4 +1,10 @@
-import { Source_Code_Pro as FontMono, Inter as FontSans, Pixelify_Sans as FontPixel } from "next/font/google";
+import { Source_Code_Pro as FontMono, Inter as FontSans, Pixelify_Sans as FontPixel, Geist as FontUi } from "next/font/google";
+
+/* Used by the landing page only. */
+export const fontUi = FontUi({
+  subsets: ["latin"],
+  variable: "--font-ui",
+});
 
 export const fontSans = FontSans({
   subsets: ["latin"],
