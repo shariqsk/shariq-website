@@ -1,6 +1,4 @@
-'use client';
-
-import { motion } from 'framer-motion';
+import PortalCircles from '@/components/home/PortalCircles';
 
 const WORK = [
   {
@@ -47,11 +45,6 @@ const LINKS = [
   { label: 'Resume',   href: 'https://drive.google.com/file/d/1l1aJcVBJBbIg0VPKc9LXyG9x5E3l0FIa/view' },
 ];
 
-const fadeUp = {
-  initial: { opacity: 0, y: 16 },
-  animate: { opacity: 1, y: 0 },
-};
-
 export default function Home() {
   return (
     <main className="home">
@@ -60,7 +53,7 @@ export default function Home() {
       <div className="home__inner">
 
         {/* ── Hero ── */}
-        <motion.header {...fadeUp} transition={{ duration: 0.5 }}>
+        <header className="home__reveal">
           <span className="home__status">
             <span className="home__status-dot" />
             Open to opportunities · Toronto
@@ -71,13 +64,21 @@ export default function Home() {
             I build things people actually use.
           </p>
           <p className="home__meta">Toronto, Canada · Graduating 2027</p>
-        </motion.header>
+        </header>
+
+        {/* ── Retro experiences ── */}
+        <section
+          className="home__section home__reveal"
+          style={{ animationDelay: '0.05s' }}
+        >
+          <h2 className="home__section-label">Two other ways in</h2>
+          <PortalCircles />
+        </section>
 
         {/* ── About ── */}
-        <motion.section
-          className="home__section home__prose"
-          {...fadeUp}
-          transition={{ duration: 0.5, delay: 0.05 }}
+        <section
+          className="home__section home__prose home__reveal"
+          style={{ animationDelay: '0.1s' }}
         >
           <h2 className="home__section-label">About</h2>
           <p>
@@ -91,13 +92,12 @@ export default function Home() {
             The ones that work end up with <strong>real users</strong>, which is the part
             I care about.
           </p>
-        </motion.section>
+        </section>
 
         {/* ── Selected work ── */}
-        <motion.section
-          className="home__section"
-          {...fadeUp}
-          transition={{ duration: 0.5, delay: 0.1 }}
+        <section
+          className="home__section home__reveal"
+          style={{ animationDelay: '0.15s' }}
         >
           <h2 className="home__section-label">Selected work</h2>
           <div className="home__work">
@@ -120,13 +120,12 @@ export default function Home() {
               </a>
             ))}
           </div>
-        </motion.section>
+        </section>
 
         {/* ── Experience ── */}
-        <motion.section
-          className="home__section"
-          {...fadeUp}
-          transition={{ duration: 0.5, delay: 0.15 }}
+        <section
+          className="home__section home__reveal"
+          style={{ animationDelay: '0.2s' }}
         >
           <h2 className="home__section-label">Experience</h2>
           {EXPERIENCE.map(([when, role, where]) => (
@@ -135,13 +134,12 @@ export default function Home() {
               <div className="home__row-what"><b>{role}</b> · {where}</div>
             </div>
           ))}
-        </motion.section>
+        </section>
 
         {/* ── Elsewhere ── */}
-        <motion.section
-          className="home__section"
-          {...fadeUp}
-          transition={{ duration: 0.5, delay: 0.2 }}
+        <section
+          className="home__section home__reveal"
+          style={{ animationDelay: '0.25s' }}
         >
           <h2 className="home__section-label">Elsewhere</h2>
           <div className="home__links">
@@ -157,7 +155,7 @@ export default function Home() {
               </a>
             ))}
           </div>
-        </motion.section>
+        </section>
 
         <footer className="home__footer">
           <span>© {new Date().getFullYear()} Shariq Khan</span>

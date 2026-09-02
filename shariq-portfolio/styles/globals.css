@@ -857,3 +857,199 @@ html, body {
   .home__section { margin-top: 56px; }
   .home__row { grid-template-columns: 1fr; gap: 4px; }
 }
+
+/* ─── Landing page: portal circles ───────────────────────────────────── */
+.home__portals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.home__portal {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.home__portal-disc {
+  position: relative;
+  width: 84px; height: 84px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.45);
+  transition: transform 0.25s cubic-bezier(0.2,0.8,0.3,1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.home__portal:hover .home__portal-disc,
+.home__portal:focus-visible .home__portal-disc {
+  transform: scale(1.07);
+  border-color: rgba(255,255,255,0.4);
+}
+
+.home__portal:focus-visible { outline: none; }
+.home__portal:focus-visible .home__portal-disc {
+  box-shadow: 0 0 0 3px rgba(45,212,191,0.5), 0 6px 24px rgba(0,0,0,0.45);
+}
+
+.home__portal:active .home__portal-disc { transform: scale(0.97); }
+
+.home__portal-title {
+  font-size: 15px; font-weight: 600; color: #e7e9ee;
+  display: flex; align-items: center; gap: 6px;
+}
+
+.home__portal:hover .home__portal-title { color: #fff; }
+
+.home__portal-arrow {
+  opacity: 0; transform: translateX(-3px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  color: #2dd4bf;
+}
+
+.home__portal:hover .home__portal-arrow { opacity: 1; transform: translateX(0); }
+
+.home__portal-sub { display: block; font-size: 13px; color: #6f7887; margin-top: 2px; }
+
+/* Disc 1 — Windows 95 desktop */
+.home__disc-os {
+  background: linear-gradient(160deg, #009898 0%, #007070 55%, #005858 100%);
+}
+
+.home__disc-os__win {
+  position: absolute;
+  left: 17px; top: 22px;
+  width: 50px; height: 34px;
+  background: #c0c0c0;
+  box-shadow: inset 1px 1px #fff, inset -1px -1px #808080;
+  transition: transform 0.25s cubic-bezier(0.2,0.8,0.3,1);
+}
+
+.home__portal:hover .home__disc-os__win { transform: translate(-2px, -2px); }
+
+.home__disc-os__bar {
+  height: 8px;
+  margin: 2px;
+  background: linear-gradient(to right, #000080, #1084d0);
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 2px; gap: 1px;
+}
+
+.home__disc-os__btn { width: 5px; height: 5px; background: #c0c0c0; }
+
+.home__disc-os__lines { padding: 3px; display: flex; flex-direction: column; gap: 3px; }
+.home__disc-os__lines i { display: block; height: 2px; background: #808080; }
+.home__disc-os__lines i:nth-child(2) { width: 70%; }
+.home__disc-os__lines i:nth-child(3) { width: 45%; }
+
+.home__disc-os__taskbar {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 10px;
+  background: #c0c0c0;
+  box-shadow: inset 0 1px #fff;
+  display: flex; align-items: center;
+}
+
+.home__disc-os__start {
+  width: 16px; height: 7px; margin-left: 3px;
+  background: #dfdfdf;
+  box-shadow: inset 1px 1px #fff, inset -1px -1px #808080;
+}
+
+/* Disc 2 — PS3 XMB */
+.home__disc-xmb {
+  background: radial-gradient(circle at 50% 55%, #0b3a5e 0%, #06203a 55%, #030d1c 100%);
+}
+
+.home__disc-xmb__wave {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 22% at 50% 44%, rgba(120,200,255,0.34), transparent 70%),
+    radial-gradient(ellipse 70% 14% at 50% 56%, rgba(90,170,255,0.22), transparent 70%);
+  animation: home-xmb-wave 6s ease-in-out infinite;
+}
+
+@keyframes home-xmb-wave {
+  0%, 100% { transform: translateY(0)   scaleY(1); opacity: 0.9; }
+  50%      { transform: translateY(-3px) scaleY(1.12); opacity: 1; }
+}
+
+.home__disc-xmb__cross { position: absolute; inset: 0; }
+
+/* horizontal row of category icons */
+.home__disc-xmb__row {
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  transform: translateY(-50%);
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+}
+
+.home__disc-xmb__row i {
+  width: 5px; height: 5px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 1px;
+  transform: rotate(45deg);
+}
+
+/* vertical column under the selected icon */
+.home__disc-xmb__col {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 7px;
+}
+
+.home__disc-xmb__col i {
+  width: 7px; height: 7px;
+  background: #fff;
+  border-radius: 1px;
+  transform: rotate(45deg);
+  box-shadow: 0 0 8px rgba(160,220,255,0.9);
+}
+
+.home__disc-xmb__col i:not(:nth-child(2)) {
+  background: rgba(255,255,255,0.45);
+  box-shadow: none;
+  width: 5px; height: 5px;
+}
+
+.home__portal:hover .home__disc-xmb__col { gap: 9px; }
+.home__disc-xmb__col { transition: gap 0.25s ease; }
+
+@media (max-width: 640px) {
+  .home__portals { gap: 20px; flex-direction: column; }
+  .home__portal-disc { width: 72px; height: 72px; }
+}
+
+/* ── Landing reveal ── */
+/* CSS rather than JS so content can never be stranded at opacity 0 in a
+   background tab, where rAF-driven animations never start. */
+.home__reveal {
+  opacity: 0;
+  animation: home-reveal 0.55s cubic-bezier(0.22, 0.9, 0.3, 1) forwards;
+}
+
+@keyframes home-reveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__reveal { animation: none; opacity: 1; }
+  .home__disc-xmb__wave { animation: none; }
+  .home__portal-disc,
+  .home__portal-arrow,
+  .home__disc-os__win { transition: none; }
+}
