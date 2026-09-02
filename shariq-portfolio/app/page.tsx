@@ -3,13 +3,37 @@ import Image from 'next/image';
 import PortalCircles from '@/components/home/PortalCircles';
 import Contributions from '@/components/home/Contributions';
 
-const WORK = [
+interface Row {
+  name: string;
+  kind: string;
+  meta: string;
+  logo?: string;
+  mono?: string;
+  href?: string;
+}
+
+const EXPERIENCE: Row[] = [
   {
     name: 'Sandbox Simulator',
-    kind: 'World-building sim, founder',
-    meta: '9,000+ users',
+    kind: 'Founder, full-stack · 9,000+ users',
+    meta: 'Oct 24 - now',
     logo: '/logos/sandbox.png',
   },
+  {
+    name: 'Shake Shack',
+    kind: 'Full-stack developer, freelance',
+    meta: 'Dec 25 - Feb 26',
+    mono: 'SS',
+  },
+  {
+    name: 'Saftech Designs',
+    kind: 'Full-stack developer',
+    meta: 'Jan 23 - Apr 24',
+    mono: 'SD',
+  },
+];
+
+const PROJECTS: Row[] = [
   {
     name: 'Zocratic MMA',
     kind: 'UFC fight predictions, 75% accuracy',
@@ -23,12 +47,6 @@ const WORK = [
     meta: 'Electron',
     mono: 'PB',
   },
-];
-
-const EXPERIENCE = [
-  { role: 'Founder, full-stack',  at: 'Sandbox Simulator',       when: 'Oct 24 - now' },
-  { role: 'Full-stack developer', at: 'Shake Shack (freelance)', when: 'Dec 25 - Feb 26' },
-  { role: 'Full-stack developer', at: 'Saftech Designs',         when: 'Jan 23 - Apr 24' },
 ];
 
 const STACK: [string, string][] = [
@@ -46,6 +64,35 @@ const SOCIALS = [
   { label: 'Email',    href: 'mailto:00khanshariq@gmail.com',
     path: 'M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z' },
 ];
+
+function List({ rows }: { rows: Row[] }) {
+  return (
+    <div className="home__list">
+      {rows.map((r) => {
+        const inner = (
+          <>
+            {r.logo
+              ? <Image className="home__row-logo" src={r.logo} alt="" width={26} height={26} />
+              : <span className="home__row-mono">{r.mono}</span>}
+            <span>
+              <span className="home__row-name">{r.name}</span>
+              <span className="home__row-desc"> · {r.kind}</span>
+            </span>
+            <span className="home__row-meta">{r.meta}</span>
+          </>
+        );
+
+        return r.href ? (
+          <a key={r.name} className="home__row" href={r.href} target="_blank" rel="noopener noreferrer">
+            {inner}
+          </a>
+        ) : (
+          <div key={r.name} className="home__row">{inner}</div>
+        );
+      })}
+    </div>
+  );
+}
 
 export default function Home() {
   return (
@@ -103,51 +150,18 @@ export default function Home() {
           </section>
 
           <section className="home__section">
-            <div className="home__label">Work</div>
-            <div className="home__list">
-              {WORK.map((w) => {
-                const inner = (
-                  <>
-                    {w.logo
-                      ? <Image className="home__row-logo" src={w.logo} alt="" width={26} height={26} />
-                      : <span className="home__row-mono">{w.mono}</span>}
-                    <span>
-                      <span className="home__row-name">{w.name}</span>
-                      <span className="home__row-desc"> · {w.kind}</span>
-                    </span>
-                    <span className="home__row-meta">{w.meta}</span>
-                  </>
-                );
+            <div className="home__label">Experience</div>
+            <List rows={EXPERIENCE} />
+          </section>
 
-                return w.href ? (
-                  <a key={w.name} className="home__row" href={w.href} target="_blank" rel="noopener noreferrer">
-                    {inner}
-                  </a>
-                ) : (
-                  <div key={w.name} className="home__row">{inner}</div>
-                );
-              })}
-            </div>
+          <section className="home__section">
+            <div className="home__label">Projects</div>
+            <List rows={PROJECTS} />
           </section>
 
           <section className="home__section">
             <div className="home__label">Playground</div>
             <PortalCircles />
-          </section>
-
-          <section className="home__section">
-            <div className="home__label">Experience</div>
-            <div className="home__list">
-              {EXPERIENCE.map((e) => (
-                <div className="home__row" key={e.at} style={{ gridTemplateColumns: '1fr auto' }}>
-                  <span>
-                    <span className="home__row-name">{e.role}</span>
-                    <span className="home__row-desc"> · {e.at}</span>
-                  </span>
-                  <span className="home__row-meta">{e.when}</span>
-                </div>
-              ))}
-            </div>
           </section>
 
           <Contributions />
