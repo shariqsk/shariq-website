@@ -19,7 +19,7 @@ export default function Home() {
         <header className="home__head">
           <div>
             <h1 className="home__name"><ScrambleName delay={950} text="Shariq Khan" /></h1>
-            <div className="home__role">Full-stack developer, Toronto</div>
+            <div className="home__role">Founder &amp; full-stack developer, Toronto</div>
             <Status />
           </div>
           <div className="home__head-right">
