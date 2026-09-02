@@ -2,33 +2,49 @@
 
 import { useEffect, useState } from 'react';
 
-/* Resolves the name out of random glyphs, left to right. Renders the plain
-   text on the server and starts scrambling after mount, so there's no
-   hydration mismatch and no layout shift. */
+import { loadPalette } from './palettes';
 
-const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&@$*<>/\\';
-const DURATION = 900;
-const SWAP = 55;   // ms between glyph swaps for unresolved characters
+/* The name resolves out of coloured shape glyphs, left to right. Plain text
+   is rendered on the server and the scramble starts after mount, so there's
+   no hydration mismatch. */
 
-const randomGlyph = () => GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+const SHAPES = '◆◇▲△●○■□✦✧❖✳❀✿❁⬢⬡▚▞◈◐◑';
+const DURATION = 850;
+const SWAP = 60;   // ms between glyph swaps for unresolved characters
+
+interface Cell {
+  char: string;
+  glyph: string;
+  color: string;
+  done: boolean;
+}
 
 export default function ScrambleName({ text, delay = 0 }: { text: string; delay?: number }) {
-  const [out, setOut] = useState(text);
+  const [cells, setCells] = useState<Cell[] | null>(null);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    const palette = loadPalette().colors;
     const chars = [...text];
+    const pick = () => ({
+      glyph: SHAPES[Math.floor(Math.random() * SHAPES.length)],
+      color: palette[Math.floor(Math.random() * palette.length)],
+    });
+
     /* Each character resolves at its own point along the run, ordered left
-       to right with a little jitter so it doesn't march. */
+       to right with jitter so it doesn't march. */
     const thresholds = chars.map((c, i) =>
-      c === ' ' ? 0 : (i / chars.length) * 0.7 + Math.random() * 0.22,
+      c === ' ' ? 0 : (i / chars.length) * 0.62 + Math.random() * 0.2,
     );
+
+    let state: Cell[] = chars.map((c) => ({ char: c, ...pick(), done: c === ' ' }));
+
+    setCells(state);
 
     let frame = 0;
     let start = 0;
     let lastSwap = 0;
-    let scrambled = chars.map((c) => (c === ' ' ? ' ' : randomGlyph()));
 
     const tick = (now: number) => {
       if (!start) start = now;
@@ -38,19 +54,17 @@ export default function ScrambleName({ text, delay = 0 }: { text: string; delay?
 
       if (swap) lastSwap = now;
 
-      setOut(
-        chars
-          .map((c, i) => {
-            if (p >= thresholds[i] + 0.3 || c === ' ') return c;
-            if (swap) scrambled[i] = randomGlyph();
+      state = state.map((cell, i) => {
+        if (cell.done) return cell;
+        if (p >= thresholds[i] + 0.32) return { ...cell, done: true };
 
-            return scrambled[i];
-          })
-          .join(''),
-      );
+        return swap ? { ...cell, ...pick() } : cell;
+      });
 
-      if (p < 1.3) frame = requestAnimationFrame(tick);
-      else setOut(text);
+      setCells(state);
+
+      if (p < 1.35) frame = requestAnimationFrame(tick);
+      else setCells(null);
     };
 
     const timer = setTimeout(() => {
@@ -63,5 +77,19 @@ export default function ScrambleName({ text, delay = 0 }: { text: string; delay?
     };
   }, [text, delay]);
 
-  return <span className="home__name-text">{out}</span>;
+  if (!cells) return <span className="home__name-text">{text}</span>;
+
+  return (
+    <span className="home__name-text">
+      {cells.map((cell, i) =>
+        cell.done ? (
+          <span key={i}>{cell.char}</span>
+        ) : (
+          <span key={i} className="home__name-glyph" style={{ color: cell.color }}>
+            {cell.glyph}
+          </span>
+        ),
+      )}
+    </span>
+  );
 }

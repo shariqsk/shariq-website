@@ -1151,3 +1151,14 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
   .home__intro { display: none; }
   .home__shell { animation: none; }
 }
+
+.home__name-text { font-variant-ligatures: none; }
+
+.home__name-glyph {
+  display: inline-block;
+  min-width: 0.66em;
+  text-align: center;
+  font-size: 0.82em;
+  vertical-align: 1px;
+  letter-spacing: 0;
+}

@@ -145,7 +145,7 @@ export default function Home() {
         {/* ── Header ── */}
         <header className="home__head">
           <div>
-            <h1 className="home__name"><ScrambleName delay={1180} text="Shariq Khan" /></h1>
+            <h1 className="home__name"><ScrambleName delay={950} text="Shariq Khan" /></h1>
             <div className="home__role">Full-stack developer, Toronto</div>
             <div className="home__available"><i />Open to work</div>
           </div>
