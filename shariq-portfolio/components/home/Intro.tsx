@@ -2,106 +2,35 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-/* Short intro: pixels fly in, lock into an isometric cube, then break apart
-   and fall away. Plays once per session, skipped entirely under
-   prefers-reduced-motion. */
+/* Full-screen dissolve: the viewport starts as a solid grid of cells that
+   shrink and fade from the centre outwards, revealing the page underneath.
+   Runs on every load, skipped under prefers-reduced-motion. */
 
-const N = 7;              // cells per cube edge
-const CELL = 11;          // px per cell
-const ASSEMBLE = 720;     // ms
-const HOLD = 320;
-const SCATTER = 620;
-const TOTAL = ASSEMBLE + HOLD + SCATTER;
-
-const FACE_COLORS = ['#ececed', '#9c9ca6', '#54545d'];
-const ACCENT = '#c33049';
-
-interface Pixel {
-  tx: number; ty: number;      // target
-  sx: number; sy: number;      // start
-  vx: number; vy: number;      // scatter velocity
-  delay: number;
-  color: string;
-  spin: number;
-}
-
-const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
-const easeIn = (t: number) => t * t;
-
-function buildCube(cx: number, cy: number): Pixel[] {
-  const px: Pixel[] = [];
-  /* Isometric basis: x runs down-right, y down-left, z straight up. */
-  const ax = [CELL * 0.866, CELL * 0.5];
-  const ay = [-CELL * 0.866, CELL * 0.5];
-  const az = [0, -CELL];
-  const off = (N - 1) / 2;
-
-  const place = (u: number, v: number, face: number) => {
-    let x = cx;
-    let y = cy;
-
-    if (face === 0) {          // top
-      x += (u - off) * ax[0] + (v - off) * ay[0];
-      y += (u - off) * ax[1] + (v - off) * ay[1] - N * CELL * 0.5;
-    } else if (face === 1) {   // left
-      x += (u - off) * ay[0];
-      y += (u - off) * ay[1] + (v - off) * az[1] + CELL * 0.5;
-    } else {                   // right
-      x += (u - off) * ax[0];
-      y += (u - off) * ax[1] + (v - off) * az[1] + CELL * 0.5;
-    }
-
-    const angle = Math.random() * Math.PI * 2;
-    const dist = 260 + Math.random() * 420;
-
-    px.push({
-      tx: x,
-      ty: y,
-      sx: x + Math.cos(angle) * dist,
-      sy: y + Math.sin(angle) * dist,
-      vx: (Math.random() - 0.5) * 1.6,
-      vy: 0.6 + Math.random() * 1.9,
-      delay: Math.random() * 240,
-      color: Math.random() < 0.06 ? ACCENT : FACE_COLORS[face],
-      spin: (Math.random() - 0.5) * 0.2,
-    });
-  };
-
-  for (let f = 0; f < 3; f++) {
-    for (let u = 0; u < N; u++) {
-      for (let v = 0; v < N; v++) place(u, v, f);
-    }
-  }
-
-  return px;
-}
+const CELL = 24;
+const GAP = 1.5;
+const LIFE = 430;       // ms a single cell takes to vanish
+const SPREAD = 950;     // ms between the first and last cell starting
+const ACCENT = [206, 46, 72];
 
 export default function Intro() {
   const ref = useRef<HTMLCanvasElement>(null);
-  const [phase, setPhase] = useState<'idle' | 'run' | 'gone'>('idle');
+  const [alive, setAlive] = useState(true);
 
   useEffect(() => {
-    const skip =
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-      sessionStorage.getItem('intro') === 'seen';
-
-    if (skip) {
-      setPhase('gone');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setAlive(false);
 
       return;
     }
 
-    sessionStorage.setItem('intro', 'seen');
-    setPhase('run');
-  }, []);
-
-  useEffect(() => {
-    if (phase !== 'run') return;
-
     const canvas = ref.current;
     const ctx = canvas?.getContext('2d');
 
-    if (!canvas || !ctx) return;
+    if (!canvas || !ctx) {
+      setAlive(false);
+
+      return;
+    }
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const w = window.innerWidth;
@@ -113,7 +42,24 @@ export default function Intro() {
     canvas.style.height = `${h}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const pixels = buildCube(w / 2, h / 2);
+    const cols = Math.ceil(w / CELL);
+    const rows = Math.ceil(h / CELL);
+
+    const delay: number[] = [];
+    const shade: number[] = [];
+
+    /* The dissolve front runs on a diagonal, so the wave crosses the whole
+       screen rather than blooming out of the middle. */
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const diag = (c / cols + r / rows) / 2;
+
+        delay.push(diag * SPREAD + Math.random() * SPREAD * 0.28);
+        shade.push(18 + Math.random() * 22);
+      }
+    }
+
+    const total = Math.max(...delay) + LIFE;
     const t0 = performance.now();
     let frame = 0;
 
@@ -122,57 +68,40 @@ export default function Intro() {
 
       ctx.clearRect(0, 0, w, h);
 
-      for (const p of pixels) {
-        let x: number;
-        let y: number;
-        let alpha = 1;
-        let rot = 0;
-        let scale = 1;
+      let i = 0;
 
-        if (t < ASSEMBLE) {
-          const k = Math.max(0, Math.min(1, (t - p.delay) / (ASSEMBLE - p.delay)));
-          const e = easeOut(k);
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++, i++) {
+          const p = Math.max(0, Math.min(1, (t - delay[i]) / LIFE));
 
-          x = p.sx + (p.tx - p.sx) * e;
-          y = p.sy + (p.ty - p.sy) * e;
-          alpha = k;
-          rot = (1 - e) * Math.PI;
-          scale = 0.4 + e * 0.6;
-        } else if (t < ASSEMBLE + HOLD) {
-          x = p.tx;
-          y = p.ty;
-        } else {
-          const k = Math.min(1, (t - ASSEMBLE - HOLD) / SCATTER);
+          if (p >= 1) continue;
 
-          x = p.tx + p.vx * k * 190;
-          y = p.ty + easeIn(k) * p.vy * 320;
-          alpha = 1 - k;
-          rot = k * p.spin * 12;
+          /* Each cell flares red as the front reaches it, then fades out. */
+          const flare = p > 0 ? Math.sin(Math.min(p, 0.5) * Math.PI * 2) : 0;
+          const g = shade[i];
+          const rr = Math.round(g + (ACCENT[0] - g) * flare);
+          const gg = Math.round(g + (ACCENT[1] - g) * flare);
+          const bb = Math.round(g + 2 + (ACCENT[2] - g) * flare);
+          const alpha = 1 - p * p;
+          const scale = 1 - p * 0.5;
+          const size = (CELL - GAP) * scale;
+          const pad = (CELL - size) / 2;
+
+          ctx.fillStyle = `rgba(${rr}, ${gg}, ${bb}, ${alpha.toFixed(3)})`;
+          ctx.fillRect(c * CELL + pad, r * CELL + pad, size, size);
         }
-
-        ctx.save();
-        ctx.translate(x, y);
-        if (rot) ctx.rotate(rot);
-        ctx.globalAlpha = Math.max(0, alpha);
-        ctx.fillStyle = p.color;
-        ctx.fillRect(-CELL * scale * 0.46, -CELL * scale * 0.46, CELL * scale * 0.92, CELL * scale * 0.92);
-        ctx.restore();
       }
 
-      if (t < TOTAL) frame = requestAnimationFrame(tick);
-      else setPhase('gone');
+      if (t < total) frame = requestAnimationFrame(tick);
+      else setAlive(false);
     };
 
     frame = requestAnimationFrame(tick);
 
     return () => cancelAnimationFrame(frame);
-  }, [phase]);
+  }, []);
 
-  if (phase === 'gone') return null;
+  if (!alive) return null;
 
-  return (
-    <div className={`home__intro${phase === 'run' ? ' home__intro--run' : ''}`} aria-hidden>
-      <canvas ref={ref} />
-    </div>
-  );
+  return <canvas ref={ref} className="home__intro" aria-hidden />;
 }

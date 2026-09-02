@@ -1,6 +1,7 @@
 import EntryList from '@/components/home/EntryList';
 import Petals from '@/components/home/Petals';
 import Intro from '@/components/home/Intro';
+import ScrambleName from '@/components/home/ScrambleName';
 import PortalCircles from '@/components/home/PortalCircles';
 import Contributions from '@/components/home/Contributions';
 
@@ -144,7 +145,7 @@ export default function Home() {
         {/* ── Header ── */}
         <header className="home__head">
           <div>
-            <div className="home__name">Shariq Khan</div>
+            <h1 className="home__name"><ScrambleName delay={1180} text="Shariq Khan" /></h1>
             <div className="home__role">Full-stack developer, Toronto</div>
             <div className="home__available"><i />Open to work</div>
           </div>
@@ -169,14 +170,9 @@ export default function Home() {
         </header>
 
         <p className="home__lede">
-          I&apos;m a full-stack developer in Toronto. Right now I&apos;m scaling{' '}
-          <b>Sandbox Simulator</b>, a world-building sim I built and run, to 9,000
-          registered users and 20,000 weekly visitors.
-        </p>
-        <p className="home__lede">
-          Alongside it I run Zocratic MMA, which predicts UFC fights, and PostBridge,
-          a desktop scheduler. I build with security in mind because that&apos;s what
-          I studied.
+          I&apos;m scaling <b>Sandbox Simulator</b>, a world-building sim I built and
+          run, to 9,000 registered users. Alongside it I run Zocratic MMA, which
+          predicts UFC fights, and PostBridge, a desktop scheduler.
         </p>
 
         <div className="home__actions">
@@ -204,6 +200,8 @@ export default function Home() {
           <EntryList entries={EXPERIENCE} />
         </section>
 
+        <Contributions />
+
         <section className="home__section">
           <div className="home__label">Projects</div>
           <EntryList entries={PROJECTS} />
@@ -213,8 +211,6 @@ export default function Home() {
           <div className="home__label">Playground</div>
           <PortalCircles />
         </section>
-
-        <Contributions />
 
         <section className="home__section">
           <div className="home__label">Stack</div>
