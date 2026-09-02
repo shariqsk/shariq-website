@@ -12,10 +12,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${baseUrl}/os`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
-      priority: 0.9,
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/xmb`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/projects`,
@@ -24,22 +30,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/skills`,
+      url: `${baseUrl}/recruiter`,
       lastModified: new Date(),
       changeFrequency: 'monthly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
+      priority: 0.9,
     },
     {
       url: siteConfig.links.resume,

@@ -3,6 +3,8 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { siteHome } from './xmbHome';
+
 /* Each game is its own route — /lightpaint, /koi, /spark, /conductor.
  * Launching a game navigates there; the GameId doubles as the path. */
 type GameId = 'lightpaint' | 'koi' | 'spark' | 'conductor';
@@ -185,7 +187,7 @@ const CATEGORIES: Category[] = [
         label: 'Music Player',
         sublabel: 'Open the desktop player',
         icon: `${ICON_BASE}/music.png`,
-        action: () => { window.location.href = '/'; },
+        action: () => { window.location.href = '/os'; },
       },
     ],
   },
@@ -305,7 +307,7 @@ const CATEGORIES: Category[] = [
     label: 'Friends',
     icon: `${ICON_BASE}/menu_room.png`,
     items: [
-      { id: 'contact', label: 'Contact', sublabel: 'Open contact form', icon: `${ICON_BASE}/menu_room_lan.png`, action: () => { window.location.href = '/'; } },
+      { id: 'contact', label: 'Contact', sublabel: 'Open contact form', icon: `${ICON_BASE}/menu_room_lan.png`, action: () => { window.location.href = '/os'; } },
       { id: 'email',   label: 'Email',   sublabel: '00khanshariq@gmail.com', icon: `${ICON_BASE}/menu_notifications.png`, href: 'mailto:00khanshariq@gmail.com' },
     ],
   },
@@ -562,6 +564,14 @@ export default function XMB() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { play, startBgm, stopBgm, toggleBgm } = useSound();
 
+  /* "Back" leaves the XMB for the landing page, which lives on the bare
+     domain even when the XMB is being served as the home.* root. */
+  const goHome = useCallback(() => {
+    const href = siteHome();
+    if (href.startsWith('http')) window.location.href = href;
+    else router.push(href);
+  }, [router]);
+
   const theme = THEMES[themeIdx];
   const curCat = CATEGORIES[catIdx];
   const curItemIdx = itemIdx[catIdx] ?? 0;
@@ -670,14 +680,14 @@ export default function XMB() {
         case 'ArrowUp':    case 'w': case 'W': e.preventDefault(); moveVert(-1);  break;
         case 'ArrowDown':  case 's': case 'S': e.preventDefault(); moveVert(1);   break;
         case 'Enter':      case ' ':           e.preventDefault(); activate();    break;
-        case 'Escape':     case 'Backspace':   e.preventDefault(); play('cancel'); router.push('/'); break;
+        case 'Escape':     case 'Backspace':   e.preventDefault(); play('cancel'); goHome(); break;
         case 't': case 'T': cycleTheme(); play('ok'); break;
         case 'm': case 'M': setBgmOn(toggleBgm()); break;
       }
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [started, moveHoriz, moveVert, activate, handleStart, play, toggleBgm, cycleTheme, router]);
+  }, [started, moveHoriz, moveVert, activate, handleStart, play, toggleBgm, cycleTheme, goHome]);
 
   /* Layout anchors */
   const CAT_TOP_PCT = 42; // category bar centre, % of viewport
@@ -848,8 +858,8 @@ export default function XMB() {
         className="xmb-back"
         role="button"
         tabIndex={0}
-        onClick={() => { play('cancel'); router.push('/'); }}
-        onKeyDown={(e) => { if (e.key === 'Enter') { play('cancel'); router.push('/'); } }}
+        onClick={() => { play('cancel'); goHome(); }}
+        onKeyDown={(e) => { if (e.key === 'Enter') { play('cancel'); goHome(); } }}
       >
         ← BACK
       </div>

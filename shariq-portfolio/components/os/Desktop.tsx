@@ -156,6 +156,7 @@ export default function Desktop() {
       {/* ── Menubar ─────────────────────────────────────────────────── */}
       <div className="os-menubar" onClick={(e) => e.stopPropagation()}>
         <span className="os-menubar__brand">sk_os</span>
+        <span className="os-menubar__item" onClick={() => { playClick(); router.push('/'); }}>Home</span>
         <span className="os-menubar__item os-menubar__item--recruiter" onClick={() => { playClick(); router.push('/recruiter'); }}>For Recruiters</span>
         <span className="os-menubar__spacer" />
       </div>

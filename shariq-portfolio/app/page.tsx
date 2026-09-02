@@ -5,36 +5,36 @@ const WORK = [
     name: 'Zocratic MMA',
     href: 'https://zocraticmma.com',
     badge: '100+ users',
-    desc: 'Sports analytics SaaS with an XGBoost win-probability model (~65% accuracy) trained on scraped UFC data for 4,000+ fighters.',
+    desc: 'UFC analytics. A model trained on data for 4,000+ fighters calls win probability at about 65% accuracy.',
     stack: ['Next.js', 'FastAPI', 'PostgreSQL', 'XGBoost', 'AWS'],
   },
   {
     name: 'CDL Simulator',
     href: 'https://cdlsim.com',
     badge: '1,500+ visitors',
-    desc: 'Esports management sim with Elo ratings, salary caps and playoff brackets on a FastAPI engine.',
+    desc: 'Esports management sim. Elo ratings, salary caps, playoff brackets.',
     stack: ['React', 'TypeScript', 'FastAPI'],
   },
   {
     name: 'Social Desk',
     href: 'https://github.com/shariqsk',
     badge: 'Desktop app',
-    desc: 'Electron app that posts to X, Facebook, Instagram and TikTok with per-account session isolation.',
+    desc: 'Desktop app that posts to X, Facebook, Instagram and TikTok. Every account stays in its own session.',
     stack: ['Electron', 'React', 'SQLite', 'Playwright'],
   },
   {
     name: 'Phintic',
     href: 'https://github.com/shariqsk',
     badge: 'Open source',
-    desc: 'Security education platform covering phishing, scamware and account takeover through simulation drills.',
+    desc: 'Security lessons on phishing, scamware and account takeover, with practice drills.',
     stack: ['React', 'TypeScript'],
   },
 ];
 
 const EXPERIENCE: [string, string, string][] = [
-  ['Dec 2025 — Feb 2026', 'Freelance Full-Stack Developer', 'Shake Shack'],
-  ['Jun 2024 — Dec 2025', 'Import Analyst', 'Farrow'],
-  ['Jan 2023 — Apr 2024', 'Web Developer', 'Saftech Designs'],
+  ['Dec 2025 to Feb 2026', 'Freelance Full-Stack Developer', 'Shake Shack'],
+  ['Jun 2024 to Dec 2025', 'Import Analyst', 'Farrow'],
+  ['Jan 2023 to Apr 2024', 'Web Developer', 'Saftech Designs'],
 ];
 
 const LINKS = [
@@ -56,12 +56,11 @@ export default function Home() {
         <header className="home__reveal">
           <span className="home__status">
             <span className="home__status-dot" />
-            Open to opportunities · Toronto
+            Open to work · Toronto
           </span>
           <h1 className="home__name">Shariq Safdar Khan</h1>
           <p className="home__tagline">
-            Full-stack developer and Computer Security student at York University.
-            I build things people actually use.
+            I build full-stack apps. Computer security student at York University.
           </p>
           <p className="home__meta">Toronto, Canada · Graduating 2027</p>
         </header>
@@ -71,7 +70,7 @@ export default function Home() {
           className="home__section home__reveal"
           style={{ animationDelay: '0.05s' }}
         >
-          <h2 className="home__section-label">Two other ways in</h2>
+          <h2 className="home__section-label">This site, two other ways</h2>
           <PortalCircles />
         </section>
 
@@ -82,15 +81,8 @@ export default function Home() {
         >
           <h2 className="home__section-label">About</h2>
           <p>
-            I write software across the whole stack — React and Next.js on the front,
-            FastAPI and Node behind it, Postgres underneath — and I keep security
-            baked in rather than bolted on afterwards.
-          </p>
-          <p>
-            Most of what I build starts as a question I want answered: can a model call
-            a fight better than the odds, can a customs process survive without paper.
-            The ones that work end up with <strong>real users</strong>, which is the part
-            I care about.
+            React and Next.js on the front, FastAPI or Node behind it, Postgres
+            underneath. I studied security, so I try not to leave holes in any of it.
           </p>
         </section>
 
@@ -99,7 +91,7 @@ export default function Home() {
           className="home__section home__reveal"
           style={{ animationDelay: '0.15s' }}
         >
-          <h2 className="home__section-label">Selected work</h2>
+          <h2 className="home__section-label">Work</h2>
           <div className="home__work">
             {WORK.map((p) => (
               <a
@@ -141,7 +133,7 @@ export default function Home() {
           className="home__section home__reveal"
           style={{ animationDelay: '0.25s' }}
         >
-          <h2 className="home__section-label">Elsewhere</h2>
+          <h2 className="home__section-label">Links</h2>
           <div className="home__links">
             {LINKS.map((l) => (
               <a
