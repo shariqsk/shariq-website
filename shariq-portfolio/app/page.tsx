@@ -48,15 +48,7 @@ export default function Home() {
 
         <Contributions />
 
-        <Link className="home__next" href="/other">
-          <span>Everything else</span>
-          <span className="home__next-hint">
-            projects, education, stack, the retro versions
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden>
-              <path d="M3 7h8M7.5 3.5 11 7l-3.5 3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
-        </Link>
+        <Link className="home__next" href="/other">other</Link>
 
       </div>
     </main>

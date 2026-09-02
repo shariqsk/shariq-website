@@ -1157,30 +1157,18 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 
 /* ── Link to the rest of the site ────────────────────────────────────── */
 .home__next {
-  display: flex; align-items: baseline; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap;
-  width: calc(100% + 20px);
-  margin: 40px -10px 0;
-  padding: 16px 10px;
-  border-top: 1px solid var(--line);
-  border-radius: 9px;
-  font-size: 15px;
-  color: var(--ink);
-  transition: background 0.16s ease;
-}
-
-.home__next:hover { background: rgba(255, 255, 255, 0.035); }
-
-.home__next-hint {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: inline-block;
+  margin-top: 38px;
   font-size: 13.5px;
   color: var(--ink-3);
   transition: color 0.16s ease;
 }
 
-.home__next:hover .home__next-hint { color: var(--ink-2); }
-.home__next-hint svg { transition: transform 0.18s ease; }
-.home__next:hover .home__next-hint svg { transform: translateX(3px); }
+.home__next:hover {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
 
 /* ── Back link ───────────────────────────────────────────────────────── */
 .home__back {
@@ -1193,3 +1181,4 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 .home__back:hover { color: var(--ink); }
 .home__back svg { transition: transform 0.18s ease; }
 .home__back:hover svg { transform: translateX(-3px); }
+
