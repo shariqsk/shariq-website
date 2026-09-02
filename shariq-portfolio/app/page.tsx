@@ -117,6 +117,21 @@ const PROJECTS: Entry[] = [
   },
 ];
 
+const EDUCATION: Entry[] = [
+  {
+    name: 'York University',
+    year: '2024',
+    role: 'BSc Computer Security, specialized honours',
+    meta: 'Toronto · exp. 2028',
+    logo: '/logos/yorku.png',
+    href: 'https://www.yorku.ca/',
+    points: [
+      'Specialized honours BSc in Computer Security, expected April 2028.',
+      'Coursework: advanced object-oriented programming, discrete mathematics, computer organization.',
+    ],
+  },
+];
+
 const STACK: [string, string][] = [
   ['Languages',  'Python, TypeScript, Java, C, SQL'],
   ['Frameworks', 'React, React Native, Next.js, FastAPI, Spring Boot, Electron'],
@@ -191,6 +206,11 @@ export default function Home() {
           </section>
 
           <section className="home__section">
+            <div className="home__label">Education</div>
+            <EntryList entries={EDUCATION} />
+          </section>
+
+          <section className="home__section">
             <div className="home__label">Stack</div>
             {STACK.map(([key, val]) => (
               <div className="home__stack-row" key={key}>
@@ -202,12 +222,12 @@ export default function Home() {
         </More>
 
         <footer className="home__footer">
-          <span>BSc Computer Security, York University · 2028</span>
           <span className="home__footer-links">
             <a href="/os">SK-OS</a>
             <a href="/xmb">XMB</a>
             <a href="https://github.com/shariqsk" target="_blank" rel="noopener noreferrer">GitHub</a>
           </span>
+          <span>Toronto · {new Date().getFullYear()}</span>
         </footer>
 
       </div>
