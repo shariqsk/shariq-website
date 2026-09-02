@@ -251,7 +251,9 @@ html, body {
 
 .os-window-body { flex: 1; overflow: auto; position: relative; background: var(--w95-surface); }
 
-/* ─── Scrollbar ──────────────────────────────────────────────────────── */
+/* ─── Scrollbar ──────────────────────────────────────────────────────────
+   The chunky bevelled bar belongs to the OS/XMB shells; the landing page
+   overrides it with a thin dark one further down. */
 ::-webkit-scrollbar { width: 16px; height: 16px; }
 ::-webkit-scrollbar-track { background: var(--w95-surface); }
 ::-webkit-scrollbar-corner { background: var(--w95-surface); }
@@ -678,22 +680,38 @@ html, body {
   line-height: 1.55;
   letter-spacing: -0.01em;
   -webkit-font-smoothing: antialiased;
+
+  scrollbar-width: thin;
+  scrollbar-color: #2a2a2e transparent;
 }
+
+.home::-webkit-scrollbar { width: 11px; }
+.home::-webkit-scrollbar-track { background: transparent; }
+
+.home::-webkit-scrollbar-thumb {
+  background: #26262a;
+  background-clip: content-box;
+  border: 3px solid transparent;
+  border-radius: 999px;
+  box-shadow: none;   /* clears the Win95 bevel inherited from the global rule */
+}
+
+.home::-webkit-scrollbar-thumb:hover { background: #3a3a41; background-clip: content-box; }
 
 .home :where(a) { color: inherit; text-decoration: none; }
 .home ::selection { background: rgba(255, 255, 255, 0.16); }
 
 .home__shell {
   display: grid;
-  grid-template-columns: 232px 1fr;
-  gap: 80px;
-  max-width: 1000px;
+  grid-template-columns: 196px 1fr;
+  gap: 56px;
+  max-width: 880px;
   margin: 0 auto;
-  padding: 104px 40px 96px;
+  padding: 88px 32px 80px;
 }
 
 /* ── Left rail ── */
-.home__rail { position: sticky; top: 104px; align-self: start; }
+.home__rail { position: sticky; top: 88px; align-self: start; }
 
 .home__name {
   font-size: 21px; font-weight: 500;
@@ -759,11 +777,11 @@ html, body {
 /* ── Sections ── */
 .home__main { min-width: 0; }
 
-.home__section { margin-bottom: 52px; }
+.home__section { margin-bottom: 38px; }
 .home__section:last-of-type { margin-bottom: 0; }
 
 .home__lede {
-  font-size: 16px;
+  font-size: 15.5px;
   color: var(--ink-2);
   max-width: 54ch;
 }
@@ -771,10 +789,13 @@ html, body {
 .home__lede + .home__lede { margin-top: 12px; }
 .home__lede b { color: var(--ink); font-weight: 500; }
 
+/* Section headings carry the structure, so they sit at text weight in full
+   contrast rather than as faint micro-labels. */
 .home__label {
-  font-size: 12.5px;
-  color: var(--ink-3);
-  margin-bottom: 6px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 4px;
 }
 
 /* ── Rows ── */
@@ -782,8 +803,8 @@ html, body {
   display: grid;
   grid-template-columns: 26px 1fr auto;
   align-items: center;
-  gap: 14px;
-  padding: 15px 0;
+  gap: 12px;
+  padding: 12px 0;
   border-top: 1px solid var(--line);
 }
 

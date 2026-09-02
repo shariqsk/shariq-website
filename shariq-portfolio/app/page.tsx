@@ -23,7 +23,7 @@ const EXPERIENCE: Row[] = [
     name: 'Shake Shack',
     kind: 'Full-stack developer, freelance',
     meta: 'Dec 25 - Feb 26',
-    mono: 'SS',
+    logo: '/logos/shakeshack.png',
   },
   {
     name: 'Saftech Designs',
@@ -142,10 +142,14 @@ export default function Home() {
 
           <section className="home__section">
             <p className="home__lede">
-              I study computer security at York University and build full-stack apps the
-              rest of the time. Most of what I make ends up with real users:{' '}
-              <b>a world-building sim with 9,000 registered accounts</b> and a model that
-              predicts UFC fights.
+              I&apos;m a full-stack developer in Toronto. Right now I&apos;m scaling{' '}
+              <b>Sandbox Simulator</b>, a world-building sim I built and run, to 9,000
+              registered users and 20,000 weekly visitors.
+            </p>
+            <p className="home__lede">
+              Alongside it I run Zocratic MMA, which predicts UFC fights, and PostBridge,
+              a desktop scheduler. I build with security in mind because that&apos;s what
+              I studied.
             </p>
           </section>
 
