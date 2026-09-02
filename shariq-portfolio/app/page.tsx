@@ -123,6 +123,8 @@ const SOCIALS = [
     path: 'M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.2-4.6-5.1 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9 9 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.2 10.2 0 0 0 22 12.2C22 6.6 17.5 2 12 2z' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/shariq-khan-430754217/',
     path: 'M6.9 21H3.4V9.2h3.5V21zM5.1 7.7A2 2 0 1 1 5.1 3.7a2 2 0 0 1 0 4zM21 21h-3.5v-5.7c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V21H9.8V9.2h3.3v1.6h.1a3.7 3.7 0 0 1 3.3-1.8c3.5 0 4.2 2.3 4.2 5.3V21z' },
+  { label: 'X',        href: 'https://x.com/shariqssk',
+    path: 'M17.5 3h3.1l-6.8 7.7L21.8 21h-6.2l-4.9-6.3L5.1 21H2l7.3-8.3L2.2 3h6.4l4.4 5.8L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z' },
   { label: 'Email',    href: 'mailto:00khanshariq@gmail.com',
     path: 'M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z' },
 ];
@@ -142,11 +144,6 @@ export default function Home() {
             <div className="home__available"><i />Open to work</div>
           </div>
           <div className="home__head-right">
-            <nav className="home__nav">
-              <a href="/projects">Projects</a>
-              <a href="/recruiter">Recruiter</a>
-              <a href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer">Blog</a>
-            </nav>
             <div className="home__socials">
               {SOCIALS.map((s) => (
                 <a
@@ -219,8 +216,6 @@ export default function Home() {
         <footer className="home__footer">
           <span>BSc Computer Security, York University · 2028</span>
           <span className="home__footer-links">
-            <a href="/projects">Projects</a>
-            <a href="/recruiter">Recruiter</a>
             <a href="/os">SK-OS</a>
             <a href="/xmb">XMB</a>
             <a href="https://github.com/shariqsk" target="_blank" rel="noopener noreferrer">GitHub</a>
