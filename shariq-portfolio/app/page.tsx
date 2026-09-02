@@ -4,6 +4,7 @@ import Intro from '@/components/home/Intro';
 import ScrambleName from '@/components/home/ScrambleName';
 import PortalCircles from '@/components/home/PortalCircles';
 import Contributions from '@/components/home/Contributions';
+import More from '@/components/home/More';
 
 import type { Entry } from '@/components/home/EntryList';
 
@@ -178,25 +179,27 @@ export default function Home() {
 
         <Contributions />
 
-        <section className="home__section">
-          <div className="home__label">Projects</div>
-          <EntryList entries={PROJECTS} />
-        </section>
+        <More>
+          <section className="home__section">
+            <div className="home__label">Projects</div>
+            <EntryList entries={PROJECTS} />
+          </section>
 
-        <section className="home__section">
-          <div className="home__label">Playground</div>
-          <PortalCircles />
-        </section>
+          <section className="home__section">
+            <div className="home__label">Playground</div>
+            <PortalCircles />
+          </section>
 
-        <section className="home__section">
-          <div className="home__label">Stack</div>
-          {STACK.map(([key, val]) => (
-            <div className="home__stack-row" key={key}>
-              <span className="home__stack-key">{key}</span>
-              <span className="home__stack-val">{val}</span>
-            </div>
-          ))}
-        </section>
+          <section className="home__section">
+            <div className="home__label">Stack</div>
+            {STACK.map(([key, val]) => (
+              <div className="home__stack-row" key={key}>
+                <span className="home__stack-key">{key}</span>
+                <span className="home__stack-val">{val}</span>
+              </div>
+            ))}
+          </section>
+        </More>
 
         <footer className="home__footer">
           <span>BSc Computer Security, York University · 2028</span>

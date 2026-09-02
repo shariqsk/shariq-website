@@ -914,6 +914,8 @@ a.home__row:hover .home__row-name { text-decoration: underline; text-underline-o
   font-size: 13px; color: var(--ink-3);
 }
 
+.home__footer-links { display: flex; flex-wrap: wrap; gap: 14px; }
+
 .home__footer a:hover { color: var(--ink); }
 
 @media (max-width: 640px) {
@@ -1162,3 +1164,33 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
   vertical-align: 1px;
   letter-spacing: 0;
 }
+
+/* ── "Other" disclosure ──────────────────────────────────────────────── */
+.home__more { margin-top: 34px; }
+
+.home__more-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: color 0.16s ease;
+}
+
+.home__more-btn:hover { color: var(--ink); }
+.home__more-btn svg { transition: transform 0.24s ease; }
+.home__more--open .home__more-btn svg { transform: rotate(180deg); }
+
+.home__more-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.32s cubic-bezier(0.3, 0.9, 0.3, 1);
+}
+
+.home__more--open .home__more-body { grid-template-rows: 1fr; }
+
+.home__more-inner { overflow: hidden; }
+.home__more-inner > .home__section:first-child { margin-top: 26px; }
