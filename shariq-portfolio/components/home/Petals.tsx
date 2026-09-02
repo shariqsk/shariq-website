@@ -22,9 +22,9 @@ interface Petal {
 }
 
 const TINTS = [
-  [190, 45, 65],
-  [150, 30, 48],
-  [120, 22, 38],
+  [214, 58, 78],
+  [178, 38, 58],
+  [140, 26, 44],
 ];
 
 function makePetal(w: number, h: number, seeded: boolean): Petal {
@@ -34,8 +34,8 @@ function makePetal(w: number, h: number, seeded: boolean): Petal {
     x: Math.random() * w,
     y: seeded ? Math.random() * h : -20 - Math.random() * 80,
     z,
-    size: (5 + Math.random() * 7) * z,
-    fall: (0.18 + Math.random() * 0.42) * z,
+    size: (6 + Math.random() * 8) * z,
+    fall: (0.45 + Math.random() * 0.85) * z,
     sway: 12 + Math.random() * 26,
     phase: Math.random() * Math.PI * 2,
     spin: (Math.random() - 0.5) * 0.008,
@@ -72,7 +72,9 @@ export default function Petals() {
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      const count = Math.min(26, Math.max(10, Math.round(w / 68)));
+      /* Density follows area, not width: a tall 4K display needs far more
+         petals than a wide short one to feel the same. */
+      const count = Math.min(70, Math.max(18, Math.round((w * h) / 34000)));
 
       petals = Array.from({ length: count }, () => makePetal(w, h, true));
     };
@@ -92,7 +94,7 @@ export default function Petals() {
         const [r, g, b] = TINTS[p.tint];
         /* Edge-on petals read as thinner and dimmer, which sells the tumble. */
         const face = Math.abs(Math.cos(p.flip));
-        const alpha = (0.10 + p.z * 0.20) * (0.45 + face * 0.55);
+        const alpha = (0.20 + p.z * 0.34) * (0.45 + face * 0.55);
 
         ctx.save();
         ctx.translate(x, p.y);
