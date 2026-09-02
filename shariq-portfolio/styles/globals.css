@@ -1198,3 +1198,14 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 }
 
 .home__theme:hover { color: var(--ink); }
+
+/* Colours ease between themes; nothing else moves. */
+.home,
+.home :where(*) {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease,
+              box-shadow 0.3s ease, fill 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home, .home :where(*) { transition: none; }
+}
