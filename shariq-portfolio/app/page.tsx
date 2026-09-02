@@ -1,4 +1,5 @@
 import PortalCircles from '@/components/home/PortalCircles';
+import Contributions from '@/components/home/Contributions';
 
 /* href is optional: a project with no confirmed public URL renders as plain
    text rather than guessing a link. */
@@ -83,6 +84,8 @@ export default function Home() {
             </a>
           </div>
         </section>
+
+        <Contributions />
 
         <section className="home__section">
           <div className="home__section-head">

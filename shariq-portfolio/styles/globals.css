@@ -932,3 +932,32 @@ html, body {
 @media (prefers-reduced-motion: reduce) {
   .home__disc-xmb__wave { animation: none; }
 }
+
+/* ─── Landing page: contribution graph ───────────────────────────────── */
+.home__graph-scroll { overflow-x: auto; scrollbar-width: none; }
+.home__graph-scroll::-webkit-scrollbar { display: none; }
+
+.home__graph { display: flex; gap: 2px; min-width: min-content; }
+
+.home__graph-week { display: flex; flex-direction: column; gap: 2px; }
+
+.home__graph-day {
+  width: 9px; height: 9px;
+  border-radius: 2px;
+  background: #161616;
+  flex-shrink: 0;
+}
+
+.home__graph-day[data-level="1"] { background: #0e4429; }
+.home__graph-day[data-level="2"] { background: #006d32; }
+.home__graph-day[data-level="3"] { background: #26a641; }
+.home__graph-day[data-level="4"] { background: #39d353; }
+
+.home__graph-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+  margin-top: 10px;
+  font-size: 13px; color: #6b6b6b;
+}
+
+.home__graph-legend { display: flex; align-items: center; gap: 3px; }
