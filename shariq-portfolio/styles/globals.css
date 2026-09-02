@@ -1182,35 +1182,19 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 .home__theme-row {
   display: flex;
   justify-content: center;
-  margin-top: 46px;
+  margin-top: 44px;
 }
 
 .home__theme {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 7px 14px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  width: 30px; height: 30px;
+  padding: 0;
+  border: none;
   background: none;
-  font: inherit;
-  font-size: 13px;
   color: var(--ink-3);
   cursor: pointer;
-  transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+  transition: color 0.16s ease;
 }
 
-.home__theme:hover {
-  color: var(--ink);
-  border-color: var(--line-hi);
-  background: var(--hover);
-}
-
-/* The wipe is driven from the button; these just stop the default
-   cross-fade from muddying it. */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-
-::view-transition-old(root) { z-index: 1; }
-::view-transition-new(root) { z-index: 2; }
+.home__theme:hover { color: var(--ink); }
