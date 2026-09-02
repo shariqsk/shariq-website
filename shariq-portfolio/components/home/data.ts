@@ -1,0 +1,145 @@
+import type { Entry } from '@/components/home/EntryList';
+
+export const EXPERIENCE: Entry[] = [
+  {
+    name: 'Sandbox Simulator',
+    year: '2026',
+    role: 'Founder, full-stack',
+    meta: 'Oct 24 - now',
+    logo: '/logos/sandbox-icon.png',
+    href: 'https://sandboxsimulator.com',
+    stack: ['FastAPI', 'PostgreSQL', 'Cloudflare'],
+    points: [
+      'Built and shipped a sandbox world-building platform; grew it to 9,000+ registered users and 20,000+ weekly visitors, monetized through a paid tier.',
+      'Stateful FastAPI and PostgreSQL backend running the simulation engine, persistent user worlds and authenticated accounts across concurrent sessions.',
+      'Cloudflare edge caching, per-IP rate limiting and DDoS protection absorbed a 10x overnight traffic surge with zero downtime, as sole on-call engineer.',
+    ],
+  },
+  {
+    name: 'Shake Shack',
+    year: '2025',
+    role: 'Full-stack developer, freelance',
+    meta: 'Dec 25 - Feb 26',
+    logo: '/logos/shakeshack.png',
+    stack: ['React Native', 'Spring Boot', 'AWS S3'],
+    points: [
+      'Led requirements gathering with the head of technology for ReceiptGuard, a receipt validation platform, and defined its architecture, threat model and scope.',
+      'React Native app capturing GPS-tagged, timestamped photo evidence at each order handoff; one codebase shipped to iOS and Android.',
+      'Spring Boot REST API validating submissions and writing immutable records to S3, creating a tamper-evident chargeback trail across tens of thousands of daily orders.',
+    ],
+  },
+  {
+    name: 'Saftech Designs',
+    year: '2023',
+    role: 'Full-stack developer',
+    meta: 'Jan 23 - Apr 24',
+    mono: 'SD',
+    stack: ['Next.js', 'CSP / HSTS'],
+    points: [
+      'Audited 15+ API endpoints, hardened authentication and added security headers with enforced rate limiting.',
+      'Rebuilt the platform in Next.js, migrating off a legacy CMS that could no longer be securely patched.',
+      'Code splitting, lazy loading and image compression cut page load time by 75%.',
+    ],
+  },
+];
+
+export const PROJECTS: Entry[] = [
+  {
+    name: 'Zocratic MMA',
+    role: 'UFC fight predictions',
+    meta: '4,000+ fighters',
+    logo: '/logos/zocratic.png',
+    href: 'https://www.zocraticmma.com',
+    stack: ['Python', 'XGBoost', 'FastAPI'],
+    points: [
+      'Python ETL pipeline scraping and normalizing statistics for 4,000+ UFC fighters into PostgreSQL, with engineered features for strike differentials, takedown rates and finish tendencies.',
+      'XGBoost classifier at 75% held-out accuracy, served through FastAPI with automated daily retraining and a paid subscription tier.',
+    ],
+  },
+  {
+    name: 'PostBridge',
+    role: 'Desktop social scheduler',
+    meta: 'Electron',
+    mono: 'PB',
+    href: 'https://github.com/shariqsk/allinonesocials',
+    stack: ['Electron', 'TypeScript', 'Playwright', 'SQLite'],
+    points: [
+      'One Electron and React codebase ships to Windows and macOS for drafting, scheduling and publishing content across four platforms.',
+      'Playwright automation drives each platform\u2019s publishing flow, with platform-specific media rules and isolated per-account sessions in SQLite to prevent cross-account leakage.',
+      'Local-first: accounts, drafts and history stay on your own machine, and you connect by signing in through the real platform web flows.',
+    ],
+  },
+  {
+    name: 'Phintic',
+    role: 'Security education, made plain',
+    meta: 'phintic.com',
+    logo: '/logos/phintic.png',
+    href: 'https://phintic.com',
+    stack: ['Next.js', 'React'],
+    shot: '/phintic.png',
+    points: [
+      'Eight security topics taught through interactive simulations and knowledge tests, aimed at people who bounce off the usual security advice.',
+      'Covers modern threats including deepfakes and AI impersonation, with practice scenarios rather than a wall of rules.',
+    ],
+  },
+  {
+    name: 'ResuSense',
+    role: 'Resume tailoring with live LaTeX',
+    meta: 'Open source',
+    mono: 'RS',
+    href: 'https://github.com/shariqsk/ResuSense',
+    stack: ['Next.js', 'TypeScript', 'LaTeX'],
+    shot: '/ResuSense.png',
+    points: [
+      'Tailors a LaTeX resume to a specific job description, and compiles it with real pdflatex rather than approximating the output.',
+      'Paste a job posting URL and it scrapes the requirements; live preview recompiles on a 300ms debounce with an original-versus-optimized toggle.',
+    ],
+  },
+  {
+    name: 'Type-a-tune',
+    role: 'Typing as a piano performance',
+    meta: 'Tauri',
+    logo: '/logos/type-a-tune.png',
+    href: 'https://github.com/shariqsk/Type-a-tune',
+    stack: ['Tauri', 'TypeScript', 'Audio'],
+    points: [
+      'Drop in an MP3, and it detects playable beat markers so the track advances one musical step per key press.',
+      'Tauri desktop app with low-latency playback, a typing game layer, and a background mode that scores whatever you happen to be typing.',
+    ],
+  },
+];
+
+export const EDUCATION: Entry[] = [
+  {
+    name: 'York University',
+    year: '2024',
+    role: 'BSc Computer Security, specialized honours',
+    meta: 'Toronto · exp. 2028',
+    logo: '/logos/yorku.png',
+    href: 'https://www.yorku.ca/',
+    points: [
+      'Specialized honours BSc in Computer Security, expected April 2028.',
+      'Coursework: advanced object-oriented programming, discrete mathematics, computer organization.',
+    ],
+  },
+];
+
+export const STACK: [string, string][] = [
+  ['Languages',  'Python, TypeScript, Java, C, SQL'],
+  ['Frameworks', 'React, React Native, Next.js, FastAPI, Spring Boot, Electron'],
+  ['Data',       'PostgreSQL, SQLite, Supabase, XGBoost'],
+  ['Infra',      'AWS, Cloudflare, Docker, GitHub Actions'],
+];
+
+export const SOCIALS = [
+  { label: 'GitHub',   href: 'https://github.com/shariqsk',
+    path: 'M12 2C6.5 2 2 6.6 2 12.2c0 4.5 2.9 8.3 6.8 9.7.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.4-3.4-1.4-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.2-.3-4.6-1.2-4.6-5.1 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9 9 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.8-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.2 10.2 0 0 0 22 12.2C22 6.6 17.5 2 12 2z' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/shariq-khan-430754217/',
+    path: 'M6.9 21H3.4V9.2h3.5V21zM5.1 7.7A2 2 0 1 1 5.1 3.7a2 2 0 0 1 0 4zM21 21h-3.5v-5.7c0-1.4 0-3.2-2-3.2s-2.2 1.5-2.2 3.1V21H9.8V9.2h3.3v1.6h.1a3.7 3.7 0 0 1 3.3-1.8c3.5 0 4.2 2.3 4.2 5.3V21z' },
+  { label: 'X',        href: 'https://x.com/shariqssk',
+    path: 'M17.5 3h3.1l-6.8 7.7L21.8 21h-6.2l-4.9-6.3L5.1 21H2l7.3-8.3L2.2 3h6.4l4.4 5.8L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z' },
+  { label: 'Email',    href: 'mailto:00khanshariq@gmail.com',
+    path: 'M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z' },
+  { label: 'Resume',   href: '/shariq-khan-resume.pdf',
+    path: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM8 13h8v1.6H8V13zm0 3.4h8V18H8v-1.6z' },
+];
