@@ -1,51 +1,71 @@
-import Image from 'next/image';
-
+import EntryList from '@/components/home/EntryList';
 import PortalCircles from '@/components/home/PortalCircles';
 import Contributions from '@/components/home/Contributions';
 
-interface Row {
-  name: string;
-  kind: string;
-  meta: string;
-  logo?: string;
-  mono?: string;
-  href?: string;
-}
+import type { Entry } from '@/components/home/EntryList';
 
-const EXPERIENCE: Row[] = [
+const EXPERIENCE: Entry[] = [
   {
     name: 'Sandbox Simulator',
-    kind: 'Founder, full-stack · 9,000+ users',
+    role: 'Founder, full-stack',
     meta: 'Oct 24 - now',
     logo: '/logos/sandbox.png',
+    stack: ['FastAPI', 'PostgreSQL', 'Cloudflare'],
+    points: [
+      'Built and shipped a sandbox world-building platform; grew it to 9,000+ registered users and 20,000+ weekly visitors, monetized through a paid tier.',
+      'Stateful FastAPI and PostgreSQL backend running the simulation engine, persistent user worlds and authenticated accounts across concurrent sessions.',
+      'Cloudflare edge caching, per-IP rate limiting and DDoS protection absorbed a 10x overnight traffic surge with zero downtime, as sole on-call engineer.',
+    ],
   },
   {
     name: 'Shake Shack',
-    kind: 'Full-stack developer, freelance',
+    role: 'Full-stack developer, freelance',
     meta: 'Dec 25 - Feb 26',
     logo: '/logos/shakeshack.png',
+    stack: ['React Native', 'Spring Boot', 'AWS S3'],
+    points: [
+      'Led requirements gathering with the head of technology for ReceiptGuard, a receipt validation platform, and defined its architecture, threat model and scope.',
+      'React Native app capturing GPS-tagged, timestamped photo evidence at each order handoff; one codebase shipped to iOS and Android.',
+      'Spring Boot REST API validating submissions and writing immutable records to S3, creating a tamper-evident chargeback trail across tens of thousands of daily orders.',
+    ],
   },
   {
     name: 'Saftech Designs',
-    kind: 'Full-stack developer',
+    role: 'Full-stack developer',
     meta: 'Jan 23 - Apr 24',
     mono: 'SD',
+    stack: ['Next.js', 'CSP / HSTS'],
+    points: [
+      'Audited 15+ API endpoints, hardened authentication and added security headers with enforced rate limiting.',
+      'Rebuilt the platform in Next.js, migrating off a legacy CMS that could no longer be securely patched.',
+      'Code splitting, lazy loading and image compression cut page load time by 75%.',
+    ],
   },
 ];
 
-const PROJECTS: Row[] = [
+const PROJECTS: Entry[] = [
   {
     name: 'Zocratic MMA',
-    kind: 'UFC fight predictions, 75% accuracy',
+    role: 'UFC fight predictions',
     meta: '4,000+ fighters',
     logo: '/logos/zocratic.png',
     href: 'https://www.zocraticmma.com',
+    stack: ['Python', 'XGBoost', 'FastAPI'],
+    points: [
+      'Python ETL pipeline scraping and normalizing statistics for 4,000+ UFC fighters into PostgreSQL, with engineered features for strike differentials, takedown rates and finish tendencies.',
+      'XGBoost classifier at 75% held-out accuracy, served through FastAPI with automated daily retraining and a paid subscription tier.',
+    ],
   },
   {
     name: 'PostBridge',
-    kind: 'Desktop scheduler for four social platforms',
+    role: 'Desktop social scheduler',
     meta: 'Electron',
     mono: 'PB',
+    stack: ['Electron', 'TypeScript', 'Playwright', 'SQLite'],
+    points: [
+      'One Electron and React codebase ships to Windows and macOS for drafting, scheduling and publishing content across four platforms.',
+      'Playwright automation drives each platform\u2019s publishing flow, with platform-specific media rules and isolated per-account sessions in SQLite to prevent cross-account leakage.',
+    ],
   },
 ];
 
@@ -64,35 +84,6 @@ const SOCIALS = [
   { label: 'Email',    href: 'mailto:00khanshariq@gmail.com',
     path: 'M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z' },
 ];
-
-function List({ rows }: { rows: Row[] }) {
-  return (
-    <div className="home__list">
-      {rows.map((r) => {
-        const inner = (
-          <>
-            {r.logo
-              ? <Image className="home__row-logo" src={r.logo} alt="" width={26} height={26} />
-              : <span className="home__row-mono">{r.mono}</span>}
-            <span>
-              <span className="home__row-name">{r.name}</span>
-              <span className="home__row-desc"> · {r.kind}</span>
-            </span>
-            <span className="home__row-meta">{r.meta}</span>
-          </>
-        );
-
-        return r.href ? (
-          <a key={r.name} className="home__row" href={r.href} target="_blank" rel="noopener noreferrer">
-            {inner}
-          </a>
-        ) : (
-          <div key={r.name} className="home__row">{inner}</div>
-        );
-      })}
-    </div>
-  );
-}
 
 export default function Home() {
   return (
@@ -149,12 +140,12 @@ export default function Home() {
 
         <section className="home__section home__section--first">
           <div className="home__label">Experience</div>
-          <List rows={EXPERIENCE} />
+          <EntryList entries={EXPERIENCE} />
         </section>
 
         <section className="home__section">
           <div className="home__label">Projects</div>
-          <List rows={PROJECTS} />
+          <EntryList entries={PROJECTS} />
         </section>
 
         <section className="home__section">
