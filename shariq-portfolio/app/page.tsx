@@ -99,26 +99,13 @@ export default function Home() {
     <main className="home">
       <div className="home__shell">
 
-        {/* ── Left rail ── */}
-        <aside className="home__rail">
-          <div className="home__name">Shariq Khan</div>
-          <div className="home__role">Full-stack developer</div>
-
-          <div className="home__where">Toronto, Canada</div>
-          <div className="home__available"><i />Open to work</div>
-
-          <div className="home__rail-actions">
-            <a className="home__btn home__btn--solid" href="mailto:00khanshariq@gmail.com">Email</a>
-            <a
-              className="home__btn home__btn--line"
-              href="/shariq-khan-resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Resume
-            </a>
+        {/* ── Header ── */}
+        <header className="home__head">
+          <div>
+            <div className="home__name">Shariq Khan</div>
+            <div className="home__role">Full-stack developer, Toronto</div>
+            <div className="home__available"><i />Open to work</div>
           </div>
-
           <div className="home__socials">
             {SOCIALS.map((s) => (
               <a
@@ -135,61 +122,67 @@ export default function Home() {
               </a>
             ))}
           </div>
-        </aside>
+        </header>
 
-        {/* ── Content ── */}
-        <div className="home__main">
+        <p className="home__lede">
+          I&apos;m a full-stack developer in Toronto. Right now I&apos;m scaling{' '}
+          <b>Sandbox Simulator</b>, a world-building sim I built and run, to 9,000
+          registered users and 20,000 weekly visitors.
+        </p>
+        <p className="home__lede">
+          Alongside it I run Zocratic MMA, which predicts UFC fights, and PostBridge,
+          a desktop scheduler. I build with security in mind because that&apos;s what
+          I studied.
+        </p>
 
-          <section className="home__section">
-            <p className="home__lede">
-              I&apos;m a full-stack developer in Toronto. Right now I&apos;m scaling{' '}
-              <b>Sandbox Simulator</b>, a world-building sim I built and run, to 9,000
-              registered users and 20,000 weekly visitors.
-            </p>
-            <p className="home__lede">
-              Alongside it I run Zocratic MMA, which predicts UFC fights, and PostBridge,
-              a desktop scheduler. I build with security in mind because that&apos;s what
-              I studied.
-            </p>
-          </section>
-
-          <section className="home__section">
-            <div className="home__label">Experience</div>
-            <List rows={EXPERIENCE} />
-          </section>
-
-          <section className="home__section">
-            <div className="home__label">Projects</div>
-            <List rows={PROJECTS} />
-          </section>
-
-          <section className="home__section">
-            <div className="home__label">Playground</div>
-            <PortalCircles />
-          </section>
-
-          <Contributions />
-
-          <section className="home__section">
-            <div className="home__label">Stack</div>
-            {STACK.map(([key, val]) => (
-              <div className="home__stack-row" key={key}>
-                <span className="home__stack-key">{key}</span>
-                <span className="home__stack-val">{val}</span>
-              </div>
-            ))}
-          </section>
-
-          <footer className="home__footer">
-            <span>BSc Computer Security, York University · 2028</span>
-            <span>
-              <a href="/recruiter">Recruiter view</a>
-              {' · '}
-              <a href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer">Blog</a>
-            </span>
-          </footer>
-
+        <div className="home__actions">
+          <a className="home__btn home__btn--solid" href="mailto:00khanshariq@gmail.com">Email</a>
+          <a
+            className="home__btn home__btn--line"
+            href="/shariq-khan-resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Resume
+          </a>
         </div>
+
+        <section className="home__section home__section--first">
+          <div className="home__label">Experience</div>
+          <List rows={EXPERIENCE} />
+        </section>
+
+        <section className="home__section">
+          <div className="home__label">Projects</div>
+          <List rows={PROJECTS} />
+        </section>
+
+        <section className="home__section">
+          <div className="home__label">Playground</div>
+          <PortalCircles />
+        </section>
+
+        <Contributions />
+
+        <section className="home__section">
+          <div className="home__label">Stack</div>
+          {STACK.map(([key, val]) => (
+            <div className="home__stack-row" key={key}>
+              <span className="home__stack-key">{key}</span>
+              <span className="home__stack-val">{val}</span>
+            </div>
+          ))}
+        </section>
+
+        <footer className="home__footer">
+          <span>BSc Computer Security, York University · 2028</span>
+          <span>
+            <a href="/recruiter">Recruiter view</a>
+            {' · '}
+            <a href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer">Blog</a>
+          </span>
+        </footer>
+
       </div>
     </main>
   );
