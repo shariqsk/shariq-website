@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 export interface Entry {
   name: string;
+  year?: string;
   role: string;
   meta: string;
   logo?: string;
@@ -15,21 +16,20 @@ export interface Entry {
   points: string[];
 }
 
-/* Rows stay one line until you open one. The detail is the actual work,
-   so the page reads as a summary and rewards a click rather than dumping
-   three paragraphs per entry up front. */
+/* Rows stay one line until opened; the detail lives in the expanded state
+   so the page reads as a summary first. The year column only prints when
+   it changes, which groups consecutive entries under one label. */
 export default function EntryList({ entries }: { entries: Entry[] }) {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
     <div className="home__list">
-      {entries.map((e) => {
+      {entries.map((e, i) => {
         const isOpen = open === e.name;
+        const year = e.year && e.year !== entries[i - 1]?.year ? e.year : '';
 
         return (
           <div key={e.name} className={`home__entry${isOpen ? ' home__entry--open' : ''}`}>
-            {/* The row toggles; the name stays a real link when there's
-                somewhere to go, so it isn't buried in the open state. */}
             <div
               className="home__entry-head"
               role="button"
@@ -43,11 +43,13 @@ export default function EntryList({ entries }: { entries: Entry[] }) {
                 }
               }}
             >
+              <span className="home__row-year">{year}</span>
+
               {e.logo
                 ? <Image className="home__row-logo" src={e.logo} alt="" width={26} height={26} />
                 : <span className="home__row-mono">{e.mono}</span>}
 
-              <span className="home__entry-titles">
+              <span className="home__entry-name-cell">
                 {e.href ? (
                   <a
                     className="home__row-name home__row-name--link"
@@ -64,9 +66,9 @@ export default function EntryList({ entries }: { entries: Entry[] }) {
                 ) : (
                   <span className="home__row-name">{e.name}</span>
                 )}
-                <span className="home__row-desc">{e.role}</span>
               </span>
 
+              <span className="home__row-desc">{e.role}</span>
               <span className="home__row-meta">{e.meta}</span>
 
               <svg className="home__entry-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>

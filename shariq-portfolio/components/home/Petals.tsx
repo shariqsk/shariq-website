@@ -2,10 +2,8 @@
 
 import { useEffect, useRef } from 'react';
 
-/* Falling petals, drawn on a canvas rather than as DOM nodes so a few dozen
- * of them cost nothing. Deliberately faint: this is background texture, not
- * a feature. Honours prefers-reduced-motion and stops when the tab is
- * hidden, since a background tab gets no frames anyway. */
+/* Falling petals on a canvas: cheaper than DOM nodes at this count.
+ * Honours prefers-reduced-motion and stops while the tab is hidden. */
 
 interface Petal {
   x: number;
@@ -72,8 +70,7 @@ export default function Petals() {
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      /* Density follows area, not width: a tall 4K display needs far more
-         petals than a wide short one to feel the same. */
+      /* Density follows area so tall displays don't look sparse. */
       const count = Math.min(70, Math.max(18, Math.round((w * h) / 34000)));
 
       petals = Array.from({ length: count }, () => makePetal(w, h, true));
@@ -92,7 +89,7 @@ export default function Petals() {
         if (p.y > h + 30) Object.assign(p, makePetal(w, h, false));
 
         const [r, g, b] = TINTS[p.tint];
-        /* Edge-on petals read as thinner and dimmer, which sells the tumble. */
+        /* Edge-on petals are thinner and dimmer. */
         const face = Math.abs(Math.cos(p.flip));
         const alpha = (0.20 + p.z * 0.34) * (0.45 + face * 0.55);
 

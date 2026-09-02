@@ -1,5 +1,6 @@
 import EntryList from '@/components/home/EntryList';
 import Petals from '@/components/home/Petals';
+import Intro from '@/components/home/Intro';
 import PortalCircles from '@/components/home/PortalCircles';
 import Contributions from '@/components/home/Contributions';
 
@@ -8,6 +9,7 @@ import type { Entry } from '@/components/home/EntryList';
 const EXPERIENCE: Entry[] = [
   {
     name: 'Sandbox Simulator',
+    year: '2026',
     role: 'Founder, full-stack',
     meta: 'Oct 24 - now',
     logo: '/logos/sandbox-icon.png',
@@ -21,6 +23,7 @@ const EXPERIENCE: Entry[] = [
   },
   {
     name: 'Shake Shack',
+    year: '2025',
     role: 'Full-stack developer, freelance',
     meta: 'Dec 25 - Feb 26',
     logo: '/logos/shakeshack.png',
@@ -33,6 +36,7 @@ const EXPERIENCE: Entry[] = [
   },
   {
     name: 'Saftech Designs',
+    year: '2023',
     role: 'Full-stack developer',
     meta: 'Jan 23 - Apr 24',
     mono: 'SD',
@@ -132,6 +136,7 @@ const SOCIALS = [
 export default function Home() {
   return (
     <main className="home">
+      <Intro />
       <Petals />
 
       <div className="home__shell">

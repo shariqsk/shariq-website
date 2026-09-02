@@ -251,9 +251,7 @@ html, body {
 
 .os-window-body { flex: 1; overflow: auto; position: relative; background: var(--w95-surface); }
 
-/* ─── Scrollbar ──────────────────────────────────────────────────────────
-   The chunky bevelled bar belongs to the OS/XMB shells; the landing page
-   overrides it with a thin dark one further down. */
+/* ─── Scrollbar ──────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 16px; height: 16px; }
 ::-webkit-scrollbar-track { background: var(--w95-surface); }
 ::-webkit-scrollbar-corner { background: var(--w95-surface); }
@@ -658,10 +656,9 @@ html, body {
 
 
 /* ═══ Landing page ═══════════════════════════════════════════════════════
-   Scoped to .home: the OS themes set a global Tahoma/12px baseline and
-   overflow:hidden on body, so this owns its own type and scroll container.
-   Monochrome by design — the only colour on the page is the two console
-   discs and a project logo on hover. */
+   Scoped to .home. Global styles set a Tahoma/12px baseline and
+   overflow:hidden on body for the other routes, so this owns its own type
+   and scroll container. */
 .home {
   --ink:       #ededed;
   --ink-2:     #8b8b8b;
@@ -693,7 +690,7 @@ html, body {
   background-clip: content-box;
   border: 3px solid transparent;
   border-radius: 999px;
-  box-shadow: none;   /* clears the Win95 bevel inherited from the global rule */
+  box-shadow: none;
 }
 
 .home::-webkit-scrollbar-thumb:hover { background: #3a3a41; background-clip: content-box; }
@@ -753,8 +750,6 @@ html, body {
 
 .home__btn svg { opacity: 0.65; }
 
-/* A hairline of light along the top edge is what stops a flat fill from
-   looking like a coloured rectangle. */
 .home__btn--solid {
   color: #09090b;
   background: linear-gradient(180deg, #ffffff 0%, #dcdce1 100%);
@@ -802,7 +797,7 @@ html, body {
 .home__social:hover { color: #ffffff; background: rgba(255, 255, 255, 0.07); }
 
 /* ── Sections ── */
-.home__section { margin-bottom: 38px; }
+.home__section { margin-bottom: 44px; }
 .home__section:last-of-type { margin-bottom: 0; }
 
 /* First section after the intro gets extra air. */
@@ -817,13 +812,12 @@ html, body {
 .home__lede + .home__lede { margin-top: 12px; }
 .home__lede b { color: var(--ink); font-weight: 500; }
 
-/* Section headings carry the structure, so they sit at text weight in full
-   contrast rather than as faint micro-labels. */
 .home__label {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 500;
+  letter-spacing: -0.02em;
   color: var(--ink);
-  margin-bottom: 4px;
+  margin-bottom: 10px;
 }
 
 /* ── Rows ── */
@@ -867,7 +861,7 @@ a.home__row:hover .home__row-logo {
 
 .home__row-name { font-size: 15px; font-weight: 500; }
 a.home__row:hover .home__row-name { text-decoration: underline; text-underline-offset: 4px; }
-.home__row-desc { font-size: 14px; color: var(--ink-2); }
+.home__row-desc { font-size: 14px; color: var(--ink-2); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .home__row-meta { font-size: 13.5px; color: var(--ink-3); white-space: nowrap; }
 
 /* ── Contributions ── */
@@ -998,38 +992,46 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 .home__disc-xmb__col i { width: 3px; height: 3px; background: #fff; transform: rotate(45deg); }
 .home__disc-xmb__col i:not(:nth-child(2)) { width: 2px; height: 2px; background: rgba(255,255,255,0.45); }
 
-/* ── Expandable entries (experience / projects) ──────────────────────── */
-.home__entry { border-top: 1px solid var(--line); }
-.home__list > .home__entry:last-child { border-bottom: 1px solid var(--line); }
+/* ── Entries (experience / projects) ─────────────────────────────────── */
+.home__list { margin-top: 6px; }
 
 .home__entry-head {
   display: grid;
-  grid-template-columns: 26px 1fr auto 12px;
+  grid-template-columns: 40px 26px minmax(120px, 0.95fr) minmax(0, 1.15fr) auto 12px;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   width: 100%;
-  padding: 13px 0;
-  background: none;
+  padding: 11px 10px;
+  margin: 0 -10px;
+  width: calc(100% + 20px);
   border: none;
+  border-radius: 9px;
+  background: none;
   font: inherit;
   color: inherit;
   text-align: left;
   cursor: pointer;
+  transition: background 0.16s ease;
 }
 
-.home__entry-titles { display: flex; align-items: baseline; gap: 8px; min-width: 0; }
-.home__entry-titles .home__row-desc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.home__entry-head:hover { background: rgba(255, 255, 255, 0.035); }
+
+.home__row-year {
+  font-size: 13px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.home__entry-name-cell { display: flex; align-items: center; min-width: 0; }
 
 .home__entry-chevron {
-  color: var(--ink-3);
+  color: transparent;
   transition: transform 0.22s ease, color 0.16s ease;
 }
 
-.home__entry-head:hover .home__entry-chevron { color: var(--ink); }
-.home__entry-head:hover .home__row-desc { color: #a5a5a5; }
-.home__entry--open .home__entry-chevron { transform: rotate(180deg); color: var(--ink); }
+.home__entry-head:hover .home__entry-chevron { color: var(--ink-3); }
+.home__entry--open .home__entry-chevron { transform: rotate(180deg); color: var(--ink-2); }
 
-/* grid-rows 0fr → 1fr animates height without measuring it in JS */
 .home__entry-body {
   display: grid;
   grid-template-rows: 0fr;
@@ -1042,7 +1044,7 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 
 .home__points {
   list-style: none;
-  padding: 0 0 4px 38px;
+  padding: 2px 0 4px 80px;
   margin: 0;
 }
 
@@ -1051,6 +1053,7 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
   font-size: 14px;
   color: var(--ink-2);
   padding: 3px 0;
+  max-width: 62ch;
 }
 
 .home__points li::before {
@@ -1063,7 +1066,7 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 
 .home__entry-foot {
   display: flex; flex-wrap: wrap; align-items: center; gap: 6px;
-  padding: 8px 0 14px 38px;
+  padding: 8px 0 16px 80px;
 }
 
 .home__tag {
@@ -1077,41 +1080,15 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 .home__entry-link { font-size: 12.5px; color: var(--ink-2); margin-left: 2px; }
 .home__entry-link:hover { color: var(--ink); }
 
-@media (max-width: 560px) {
-  .home__entry-head { grid-template-columns: 26px 1fr 12px; row-gap: 2px; }
-  .home__entry-titles { flex-direction: column; gap: 0; }
-  .home__entry-titles .home__row-desc { white-space: normal; }
-  .home__row-meta { grid-column: 2; }
+@media (max-width: 620px) {
+  .home__entry-head {
+    grid-template-columns: 26px 1fr 12px;
+    row-gap: 3px;
+  }
+
+  .home__row-year { display: none; }
+  .home__row-desc, .home__row-meta { grid-column: 2; }
   .home__points, .home__entry-foot { padding-left: 0; }
-}
-
-/* ── Header nav / links ──────────────────────────────────────────────── */
-.home__head-right {
-  display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
-}
-
-.home__nav { display: flex; gap: 16px; font-size: 13.5px; }
-
-.home__nav a {
-  color: var(--ink-3);
-  transition: color 0.16s ease;
-}
-
-.home__nav a:hover { color: var(--ink); }
-
-.home__row-name--link {
-  display: inline-flex; align-items: center; gap: 4px;
-}
-
-.home__row-name--link svg { color: var(--ink-3); transition: color 0.16s ease; }
-.home__row-name--link:hover { text-decoration: underline; text-underline-offset: 4px; }
-.home__row-name--link:hover svg { color: var(--ink); }
-
-.home__footer-links { display: flex; flex-wrap: wrap; gap: 14px; }
-
-@media (max-width: 560px) {
-  .home__head-right { align-items: flex-start; }
-  .home__head { flex-direction: column; gap: 16px; }
 }
 
 /* ── Entry screenshot ────────────────────────────────────────────────── */
@@ -1153,4 +1130,29 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
   .home__petals { display: none; }
+}
+
+/* ── Intro ───────────────────────────────────────────────────────────── */
+.home__intro {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #0a0a0b;
+  pointer-events: none;
+  animation: home-intro-out 0.42s ease 1.24s forwards;
+}
+
+@keyframes home-intro-out {
+  to { opacity: 0; }
+}
+
+.home__intro--run ~ .home__shell { animation: home-content-in 0.6s ease 1.15s backwards; }
+
+@keyframes home-content-in {
+  from { opacity: 0; transform: translateY(6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__intro { display: none; }
+  .home__intro--run ~ .home__shell { animation: none; }
 }
