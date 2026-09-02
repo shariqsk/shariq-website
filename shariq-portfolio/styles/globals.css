@@ -1097,3 +1097,17 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 @media (max-width: 560px) {
   .home__shot { margin-left: 0; }
 }
+
+/* ── Falling petals ──────────────────────────────────────────────────── */
+.home__petals {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.home__shell { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .home__petals { display: none; }
+}

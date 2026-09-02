@@ -1,4 +1,5 @@
 import EntryList from '@/components/home/EntryList';
+import Petals from '@/components/home/Petals';
 import PortalCircles from '@/components/home/PortalCircles';
 import Contributions from '@/components/home/Contributions';
 
@@ -129,6 +130,8 @@ const SOCIALS = [
 export default function Home() {
   return (
     <main className="home">
+      <Petals />
+
       <div className="home__shell">
 
         {/* ── Header ── */}
