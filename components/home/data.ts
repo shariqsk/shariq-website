@@ -8,6 +8,7 @@ export const EXPERIENCE: Entry[] = [
     meta: 'Oct 24 - now',
     logo: '/logos/sandbox-icon.png',
     href: 'https://sandboxsimulator.com',
+    current: true,
     stack: ['FastAPI', 'PostgreSQL', 'Cloudflare'],
     points: [
       'Built and shipped a sandbox world-building platform; grew it to 9,000+ registered users and 20,000+ weekly visitors, monetized through a paid tier.',

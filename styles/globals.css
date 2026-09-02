@@ -852,7 +852,8 @@ html, body {
 }
 
 .home__entry-head:hover .home__row-logo,
-a.home__row:hover .home__row-logo {
+a.home__row:hover .home__row-logo,
+.home__row-logo--current {
   filter: grayscale(0);
   opacity: 1;
 }

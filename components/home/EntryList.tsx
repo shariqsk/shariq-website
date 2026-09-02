@@ -13,6 +13,7 @@ export interface Entry {
   href?: string;
   stack?: string[];
   shot?: string;
+  current?: boolean;
   points: string[];
 }
 
@@ -46,7 +47,13 @@ export default function EntryList({ entries }: { entries: Entry[] }) {
               <span className="home__row-year">{year}</span>
 
               {e.logo
-                ? <Image className="home__row-logo" src={e.logo} alt="" width={26} height={26} />
+                ? <Image
+                    className={`home__row-logo${e.current ? ' home__row-logo--current' : ''}`}
+                    src={e.logo}
+                    alt=""
+                    width={26}
+                    height={26}
+                  />
                 : <span className="home__row-mono">{e.mono}</span>}
 
               <span className="home__entry-name-cell">
