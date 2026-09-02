@@ -39,7 +39,6 @@ export default function Home() {
                   </svg>
                 </a>
               ))}
-              <ThemeToggle />
             </div>
           </div>
         </header>
@@ -52,6 +51,10 @@ export default function Home() {
         <Contributions />
 
         <Link className="home__next" href="/other">other</Link>
+
+        <div className="home__theme-row">
+          <ThemeToggle />
+        </div>
 
       </div>
     </main>

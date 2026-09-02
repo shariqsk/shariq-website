@@ -1178,17 +1178,39 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 .home__back svg { transition: transform 0.18s ease; }
 .home__back:hover svg { transform: translateX(-3px); }
 
-.home__theme {
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  font: inherit;
+/* ── Theme toggle ────────────────────────────────────────────────────── */
+.home__theme-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 46px;
 }
 
-/* /other has no icon row, so the toggle sits opposite the back link. */
-.home__other-tools {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: -30px;
+.home__theme {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: color 0.16s ease, border-color 0.16s ease, background 0.16s ease;
 }
+
+.home__theme:hover {
+  color: var(--ink);
+  border-color: var(--line-hi);
+  background: var(--hover);
+}
+
+/* The wipe is driven from the button; these just stop the default
+   cross-fade from muddying it. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) { z-index: 1; }
+::view-transition-new(root) { z-index: 2; }

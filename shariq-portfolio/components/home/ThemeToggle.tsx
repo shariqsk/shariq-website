@@ -1,26 +1,65 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { useTheme } from 'next-themes';
 
 /* Renders a neutral placeholder until mounted: the resolved theme isn't
-   known during SSR, so drawing the icon early would flash the wrong one. */
+   known during SSR, so drawing the icon early would flash the wrong one.
+   Switching runs as a view transition, with the new theme wiped in as a
+   circle growing out of the button. */
 export default function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => setMounted(true), []);
 
   const isLight = mounted && resolvedTheme === 'light';
 
+  const switchTheme = () => {
+    const next = isLight ? 'dark' : 'light';
+    const button = ref.current;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!document.startViewTransition || !button || reduced) {
+      setTheme(next);
+
+      return;
+    }
+
+    const box = button.getBoundingClientRect();
+    const x = box.left + box.width / 2;
+    const y = box.top + box.height / 2;
+    const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+
+    const transition = document.startViewTransition(() => {
+      flushSync(() => setTheme(next));
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {
+          clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`],
+        },
+        {
+          duration: 620,
+          easing: 'cubic-bezier(0.3, 0.9, 0.3, 1)',
+          pseudoElement: '::view-transition-new(root)',
+        },
+      );
+    });
+  };
+
   return (
     <button
+      ref={ref}
       type="button"
-      className="home__social home__theme"
+      className="home__theme"
       aria-label={isLight ? 'Switch to dark theme' : 'Switch to light theme'}
-      onClick={() => setTheme(isLight ? 'dark' : 'light')}
+      onClick={switchTheme}
     >
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden>
         {isLight ? (
           <path d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z" fill="currentColor" stroke="none" />
         ) : (
@@ -30,6 +69,7 @@ export default function ThemeToggle() {
           </>
         )}
       </svg>
+      {isLight ? 'Dark' : 'Light'}
     </button>
   );
 }

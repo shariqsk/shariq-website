@@ -26,10 +26,6 @@ export default function Other() {
           Shariq Khan
         </Link>
 
-        <div className="home__other-tools">
-          <ThemeToggle />
-        </div>
-
         <section className="home__section home__section--first">
           <div className="home__label">Projects</div>
           <EntryList entries={PROJECTS} />
@@ -54,6 +50,10 @@ export default function Other() {
             </div>
           ))}
         </section>
+
+        <div className="home__theme-row">
+          <ThemeToggle />
+        </div>
 
       </div>
     </main>
