@@ -51,6 +51,7 @@ export default function Intro() {
     canvas.style.height = `${h}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+    const light = document.documentElement.classList.contains('light');
     const palette = loadPalette().colors.map(toRgb);
     const cols = Math.ceil(w / CELL);
     const rows = Math.ceil(h / CELL);
@@ -66,7 +67,7 @@ export default function Intro() {
         const diag = (c / cols + r / rows) / 2;
 
         delay.push(diag * SPREAD + Math.random() * SPREAD * 0.28);
-        shade.push(18 + Math.random() * 22);
+        shade.push(light ? 226 + Math.random() * 20 : 18 + Math.random() * 22);
         /* Weighted towards the deeper end so the wave reads as a wash with
            bright flecks, not confetti. */
         tone.push(Math.random() < 0.18 ? Math.floor(Math.random() * 2) : 2 + Math.floor(Math.random() * 2));

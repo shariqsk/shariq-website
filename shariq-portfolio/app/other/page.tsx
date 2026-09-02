@@ -4,6 +4,7 @@ import Link from 'next/link';
 import EntryList from '@/components/home/EntryList';
 import Petals from '@/components/home/Petals';
 import PortalCircles from '@/components/home/PortalCircles';
+import ThemeToggle from '@/components/home/ThemeToggle';
 import { EDUCATION, PROJECTS, STACK } from '@/components/home/data';
 
 export const metadata: Metadata = {
@@ -24,6 +25,10 @@ export default function Other() {
           </svg>
           Shariq Khan
         </Link>
+
+        <div className="home__other-tools">
+          <ThemeToggle />
+        </div>
 
         <section className="home__section home__section--first">
           <div className="home__label">Projects</div>

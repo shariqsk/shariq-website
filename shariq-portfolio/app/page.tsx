@@ -6,6 +6,7 @@ import Intro from '@/components/home/Intro';
 import Petals from '@/components/home/Petals';
 import ScrambleName from '@/components/home/ScrambleName';
 import Status from '@/components/home/Status';
+import ThemeToggle from '@/components/home/ThemeToggle';
 import { EXPERIENCE, SOCIALS } from '@/components/home/data';
 
 export default function Home() {
@@ -38,6 +39,7 @@ export default function Home() {
                   </svg>
                 </a>
               ))}
+              <ThemeToggle />
             </div>
           </div>
         </header>

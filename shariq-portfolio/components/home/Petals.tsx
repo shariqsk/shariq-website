@@ -19,11 +19,22 @@ interface Petal {
   tint: number;
 }
 
-const TINTS = [
+const TINTS_DARK = [
   [214, 58, 78],
   [178, 38, 58],
   [140, 26, 44],
 ];
+
+/* On light the same reds read as blossom rather than embers. */
+const TINTS_LIGHT = [
+  [235, 130, 155],
+  [222, 96, 126],
+  [198, 66, 96],
+];
+
+const isLight = () => document.documentElement.classList.contains('light');
+
+let TINTS = TINTS_DARK;
 
 function makePetal(w: number, h: number, seeded: boolean): Petal {
   const z = 0.35 + Math.random() * 0.65;
@@ -58,6 +69,14 @@ export default function Petals() {
     let h = 0;
     let petals: Petal[] = [];
     let frame = 0;
+
+    TINTS = isLight() ? TINTS_LIGHT : TINTS_DARK;
+
+    const themes = new MutationObserver(() => {
+      TINTS = isLight() ? TINTS_LIGHT : TINTS_DARK;
+    });
+
+    themes.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -129,6 +148,7 @@ export default function Petals() {
 
     return () => {
       cancelAnimationFrame(frame);
+      themes.disconnect();
       window.removeEventListener('resize', resize);
       document.removeEventListener('visibilitychange', onVisibility);
     };

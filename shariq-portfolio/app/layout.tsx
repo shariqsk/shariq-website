@@ -96,7 +96,7 @@ export default function RootLayout({
           fontUi.variable,
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers themeProps={{ attribute: "class", defaultTheme: "dark", enableSystem: true }}>
           {children}
         </Providers>
         <Analytics />

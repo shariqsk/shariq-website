@@ -665,12 +665,26 @@ html, body {
   --ink-3:     #5a5a5a;
   --line:      #1c1c1e;
   --line-hi:   #2e2e31;
+  --bg:        #0a0a0b;
+  --tile:      #141416;
+  --hover:     rgba(255, 255, 255, 0.035);
+  --hover-2:   rgba(255, 255, 255, 0.07);
+  --select:    rgba(255, 255, 255, 0.16);
+  --thumb:     #26262a;
+  --thumb-hi:  #3a3a41;
+  --icon:      #c8c8d0;
+  --icon-hi:   #ffffff;
+  --g0:        #141416;
+  --g1:        #2a2a2e;
+  --g2:        #4a4a50;
+  --g3:        #75757d;
+  --g4:        #b4b4bd;
 
   position: fixed;
   inset: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  background: #0a0a0b;
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--font-ui), var(--font-sans), system-ui, sans-serif;
   font-size: 15px;
@@ -679,24 +693,48 @@ html, body {
   -webkit-font-smoothing: antialiased;
 
   scrollbar-width: thin;
-  scrollbar-color: #2a2a2e transparent;
+  scrollbar-color: var(--thumb) transparent;
 }
 
 .home::-webkit-scrollbar { width: 11px; }
 .home::-webkit-scrollbar-track { background: transparent; }
 
 .home::-webkit-scrollbar-thumb {
-  background: #26262a;
+  background: var(--thumb);
   background-clip: content-box;
   border: 3px solid transparent;
   border-radius: 999px;
   box-shadow: none;
 }
 
-.home::-webkit-scrollbar-thumb:hover { background: #3a3a41; background-clip: content-box; }
+.home::-webkit-scrollbar-thumb:hover { background: var(--thumb-hi); background-clip: content-box; }
+
+/* Light theme: next-themes puts .light on <html>. Only the tokens change;
+   every rule below reads from them. */
+:root.light .home {
+  --ink:       #16161a;
+  --ink-2:     #5f5f6b;
+  --ink-3:     #8b8b96;
+  --line:      #e6e6ea;
+  --line-hi:   #d2d2d9;
+  --bg:        #fbfbfc;
+  --tile:      #f1f1f4;
+  --hover:     rgba(0, 0, 0, 0.035);
+  --hover-2:   rgba(0, 0, 0, 0.06);
+  --select:    rgba(0, 0, 0, 0.12);
+  --thumb:     #d5d5dc;
+  --thumb-hi:  #b9b9c3;
+  --icon:      #55555f;
+  --icon-hi:   #16161a;
+  --g0:        #ececef;
+  --g1:        #cfcfd6;
+  --g2:        #a6a6b1;
+  --g3:        #74747f;
+  --g4:        #3d3d47;
+}
 
 .home :where(a) { color: inherit; text-decoration: none; }
-.home ::selection { background: rgba(255, 255, 255, 0.16); }
+.home ::selection { background: var(--select); }
 
 .home__shell {
   width: min(820px, 100%);
@@ -750,11 +788,11 @@ html, body {
   width: 30px; height: 30px;
   margin: -6px;
   border-radius: 9px;
-  color: #c8c8d0;
+  color: var(--icon);
   transition: color 0.16s ease, background 0.16s ease;
 }
 
-.home__social:hover { color: #ffffff; background: rgba(255, 255, 255, 0.07); }
+.home__social:hover { color: var(--icon-hi); background: var(--hover-2); }
 
 /* ── Sections ── */
 .home__section { margin-bottom: 32px; }
@@ -796,7 +834,7 @@ html, body {
   width: 26px; height: 26px;
   border-radius: 7px;
   object-fit: cover;
-  background: #101012;
+  background: var(--tile);
   filter: grayscale(0.7);
   opacity: 0.88;
   transition: filter 0.2s ease, opacity 0.2s ease;
@@ -815,7 +853,7 @@ a.home__row:hover .home__row-logo {
   font-size: 10.5px; font-weight: 600;
   letter-spacing: 0.02em;
   color: var(--ink-2);
-  background: #141416;
+  background: var(--tile);
   border: 1px solid var(--line-hi);
 }
 
@@ -832,13 +870,13 @@ a.home__row:hover .home__row-name { text-decoration: underline; text-underline-o
   aspect-ratio: 1;
   max-height: 11px;
   border-radius: 2px;
-  background: #141416;
+  background: var(--g0);
 }
 
-.home__graph-day[data-level="1"] { background: #2a2a2e; }
-.home__graph-day[data-level="2"] { background: #4a4a50; }
-.home__graph-day[data-level="3"] { background: #75757d; }
-.home__graph-day[data-level="4"] { background: #b4b4bd; }
+.home__graph-day[data-level="1"] { background: var(--g1); }
+.home__graph-day[data-level="2"] { background: var(--g2); }
+.home__graph-day[data-level="3"] { background: var(--g3); }
+.home__graph-day[data-level="4"] { background: var(--g4); }
 
 .home__graph-foot {
   display: flex; align-items: center; justify-content: space-between;
@@ -965,7 +1003,7 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
   transition: background 0.16s ease;
 }
 
-.home__entry-head:hover { background: rgba(255, 255, 255, 0.035); }
+.home__entry-head:hover { background: var(--hover); }
 
 .home__row-year {
   font-size: 13px;
@@ -1048,7 +1086,7 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
   border: 1px solid var(--line);
   border-radius: 10px;
   overflow: hidden;
-  background: #0f0f11;
+  background: var(--tile);
   line-height: 0;
 }
 
@@ -1139,3 +1177,18 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 .home__back:hover { color: var(--ink); }
 .home__back svg { transition: transform 0.18s ease; }
 .home__back:hover svg { transform: translateX(-3px); }
+
+.home__theme {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* /other has no icon row, so the toggle sits opposite the back link. */
+.home__other-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -30px;
+}
