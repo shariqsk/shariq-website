@@ -213,9 +213,9 @@ const CATEGORIES: Category[] = [
       {
         id: 'projects-all',
         label: 'All Projects',
-        sublabel: 'Open the Projects window',
+        sublabel: 'See everything on the main site',
         icon: `${ICON_BASE}/folder.png`,
-        action: () => { window.location.href = '/projects'; },
+        action: () => { window.location.href = '/'; },
       },
       {
         id: 'resume',
