@@ -27,18 +27,42 @@ export default function EntryList({ entries }: { entries: Entry[] }) {
 
         return (
           <div key={e.name} className={`home__entry${isOpen ? ' home__entry--open' : ''}`}>
-            <button
-              type="button"
+            {/* The row toggles; the name stays a real link when there's
+                somewhere to go, so it isn't buried in the open state. */}
+            <div
               className="home__entry-head"
+              role="button"
+              tabIndex={0}
               aria-expanded={isOpen}
               onClick={() => setOpen(isOpen ? null : e.name)}
+              onKeyDown={(ev) => {
+                if (ev.key === 'Enter' || ev.key === ' ') {
+                  ev.preventDefault();
+                  setOpen(isOpen ? null : e.name);
+                }
+              }}
             >
               {e.logo
                 ? <Image className="home__row-logo" src={e.logo} alt="" width={26} height={26} />
                 : <span className="home__row-mono">{e.mono}</span>}
 
               <span className="home__entry-titles">
-                <span className="home__row-name">{e.name}</span>
+                {e.href ? (
+                  <a
+                    className="home__row-name home__row-name--link"
+                    href={e.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(ev) => ev.stopPropagation()}
+                  >
+                    {e.name}
+                    <svg width="9" height="9" viewBox="0 0 10 10" fill="none" aria-hidden>
+                      <path d="M3 7l4-4M3.6 3H7v3.4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </a>
+                ) : (
+                  <span className="home__row-name">{e.name}</span>
+                )}
                 <span className="home__row-desc">{e.role}</span>
               </span>
 
@@ -47,7 +71,7 @@ export default function EntryList({ entries }: { entries: Entry[] }) {
               <svg className="home__entry-chevron" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
                 <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </button>
+            </div>
 
             <div className="home__entry-body">
               <div className="home__entry-body-inner">
@@ -55,12 +79,12 @@ export default function EntryList({ entries }: { entries: Entry[] }) {
                   {e.points.map((p) => <li key={p}>{p}</li>)}
                 </ul>
 
-                {(e.stack || e.href) && (
+                {e.stack && (
                   <div className="home__entry-foot">
-                    {e.stack?.map((t) => <span key={t} className="home__tag">{t}</span>)}
+                    {e.stack.map((t) => <span key={t} className="home__tag">{t}</span>)}
                     {e.href && (
                       <a className="home__entry-link" href={e.href} target="_blank" rel="noopener noreferrer">
-                        Visit ↗
+                        {e.href.replace(/^https?:\/\/(www\.)?/, '')} ↗
                       </a>
                     )}
                   </div>

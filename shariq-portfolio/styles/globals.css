@@ -1044,3 +1044,32 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
   .home__row-meta { grid-column: 2; }
   .home__points, .home__entry-foot { padding-left: 0; }
 }
+
+/* ── Header nav / links ──────────────────────────────────────────────── */
+.home__head-right {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+}
+
+.home__nav { display: flex; gap: 16px; font-size: 13.5px; }
+
+.home__nav a {
+  color: var(--ink-3);
+  transition: color 0.16s ease;
+}
+
+.home__nav a:hover { color: var(--ink); }
+
+.home__row-name--link {
+  display: inline-flex; align-items: center; gap: 4px;
+}
+
+.home__row-name--link svg { color: var(--ink-3); transition: color 0.16s ease; }
+.home__row-name--link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.home__row-name--link:hover svg { color: var(--ink); }
+
+.home__footer-links { display: flex; flex-wrap: wrap; gap: 14px; }
+
+@media (max-width: 560px) {
+  .home__head-right { align-items: flex-start; }
+  .home__head { flex-direction: column; gap: 16px; }
+}

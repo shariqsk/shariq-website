@@ -10,6 +10,7 @@ const EXPERIENCE: Entry[] = [
     role: 'Founder, full-stack',
     meta: 'Oct 24 - now',
     logo: '/logos/sandbox.png',
+    href: 'https://sandboxsimulator.com',
     stack: ['FastAPI', 'PostgreSQL', 'Cloudflare'],
     points: [
       'Built and shipped a sandbox world-building platform; grew it to 9,000+ registered users and 20,000+ weekly visitors, monetized through a paid tier.',
@@ -61,6 +62,7 @@ const PROJECTS: Entry[] = [
     role: 'Desktop social scheduler',
     meta: 'Electron',
     mono: 'PB',
+    href: 'https://github.com/shariqsk',
     stack: ['Electron', 'TypeScript', 'Playwright', 'SQLite'],
     points: [
       'One Electron and React codebase ships to Windows and macOS for drafting, scheduling and publishing content across four platforms.',
@@ -97,21 +99,28 @@ export default function Home() {
             <div className="home__role">Full-stack developer, Toronto</div>
             <div className="home__available"><i />Open to work</div>
           </div>
-          <div className="home__socials">
-            {SOCIALS.map((s) => (
-              <a
-                key={s.label}
-                className="home__social"
-                href={s.href}
-                aria-label={s.label}
-                target={s.href.startsWith('mailto:') ? undefined : '_blank'}
-                rel="noopener noreferrer"
-              >
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                  <path d={s.path} />
-                </svg>
-              </a>
-            ))}
+          <div className="home__head-right">
+            <nav className="home__nav">
+              <a href="/projects">Projects</a>
+              <a href="/recruiter">Recruiter</a>
+              <a href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer">Blog</a>
+            </nav>
+            <div className="home__socials">
+              {SOCIALS.map((s) => (
+                <a
+                  key={s.label}
+                  className="home__social"
+                  href={s.href}
+                  aria-label={s.label}
+                  target={s.href.startsWith('mailto:') ? undefined : '_blank'}
+                  rel="noopener noreferrer"
+                >
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                    <path d={s.path} />
+                  </svg>
+                </a>
+              ))}
+            </div>
           </div>
         </header>
 
@@ -167,10 +176,12 @@ export default function Home() {
 
         <footer className="home__footer">
           <span>BSc Computer Security, York University · 2028</span>
-          <span>
-            <a href="/recruiter">Recruiter view</a>
-            {' · '}
-            <a href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer">Blog</a>
+          <span className="home__footer-links">
+            <a href="/projects">Projects</a>
+            <a href="/recruiter">Recruiter</a>
+            <a href="/os">SK-OS</a>
+            <a href="/xmb">XMB</a>
+            <a href="https://github.com/shariqsk" target="_blank" rel="noopener noreferrer">GitHub</a>
           </span>
         </footer>
 
