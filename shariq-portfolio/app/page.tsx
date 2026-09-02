@@ -5,6 +5,7 @@ import EntryList from '@/components/home/EntryList';
 import Intro from '@/components/home/Intro';
 import Petals from '@/components/home/Petals';
 import ScrambleName from '@/components/home/ScrambleName';
+import Status from '@/components/home/Status';
 import { EXPERIENCE, SOCIALS } from '@/components/home/data';
 
 export default function Home() {
@@ -19,7 +20,7 @@ export default function Home() {
           <div>
             <h1 className="home__name"><ScrambleName delay={950} text="Shariq Khan" /></h1>
             <div className="home__role">Full-stack developer, Toronto</div>
-            <div className="home__available"><i />Available for work</div>
+            <Status />
           </div>
           <div className="home__head-right">
             <div className="home__socials">

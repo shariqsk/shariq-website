@@ -720,16 +720,60 @@ html, body {
 
 .home__role { font-size: 14.5px; color: var(--ink-2); letter-spacing: 0; }
 
-.home__available {
-  display: inline-flex; align-items: center; gap: 7px;
-  font-size: 13.5px; color: var(--ink-3);
-  margin-top: 3px;
+.home__status {
+  --status: #4ade80;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 7px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--ink-3);
+  transition: color 0.18s ease;
 }
 
-.home__available i {
-  width: 5px; height: 5px; border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.14);
+.home__status:hover { color: var(--ink-2); }
+
+.home__status-dot {
+  position: relative;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--status);
+  flex-shrink: 0;
+}
+
+/* Ring expanding out of the dot, like a live indicator. */
+.home__status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--status);
+  animation: home-status-ping 2.4s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+@keyframes home-status-ping {
+  0%        { transform: scale(0.6); opacity: 0.75; }
+  70%, 100% { transform: scale(2.1); opacity: 0; }
+}
+
+.home__status-caret {
+  width: 6px; height: 12px;
+  background: var(--status);
+  opacity: 0.85;
+  animation: home-status-blink 1.1s steps(1) infinite;
+}
+
+@keyframes home-status-blink {
+  0%, 50%   { opacity: 0.85; }
+  51%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__status-dot::after,
+  .home__status-caret { animation: none; }
 }
 
 .home__actions { display: flex; gap: 8px; margin-top: 22px; }
@@ -1181,4 +1225,3 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
 .home__back:hover { color: var(--ink); }
 .home__back svg { transition: transform 0.18s ease; }
 .home__back:hover svg { transform: translateX(-3px); }
-
