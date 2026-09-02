@@ -132,6 +132,8 @@ const SOCIALS = [
     path: 'M17.5 3h3.1l-6.8 7.7L21.8 21h-6.2l-4.9-6.3L5.1 21H2l7.3-8.3L2.2 3h6.4l4.4 5.8L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z' },
   { label: 'Email',    href: 'mailto:00khanshariq@gmail.com',
     path: 'M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z' },
+  { label: 'Resume',   href: '/shariq-khan-resume.pdf',
+    path: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM8 13h8v1.6H8V13zm0 3.4h8V18H8v-1.6z' },
 ];
 
 export default function Home() {
@@ -147,7 +149,7 @@ export default function Home() {
           <div>
             <h1 className="home__name"><ScrambleName delay={950} text="Shariq Khan" /></h1>
             <div className="home__role">Full-stack developer, Toronto</div>
-            <div className="home__available"><i />Open to work</div>
+            <div className="home__available"><i />Available for work</div>
           </div>
           <div className="home__head-right">
             <div className="home__socials">
@@ -168,32 +170,6 @@ export default function Home() {
             </div>
           </div>
         </header>
-
-        <p className="home__lede">
-          I&apos;m scaling <b>Sandbox Simulator</b>, a world-building sim I built and
-          run, to 9,000 registered users. Alongside it I run Zocratic MMA, which
-          predicts UFC fights, and PostBridge, a desktop scheduler.
-        </p>
-
-        <div className="home__actions">
-          <a className="home__btn home__btn--solid" href="mailto:00khanshariq@gmail.com">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-              <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4.2-8 5-8-5V6l8 5 8-5v2.2z" />
-            </svg>
-            Email
-          </a>
-          <a
-            className="home__btn home__btn--line"
-            href="/shariq-khan-resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
-            </svg>
-            Resume
-          </a>
-        </div>
 
         <section className="home__section home__section--first">
           <div className="home__label">Experience</div>

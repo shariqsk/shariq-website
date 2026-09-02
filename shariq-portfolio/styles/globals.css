@@ -784,14 +784,14 @@ html, body {
 .home__btn:active { transform: translateY(0); }
 .home__btn:hover svg { opacity: 0.9; }
 
-.home__socials { display: flex; gap: 14px; padding-top: 6px; }
+.home__socials { display: flex; gap: 12px; padding-top: 4px; }
 
 .home__social {
   display: grid; place-items: center;
   width: 30px; height: 30px;
   margin: -6px;
   border-radius: 9px;
-  color: #9a9aa2;
+  color: #c8c8d0;
   transition: color 0.16s ease, background 0.16s ease;
 }
 
@@ -802,7 +802,7 @@ html, body {
 .home__section:last-of-type { margin-bottom: 0; }
 
 /* First section after the intro gets extra air. */
-.home__section--first { margin-top: 46px; }
+.home__section--first { margin-top: 52px; }
 
 .home__lede {
   font-size: 15.5px;
