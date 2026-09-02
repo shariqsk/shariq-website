@@ -11,6 +11,7 @@ export interface Entry {
   mono?: string;
   href?: string;
   stack?: string[];
+  shot?: string;
   points: string[];
 }
 
@@ -78,6 +79,12 @@ export default function EntryList({ entries }: { entries: Entry[] }) {
                 <ul className="home__points">
                   {e.points.map((p) => <li key={p}>{p}</li>)}
                 </ul>
+
+                {e.shot && (
+                  <div className="home__shot">
+                    <Image src={e.shot} alt={`${e.name} screenshot`} width={960} height={540} />
+                  </div>
+                )}
 
                 {e.stack && (
                   <div className="home__entry-foot">

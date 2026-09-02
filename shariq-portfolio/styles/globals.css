@@ -1073,3 +1073,30 @@ a.home__row:hover .home__portal-disc { filter: none; opacity: 1; }
   .home__head-right { align-items: flex-start; }
   .home__head { flex-direction: column; gap: 16px; }
 }
+
+/* ── Entry screenshot ────────────────────────────────────────────────── */
+.home__shot {
+  margin: 10px 0 4px 38px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0f0f11;
+  line-height: 0;
+}
+
+.home__shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 260px;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0.92;
+  transition: opacity 0.2s ease;
+}
+
+.home__shot:hover img { opacity: 1; }
+
+@media (max-width: 560px) {
+  .home__shot { margin-left: 0; }
+}
