@@ -1,26 +1,41 @@
+import Image from 'next/image';
+
 import PortalCircles from '@/components/home/PortalCircles';
 import Contributions from '@/components/home/Contributions';
 
-/* href is optional: a project with no confirmed public URL renders as plain
-   text rather than guessing a link. */
-const PROJECTS: { name: string; href?: string; desc: string; meta: string }[] = [
-  { name: 'Sandbox Simulator', desc: 'World-building sim you can leave running',              meta: '9,000+ users' },
-  { name: 'Zocratic MMA', href: 'https://zocraticmma.com', desc: 'UFC fight predictions, 75% held-out accuracy', meta: '4,000+ fighters' },
-  { name: 'PostBridge',        desc: 'Desktop app that schedules posts to four platforms',    meta: 'Electron' },
+const WORK = [
+  {
+    name: 'Sandbox Simulator',
+    kind: 'World-building sim, founder',
+    meta: '9,000+ users',
+    logo: '/logos/sandbox.png',
+  },
+  {
+    name: 'Zocratic MMA',
+    kind: 'UFC fight predictions, 75% accuracy',
+    meta: '4,000+ fighters',
+    logo: '/logos/zocratic.png',
+    href: 'https://www.zocraticmma.com',
+  },
+  {
+    name: 'PostBridge',
+    kind: 'Desktop scheduler for four social platforms',
+    meta: 'Electron',
+    mono: 'PB',
+  },
 ];
 
 const EXPERIENCE = [
-  { role: 'Founder, full-stack',  at: 'Sandbox Simulator',      when: 'Oct 24 - now' },
+  { role: 'Founder, full-stack',  at: 'Sandbox Simulator',       when: 'Oct 24 - now' },
   { role: 'Full-stack developer', at: 'Shake Shack (freelance)', when: 'Dec 25 - Feb 26' },
   { role: 'Full-stack developer', at: 'Saftech Designs',         when: 'Jan 23 - Apr 24' },
 ];
 
-const SKILLS: [string, string[]][] = [
-  ['Languages',  ['Python', 'TypeScript', 'Java', 'C', 'SQL', 'Bash']],
-  ['Frameworks', ['React', 'React Native', 'Next.js', 'FastAPI', 'Spring Boot', 'Electron']],
-  ['Data',       ['PostgreSQL', 'SQLite', 'Supabase', 'XGBoost', 'Pandas']],
-  ['Infra',      ['AWS', 'Cloudflare', 'Docker', 'GitHub Actions']],
-  ['Security',   ['Auth', 'CSP / HSTS', 'Rate limiting', 'JUnit']],
+const STACK: [string, string][] = [
+  ['Languages',  'Python, TypeScript, Java, C, SQL'],
+  ['Frameworks', 'React, React Native, Next.js, FastAPI, Spring Boot, Electron'],
+  ['Data',       'PostgreSQL, SQLite, Supabase, XGBoost'],
+  ['Infra',      'AWS, Cloudflare, Docker, GitHub Actions'],
 ];
 
 const SOCIALS = [
@@ -35,13 +50,28 @@ const SOCIALS = [
 export default function Home() {
   return (
     <main className="home">
-      <div className="home__inner">
+      <div className="home__shell">
 
-        <header className="home__head">
-          <div>
-            <div className="home__name">Shariq Khan</div>
-            <div className="home__role">Full-stack developer</div>
+        {/* ── Left rail ── */}
+        <aside className="home__rail">
+          <div className="home__name">Shariq Khan</div>
+          <div className="home__role">Full-stack developer</div>
+
+          <div className="home__where">Toronto, Canada</div>
+          <div className="home__available"><i />Open to work</div>
+
+          <div className="home__rail-actions">
+            <a className="home__btn home__btn--solid" href="mailto:00khanshariq@gmail.com">Email</a>
+            <a
+              className="home__btn home__btn--line"
+              href="/shariq-khan-resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Resume
+            </a>
           </div>
+
           <div className="home__socials">
             {SOCIALS.map((s) => (
               <a
@@ -58,102 +88,90 @@ export default function Home() {
               </a>
             ))}
           </div>
-        </header>
+        </aside>
 
-        <section className="home__intro">
-          <p>
-            hey, I&apos;m Shariq. I study computer security at{' '}
-            <a href="https://www.yorku.ca/" target="_blank" rel="noopener noreferrer">York University</a>{' '}
-            in Toronto, graduating 2028, and build full-stack apps the rest of the time.
-          </p>
-          <p>
-            Mostly Sandbox Simulator, a world-building sim I started that&apos;s up to
-            9,000 registered users, and{' '}
-            <a href="https://zocraticmma.com" target="_blank" rel="noopener noreferrer">Zocratic MMA</a>,
-            which predicts UFC fights. I&apos;m open to work.
-          </p>
-          <div className="home__actions">
-            <a className="home__btn" href="mailto:00khanshariq@gmail.com">Email me</a>
-            <a
-              className="home__btn home__btn--ghost"
-              href="/shariq-khan-resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Resume
-            </a>
-          </div>
-        </section>
+        {/* ── Content ── */}
+        <div className="home__main">
 
-        <Contributions />
+          <section className="home__section">
+            <p className="home__lede">
+              I study computer security at York University and build full-stack apps the
+              rest of the time. Most of what I make ends up with real users:{' '}
+              <b>a world-building sim with 9,000 registered accounts</b> and a model that
+              predicts UFC fights.
+            </p>
+          </section>
 
-        <section className="home__section">
-          <div className="home__section-head">
-            <h2 className="home__section-title">Playground</h2>
-            <span className="home__section-note">same site, older hardware</span>
-          </div>
-          <PortalCircles />
-        </section>
+          <section className="home__section">
+            <div className="home__label">Work</div>
+            <div className="home__list">
+              {WORK.map((w) => {
+                const inner = (
+                  <>
+                    {w.logo
+                      ? <Image className="home__row-logo" src={w.logo} alt="" width={26} height={26} />
+                      : <span className="home__row-mono">{w.mono}</span>}
+                    <span>
+                      <span className="home__row-name">{w.name}</span>
+                      <span className="home__row-desc"> · {w.kind}</span>
+                    </span>
+                    <span className="home__row-meta">{w.meta}</span>
+                  </>
+                );
 
-        <section className="home__section">
-          <div className="home__section-head">
-            <h2 className="home__section-title">Projects</h2>
-            <a className="home__section-note" href="/projects">All projects</a>
-          </div>
-          {PROJECTS.map((p) => {
-            const inner = (
-              <>
-                <span className="home__proj-name">{p.name}</span>
-                <span className="home__proj-desc">{p.desc}</span>
-                <span className="home__proj-meta">{p.meta}</span>
-              </>
-            );
-
-            return p.href ? (
-              <a key={p.name} className="home__proj" href={p.href} target="_blank" rel="noopener noreferrer">
-                {inner}
-              </a>
-            ) : (
-              <div key={p.name} className="home__proj">{inner}</div>
-            );
-          })}
-        </section>
-
-        <section className="home__section">
-          <div className="home__section-head">
-            <h2 className="home__section-title">Experience</h2>
-            <a className="home__section-note" href="/recruiter">Full version</a>
-          </div>
-          {EXPERIENCE.map((e) => (
-            <div key={e.at} className="home__row">
-              <span className="home__row-role">{e.role}</span>
-              <span className="home__row-at">{e.at}</span>
-              <span className="home__row-when">{e.when}</span>
+                return w.href ? (
+                  <a key={w.name} className="home__row" href={w.href} target="_blank" rel="noopener noreferrer">
+                    {inner}
+                  </a>
+                ) : (
+                  <div key={w.name} className="home__row">{inner}</div>
+                );
+              })}
             </div>
-          ))}
-        </section>
+          </section>
 
-        <section className="home__section">
-          <div className="home__section-head">
-            <h2 className="home__section-title">Skills</h2>
-          </div>
-          <div className="home__skills">
-            {SKILLS.map(([key, vals]) => (
-              <div key={key} className="home__skill-row">
-                <span className="home__skill-key">{key}</span>
-                <span className="home__skill-vals">
-                  {vals.map((v) => <span key={v}>{v}</span>)}
-                </span>
+          <section className="home__section">
+            <div className="home__label">Playground</div>
+            <PortalCircles />
+          </section>
+
+          <section className="home__section">
+            <div className="home__label">Experience</div>
+            <div className="home__list">
+              {EXPERIENCE.map((e) => (
+                <div className="home__row" key={e.at} style={{ gridTemplateColumns: '1fr auto' }}>
+                  <span>
+                    <span className="home__row-name">{e.role}</span>
+                    <span className="home__row-desc"> · {e.at}</span>
+                  </span>
+                  <span className="home__row-meta">{e.when}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <Contributions />
+
+          <section className="home__section">
+            <div className="home__label">Stack</div>
+            {STACK.map(([key, val]) => (
+              <div className="home__stack-row" key={key}>
+                <span className="home__stack-key">{key}</span>
+                <span className="home__stack-val">{val}</span>
               </div>
             ))}
-          </div>
-        </section>
+          </section>
 
-        <footer className="home__footer">
-          <span>Toronto, Canada</span>
-          <a href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer">Blog</a>
-        </footer>
+          <footer className="home__footer">
+            <span>BSc Computer Security, York University · 2028</span>
+            <span>
+              <a href="/recruiter">Recruiter view</a>
+              {' · '}
+              <a href="https://shariqsk.github.io/" target="_blank" rel="noopener noreferrer">Blog</a>
+            </span>
+          </footer>
 
+        </div>
       </div>
     </main>
   );

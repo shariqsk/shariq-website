@@ -56,20 +56,10 @@ export default async function Contributions() {
 
   return (
     <section className="home__section">
-      <div className="home__section-head">
-        <h2 className="home__section-title">Contributions</h2>
-        <a
-          className="home__section-note"
-          href={`https://github.com/${USER}`}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          @{USER}
-        </a>
-      </div>
+      <div className="home__label">Contributions</div>
 
-      <div className="home__graph-scroll">
-        <div className="home__graph" role="img" aria-label={`${cal.total} GitHub contributions in the last year`}>
+      <div role="img" aria-label={`${cal.total} GitHub contributions in the last year`}>
+        <div className="home__graph">
           {cal.weeks.map((week) => (
             <div key={week[0].date} className="home__graph-week">
               {week.map((d) => (

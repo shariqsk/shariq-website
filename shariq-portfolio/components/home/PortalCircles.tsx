@@ -51,21 +51,23 @@ export default function PortalCircles() {
   }, []);
 
   return (
-    <div className="home__portals">
-      <Link className="home__portal" href="/os" aria-label="Open SK-OS, a Windows 95 style desktop">
+    <div className="home__list">
+      <Link className="home__row" href="/os">
         <OsDisc />
         <span>
-          <span className="home__portal-title">SK-OS</span>
-          <span className="home__portal-sub">Windows 95</span>
+          <span className="home__row-name">SK-OS</span>
+          <span className="home__row-desc"> · this site as a Windows 95 desktop</span>
         </span>
+        <span className="home__row-meta">Desktop</span>
       </Link>
 
-      <Link className="home__portal" href={xmbHref} aria-label="Open the PS3 XMB interface">
+      <Link className="home__row" href={xmbHref}>
         <XmbDisc />
         <span>
-          <span className="home__portal-title">XMB</span>
-          <span className="home__portal-sub">PlayStation 3</span>
+          <span className="home__row-name">XMB</span>
+          <span className="home__row-desc"> · this site as a PS3 menu</span>
         </span>
+        <span className="home__row-meta">Console</span>
       </Link>
     </div>
   );
