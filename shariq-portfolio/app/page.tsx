@@ -9,7 +9,7 @@ const EXPERIENCE: Entry[] = [
     name: 'Sandbox Simulator',
     role: 'Founder, full-stack',
     meta: 'Oct 24 - now',
-    logo: '/logos/sandbox.png',
+    logo: '/logos/sandbox-icon.png',
     href: 'https://sandboxsimulator.com',
     stack: ['FastAPI', 'PostgreSQL', 'Cloudflare'],
     points: [
@@ -74,7 +74,7 @@ const PROJECTS: Entry[] = [
     name: 'Phintic',
     role: 'Security education, made plain',
     meta: 'phintic.com',
-    mono: 'PH',
+    logo: '/logos/phintic.png',
     href: 'https://phintic.com',
     stack: ['Next.js', 'React'],
     shot: '/phintic.png',
@@ -100,7 +100,7 @@ const PROJECTS: Entry[] = [
     name: 'Type-a-tune',
     role: 'Typing as a piano performance',
     meta: 'Tauri',
-    mono: 'TT',
+    logo: '/logos/type-a-tune.png',
     href: 'https://github.com/shariqsk/Type-a-tune',
     stack: ['Tauri', 'TypeScript', 'Audio'],
     points: [
