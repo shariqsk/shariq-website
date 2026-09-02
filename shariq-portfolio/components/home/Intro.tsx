@@ -67,7 +67,7 @@ export default function Intro() {
         const diag = (c / cols + r / rows) / 2;
 
         delay.push(diag * SPREAD + Math.random() * SPREAD * 0.28);
-        shade.push(light ? 226 + Math.random() * 20 : 18 + Math.random() * 22);
+        shade.push(light ? 226 + Math.random() * 20 : 24 + Math.random() * 22);
         /* Weighted towards the deeper end so the wave reads as a wash with
            bright flecks, not confetti. */
         tone.push(Math.random() < 0.18 ? Math.floor(Math.random() * 2) : 2 + Math.floor(Math.random() * 2));
